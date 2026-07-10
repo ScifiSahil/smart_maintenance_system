@@ -3,9 +3,9 @@
   "bomFormat": "CycloneDX",
   "specVersion": "1.4",
   "version": 1,
-  "serialNumber": "urn:uuid:c47a159f-2953-4f3e-b365-4cf565bb1990",
+  "serialNumber": "urn:uuid:5eed137e-dd13-4f2c-a6a5-c0d56cb85a00",
   "metadata": {
-    "timestamp": "2026-07-09T11:11:07.794Z",
+    "timestamp": "2026-07-10T10:14:29.622Z",
     "tools": [
       {
         "vendor": "@cyclonedx",
@@ -136,38 +136,6 @@
     },
     {
       "type": "library",
-      "name": "redux",
-      "version": "5.0.1",
-      "bom-ref": "pkg:npm/redux@5.0.1?vcs_url=git%2Bhttps%3A//github.com/reduxjs/redux.git",
-      "description": "Predictable state container for JavaScript apps",
-      "licenses": [
-        {
-          "license": {
-            "id": "MIT"
-          }
-        }
-      ],
-      "purl": "pkg:npm/redux@5.0.1?vcs_url=git%2Bhttps%3A//github.com/reduxjs/redux.git",
-      "externalReferences": [
-        {
-          "url": "git+https://github.com/reduxjs/redux.git",
-          "type": "vcs",
-          "comment": "as detected from PackageJson property \"repository.url\""
-        },
-        {
-          "url": "http://redux.js.org",
-          "type": "website",
-          "comment": "as detected from PackageJson property \"homepage\""
-        },
-        {
-          "url": "https://github.com/reduxjs/redux/issues",
-          "type": "issue-tracker",
-          "comment": "as detected from PackageJson property \"bugs.url\""
-        }
-      ]
-    },
-    {
-      "type": "library",
       "name": "react-redux",
       "version": "9.3.0",
       "bom-ref": "pkg:npm/react-redux@9.3.0?vcs_url=git%2Bhttps%3A//github.com/reduxjs/react-redux.git",
@@ -230,6 +198,38 @@
           "comment": "as detected from PackageJson property \"bugs.url\""
         }
       ]
+    },
+    {
+      "type": "library",
+      "name": "redux",
+      "version": "5.0.1",
+      "bom-ref": "pkg:npm/redux@5.0.1?vcs_url=git%2Bhttps%3A//github.com/reduxjs/redux.git",
+      "description": "Predictable state container for JavaScript apps",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:npm/redux@5.0.1?vcs_url=git%2Bhttps%3A//github.com/reduxjs/redux.git",
+      "externalReferences": [
+        {
+          "url": "git+https://github.com/reduxjs/redux.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "http://redux.js.org",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        },
+        {
+          "url": "https://github.com/reduxjs/redux/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        }
+      ]
     }
   ],
   "dependencies": [
@@ -249,9 +249,6 @@
       "ref": "pkg:npm/css-loader@6.7.3?vcs_url=git%2Bhttps%3A//github.com/webpack-contrib/css-loader.git"
     },
     {
-      "ref": "pkg:npm/redux@5.0.1?vcs_url=git%2Bhttps%3A//github.com/reduxjs/redux.git"
-    },
-    {
       "ref": "pkg:npm/react-redux@9.3.0?vcs_url=git%2Bhttps%3A//github.com/reduxjs/react-redux.git",
       "dependsOn": [
         "pkg:npm/use-sync-external-store@1.6.0?vcs_url=git%2Bhttps%3A//github.com/facebook/react.git#packages/use-sync-external-store"
@@ -259,6 +256,9 @@
     },
     {
       "ref": "pkg:npm/use-sync-external-store@1.6.0?vcs_url=git%2Bhttps%3A//github.com/facebook/react.git#packages/use-sync-external-store"
+    },
+    {
+      "ref": "pkg:npm/redux@5.0.1?vcs_url=git%2Bhttps%3A//github.com/reduxjs/redux.git"
     }
   ]
 }

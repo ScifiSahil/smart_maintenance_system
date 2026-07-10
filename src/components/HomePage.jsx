@@ -17,7 +17,6 @@ export default function HomePage({ onNavigate }) {
     <>
       <style>{`
 
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap');
   *{margin:0;padding:0;box-sizing:border-box}
   :root{
     --blue-900:#0B1F3A;--blue-800:#122D52;--blue-700:#1A3F6F;
@@ -26,7 +25,9 @@ export default function HomePage({ onNavigate }) {
     --slate-700:#334155;--slate-500:#64748B;--slate-300:#CBD5E1;
     --slate-100:#F1F5F9;--slate-50:#F8FAFC;
     --white:#FFFFFF;--success:#059669;--warning:#D97706;--danger:#DC2626;
-    --font-main:'Inter',sans-serif;--font-mono:'Roboto Mono',monospace;
+    /* 100% offline system fonts — no internet / CDN dependency */
+    --font-main:"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+    --font-mono:"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
     --radius:8px;--shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.06);
     --shadow-md:0 4px 6px rgba(0,0,0,.07),0 2px 4px rgba(0,0,0,.06);
     --shadow-lg:0 10px 25px rgba(0,0,0,.08),0 4px 8px rgba(0,0,0,.04);

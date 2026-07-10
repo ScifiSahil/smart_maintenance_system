@@ -10,7 +10,7 @@ const CATEGORY_ICON = {
 };
 
 const badgeBase =
-  "inline-flex items-center gap-1 py-[3px] px-2.5 rounded-full text-[11px] font-semibold whitespace-nowrap before:content-[''] before:w-[5px] before:h-[5px] before:rounded-full before:bg-current";
+  "inline-flex items-center gap-1 py-[3px] px-2.5 rounded-full text-[13px] font-semibold whitespace-nowrap before:content-[''] before:w-[5px] before:h-[5px] before:rounded-full before:bg-current";
 
 const EquipmentCard = ({ equipment, onEdit, onDelete }) => {
   const {
@@ -47,8 +47,8 @@ const EquipmentCard = ({ equipment, onEdit, onDelete }) => {
         </span>
       </div>
       <div className="flex gap-4 mr-3 text-right">
-        <div className="text-[11px] text-[#64748B]">
-          <strong className="block text-sm text-[#0B1F3A] font-['Roboto_Mono'] capitalize">
+        <div className="text-[13px] text-[#64748B]">
+          <strong className="block text-sm text-[#0B1F3A] capitalize" style={{ fontFamily: 'var(--font-mono)' }}>
             {pm_frequency || "—"}
           </strong>
           Frequency

@@ -15,7 +15,15 @@ import {
 
 const initialState = {
   items: [],
-  filters: { plant_code: "all", status: "all", search: "" },
+  filters: {
+    plant_code: "all",
+    status: "all",
+    search: "",
+    line_name: "all",
+    machine_name: "all",
+    assembly: "all",
+    sub_assembly: "all",
+  },
   status: "idle",
   error: null,
 };

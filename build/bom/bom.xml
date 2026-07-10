@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.4" version="1" serialNumber="urn:uuid:c47a159f-2953-4f3e-b365-4cf565bb1990">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.4" version="1" serialNumber="urn:uuid:5eed137e-dd13-4f2c-a6a5-c0d56cb85a00">
   <metadata>
-    <timestamp>2026-07-09T11:11:07.794Z</timestamp>
+    <timestamp>2026-07-10T10:14:29.622Z</timestamp>
     <tools>
       <tool>
         <vendor>@cyclonedx</vendor>
@@ -106,31 +106,6 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="pkg:npm/redux@5.0.1?vcs_url=git%2Bhttps%3A//github.com/reduxjs/redux.git">
-      <name>redux</name>
-      <version>5.0.1</version>
-      <description>Predictable state container for JavaScript apps</description>
-      <licenses>
-        <license>
-          <id>MIT</id>
-        </license>
-      </licenses>
-      <purl>pkg:npm/redux@5.0.1?vcs_url=git%2Bhttps%3A//github.com/reduxjs/redux.git</purl>
-      <externalReferences>
-        <reference type="vcs">
-          <url>git+https://github.com/reduxjs/redux.git</url>
-          <comment>as detected from PackageJson property "repository.url"</comment>
-        </reference>
-        <reference type="website">
-          <url>http://redux.js.org</url>
-          <comment>as detected from PackageJson property "homepage"</comment>
-        </reference>
-        <reference type="issue-tracker">
-          <url>https://github.com/reduxjs/redux/issues</url>
-          <comment>as detected from PackageJson property "bugs.url"</comment>
-        </reference>
-      </externalReferences>
-    </component>
     <component type="library" bom-ref="pkg:npm/react-redux@9.3.0?vcs_url=git%2Bhttps%3A//github.com/reduxjs/react-redux.git">
       <author>Dan Abramov</author>
       <name>react-redux</name>
@@ -182,6 +157,31 @@
         </reference>
       </externalReferences>
     </component>
+    <component type="library" bom-ref="pkg:npm/redux@5.0.1?vcs_url=git%2Bhttps%3A//github.com/reduxjs/redux.git">
+      <name>redux</name>
+      <version>5.0.1</version>
+      <description>Predictable state container for JavaScript apps</description>
+      <licenses>
+        <license>
+          <id>MIT</id>
+        </license>
+      </licenses>
+      <purl>pkg:npm/redux@5.0.1?vcs_url=git%2Bhttps%3A//github.com/reduxjs/redux.git</purl>
+      <externalReferences>
+        <reference type="vcs">
+          <url>git+https://github.com/reduxjs/redux.git</url>
+          <comment>as detected from PackageJson property "repository.url"</comment>
+        </reference>
+        <reference type="website">
+          <url>http://redux.js.org</url>
+          <comment>as detected from PackageJson property "homepage"</comment>
+        </reference>
+        <reference type="issue-tracker">
+          <url>https://github.com/reduxjs/redux/issues</url>
+          <comment>as detected from PackageJson property "bugs.url"</comment>
+        </reference>
+      </externalReferences>
+    </component>
   </components>
   <dependencies>
     <dependency ref="pkg:npm/kalyani-iot-smart_maintenance_system@0.0.1">
@@ -192,10 +192,10 @@
     </dependency>
     <dependency ref="pkg:npm/style-loader@3.3.2?vcs_url=git%2Bhttps%3A//github.com/webpack-contrib/style-loader.git"/>
     <dependency ref="pkg:npm/css-loader@6.7.3?vcs_url=git%2Bhttps%3A//github.com/webpack-contrib/css-loader.git"/>
-    <dependency ref="pkg:npm/redux@5.0.1?vcs_url=git%2Bhttps%3A//github.com/reduxjs/redux.git"/>
     <dependency ref="pkg:npm/react-redux@9.3.0?vcs_url=git%2Bhttps%3A//github.com/reduxjs/react-redux.git">
       <dependency ref="pkg:npm/use-sync-external-store@1.6.0?vcs_url=git%2Bhttps%3A//github.com/facebook/react.git#packages/use-sync-external-store"/>
     </dependency>
     <dependency ref="pkg:npm/use-sync-external-store@1.6.0?vcs_url=git%2Bhttps%3A//github.com/facebook/react.git#packages/use-sync-external-store"/>
+    <dependency ref="pkg:npm/redux@5.0.1?vcs_url=git%2Bhttps%3A//github.com/reduxjs/redux.git"/>
   </dependencies>
 </bom>

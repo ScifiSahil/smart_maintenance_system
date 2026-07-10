@@ -10,9 +10,16 @@
 
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import equipment from './reducers/equipmentReducer';
+import plants from './reducers/plantsReducer';   // 👈 naya import
+import lines from './reducers/linesReducer';       // 👈 Line Name filter ke liye
+import machines from './reducers/machinesReducer'; // 👈 Machine Name filter ke liye
+
 
 const rootReducer = combineReducers({
   equipment,
+  plants,
+  lines,
+  machines,
 });
 
 // Chhota thunk middleware, khud likha hai — redux-thunk package install

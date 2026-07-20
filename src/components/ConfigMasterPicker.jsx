@@ -36,8 +36,8 @@ const ConfigMasterPicker = ({ onSelect, onClose, anchor = { top: 60, right: 20 }
       onClick={(e) => e.stopPropagation()}
     >
       <div className="flex items-center gap-2 py-3.5 px-4 border-b border-[#F1F5F9]">
-        <span className="text-[16px]">⚙️</span>
-        <span className="text-[13px] font-bold text-[#64748B] uppercase tracking-[0.6px]">Configuration</span>
+        <span className="text-lg">⚙️</span>
+        <span className="text-sm font-bold text-[#64748B] uppercase tracking-[0.6px]">Configuration</span>
       </div>
 
       <div className="py-1.5">
@@ -50,16 +50,16 @@ const ConfigMasterPicker = ({ onSelect, onClose, anchor = { top: 60, right: 20 }
             onClick={() => onSelect(m.key)}
           >
             <span
-              className="w-10 h-10 rounded-xl flex items-center justify-center text-lg shrink-0"
+              className="w-10 h-10 rounded-xl flex items-center justify-center text-xl shrink-0"
               style={{ background: m.bg }}
             >
               {m.icon}
             </span>
             <span className="flex-1 min-w-0">
-              <div className="text-[15px] font-bold text-[#1E293B] leading-tight">{m.label}</div>
-              <div className="text-[13px] text-[#94A3B8] mt-0.5 leading-snug">{m.desc}</div>
+              <div className="text-base font-bold text-[#1E293B] leading-tight">{m.label}</div>
+              <div className="text-sm text-[#94A3B8] mt-0.5 leading-snug">{m.desc}</div>
             </span>
-            <span className="text-[#CBD5E1] text-base shrink-0">›</span>
+            <span className="text-[#CBD5E1] text-lg shrink-0">›</span>
           </button>
         ))}
       </div>

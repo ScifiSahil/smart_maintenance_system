@@ -202,6 +202,350 @@ function asyncActionCreator() {
 
 /***/ }),
 
+/***/ "./src/actions/checklistActions.js":
+/*!*****************************************!*\
+  !*** ./src/actions/checklistActions.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CHECKLIST_HEADERS_LOAD_FAILURE": () => (/* binding */ CHECKLIST_HEADERS_LOAD_FAILURE),
+/* harmony export */   "CHECKLIST_HEADERS_LOAD_REQUEST": () => (/* binding */ CHECKLIST_HEADERS_LOAD_REQUEST),
+/* harmony export */   "CHECKLIST_HEADERS_LOAD_SUCCESS": () => (/* binding */ CHECKLIST_HEADERS_LOAD_SUCCESS),
+/* harmony export */   "CHECKLIST_ITEMS_LOAD_FAILURE": () => (/* binding */ CHECKLIST_ITEMS_LOAD_FAILURE),
+/* harmony export */   "CHECKLIST_ITEMS_LOAD_REQUEST": () => (/* binding */ CHECKLIST_ITEMS_LOAD_REQUEST),
+/* harmony export */   "CHECKLIST_ITEMS_LOAD_SUCCESS": () => (/* binding */ CHECKLIST_ITEMS_LOAD_SUCCESS),
+/* harmony export */   "CHECKLIST_SET_SELECTED_HEADER": () => (/* binding */ CHECKLIST_SET_SELECTED_HEADER),
+/* harmony export */   "addCheckPoint": () => (/* binding */ addCheckPoint),
+/* harmony export */   "addChecklistHeader": () => (/* binding */ addChecklistHeader),
+/* harmony export */   "editCheckPoint": () => (/* binding */ editCheckPoint),
+/* harmony export */   "editChecklistHeader": () => (/* binding */ editChecklistHeader),
+/* harmony export */   "loadChecklistHeaders": () => (/* binding */ loadChecklistHeaders),
+/* harmony export */   "loadChecklistItems": () => (/* binding */ loadChecklistItems),
+/* harmony export */   "removeCheckPoint": () => (/* binding */ removeCheckPoint),
+/* harmony export */   "removeChecklistHeader": () => (/* binding */ removeChecklistHeader),
+/* harmony export */   "setSelectedChecklistHeader": () => (/* binding */ setSelectedChecklistHeader)
+/* harmony export */ });
+/* harmony import */ var _services_checklistApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/checklistApi */ "./src/services/checklistApi.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+/**
+ * ─── CHECKLIST ACTIONS ───────────────────────────────────────────────
+ * Action types + thunk creators for PM Checklist Builder.
+ * Reducer: reducers/checklistReducer.js
+ * Pattern equipmentActions.js jaisa hi hai — try/catch se success/fail.
+ * ─────────────────────────────────────────────────────────────────────
+ */
+
+
+var CHECKLIST_HEADERS_LOAD_REQUEST = "CHECKLIST_HEADERS_LOAD_REQUEST";
+var CHECKLIST_HEADERS_LOAD_SUCCESS = "CHECKLIST_HEADERS_LOAD_SUCCESS";
+var CHECKLIST_HEADERS_LOAD_FAILURE = "CHECKLIST_HEADERS_LOAD_FAILURE";
+var CHECKLIST_ITEMS_LOAD_REQUEST = "CHECKLIST_ITEMS_LOAD_REQUEST";
+var CHECKLIST_ITEMS_LOAD_SUCCESS = "CHECKLIST_ITEMS_LOAD_SUCCESS";
+var CHECKLIST_ITEMS_LOAD_FAILURE = "CHECKLIST_ITEMS_LOAD_FAILURE";
+var CHECKLIST_SET_SELECTED_HEADER = "CHECKLIST_SET_SELECTED_HEADER";
+
+// Kaunsi checklist header abhi builder mein khuli hai — UI select se set hota hai
+function setSelectedChecklistHeader(cdbObjectId) {
+  return {
+    type: CHECKLIST_SET_SELECTED_HEADER,
+    payload: cdbObjectId
+  };
+}
+
+// ── Headers ──
+function loadChecklistHeaders() {
+  return /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(dispatch) {
+      var res;
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            dispatch({
+              type: CHECKLIST_HEADERS_LOAD_REQUEST
+            });
+            _context.prev = 1;
+            _context.next = 4;
+            return (0,_services_checklistApi__WEBPACK_IMPORTED_MODULE_0__.fetchChecklistHeaders)();
+          case 4:
+            res = _context.sent;
+            dispatch({
+              type: CHECKLIST_HEADERS_LOAD_SUCCESS,
+              payload: res.objects || []
+            });
+            _context.next = 11;
+            break;
+          case 8:
+            _context.prev = 8;
+            _context.t0 = _context["catch"](1);
+            dispatch({
+              type: CHECKLIST_HEADERS_LOAD_FAILURE,
+              payload: _context.t0.message
+            });
+          case 11:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee, null, [[1, 8]]);
+    }));
+    return function (_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+}
+
+// Naya checklist header banata hai (equipment + frequency choose karke)
+// Success par headers list refresh + naya header select ho jata hai
+function addChecklistHeader(data) {
+  return /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(dispatch) {
+      var res;
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            _context2.next = 3;
+            return (0,_services_checklistApi__WEBPACK_IMPORTED_MODULE_0__.createChecklistHeader)(data);
+          case 3:
+            res = _context2.sent;
+            _context2.next = 6;
+            return dispatch(loadChecklistHeaders());
+          case 6:
+            if (res !== null && res !== void 0 && res.cdb_object_id) {
+              dispatch(setSelectedChecklistHeader(res.cdb_object_id));
+            }
+            return _context2.abrupt("return", {
+              ok: true,
+              data: res
+            });
+          case 10:
+            _context2.prev = 10;
+            _context2.t0 = _context2["catch"](0);
+            return _context2.abrupt("return", {
+              ok: false,
+              message: _context2.t0.message
+            });
+          case 13:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2, null, [[0, 10]]);
+    }));
+    return function (_x2) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+}
+function editChecklistHeader(cdbObjectId, data) {
+  return /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(dispatch) {
+      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        while (1) switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.prev = 0;
+            _context3.next = 3;
+            return (0,_services_checklistApi__WEBPACK_IMPORTED_MODULE_0__.updateChecklistHeader)(cdbObjectId, data);
+          case 3:
+            dispatch(loadChecklistHeaders());
+            return _context3.abrupt("return", {
+              ok: true
+            });
+          case 7:
+            _context3.prev = 7;
+            _context3.t0 = _context3["catch"](0);
+            return _context3.abrupt("return", {
+              ok: false,
+              message: _context3.t0.message
+            });
+          case 10:
+          case "end":
+            return _context3.stop();
+        }
+      }, _callee3, null, [[0, 7]]);
+    }));
+    return function (_x3) {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+}
+function removeChecklistHeader(cdbObjectId) {
+  return /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(dispatch) {
+      return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+        while (1) switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.prev = 0;
+            _context4.next = 3;
+            return (0,_services_checklistApi__WEBPACK_IMPORTED_MODULE_0__.deleteChecklistHeader)(cdbObjectId);
+          case 3:
+            dispatch(loadChecklistHeaders());
+            return _context4.abrupt("return", {
+              ok: true
+            });
+          case 7:
+            _context4.prev = 7;
+            _context4.t0 = _context4["catch"](0);
+            return _context4.abrupt("return", {
+              ok: false,
+              message: _context4.t0.message
+            });
+          case 10:
+          case "end":
+            return _context4.stop();
+        }
+      }, _callee4, null, [[0, 7]]);
+    }));
+    return function (_x4) {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+}
+
+// ── Items (Check Points) ──
+function loadChecklistItems() {
+  return /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(dispatch) {
+      var res;
+      return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+        while (1) switch (_context5.prev = _context5.next) {
+          case 0:
+            dispatch({
+              type: CHECKLIST_ITEMS_LOAD_REQUEST
+            });
+            _context5.prev = 1;
+            _context5.next = 4;
+            return (0,_services_checklistApi__WEBPACK_IMPORTED_MODULE_0__.fetchChecklistItems)();
+          case 4:
+            res = _context5.sent;
+            dispatch({
+              type: CHECKLIST_ITEMS_LOAD_SUCCESS,
+              payload: res.objects || []
+            });
+            _context5.next = 11;
+            break;
+          case 8:
+            _context5.prev = 8;
+            _context5.t0 = _context5["catch"](1);
+            dispatch({
+              type: CHECKLIST_ITEMS_LOAD_FAILURE,
+              payload: _context5.t0.message
+            });
+          case 11:
+          case "end":
+            return _context5.stop();
+        }
+      }, _callee5, null, [[1, 8]]);
+    }));
+    return function (_x5) {
+      return _ref5.apply(this, arguments);
+    };
+  }();
+}
+
+// Naya check point banata hai — success par items list refresh
+function addCheckPoint(data) {
+  return /*#__PURE__*/function () {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6(dispatch) {
+      return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+        while (1) switch (_context6.prev = _context6.next) {
+          case 0:
+            _context6.prev = 0;
+            _context6.next = 3;
+            return (0,_services_checklistApi__WEBPACK_IMPORTED_MODULE_0__.createChecklistItem)(data);
+          case 3:
+            dispatch(loadChecklistItems());
+            return _context6.abrupt("return", {
+              ok: true
+            });
+          case 7:
+            _context6.prev = 7;
+            _context6.t0 = _context6["catch"](0);
+            return _context6.abrupt("return", {
+              ok: false,
+              message: _context6.t0.message
+            });
+          case 10:
+          case "end":
+            return _context6.stop();
+        }
+      }, _callee6, null, [[0, 7]]);
+    }));
+    return function (_x6) {
+      return _ref6.apply(this, arguments);
+    };
+  }();
+}
+function editCheckPoint(cdbObjectId, data) {
+  return /*#__PURE__*/function () {
+    var _ref7 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7(dispatch) {
+      return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+        while (1) switch (_context7.prev = _context7.next) {
+          case 0:
+            _context7.prev = 0;
+            _context7.next = 3;
+            return (0,_services_checklistApi__WEBPACK_IMPORTED_MODULE_0__.updateChecklistItem)(cdbObjectId, data);
+          case 3:
+            dispatch(loadChecklistItems());
+            return _context7.abrupt("return", {
+              ok: true
+            });
+          case 7:
+            _context7.prev = 7;
+            _context7.t0 = _context7["catch"](0);
+            return _context7.abrupt("return", {
+              ok: false,
+              message: _context7.t0.message
+            });
+          case 10:
+          case "end":
+            return _context7.stop();
+        }
+      }, _callee7, null, [[0, 7]]);
+    }));
+    return function (_x7) {
+      return _ref7.apply(this, arguments);
+    };
+  }();
+}
+function removeCheckPoint(cdbObjectId) {
+  return /*#__PURE__*/function () {
+    var _ref8 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8(dispatch) {
+      return _regeneratorRuntime().wrap(function _callee8$(_context8) {
+        while (1) switch (_context8.prev = _context8.next) {
+          case 0:
+            _context8.prev = 0;
+            _context8.next = 3;
+            return (0,_services_checklistApi__WEBPACK_IMPORTED_MODULE_0__.deleteChecklistItem)(cdbObjectId);
+          case 3:
+            dispatch(loadChecklistItems());
+            return _context8.abrupt("return", {
+              ok: true
+            });
+          case 7:
+            _context8.prev = 7;
+            _context8.t0 = _context8["catch"](0);
+            return _context8.abrupt("return", {
+              ok: false,
+              message: _context8.t0.message
+            });
+          case 10:
+          case "end":
+            return _context8.stop();
+        }
+      }, _callee8, null, [[0, 7]]);
+    }));
+    return function (_x8) {
+      return _ref8.apply(this, arguments);
+    };
+  }();
+}
+
+/***/ }),
+
 /***/ "./src/actions/equipmentActions.js":
 /*!*****************************************!*\
   !*** ./src/actions/equipmentActions.js ***!
@@ -955,6 +1299,566 @@ var removePlant = function removePlant(cdbObjectId) {
 
 /***/ }),
 
+/***/ "./src/components/AddCheckPointModal.jsx":
+/*!***********************************************!*\
+  !*** ./src/components/AddCheckPointModal.jsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/dist/react-redux.mjs");
+/* harmony import */ var _actions_checklistActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/checklistActions */ "./src/actions/checklistActions.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+// components/AddCheckPointModal.jsx
+// Local form state only (useState). Submitting dispatches addCheckPoint or
+// editCheckPoint. Same pattern as AddEquipmentModal.jsx.
+//
+// NOTE on field names: the smartpm_admin_checklist_item table's real columns
+// are `title` (not check_point_title), `limit_value` (not limit_text), and
+// it has its own `equipment_code` column. It does NOT have a
+// `checklist_header_id` column — the only header-link-looking column is
+// `checklist_id`, which is typed Integer while the header's id is a UUID
+// string, so we deliberately do NOT send it (would likely 500 on a type
+// mismatch). Linking is done purely via equipment_code instead.
+
+
+
+
+var inputClass = "w-full py-[9px] px-3 border-[1.5px] border-[#CBD5E1] rounded-lg text-[13px] font-sans text-[#334155] bg-white outline-none focus:border-[#3B82F6] focus:shadow-[0_0_0_3px_rgba(37,99,235,0.08)]";
+var EMPTY_FORM = {
+  title: "",
+  sop_ref: "",
+  limit_value: "",
+  instrument: "",
+  is_active: "1"
+};
+var AddCheckPointModal = function AddCheckPointModal(_ref) {
+  var isOpen = _ref.isOpen,
+    onClose = _ref.onClose,
+    equipmentCode = _ref.equipmentCode,
+    nextSeqNo = _ref.nextSeqNo,
+    checkPoint = _ref.checkPoint;
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
+  var isEdit = Boolean(checkPoint);
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(EMPTY_FORM),
+    _useState2 = _slicedToArray(_useState, 2),
+    form = _useState2[0],
+    setForm = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    _useState4 = _slicedToArray(_useState3, 2),
+    error = _useState4[0],
+    setError = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    saving = _useState6[0],
+    setSaving = _useState6[1];
+
+  // On open — prefill from the existing check point when editing, else start blank
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (isOpen) {
+      var _checkPoint$is_active;
+      setForm(checkPoint ? {
+        title: checkPoint.title || "",
+        sop_ref: checkPoint.sop_ref || "",
+        limit_value: checkPoint.limit_value || "",
+        instrument: checkPoint.instrument || "",
+        is_active: String((_checkPoint$is_active = checkPoint.is_active) !== null && _checkPoint$is_active !== void 0 ? _checkPoint$is_active : "1")
+      } : EMPTY_FORM);
+      setError("");
+    }
+  }, [isOpen, checkPoint]);
+  if (!isOpen) return null;
+  var handleChange = function handleChange(field) {
+    return function (e) {
+      return setForm(function (f) {
+        return _objectSpread(_objectSpread({}, f), {}, _defineProperty({}, field, e.target.value));
+      });
+    };
+  };
+  var handleSave = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var payload, result;
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            if (form.title) {
+              _context.next = 3;
+              break;
+            }
+            setError("Check point title is required");
+            return _context.abrupt("return");
+          case 3:
+            if (!(!isEdit && !equipmentCode)) {
+              _context.next = 6;
+              break;
+            }
+            setError("No equipment selected for this checklist — pick a checklist first");
+            return _context.abrupt("return");
+          case 6:
+            setSaving(true);
+            setError("");
+            payload = _objectSpread({}, form);
+            if (!isEdit) {
+              _context.next = 15;
+              break;
+            }
+            _context.next = 12;
+            return dispatch((0,_actions_checklistActions__WEBPACK_IMPORTED_MODULE_1__.editCheckPoint)(checkPoint.cdb_object_id, payload));
+          case 12:
+            _context.t0 = _context.sent;
+            _context.next = 18;
+            break;
+          case 15:
+            _context.next = 17;
+            return dispatch((0,_actions_checklistActions__WEBPACK_IMPORTED_MODULE_1__.addCheckPoint)(_objectSpread(_objectSpread({}, payload), {}, {
+              equipment_code: equipmentCode,
+              seq_no: String(nextSeqNo) // column is Char(10) — must be a string, not a number
+            })));
+          case 17:
+            _context.t0 = _context.sent;
+          case 18:
+            result = _context.t0;
+            setSaving(false);
+            if (result.ok) {
+              _context.next = 23;
+              break;
+            }
+            setError(result.message || "Save failed, please try again");
+            return _context.abrupt("return");
+          case 23:
+            onClose();
+          case 24:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee);
+    }));
+    return function handleSave() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+  return /*#__PURE__*/React.createElement("div", {
+    className: "fixed inset-0 bg-black/45 z-[200] flex items-center justify-center p-5"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "bg-white rounded-xl w-full max-w-[520px] max-h-[90vh] overflow-y-auto shadow-[0_10px_25px_rgba(0,0,0,0.08),0_4px_8px_rgba(0,0,0,0.04)]"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "py-5 px-6 pb-4 border-b border-[#E2E8F0] flex items-center justify-between"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-base font-bold text-[#0B1F3A]"
+  }, isEdit ? "Edit Check Point" : "Add Check Point"), /*#__PURE__*/React.createElement("button", {
+    className: "w-8 h-8 rounded-md border-none bg-[#F1F5F9] cursor-pointer text-base flex items-center justify-center text-[#64748B] hover:bg-[#E2E8F0]",
+    onClick: onClose
+  }, "\u2715")), /*#__PURE__*/React.createElement("div", {
+    className: "py-5 px-6"
+  }, error && /*#__PURE__*/React.createElement("div", {
+    className: "mb-3 text-xs text-[#991B1B] bg-[#FEF2F2] py-2 px-3 rounded-lg"
+  }, error), /*#__PURE__*/React.createElement("div", {
+    className: "mb-4"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "block text-xs font-semibold text-[#334155] mb-[5px]"
+  }, "Check Point Title"), /*#__PURE__*/React.createElement("input", {
+    className: inputClass,
+    placeholder: "e.g. Bearing Temperature Check",
+    value: form.title,
+    onChange: handleChange("title")
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-2 gap-3.5"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "mb-4"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "block text-xs font-semibold text-[#334155] mb-[5px]"
+  }, "SOP Reference"), /*#__PURE__*/React.createElement("input", {
+    className: inputClass,
+    placeholder: "e.g. SOP-PM-001",
+    value: form.sop_ref,
+    onChange: handleChange("sop_ref")
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "mb-4"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "block text-xs font-semibold text-[#334155] mb-[5px]"
+  }, "Instrument"), /*#__PURE__*/React.createElement("input", {
+    className: inputClass,
+    placeholder: "e.g. Temp Gun",
+    value: form.instrument,
+    onChange: handleChange("instrument")
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "mb-4"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "block text-xs font-semibold text-[#334155] mb-[5px]"
+  }, "Limit / Standard"), /*#__PURE__*/React.createElement("input", {
+    className: inputClass,
+    placeholder: "e.g. Limit: <80\xB0C",
+    value: form.limit_value,
+    onChange: handleChange("limit_value")
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "mb-2"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "block text-xs font-semibold text-[#334155] mb-[5px]"
+  }, "Status"), /*#__PURE__*/React.createElement("select", {
+    className: inputClass,
+    value: form.is_active,
+    onChange: handleChange("is_active")
+  }, /*#__PURE__*/React.createElement("option", {
+    value: "1"
+  }, "Active"), /*#__PURE__*/React.createElement("option", {
+    value: "0"
+  }, "Inactive")))), /*#__PURE__*/React.createElement("div", {
+    className: "py-4 px-6 border-t border-[#E2E8F0] flex justify-end gap-2.5"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "py-2 px-4 rounded-lg text-[13px] font-semibold cursor-pointer border border-[#CBD5E1] bg-white text-[#334155] hover:bg-[#F8FAFC]",
+    onClick: onClose,
+    disabled: saving
+  }, "Cancel"), /*#__PURE__*/React.createElement("button", {
+    className: "py-2 px-4 rounded-lg text-[13px] font-semibold cursor-pointer border-none bg-[#2563EB] text-white hover:bg-[#1E5291] disabled:opacity-60",
+    onClick: handleSave,
+    disabled: saving
+  }, saving ? "Saving…" : isEdit ? "Save Changes" : "Add Check Point"))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AddCheckPointModal);
+
+/***/ }),
+
+/***/ "./src/components/AddChecklistModal.jsx":
+/*!**********************************************!*\
+  !*** ./src/components/AddChecklistModal.jsx ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/dist/react-redux.mjs");
+/* harmony import */ var _actions_checklistActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/checklistActions */ "./src/actions/checklistActions.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+// components/AddChecklistModal.jsx
+// Opened from the "+ New Checklist" button — pick the equipment via a
+// cascading Plant → Line → Machine → Equipment filter (same pattern as
+// Equipment Register), then choose a Frequency to create a new checklist
+// header. Check points are added afterward with "+ Add Check Point".
+
+
+
+
+var inputClass = "w-full py-[9px] px-3 border-[1.5px] border-[#CBD5E1] rounded-lg text-[13px] font-sans text-[#334155] bg-white outline-none focus:border-[#3B82F6] focus:shadow-[0_0_0_3px_rgba(37,99,235,0.08)]";
+var AddChecklistModal = function AddChecklistModal(_ref) {
+  var isOpen = _ref.isOpen,
+    onClose = _ref.onClose;
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
+  var _useSelector = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (s) {
+      return s.equipment;
+    }),
+    equipmentItems = _useSelector.items,
+    equipmentStatus = _useSelector.status;
+  var _useSelector2 = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (s) {
+      return s.plants;
+    }),
+    plantItems = _useSelector2.items,
+    plantsStatus = _useSelector2.status;
+  var _useSelector3 = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (s) {
+      return s.lines;
+    }),
+    lineItems = _useSelector3.items,
+    linesStatus = _useSelector3.status;
+  var _useSelector4 = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (s) {
+      return s.machines;
+    }),
+    machineItems = _useSelector4.items,
+    machinesStatus = _useSelector4.status;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    _useState2 = _slicedToArray(_useState, 2),
+    plantCode = _useState2[0],
+    setPlantCode = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    _useState4 = _slicedToArray(_useState3, 2),
+    lineName = _useState4[0],
+    setLineName = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    _useState6 = _slicedToArray(_useState5, 2),
+    machineName = _useState6[0],
+    setMachineName = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    _useState8 = _slicedToArray(_useState7, 2),
+    equipmentCode = _useState8[0],
+    setEquipmentCode = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("Daily"),
+    _useState10 = _slicedToArray(_useState9, 2),
+    frequency = _useState10[0],
+    setFrequency = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    _useState12 = _slicedToArray(_useState11, 2),
+    error = _useState12[0],
+    setError = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState14 = _slicedToArray(_useState13, 2),
+    saving = _useState14[0],
+    setSaving = _useState14[1];
+
+  // Reset all filters on open — auto-select the first available plant
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (isOpen) {
+      var _plantItems$0$plant_c, _plantItems$;
+      setPlantCode(String((_plantItems$0$plant_c = (_plantItems$ = plantItems[0]) === null || _plantItems$ === void 0 ? void 0 : _plantItems$.plant_code) !== null && _plantItems$0$plant_c !== void 0 ? _plantItems$0$plant_c : ""));
+      setLineName("");
+      setMachineName("");
+      setEquipmentCode("");
+      setFrequency("Daily");
+      setError("");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
+
+  // Line dropdown — scoped to the selected Plant, deduped by name
+  var lineOptions = _toConsumableArray(new Map(lineItems.filter(function (l) {
+    return !plantCode || String(l.plant_code) === String(plantCode);
+  }).map(function (l) {
+    return [l.line_name, l];
+  })).values());
+
+  // Machine dropdown — scoped to the selected Plant + Line
+  var machineOptions = _toConsumableArray(new Map(machineItems.filter(function (m) {
+    return (!plantCode || String(m.plant_code) === String(plantCode)) && (!lineName || String(m.line_name) === String(lineName));
+  }).map(function (m) {
+    return [m.machine_name, m];
+  })).values());
+
+  // Equipment dropdown — scoped to Plant + Line + Machine
+  var equipmentOptions = equipmentItems.filter(function (eq) {
+    return (!plantCode || String(eq.plant_code) === String(plantCode)) && (!lineName || String(eq.line || "") === String(lineName)) && (!machineName || String(eq.machine || "") === String(machineName));
+  });
+
+  // Changing Plant resets Line + Machine + Equipment
+  var handlePlantChange = function handlePlantChange(e) {
+    setPlantCode(e.target.value);
+    setLineName("");
+    setMachineName("");
+    setEquipmentCode("");
+  };
+
+  // Changing Line resets Machine + Equipment
+  var handleLineChange = function handleLineChange(e) {
+    setLineName(e.target.value);
+    setMachineName("");
+    setEquipmentCode("");
+  };
+
+  // Changing Machine resets Equipment
+  var handleMachineChange = function handleMachineChange(e) {
+    setMachineName(e.target.value);
+    setEquipmentCode("");
+  };
+  if (!isOpen) return null;
+  var handleSave = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var eq, checklistName, result;
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            if (equipmentCode) {
+              _context.next = 3;
+              break;
+            }
+            setError("Select an equipment (narrow down by Plant/Line/Machine)");
+            return _context.abrupt("return");
+          case 3:
+            setSaving(true);
+            setError("");
+            eq = equipmentItems.find(function (e) {
+              return e.equipment_code === equipmentCode;
+            });
+            checklistName = "".concat(equipmentCode, " \u2014 ").concat((eq === null || eq === void 0 ? void 0 : eq.equipment_name) || "Equipment", " ").concat(frequency, " Checklist");
+            _context.next = 9;
+            return dispatch((0,_actions_checklistActions__WEBPACK_IMPORTED_MODULE_1__.addChecklistHeader)({
+              equipment_code: equipmentCode,
+              frequency: frequency,
+              // Backend column is `checklist_name` (Char(15)) — NOT `checklist_title`.
+              // Sending `checklist_title` was silently dropped by CDB since no such
+              // attribute exists on smartpm_admin_checklist_header.
+              checklist_name: checklistName,
+              is_active: "1"
+            }));
+          case 9:
+            result = _context.sent;
+            setSaving(false);
+            if (result.ok) {
+              _context.next = 14;
+              break;
+            }
+            setError(result.message || "Save failed, please try again");
+            return _context.abrupt("return");
+          case 14:
+            onClose();
+          case 15:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee);
+    }));
+    return function handleSave() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+  return /*#__PURE__*/React.createElement("div", {
+    className: "fixed inset-0 bg-black/45 z-[200] flex items-center justify-center p-5"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "bg-white rounded-xl w-full max-w-[520px] max-h-[90vh] overflow-y-auto shadow-[0_10px_25px_rgba(0,0,0,0.08),0_4px_8px_rgba(0,0,0,0.04)]"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "py-5 px-6 pb-4 border-b border-[#E2E8F0] flex items-center justify-between"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-base font-bold text-[#0B1F3A]"
+  }, "New Checklist"), /*#__PURE__*/React.createElement("button", {
+    className: "w-8 h-8 rounded-md border-none bg-[#F1F5F9] cursor-pointer text-base flex items-center justify-center text-[#64748B] hover:bg-[#E2E8F0]",
+    onClick: onClose
+  }, "\u2715")), /*#__PURE__*/React.createElement("div", {
+    className: "py-5 px-6"
+  }, error && /*#__PURE__*/React.createElement("div", {
+    className: "mb-3 text-xs text-[#991B1B] bg-[#FEF2F2] py-2 px-3 rounded-lg"
+  }, error), /*#__PURE__*/React.createElement("div", {
+    className: "text-[10px] font-bold tracking-wider uppercase text-[#94A3B8] mb-2"
+  }, "Which equipment is this for \u2014 narrow down by Plant"), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-2 gap-3.5"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "mb-4"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "block text-xs font-semibold text-[#334155] mb-[5px]"
+  }, "Plant"), /*#__PURE__*/React.createElement("select", {
+    className: inputClass,
+    value: plantCode,
+    onChange: handlePlantChange
+  }, plantsStatus === "loading" && /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, "Loading plants\u2026"), /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, "All Plants"), plantItems.map(function (p) {
+    return /*#__PURE__*/React.createElement("option", {
+      key: p.plant_code,
+      value: p.plant_code
+    }, p.plant_name, " (", p.plant_code, ")");
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "mb-4"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "block text-xs font-semibold text-[#334155] mb-[5px]"
+  }, "Line"), /*#__PURE__*/React.createElement("select", {
+    className: inputClass,
+    value: lineName,
+    onChange: handleLineChange
+  }, /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, "All Lines"), linesStatus === "loading" && /*#__PURE__*/React.createElement("option", {
+    disabled: true
+  }, "Loading lines\u2026"), lineOptions.map(function (l) {
+    return /*#__PURE__*/React.createElement("option", {
+      key: "".concat(l.plant_code, "-").concat(l.line_name),
+      value: l.line_name
+    }, l.line_name);
+  })))), /*#__PURE__*/React.createElement("div", {
+    className: "mb-4"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "block text-xs font-semibold text-[#334155] mb-[5px]"
+  }, "Machine"), /*#__PURE__*/React.createElement("select", {
+    className: inputClass,
+    value: machineName,
+    onChange: handleMachineChange
+  }, /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, "All Machines"), machinesStatus === "loading" && /*#__PURE__*/React.createElement("option", {
+    disabled: true
+  }, "Loading machines\u2026"), machineOptions.map(function (m) {
+    return /*#__PURE__*/React.createElement("option", {
+      key: "".concat(m.plant_code, "-").concat(m.line_name, "-").concat(m.machine_name),
+      value: m.machine_name
+    }, m.machine_name);
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "h-px bg-[#E2E8F0] my-4"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "mb-4"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "block text-xs font-semibold text-[#334155] mb-[5px]"
+  }, "Equipment"), /*#__PURE__*/React.createElement("select", {
+    className: inputClass,
+    value: equipmentCode,
+    onChange: function onChange(e) {
+      return setEquipmentCode(e.target.value);
+    }
+  }, /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, "\u2014 Select equipment \u2014"), equipmentStatus === "loading" && /*#__PURE__*/React.createElement("option", {
+    disabled: true
+  }, "Loading equipment\u2026"), equipmentOptions.map(function (eq) {
+    return /*#__PURE__*/React.createElement("option", {
+      key: eq.equipment_code,
+      value: eq.equipment_code
+    }, eq.equipment_code, " \u2014 ", eq.equipment_name);
+  })), equipmentOptions.length === 0 && equipmentStatus === "succeeded" && /*#__PURE__*/React.createElement("div", {
+    className: "text-[11px] text-[#94A3B8] mt-1"
+  }, "No equipment found for this Plant/Line/Machine \u2014 widen the filter.")), /*#__PURE__*/React.createElement("div", {
+    className: "mb-2"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "block text-xs font-semibold text-[#334155] mb-[5px]"
+  }, "Frequency"), /*#__PURE__*/React.createElement("select", {
+    className: inputClass,
+    value: frequency,
+    onChange: function onChange(e) {
+      return setFrequency(e.target.value);
+    }
+  }, /*#__PURE__*/React.createElement("option", {
+    value: "Daily"
+  }, "Daily"), /*#__PURE__*/React.createElement("option", {
+    value: "Weekly"
+  }, "Weekly"), /*#__PURE__*/React.createElement("option", {
+    value: "Monthly"
+  }, "Monthly"), /*#__PURE__*/React.createElement("option", {
+    value: "Quarterly"
+  }, "Quarterly")))), /*#__PURE__*/React.createElement("div", {
+    className: "py-4 px-6 border-t border-[#E2E8F0] flex justify-end gap-2.5"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "py-2 px-4 rounded-lg text-[13px] font-semibold cursor-pointer border border-[#CBD5E1] bg-white text-[#334155] hover:bg-[#F8FAFC]",
+    onClick: onClose,
+    disabled: saving
+  }, "Cancel"), /*#__PURE__*/React.createElement("button", {
+    className: "py-2 px-4 rounded-lg text-[13px] font-semibold cursor-pointer border-none bg-[#2563EB] text-white hover:bg-[#1E5291] disabled:opacity-60",
+    onClick: handleSave,
+    disabled: saving
+  }, saving ? "Saving…" : "Create Checklist"))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AddChecklistModal);
+
+/***/ }),
+
 /***/ "./src/components/AddEquipmentModal.jsx":
 /*!**********************************************!*\
   !*** ./src/components/AddEquipmentModal.jsx ***!
@@ -990,7 +1894,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var inputClass = "w-full py-[9px] px-3 border-[1.5px] border-[#CBD5E1] rounded-lg text-[14px] text-[#334155] bg-white outline-none focus:border-[#3B82F6] focus:shadow-[0_0_0_3px_rgba(37,99,235,0.08)]";
+var inputClass = "w-full py-[9px] px-3 border-[1.5px] border-[#CBD5E1] rounded-lg text-base text-[#334155] bg-white outline-none focus:border-[#3B82F6] focus:shadow-[0_0_0_3px_rgba(37,99,235,0.08)]";
 var EMPTY_FORM = {
   equipment_code: "",
   equipment_name: "",
@@ -1123,20 +2027,20 @@ var AddEquipmentModal = function AddEquipmentModal(_ref) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "py-5 px-6 pb-4 border-b border-[#E2E8F0] flex items-center justify-between"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "text-base font-bold text-[#0B1F3A]"
+    className: "text-lg font-bold text-[#0B1F3A]"
   }, isEdit ? "Edit Equipment" : "Add New Equipment"), /*#__PURE__*/React.createElement("button", {
-    className: "w-8 h-8 rounded-md border-none bg-[#F1F5F9] cursor-pointer text-base flex items-center justify-center text-[#64748B] hover:bg-[#E2E8F0]",
+    className: "w-8 h-8 rounded-md border-none bg-[#F1F5F9] cursor-pointer text-lg flex items-center justify-center text-[#64748B] hover:bg-[#E2E8F0]",
     onClick: onClose
   }, "\u2715")), /*#__PURE__*/React.createElement("div", {
     className: "py-5 px-6"
   }, error && /*#__PURE__*/React.createElement("div", {
-    className: "mb-3 text-xs text-[#991B1B] bg-[#FEF2F2] py-2 px-3 rounded-lg"
+    className: "mb-3 text-sm text-[#991B1B] bg-[#FEF2F2] py-2 px-3 rounded-lg"
   }, error), /*#__PURE__*/React.createElement("div", {
     className: "grid grid-cols-2 gap-3.5"
   }, /*#__PURE__*/React.createElement("div", {
     className: "mb-4"
   }, /*#__PURE__*/React.createElement("label", {
-    className: "block text-xs font-semibold text-[#334155] mb-[5px]"
+    className: "block text-sm font-semibold text-[#334155] mb-[5px]"
   }, "Equipment ID"), /*#__PURE__*/React.createElement("input", {
     className: inputClass,
     placeholder: "e.g. CP-201",
@@ -1145,7 +2049,7 @@ var AddEquipmentModal = function AddEquipmentModal(_ref) {
   })), /*#__PURE__*/React.createElement("div", {
     className: "mb-4"
   }, /*#__PURE__*/React.createElement("label", {
-    className: "block text-xs font-semibold text-[#334155] mb-[5px]"
+    className: "block text-sm font-semibold text-[#334155] mb-[5px]"
   }, "Equipment Name"), /*#__PURE__*/React.createElement("input", {
     className: inputClass,
     placeholder: "e.g. Centrifugal Pump",
@@ -1156,7 +2060,7 @@ var AddEquipmentModal = function AddEquipmentModal(_ref) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "mb-4"
   }, /*#__PURE__*/React.createElement("label", {
-    className: "block text-xs font-semibold text-[#334155] mb-[5px]"
+    className: "block text-sm font-semibold text-[#334155] mb-[5px]"
   }, "Plant"), /*#__PURE__*/React.createElement("select", {
     className: inputClass,
     value: form.plant_code,
@@ -1173,7 +2077,7 @@ var AddEquipmentModal = function AddEquipmentModal(_ref) {
   }))), /*#__PURE__*/React.createElement("div", {
     className: "mb-4"
   }, /*#__PURE__*/React.createElement("label", {
-    className: "block text-xs font-semibold text-[#334155] mb-[5px]"
+    className: "block text-sm font-semibold text-[#334155] mb-[5px]"
   }, "PM Frequency"), /*#__PURE__*/React.createElement("select", {
     className: inputClass,
     value: form.pm_frequency,
@@ -1189,7 +2093,7 @@ var AddEquipmentModal = function AddEquipmentModal(_ref) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "mb-4"
   }, /*#__PURE__*/React.createElement("label", {
-    className: "block text-xs font-semibold text-[#334155] mb-[5px]"
+    className: "block text-sm font-semibold text-[#334155] mb-[5px]"
   }, "Line"), /*#__PURE__*/React.createElement("input", {
     className: inputClass,
     placeholder: "e.g. Line-1",
@@ -1198,7 +2102,7 @@ var AddEquipmentModal = function AddEquipmentModal(_ref) {
   })), /*#__PURE__*/React.createElement("div", {
     className: "mb-4"
   }, /*#__PURE__*/React.createElement("label", {
-    className: "block text-xs font-semibold text-[#334155] mb-[5px]"
+    className: "block text-sm font-semibold text-[#334155] mb-[5px]"
   }, "Machine"), /*#__PURE__*/React.createElement("input", {
     className: inputClass,
     placeholder: "e.g. CNC-04",
@@ -1209,7 +2113,7 @@ var AddEquipmentModal = function AddEquipmentModal(_ref) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "mb-4"
   }, /*#__PURE__*/React.createElement("label", {
-    className: "block text-xs font-semibold text-[#334155] mb-[5px]"
+    className: "block text-sm font-semibold text-[#334155] mb-[5px]"
   }, "Assembly"), /*#__PURE__*/React.createElement("input", {
     className: inputClass,
     placeholder: "e.g. Drive Assembly",
@@ -1218,7 +2122,7 @@ var AddEquipmentModal = function AddEquipmentModal(_ref) {
   })), /*#__PURE__*/React.createElement("div", {
     className: "mb-4"
   }, /*#__PURE__*/React.createElement("label", {
-    className: "block text-xs font-semibold text-[#334155] mb-[5px]"
+    className: "block text-sm font-semibold text-[#334155] mb-[5px]"
   }, "Sub-Assembly"), /*#__PURE__*/React.createElement("input", {
     className: inputClass,
     placeholder: "e.g. Coupling Unit",
@@ -1227,7 +2131,7 @@ var AddEquipmentModal = function AddEquipmentModal(_ref) {
   }))), /*#__PURE__*/React.createElement("div", {
     className: "mb-4"
   }, /*#__PURE__*/React.createElement("label", {
-    className: "block text-xs font-semibold text-[#334155] mb-[5px]"
+    className: "block text-sm font-semibold text-[#334155] mb-[5px]"
   }, "Component"), /*#__PURE__*/React.createElement("input", {
     className: inputClass,
     placeholder: "e.g. Bearing",
@@ -1236,7 +2140,7 @@ var AddEquipmentModal = function AddEquipmentModal(_ref) {
   })), /*#__PURE__*/React.createElement("div", {
     className: "mb-4"
   }, /*#__PURE__*/React.createElement("label", {
-    className: "block text-xs font-semibold text-[#334155] mb-[5px]"
+    className: "block text-sm font-semibold text-[#334155] mb-[5px]"
   }, "Location"), /*#__PURE__*/React.createElement("input", {
     className: inputClass,
     placeholder: "e.g. Utility Block",
@@ -1245,7 +2149,7 @@ var AddEquipmentModal = function AddEquipmentModal(_ref) {
   })), /*#__PURE__*/React.createElement("div", {
     className: "mb-4"
   }, /*#__PURE__*/React.createElement("label", {
-    className: "block text-xs font-semibold text-[#334155] mb-[5px]"
+    className: "block text-sm font-semibold text-[#334155] mb-[5px]"
   }, "Equipment Category"), /*#__PURE__*/React.createElement("select", {
     className: inputClass,
     value: form.category,
@@ -1261,7 +2165,7 @@ var AddEquipmentModal = function AddEquipmentModal(_ref) {
   }, "Instrumentation"))), /*#__PURE__*/React.createElement("div", {
     className: "mb-4"
   }, /*#__PURE__*/React.createElement("label", {
-    className: "block text-xs font-semibold text-[#334155] mb-[5px]"
+    className: "block text-sm font-semibold text-[#334155] mb-[5px]"
   }, "IIoT Status"), /*#__PURE__*/React.createElement("select", {
     className: inputClass,
     value: form.iiot_status,
@@ -1273,10 +2177,10 @@ var AddEquipmentModal = function AddEquipmentModal(_ref) {
   }, "Connected")))), /*#__PURE__*/React.createElement("div", {
     className: "py-4 px-6 border-t border-[#E2E8F0] flex justify-end gap-2.5"
   }, /*#__PURE__*/React.createElement("button", {
-    className: "inline-flex items-center gap-1.5 py-[5px] px-3 rounded-lg text-xs font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-white text-[#334155] border border-[#CBD5E1] hover:bg-[#F8FAFC] hover:border-[#94A3B8]",
+    className: "inline-flex items-center gap-1.5 py-[5px] px-3 rounded-lg text-sm font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-white text-[#334155] border border-[#CBD5E1] hover:bg-[#F8FAFC] hover:border-[#94A3B8]",
     onClick: onClose
   }, "Cancel"), /*#__PURE__*/React.createElement("button", {
-    className: "inline-flex items-center gap-1.5 py-2 px-4 rounded-lg text-[14px] font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-[#2563EB] text-white hover:bg-[#1E5291] disabled:opacity-60",
+    className: "inline-flex items-center gap-1.5 py-2 px-4 rounded-lg text-base font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-[#2563EB] text-white hover:bg-[#1E5291] disabled:opacity-60",
     onClick: handleSave,
     disabled: saving
   }, saving ? "Saving…" : isEdit ? "Update Equipment" : "Save Equipment"))));
@@ -1297,17 +2201,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/dist/react-redux.mjs");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/dist/react-redux.mjs");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store */ "./src/store.js");
 /* harmony import */ var _actions_equipmentActions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/equipmentActions */ "./src/actions/equipmentActions.js");
 /* harmony import */ var _EquipmentStatsCards__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EquipmentStatsCards */ "./src/components/EquipmentStatsCards.jsx");
 /* harmony import */ var _EquipmentCard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EquipmentCard */ "./src/components/EquipmentCard.jsx");
 /* harmony import */ var _AddEquipmentModal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./AddEquipmentModal */ "./src/components/AddEquipmentModal.jsx");
-/* harmony import */ var _actions_plantActions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../actions/plantActions */ "./src/actions/plantActions.js");
-/* harmony import */ var _actions_lineActions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../actions/lineActions */ "./src/actions/lineActions.js");
-/* harmony import */ var _actions_machineActions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../actions/machineActions */ "./src/actions/machineActions.js");
-/* harmony import */ var _ConfigurationModal__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ConfigurationModal */ "./src/components/ConfigurationModal.jsx");
-/* harmony import */ var _ConfigMasterPicker__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./ConfigMasterPicker */ "./src/components/ConfigMasterPicker.jsx");
+/* harmony import */ var _ChecklistBuilder__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ChecklistBuilder */ "./src/components/ChecklistBuilder.jsx");
+/* harmony import */ var _SOPLibrary__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./SOPLibrary */ "./src/components/SOPLibrary.jsx");
+/* harmony import */ var _actions_plantActions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../actions/plantActions */ "./src/actions/plantActions.js");
+/* harmony import */ var _actions_lineActions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../actions/lineActions */ "./src/actions/lineActions.js");
+/* harmony import */ var _actions_machineActions__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../actions/machineActions */ "./src/actions/machineActions.js");
+/* harmony import */ var _ConfigurationModal__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./ConfigurationModal */ "./src/components/ConfigurationModal.jsx");
+/* harmony import */ var _ConfigMasterPicker__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./ConfigMasterPicker */ "./src/components/ConfigMasterPicker.jsx");
+/* harmony import */ var _SpareStandardization__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./SpareStandardization */ "./src/components/SpareStandardization.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
@@ -1334,7 +2241,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var SIDEBAR_LINK_BASE = "sidebar-link flex items-center gap-2.5 py-2.5 px-5 text-[14px] font-semibold no-underline transition-all duration-150 border-l-[3px]";
+
+
+
+var SIDEBAR_LINK_BASE = "sidebar-link flex items-center gap-2.5 py-2.5 px-5 text-base font-semibold no-underline transition-all duration-150 border-l-[3px]";
 var SIDEBAR_ACTIVE = "bg-[#F0F7FF] text-[#2563EB] border-l-[#2563EB] font-semibold hover:bg-[#F8FAFC]";
 var SIDEBAR_INACTIVE = "border-l-transparent text-[#475569] hover:bg-[#F8FAFC] hover:text-[#2563EB]";
 var sidebarLinkClass = function sidebarLinkClass(tabName, activeTab) {
@@ -1378,25 +2288,25 @@ function AdminPageInner(_ref) {
     selectedMaster = _useState16[0],
     setSelectedMaster = _useState16[1];
   var gearBtnRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_11__.useDispatch)();
-  var _useSelector = (0,react_redux__WEBPACK_IMPORTED_MODULE_11__.useSelector)(function (s) {
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_14__.useDispatch)();
+  var _useSelector = (0,react_redux__WEBPACK_IMPORTED_MODULE_14__.useSelector)(function (s) {
       return s.equipment;
     }),
     items = _useSelector.items,
     filters = _useSelector.filters,
     status = _useSelector.status,
     error = _useSelector.error;
-  var _useSelector2 = (0,react_redux__WEBPACK_IMPORTED_MODULE_11__.useSelector)(function (s) {
+  var _useSelector2 = (0,react_redux__WEBPACK_IMPORTED_MODULE_14__.useSelector)(function (s) {
       return s.plants;
     }),
     plantItems = _useSelector2.items,
     plantsStatus = _useSelector2.status;
-  var _useSelector3 = (0,react_redux__WEBPACK_IMPORTED_MODULE_11__.useSelector)(function (s) {
+  var _useSelector3 = (0,react_redux__WEBPACK_IMPORTED_MODULE_14__.useSelector)(function (s) {
       return s.lines;
     }),
     lineItems = _useSelector3.items,
     linesStatus = _useSelector3.status;
-  var _useSelector4 = (0,react_redux__WEBPACK_IMPORTED_MODULE_11__.useSelector)(function (s) {
+  var _useSelector4 = (0,react_redux__WEBPACK_IMPORTED_MODULE_14__.useSelector)(function (s) {
       return s.machines;
     }),
     machineItems = _useSelector4.items,
@@ -1421,13 +2331,13 @@ function AdminPageInner(_ref) {
   }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     dispatch((0,_actions_equipmentActions__WEBPACK_IMPORTED_MODULE_2__.loadEquipment)());
-    dispatch((0,_actions_plantActions__WEBPACK_IMPORTED_MODULE_6__.loadPlants)());
-    dispatch((0,_actions_lineActions__WEBPACK_IMPORTED_MODULE_7__.loadLines)()); // Line Name filter — smartpm_line_master se
-    dispatch((0,_actions_machineActions__WEBPACK_IMPORTED_MODULE_8__.loadMachines)()); // Machine Name filter — smartpm_machine_master se
+    dispatch((0,_actions_plantActions__WEBPACK_IMPORTED_MODULE_8__.loadPlants)());
+    dispatch((0,_actions_lineActions__WEBPACK_IMPORTED_MODULE_9__.loadLines)()); // Line Name filter — from smartpm_line_master
+    dispatch((0,_actions_machineActions__WEBPACK_IMPORTED_MODULE_10__.loadMachines)()); // Machine Name filter — from smartpm_machine_master
   }, [dispatch]);
 
-  // Filter bar aur equipment list dono client-side filter hote hain
-  // (backend abhi query-param filter support nahi karta — GET sab kuch laata hai)
+  // Both the filter bar and the equipment list are filtered client-side
+  // (the backend doesn't support query-param filtering yet — GET returns everything)
   var filteredItems = items.filter(function (eq) {
     if (filters.plant_code !== 'all' && String(eq.plant_code) !== String(filters.plant_code)) return false;
     if (filters.status === 'overdue' && eq.pm_status !== 'overdue') return false;
@@ -1445,25 +2355,25 @@ function AdminPageInner(_ref) {
     return true;
   });
 
-  // Line Name dropdown — smartpm_line_master se, selected Plant ke hisaab se scope hota hai.
-  // Dedup name se karte hain (dropdown mein ek hi naam do baar na dikhe) — CRUD table
-  // (Configuration modal) mein raw rows hi dikhti hain, wahan dedup nahi hota.
+  // Line Name dropdown — from smartpm_line_master, scoped to the selected Plant.
+  // Deduped by name (so the dropdown doesn't show the same name twice) — the CRUD
+  // table (Configuration modal) shows raw rows without dedup.
   var lineOptions = _toConsumableArray(new Map(lineItems.filter(function (l) {
     return filters.plant_code === 'all' || String(l.plant_code) === String(filters.plant_code);
   }).map(function (l) {
     return [l.line_name, l];
   })).values());
 
-  // Machine Name dropdown — smartpm_machine_master se, selected Plant + Line ke hisaab se scope hota hai
+  // Machine Name dropdown — from smartpm_machine_master, scoped to selected Plant + Line
   var machineOptions = _toConsumableArray(new Map(machineItems.filter(function (m) {
     return (filters.plant_code === 'all' || String(m.plant_code) === String(filters.plant_code)) && (filters.line_name === 'all' || String(m.line_name) === String(filters.line_name));
   }).map(function (m) {
     return [m.machine_name, m];
   })).values());
 
-  // Assembly / Sub-Assembly ke liye koi master table nahi hai — abhi load ho chuke
-  // equipment records se hi unique, non-empty values nikal ke dropdown banaya jaata hai.
-  // Assembly Machine ke hisaab se scope hota hai, Sub-Assembly Assembly ke hisaab se.
+  // Assembly / Sub-Assembly have no master table — unique, non-empty values are
+  // derived directly from the equipment records already loaded. Assembly is
+  // scoped by Machine, Sub-Assembly is scoped by Assembly.
   var assemblyOptions = _toConsumableArray(new Set(items.filter(function (eq) {
     return filters.machine_name === 'all' || String(eq.machine || '') === String(filters.machine_name);
   }).map(function (eq) {
@@ -1477,7 +2387,7 @@ function AdminPageInner(_ref) {
   var handleFilterChange = function handleFilterChange(field) {
     return function (e) {
       var value = e.target.value;
-      // Plant badalne par Line + Machine + Assembly + Sub-Assembly sab reset ho jaate hain
+      // Changing Plant resets Line + Machine + Assembly + Sub-Assembly
       if (field === 'plant_code') {
         dispatch((0,_actions_equipmentActions__WEBPACK_IMPORTED_MODULE_2__.setEquipmentFilters)({
           plant_code: value,
@@ -1488,7 +2398,7 @@ function AdminPageInner(_ref) {
         }));
         return;
       }
-      // Line badalne par Machine + Assembly + Sub-Assembly reset ho jaate hain (machine line-scoped hai)
+      // Changing Line resets Machine + Assembly + Sub-Assembly (machine is line-scoped)
       if (field === 'line_name') {
         dispatch((0,_actions_equipmentActions__WEBPACK_IMPORTED_MODULE_2__.setEquipmentFilters)({
           line_name: value,
@@ -1498,7 +2408,7 @@ function AdminPageInner(_ref) {
         }));
         return;
       }
-      // Machine badalne par Assembly + Sub-Assembly reset ho jaate hain (assembly machine-scoped hai)
+      // Changing Machine resets Assembly + Sub-Assembly (assembly is machine-scoped)
       if (field === 'machine_name') {
         dispatch((0,_actions_equipmentActions__WEBPACK_IMPORTED_MODULE_2__.setEquipmentFilters)({
           machine_name: value,
@@ -1507,7 +2417,7 @@ function AdminPageInner(_ref) {
         }));
         return;
       }
-      // Assembly badalne par Sub-Assembly reset ho jaata hai (sub-assembly assembly-scoped hai)
+      // Changing Assembly resets Sub-Assembly (sub-assembly is assembly-scoped)
       if (field === 'assembly') {
         dispatch((0,_actions_equipmentActions__WEBPACK_IMPORTED_MODULE_2__.setEquipmentFilters)({
           assembly: value,
@@ -1519,9 +2429,9 @@ function AdminPageInner(_ref) {
     };
   };
 
-  // Confirm karke soft-delete karta hai (backend is_active=0 karega)
+  // Confirms and soft-deletes (backend sets is_active=0)
   var handleDelete = function handleDelete(eq) {
-    var ok = window.confirm("\"".concat(eq.equipment_name, "\" (").concat(eq.equipment_code, ") delete karna hai?"));
+    var ok = window.confirm("Delete \"".concat(eq.equipment_name, "\" (").concat(eq.equipment_code, ")?"));
     if (ok) dispatch((0,_actions_equipmentActions__WEBPACK_IMPORTED_MODULE_2__.removeEquipment)(eq.cdb_object_id));
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("nav", {
@@ -1534,11 +2444,11 @@ function AdminPageInner(_ref) {
       onNavigate && onNavigate('home');
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "w-8 h-8 bg-[#2563EB] rounded-md flex items-center justify-center text-base"
+    className: "w-8 h-8 bg-[#2563EB] rounded-md flex items-center justify-center text-lg"
   }, "\u2699\uFE0F"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "text-white text-[16px] font-bold tracking-[-0.2px]"
+    className: "text-white text-lg font-bold tracking-[-0.2px]"
   }, "SmartPM"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "text-white/40 text-[11px] font-normal tracking-[0.6px] uppercase"
+    className: "text-white/40 text-xs font-normal tracking-[0.6px] uppercase"
   }, "Admin Panel"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "flex-1"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -1546,7 +2456,7 @@ function AdminPageInner(_ref) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "w-2 h-2 rounded-full bg-[#7C3AED]"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "text-white text-xs font-semibold"
+    className: "text-white text-sm font-semibold"
   }, "Administrator")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     ref: gearBtnRef,
     onClick: function onClick() {
@@ -1558,7 +2468,7 @@ function AdminPageInner(_ref) {
       setPickerOpen(true);
     },
     title: "System Configuration",
-    className: "w-8 h-8 flex items-center justify-center rounded-md text-white/[0.75] text-base bg-white/[0.08] border border-white/[0.12] cursor-pointer transition-all duration-150 hover:bg-white/[0.16] hover:text-white",
+    className: "w-8 h-8 flex items-center justify-center rounded-md text-white/[0.75] text-lg bg-white/[0.08] border border-white/[0.12] cursor-pointer transition-all duration-150 hover:bg-white/[0.16] hover:text-white",
     style: {
       marginLeft: 4
     }
@@ -1568,12 +2478,12 @@ function AdminPageInner(_ref) {
       e.preventDefault();
       onNavigate && onNavigate('home');
     },
-    className: "text-white/[0.55] text-xs no-underline py-[5px] px-2.5 rounded-md transition-all duration-150 hover:bg-white/[0.08] hover:text-white",
+    className: "text-white/[0.55] text-sm no-underline py-[5px] px-2.5 rounded-md transition-all duration-150 hover:bg-white/[0.08] hover:text-white",
     style: {
       marginLeft: 12
     }
   }, "\u2190 Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "text-white/50 text-[13px] ml-2.5",
+    className: "text-white/50 text-sm ml-2.5",
     style: {
       fontFamily: 'var(--font-mono)'
     }
@@ -1582,7 +2492,7 @@ function AdminPageInner(_ref) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("aside", {
     className: "w-60 bg-white border-r border-[#E2E8F0] fixed top-14 left-0 bottom-0 overflow-y-auto py-5"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "text-[11px] font-bold tracking-wider uppercase text-[#94A3B8] pt-3.5 px-5 pb-1.5"
+    className: "text-xs font-bold tracking-wider uppercase text-[#94A3B8] pt-3.5 px-5 pb-1.5"
   }, "Configuration"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
     href: "#",
     className: sidebarLinkClass('equipment', activeTab),
@@ -1591,7 +2501,7 @@ function AdminPageInner(_ref) {
       setActiveTab('equipment');
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "w-[18px] h-[18px] flex items-center justify-center text-sm shrink-0"
+    className: "w-[18px] h-[18px] flex items-center justify-center text-base shrink-0"
   }, "\uD83C\uDFED"), "Equipment Register"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
     href: "#",
     className: sidebarLinkClass('checklist', activeTab),
@@ -1600,7 +2510,7 @@ function AdminPageInner(_ref) {
       setActiveTab('checklist');
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "w-[18px] h-[18px] flex items-center justify-center text-sm shrink-0"
+    className: "w-[18px] h-[18px] flex items-center justify-center text-base shrink-0"
   }, "\uD83D\uDCDD"), "PM Checklists"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
     href: "#",
     className: sidebarLinkClass('sop', activeTab),
@@ -1609,8 +2519,17 @@ function AdminPageInner(_ref) {
       setActiveTab('sop');
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "w-[18px] h-[18px] flex items-center justify-center text-sm shrink-0"
+    className: "w-[18px] h-[18px] flex items-center justify-center text-base shrink-0"
   }, "\uD83D\uDCD6"), "SOP Library"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+    href: "#",
+    className: sidebarLinkClass('standardization', activeTab),
+    onClick: function onClick(e) {
+      e.preventDefault();
+      setActiveTab('standardization');
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "w-[18px] h-[18px] flex items-center justify-center text-base shrink-0"
+  }, "\uD83D\uDD29"), "Spare Standardization"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
     href: "#",
     className: sidebarLinkClass('iiot', activeTab),
     onClick: function onClick(e) {
@@ -1618,11 +2537,11 @@ function AdminPageInner(_ref) {
       setActiveTab('iiot');
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "w-[18px] h-[18px] flex items-center justify-center text-sm shrink-0"
+    className: "w-[18px] h-[18px] flex items-center justify-center text-base shrink-0"
   }, "\uD83D\uDCE1"), "IIoT Sensor Config"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "h-px bg-[#E2E8F0] my-2.5"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "text-[11px] font-bold tracking-wider uppercase text-[#94A3B8] pt-3.5 px-5 pb-1.5"
+    className: "text-xs font-bold tracking-wider uppercase text-[#94A3B8] pt-3.5 px-5 pb-1.5"
   }, "Users & Access"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
     href: "#",
     className: sidebarLinkClass('users', activeTab),
@@ -1631,7 +2550,7 @@ function AdminPageInner(_ref) {
       setActiveTab('users');
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "w-[18px] h-[18px] flex items-center justify-center text-sm shrink-0"
+    className: "w-[18px] h-[18px] flex items-center justify-center text-base shrink-0"
   }, "\uD83D\uDC65"), "User Management"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
     href: "#",
     className: sidebarLinkClass('roles', activeTab),
@@ -1640,11 +2559,11 @@ function AdminPageInner(_ref) {
       setActiveTab('roles');
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "w-[18px] h-[18px] flex items-center justify-center text-sm shrink-0"
+    className: "w-[18px] h-[18px] flex items-center justify-center text-base shrink-0"
   }, "\uD83D\uDD11"), "Roles & Permissions"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "h-px bg-[#E2E8F0] my-2.5"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "text-[11px] font-bold tracking-wider uppercase text-[#94A3B8] pt-3.5 px-5 pb-1.5"
+    className: "text-xs font-bold tracking-wider uppercase text-[#94A3B8] pt-3.5 px-5 pb-1.5"
   }, "Navigation"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
     href: "#",
     onClick: function onClick(e) {
@@ -1653,7 +2572,7 @@ function AdminPageInner(_ref) {
     },
     className: "".concat(SIDEBAR_LINK_BASE, " ").concat(SIDEBAR_INACTIVE)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "w-[18px] h-[18px] flex items-center justify-center text-sm shrink-0"
+    className: "w-[18px] h-[18px] flex items-center justify-center text-base shrink-0"
   }, "\uD83D\uDD0D"), "Checker View"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
     href: "#",
     onClick: function onClick(e) {
@@ -1662,7 +2581,7 @@ function AdminPageInner(_ref) {
     },
     className: "".concat(SIDEBAR_LINK_BASE, " ").concat(SIDEBAR_INACTIVE)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "w-[18px] h-[18px] flex items-center justify-center text-sm shrink-0"
+    className: "w-[18px] h-[18px] flex items-center justify-center text-base shrink-0"
   }, "\uD83D\uDCCB"), "Planner View"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
     href: "#",
     onClick: function onClick(e) {
@@ -1671,7 +2590,7 @@ function AdminPageInner(_ref) {
     },
     className: "".concat(SIDEBAR_LINK_BASE, " ").concat(SIDEBAR_INACTIVE)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "w-[18px] h-[18px] flex items-center justify-center text-sm shrink-0"
+    className: "w-[18px] h-[18px] flex items-center justify-center text-base shrink-0"
   }, "\uD83D\uDD27"), "Executor View"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
     href: "#",
     onClick: function onClick(e) {
@@ -1680,25 +2599,25 @@ function AdminPageInner(_ref) {
     },
     className: "".concat(SIDEBAR_LINK_BASE, " ").concat(SIDEBAR_INACTIVE)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "w-[18px] h-[18px] flex items-center justify-center text-sm shrink-0"
+    className: "w-[18px] h-[18px] flex items-center justify-center text-base shrink-0"
   }, "\uD83D\uDCCA"), "Mentor Dashboard"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "h-px bg-[#E2E8F0] my-2.5"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "text-[11px] font-bold tracking-wider uppercase text-[#94A3B8] pt-3.5 px-5 pb-1.5"
+    className: "text-xs font-bold tracking-wider uppercase text-[#94A3B8] pt-3.5 px-5 pb-1.5"
   }, "Quick Actions"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "flex flex-col gap-1.5 px-3 pb-3 pt-1"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "flex items-center gap-2 py-[7px] px-3 rounded-lg bg-[#F0F7FF] border border-[#BFDBFE] text-[#1E5291] text-xs font-semibold cursor-pointer transition-all duration-150 w-full hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB]",
+    className: "flex items-center gap-2 py-[7px] px-3 rounded-lg bg-[#F0F7FF] border border-[#BFDBFE] text-[#1E5291] text-sm font-semibold cursor-pointer transition-all duration-150 w-full hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB]",
     onClick: function onClick() {
       return setAddEquipModalOpen(true);
     }
   }, "+ Add Equipment"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "flex items-center gap-2 py-[7px] px-3 rounded-lg bg-[#F0F7FF] border border-[#BFDBFE] text-[#1E5291] text-xs font-semibold cursor-pointer transition-all duration-150 w-full hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB]",
+    className: "flex items-center gap-2 py-[7px] px-3 rounded-lg bg-[#F0F7FF] border border-[#BFDBFE] text-[#1E5291] text-sm font-semibold cursor-pointer transition-all duration-150 w-full hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB]",
     onClick: function onClick() {
       return alert('Add new user form');
     }
   }, "+ Add User"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "flex items-center gap-2 py-[7px] px-3 rounded-lg bg-[#F0F7FF] border border-[#BFDBFE] text-[#1E5291] text-xs font-semibold cursor-pointer transition-all duration-150 w-full hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB]",
+    className: "flex items-center gap-2 py-[7px] px-3 rounded-lg bg-[#F0F7FF] border border-[#BFDBFE] text-[#1E5291] text-sm font-semibold cursor-pointer transition-all duration-150 w-full hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB]",
     onClick: function onClick() {
       return alert('System audit log');
     }
@@ -1709,7 +2628,7 @@ function AdminPageInner(_ref) {
   }, activeTab === 'equipment' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "mb-6"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "flex items-center gap-1.5 text-xs text-[#94A3B8] mb-2 flex-wrap"
+    className: "flex items-center gap-1.5 text-sm text-[#94A3B8] mb-2 flex-wrap"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
     className: "text-[#94A3B8] no-underline hover:text-[#2563EB]",
     href: "#",
@@ -1718,33 +2637,33 @@ function AdminPageInner(_ref) {
       onNavigate && onNavigate('home');
     }
   }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "text-[11px] text-[#CBD5E1]"
+    className: "text-xs text-[#CBD5E1]"
   }, "\u203A"), "Admin", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "text-[11px] text-[#CBD5E1]"
+    className: "text-xs text-[#CBD5E1]"
   }, "\u203A"), "Equipment Register"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "flex items-center justify-between flex-wrap gap-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "text-[24px] font-bold text-[#0B1F3A] tracking-[-0.3px]"
+    className: "text-2xl font-bold text-[#0B1F3A] tracking-[-0.3px]"
   }, "Equipment Register"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "text-[14px] text-[#64748B] mt-[3px]"
+    className: "text-base text-[#64748B] mt-[3px]"
   }, "All monitored assets with PM schedules")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "flex gap-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "inline-flex items-center gap-1.5 py-[5px] px-3 rounded-lg text-xs font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-white text-[#334155] border border-[#CBD5E1] hover:bg-[#F8FAFC] hover:border-[#94A3B8]",
+    className: "inline-flex items-center gap-1.5 py-[5px] px-3 rounded-lg text-sm font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-white text-[#334155] border border-[#CBD5E1] hover:bg-[#F8FAFC] hover:border-[#94A3B8]",
     onClick: function onClick() {
       return alert('Export equipment list');
     }
   }, "\u2B07 Export"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "inline-flex items-center gap-1.5 py-2 px-4 rounded-lg text-[14px] font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-[#2563EB] text-white hover:bg-[#1E5291]",
+    className: "inline-flex items-center gap-1.5 py-2 px-4 rounded-lg text-base font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-[#2563EB] text-white hover:bg-[#1E5291]",
     onClick: function onClick() {
       return setAddEquipModalOpen(true);
     }
   }, "+ Add Equipment")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "bg-white border border-[#E2E8F0] rounded-xl py-3 px-4 mb-4 flex items-center gap-3 flex-wrap"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "text-[13px] font-bold text-[#64748B] uppercase tracking-[0.5px]"
+    className: "text-sm font-bold text-[#64748B] uppercase tracking-[0.5px]"
   }, "Filter:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
-    className: "w-[160px] text-xs py-[5px] px-2 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]",
+    className: "w-[160px] text-sm py-[5px] px-2 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]",
     value: filters.plant_code,
     onChange: handleFilterChange('plant_code')
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
@@ -1757,7 +2676,7 @@ function AdminPageInner(_ref) {
       value: p.plant_code
     }, p.plant_name, " (", p.plant_code, ")");
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
-    className: "w-[150px] text-xs py-[5px] px-2 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]",
+    className: "w-[150px] text-sm py-[5px] px-2 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]",
     value: filters.status,
     onChange: handleFilterChange('status')
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
@@ -1769,7 +2688,7 @@ function AdminPageInner(_ref) {
   }, "Overdue PM"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
     value: "no_pm_plan"
   }, "No PM Plan")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
-    className: "w-[150px] text-xs py-[5px] px-2 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]",
+    className: "w-[150px] text-sm py-[5px] px-2 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]",
     value: filters.line_name,
     onChange: handleFilterChange('line_name')
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
@@ -1778,13 +2697,13 @@ function AdminPageInner(_ref) {
     disabled: true
   }, "Loading lines\u2026"), linesStatus === 'failed' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
     disabled: true
-  }, "Lines load nahi hue"), lineOptions.map(function (l) {
+  }, "Failed to load lines"), lineOptions.map(function (l) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
       key: "".concat(l.plant_code, "-").concat(l.line_name),
       value: l.line_name
     }, l.line_name);
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
-    className: "w-[160px] text-xs py-[5px] px-2 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]",
+    className: "w-[160px] text-sm py-[5px] px-2 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]",
     value: filters.machine_name,
     onChange: handleFilterChange('machine_name')
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
@@ -1793,13 +2712,13 @@ function AdminPageInner(_ref) {
     disabled: true
   }, "Loading machines\u2026"), machinesStatus === 'failed' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
     disabled: true
-  }, "Machines load nahi hue"), machineOptions.map(function (m) {
+  }, "Failed to load machines"), machineOptions.map(function (m) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
       key: "".concat(m.plant_code, "-").concat(m.line_name, "-").concat(m.machine_name),
       value: m.machine_name
     }, m.machine_name);
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
-    className: "w-[150px] text-xs py-[5px] px-2 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]",
+    className: "w-[150px] text-sm py-[5px] px-2 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]",
     value: filters.assembly,
     onChange: handleFilterChange('assembly')
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
@@ -1810,7 +2729,7 @@ function AdminPageInner(_ref) {
       value: a
     }, a);
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
-    className: "w-[160px] text-xs py-[5px] px-2 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]",
+    className: "w-[160px] text-sm py-[5px] px-2 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]",
     value: filters.sub_assembly,
     onChange: handleFilterChange('sub_assembly')
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
@@ -1821,7 +2740,7 @@ function AdminPageInner(_ref) {
       value: sa
     }, sa);
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-    className: "w-[180px] text-xs py-[5px] px-2.5 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]",
+    className: "w-[180px] text-sm py-[5px] px-2.5 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]",
     placeholder: "\uD83D\uDD0D Search equipment\u2026",
     value: filters.search,
     onChange: handleFilterChange('search')
@@ -1832,15 +2751,15 @@ function AdminPageInner(_ref) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "flex items-center justify-between mb-4 flex-wrap gap-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "text-sm font-bold text-[#0B1F3A]"
+    className: "text-base font-bold text-[#0B1F3A]"
   }, "Equipment List"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "text-xs text-[#64748B] mt-0.5"
+    className: "text-sm text-[#64748B] mt-0.5"
   }, "Click to view checklist and sensor assignments"))), status === 'loading' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-    className: "text-sm text-[#64748B] py-4"
+    className: "text-base text-[#64748B] py-4"
   }, "Loading equipment\u2026"), status === 'failed' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-    className: "text-sm text-[#DC2626] py-4"
+    className: "text-base text-[#DC2626] py-4"
   }, "Load failed: ", error), status === 'succeeded' && filteredItems.length === 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-    className: "text-sm text-[#64748B] py-4"
+    className: "text-base text-[#64748B] py-4"
   }, "No equipment found."), filteredItems.map(function (eq) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_EquipmentCard__WEBPACK_IMPORTED_MODULE_4__["default"], {
       key: eq.cdb_object_id,
@@ -1850,54 +2769,38 @@ function AdminPageInner(_ref) {
       },
       onDelete: handleDelete
     });
-  }))), activeTab === 'checklist' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }))), activeTab === 'checklist' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_ChecklistBuilder__WEBPACK_IMPORTED_MODULE_6__["default"], null), activeTab === 'users' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "mb-6"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "text-[24px] font-bold text-[#0B1F3A] tracking-[-0.3px]"
-  }, "PM Checklist Builder"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "text-[14px] text-[#64748B] mt-[3px]"
-  }, "Define inspection points for each equipment")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-    className: "text-sm text-[#64748B]"
-  }, "Ye module abhi banaya nahi gaya \u2014 Equipment ke baad next.")), activeTab === 'users' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "mb-6"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "text-[24px] font-bold text-[#0B1F3A] tracking-[-0.3px]"
+    className: "text-2xl font-bold text-[#0B1F3A] tracking-[-0.3px]"
   }, "User Management"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "text-[14px] text-[#64748B] mt-[3px]"
+    className: "text-base text-[#64748B] mt-[3px]"
   }, "Manage system users and role assignments")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-    className: "text-sm text-[#64748B]"
-  }, "Ye module abhi banaya nahi gaya.")), activeTab === 'iiot' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "text-base text-[#64748B]"
+  }, "This module hasn't been built yet.")), activeTab === 'iiot' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "mb-6"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "text-[24px] font-bold text-[#0B1F3A] tracking-[-0.3px]"
+    className: "text-2xl font-bold text-[#0B1F3A] tracking-[-0.3px]"
   }, "IIoT Sensor Configuration"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "text-[14px] text-[#64748B] mt-[3px]"
+    className: "text-base text-[#64748B] mt-[3px]"
   }, "Manage connected sensors and alert thresholds")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-    className: "text-sm text-[#64748B]"
-  }, "Ye module abhi banaya nahi gaya.")), activeTab === 'sop' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "text-base text-[#64748B]"
+  }, "This module hasn't been built yet.")), activeTab === 'sop' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SOPLibrary__WEBPACK_IMPORTED_MODULE_7__["default"], null), activeTab === 'standardization' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SpareStandardization__WEBPACK_IMPORTED_MODULE_13__["default"], null), activeTab === 'roles' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "mb-6"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "text-[24px] font-bold text-[#0B1F3A] tracking-[-0.3px]"
-  }, "SOP Library"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "text-[14px] text-[#64748B] mt-[3px]"
-  }, "Standard Operating Procedures for inspection tasks")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-    className: "text-sm text-[#64748B]"
-  }, "Ye module abhi banaya nahi gaya.")), activeTab === 'roles' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "mb-6"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "text-[24px] font-bold text-[#0B1F3A] tracking-[-0.3px]"
+    className: "text-2xl font-bold text-[#0B1F3A] tracking-[-0.3px]"
   }, "Roles & Permissions"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "text-[14px] text-[#64748B] mt-[3px]"
+    className: "text-base text-[#64748B] mt-[3px]"
   }, "Define access levels for each user role")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-    className: "text-sm text-[#64748B]"
-  }, "Ye module abhi banaya nahi gaya."))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_AddEquipmentModal__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    className: "text-base text-[#64748B]"
+  }, "This module hasn't been built yet."))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_AddEquipmentModal__WEBPACK_IMPORTED_MODULE_5__["default"], {
     isOpen: addEquipModalOpen || Boolean(editingEquipment),
     equipment: editingEquipment,
     onClose: function onClose() {
       setAddEquipModalOpen(false);
       setEditingEquipment(null);
     }
-  }), pickerOpen && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_ConfigMasterPicker__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  }), pickerOpen && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_ConfigMasterPicker__WEBPACK_IMPORTED_MODULE_12__["default"], {
     anchor: pickerAnchor,
     onClose: function onClose() {
       return setPickerOpen(false);
@@ -1907,7 +2810,7 @@ function AdminPageInner(_ref) {
       setPickerOpen(false);
       setConfigOpen(true);
     }
-  }), configOpen && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_ConfigurationModal__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }), configOpen && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_ConfigurationModal__WEBPACK_IMPORTED_MODULE_11__["default"], {
     initialMaster: selectedMaster,
     onClose: function onClose() {
       return setConfigOpen(false);
@@ -1915,10 +2818,10 @@ function AdminPageInner(_ref) {
   }));
 }
 
-// Apna alag Redux <Provider> — CMDBuild ke root Provider se independent.
-// Sirf AdminPageInner aur uske children ko ye store dikhta hai.
+// A separate Redux <Provider>, independent of CMDBuild's root Provider.
+// Only AdminPageInner and its children see this store.
 function AdminPage(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_redux__WEBPACK_IMPORTED_MODULE_11__.Provider, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_redux__WEBPACK_IMPORTED_MODULE_14__.Provider, {
     store: _store__WEBPACK_IMPORTED_MODULE_1__["default"]
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(AdminPageInner, props));
 }
@@ -1937,1918 +2840,1675 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _services_checkerApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/checkerApi */ "./src/services/checkerApi.js");
+/* harmony import */ var _services_equipmentApi__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/equipmentApi */ "./src/services/equipmentApi.js");
+/* harmony import */ var _services_plantApi__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/plantApi */ "./src/services/plantApi.js");
+/* harmony import */ var _services_lineApi__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/lineApi */ "./src/services/lineApi.js");
+/* harmony import */ var _services_machineApi__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/machineApi */ "./src/services/machineApi.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
-/* ---------------------------------------------------------------
-   Module-scope helpers (verbatim logic from the original page's
-   <script> block). These are intentionally kept as plain JS,
-   driving the DOM directly exactly as in the original demo.
------------------------------------------------------------------- */
-var WF = {
-  KEY: 'smartpm_workflow',
-  getAll: function getAll() {
-    try {
-      return JSON.parse(localStorage.getItem(this.KEY) || '[]');
-    } catch (e) {
-      return [];
-    }
-  },
-  save: function save(items) {
-    localStorage.setItem(this.KEY, JSON.stringify(items));
-    localStorage.setItem('smartpm_sync', Date.now());
-  },
-  addAbn: function addAbn(data) {
-    var items = this.getAll();
-    var now = new Date();
-    var id = 'ABN-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6).toUpperCase();
-    var ct = items.filter(function (i) {
-      return i.woRef;
-    }).length;
-    var item = {
-      id: id,
-      woRef: null,
-      status: 'pending_planner',
-      priority: data.priority,
-      machine: data.machine,
-      checkPoint: data.checkPoint,
-      observed: data.observed,
-      cause: data.cause,
-      remarks: data.remarks,
-      photos: data.photos || 0,
-      loggedBy: 'Sandeep Tapkir',
-      loggedAt: now.toISOString(),
-      loggedDate: now.toLocaleDateString('en-IN', {
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric'
-      }),
-      loggedTime: now.toLocaleTimeString('en-IN', {
-        hour: '2-digit',
-        minute: '2-digit'
-      }),
-      assignedTo: null,
-      scheduledDate: null,
-      plannedAt: null,
-      completedAt: null,
-      completionNotes: null,
-      completedBy: null,
-      auditResult: null,
-      auditedAt: null,
-      reworkCount: 0,
-      history: [{
-        stage: 'Abnormality Logged',
-        by: 'Sandeep Tapkir',
-        at: now.toISOString(),
-        note: data.remarks || 'Abnormality observed during PM inspection',
-        icon: '⚠️'
-      }]
-    };
-    items.unshift(item);
-    this.save(items);
-    return item;
-  },
-  complete: function complete(id, data) {
-    var items = this.getAll(),
-      item = items.find(function (i) {
-        return i.id === id;
-      });
-    if (!item) return;
-    var now = new Date();
-    item.status = 'pending_audit';
-    item.completedAt = now.toISOString();
-    item.completionNotes = data.notes;
-    item.completedBy = data.by;
-    item.history.push({
-      stage: 'Work Completed by Executor',
-      by: data.by,
-      at: now.toISOString(),
-      note: data.notes,
-      icon: '🔧'
-    });
-    this.save(items);
-    return item;
-  },
-  audit: function audit(id, pass, notes) {
-    var items = this.getAll(),
-      item = items.find(function (i) {
-        return i.id === id;
-      });
-    if (!item) return;
-    var now = new Date();
-    if (pass) {
-      item.status = 'closed';
-      item.auditResult = 'pass';
-    } else {
-      item.status = 'rework';
-      item.auditResult = 'fail';
-      item.reworkCount = (item.reworkCount || 0) + 1;
-      item.assignedTo = null;
-      item.scheduledDate = null;
-      item.woRef = null;
-    }
-    item.auditedAt = now.toISOString();
-    item.history.push({
-      stage: pass ? 'Audit PASSED ✅ — WO Closed' : 'Audit FAILED ✗ — Sent for Rework',
-      by: 'Sandeep Tapkir',
-      at: now.toISOString(),
-      note: notes,
-      icon: pass ? '✅' : '🔁'
-    });
-    this.save(items);
-    return item;
-  }
+
+
+
+
+var F = "SourceSansPro,\"Helvetica Neue\",Helvetica,Arial,sans-serif";
+var AC = "#16a34a";
+var todayStr = function todayStr() {
+  return new Date().toISOString().slice(0, 10);
 };
-var checkState = {},
-  activeCI = null,
-  activeAuditId = null;
-function statusPill(s) {
-  var m = {
-    pending_planner: {
-      cls: 'wf-pill pending-planner',
-      label: '📨 Awaiting Planner'
-    },
-    pending_executor: {
-      cls: 'wf-pill pending-executor',
-      label: '🔧 WO Assigned — Executor'
-    },
-    pending_audit: {
-      cls: 'wf-pill pending-audit',
-      label: '🔍 Pending Audit'
-    },
-    rework: {
-      cls: 'wf-pill rework',
-      label: '🔁 Rework'
-    },
-    closed: {
-      cls: 'wf-pill closed',
-      label: '✅ Closed'
-    }
-  };
-  return "<span class=\"".concat((m[s] || {
-    cls: 'badge badge-closed'
-  }).cls, "\">").concat((m[s] || {
-    label: s
-  }).label, "</span>");
-}
-function priBadge(p) {
-  var m = {
-    critical: 'badge-critical',
-    high: 'badge-high',
-    medium: 'badge-medium',
-    low: 'badge-low'
-  };
-  var icons = {
-    critical: '🔴',
-    high: '🟠',
-    medium: '🟡',
-    low: '🟢'
-  };
-  return "<span class=\"badge ".concat(m[p] || 'badge-closed', "\">").concat(icons[p] || '', " ").concat(p, "</span>");
-}
-function flowTrack(item) {
-  var _stateMap$item$status;
-  var stages = [{
-    key: 'logged',
-    label: 'Logged',
-    icon: '⚠️'
-  }, {
-    key: 'planner',
-    label: 'Planner',
-    icon: '📋'
-  }, {
-    key: 'executor',
-    label: 'Executor',
-    icon: '🔧'
-  }, {
-    key: 'audit',
-    label: 'Audit',
-    icon: '🔍'
-  }, {
-    key: 'closed',
-    label: 'Closed',
-    icon: '✅'
-  }];
-  var stateMap = {
-    pending_planner: 1,
-    pending_executor: 2,
-    pending_audit: 3,
-    rework: 3,
-    closed: 4
-  };
-  var activeIdx = (_stateMap$item$status = stateMap[item.status]) !== null && _stateMap$item$status !== void 0 ? _stateMap$item$status : 0;
-  var fail = item.status === 'rework';
-  var html = '<div class="flow-track">';
-  stages.forEach(function (s, i) {
-    var done = i < activeIdx,
-      active = i === activeIdx,
-      isFail = fail && i === 3;
-    var dotCls = isFail ? 'fail' : done ? 'done' : active ? 'active' : '';
-    html += "<div class=\"flow-node\"><div class=\"flow-node-dot ".concat(dotCls, "\">").concat(done ? '✓' : s.icon, "</div><div class=\"flow-node-label ").concat(active ? 'active' : '', "\">").concat(s.label, "</div></div>");
-    if (i < stages.length - 1) html += "<div class=\"flow-connector ".concat(done ? 'done' : '', "\"></div>");
+var rowsOf = function rowsOf(j) {
+  var _ref, _ref2, _j$objects;
+  return (_ref = (_ref2 = (_j$objects = j === null || j === void 0 ? void 0 : j.objects) !== null && _j$objects !== void 0 ? _j$objects : j === null || j === void 0 ? void 0 : j.data) !== null && _ref2 !== void 0 ? _ref2 : j === null || j === void 0 ? void 0 : j.results) !== null && _ref !== void 0 ? _ref : [];
+};
+var fmtDate = function fmtDate(d) {
+  return d.toLocaleDateString("en-GB", {
+    weekday: "long",
+    day: "2-digit",
+    month: "long",
+    year: "numeric"
   });
-  return html + '</div>';
-}
-function renderAbnCard(item) {
-  var mode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'checker';
-  var pCls = {
-    critical: 'critical',
-    high: 'high',
-    medium: 'medium',
-    low: 'low'
-  }[item.priority] || '';
-  var ts = item.loggedDate + ' ' + item.loggedTime;
-  return "<div class=\"wf-card ".concat(pCls, "\" id=\"wfcard-").concat(item.id, "\">\n    <div style=\"display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px\">\n      <div>\n        <div style=\"font-size:13px;font-weight:700;color:var(--blue-900)\">\u26A0\uFE0F ").concat(item.checkPoint, "</div>\n        <div style=\"font-size:11px;color:var(--slate-500);margin-top:2px\">").concat(ts, " \xB7 ").concat(item.loggedBy, " \xB7 ").concat(item.machine, "</div>\n      </div>\n      <div style=\"display:flex;gap:6px;align-items:center;flex-wrap:wrap\">").concat(priBadge(item.priority)).concat(statusPill(item.status), "</div>\n    </div>\n    <div style=\"display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;font-size:12px\">\n      <div style=\"background:var(--slate-50);border-radius:6px;padding:8px\"><div style=\"font-size:10px;font-weight:700;text-transform:uppercase;color:var(--slate-400);margin-bottom:2px\">Observed</div>").concat(item.observed || '—', "</div>\n      <div style=\"background:var(--slate-50);border-radius:6px;padding:8px\"><div style=\"font-size:10px;font-weight:700;text-transform:uppercase;color:var(--slate-400);margin-bottom:2px\">Probable Cause</div>").concat(item.cause || '—', "</div>\n    </div>\n    ").concat(item.woRef ? "<div style=\"font-size:11px;color:var(--slate-600);margin-bottom:6px\">\uD83D\uDCCB WO: <strong style=\"font-family:var(--font-mono)\">".concat(item.woRef, "</strong>").concat(item.assignedTo ? ' · Assigned to: <strong>' + item.assignedTo + '</strong>' : '', "</div>") : '', "\n    ").concat(flowTrack(item), "\n    <div style=\"display:flex;gap:8px;margin-top:8px;flex-wrap:wrap\">\n      <button class=\"btn btn-ghost btn-sm\" onclick=\"openDetail('").concat(item.id, "')\">\uD83D\uDCC4 View Full Detail</button>\n      ").concat(item.status === 'pending_audit' ? "<button class=\"btn btn-primary btn-sm\" onclick=\"openAudit('".concat(item.id, "')\">\u2705 Start Audit</button>") : '', "\n      ").concat(item.status === 'rework' ? "<span style=\"font-size:11px;color:var(--red);font-weight:600;padding:5px 0\">\uD83D\uDD01 Rework #".concat(item.reworkCount, " \u2014 Re-planning in progress</span>") : '', "\n    </div>\n  </div>");
-}
-function renderAbnTab() {
-  var items = WF.getAll().filter(function (i) {
-    return i.status !== 'closed';
-  });
-  var list = document.getElementById('abn-list');
-  var empty = document.getElementById('abn-empty');
-  var badge = document.getElementById('abn-count-badge');
-  if (badge) badge.textContent = items.length;
-  if (!items.length) {
-    if (empty) empty.style.display = 'flex';
-    list.innerHTML = '';
-    return;
-  }
-  if (empty) empty.style.display = 'none';
-  list.innerHTML = items.map(function (i) {
-    return renderAbnCard(i);
-  }).join('');
-  var subtitle = document.getElementById('abn-subtitle');
-  if (subtitle) subtitle.textContent = "".concat(items.length, " active \xB7 Last updated: ").concat(new Date().toLocaleTimeString('en-IN', {
-    hour: '2-digit',
-    minute: '2-digit'
-  }));
-}
-function renderAuditTab() {
-  var items = WF.getAll().filter(function (i) {
-    return i.status === 'pending_audit';
-  });
-  var list = document.getElementById('audit-list');
-  var empty = document.getElementById('audit-empty');
-  var badge = document.getElementById('audit-count-badge');
-  if (badge) badge.textContent = items.length;
-  if (!items.length) {
-    if (empty) empty.style.display = 'block';
-    list.innerHTML = '';
-    return;
-  }
-  if (empty) empty.style.display = 'none';
-  list.innerHTML = items.map(function (item) {
-    return "\n    <div class=\"audit-action-card ".concat(item.priority, "\">\n      <div style=\"display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:10px\">\n        <div>\n          <div style=\"font-size:13px;font-weight:700;color:var(--blue-900)\">").concat(item.checkPoint, "</div>\n          <div style=\"font-size:11px;color:var(--slate-500);margin-top:2px\">WO: <strong style=\"font-family:var(--font-mono)\">").concat(item.woRef || '—', "</strong> \xB7 Completed by: <strong>").concat(item.completedBy || '—', "</strong></div>\n        </div>\n        ").concat(priBadge(item.priority), "\n      </div>\n      <div style=\"display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;font-size:12px;margin-bottom:10px\">\n        <div style=\"background:var(--slate-50);border-radius:6px;padding:8px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);margin-bottom:2px\">Machine</div>").concat(item.machine, "</div>\n        <div style=\"background:var(--slate-50);border-radius:6px;padding:8px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);margin-bottom:2px\">Completed</div>").concat(item.completedAt ? new Date(item.completedAt).toLocaleDateString('en-IN', {
-      day: '2-digit',
-      month: 'short',
-      year: 'numeric'
-    }) : '—', "</div>\n        <div style=\"background:var(--slate-50);border-radius:6px;padding:8px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);margin-bottom:2px\">Executor Notes</div>").concat(item.completionNotes || '—', "</div>\n      </div>\n      ").concat(item.reworkCount > 0 ? "<div class=\"alert alert-warning\" style=\"margin-bottom:8px;font-size:11px\">\u26A0\uFE0F This is rework attempt #".concat(item.reworkCount, "</div>") : '', "\n      <div style=\"display:flex;gap:8px;flex-wrap:wrap\">\n        <button class=\"btn btn-secondary btn-sm\" onclick=\"openDetail('").concat(item.id, "')\">\uD83D\uDCC4 View Detail</button>\n        <button class=\"btn btn-primary btn-sm\" onclick=\"openAudit('").concat(item.id, "')\">\uD83D\uDD0D Perform Audit</button>\n      </div>\n    </div>\n  ");
-  }).join('');
-}
-function renderHistoryTab() {
-  var items = WF.getAll();
-  var list = document.getElementById('history-list');
-  if (!items.length) {
-    list.innerHTML = '<div class="alert alert-info">No workflow items yet.</div>';
-    return;
-  }
-  list.innerHTML = items.map(function (item) {
-    return "\n    <div class=\"card\" style=\"margin-bottom:12px\">\n      <div style=\"display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:8px\">\n        <div>\n          <div style=\"font-size:13px;font-weight:700;color:var(--blue-900)\">".concat(item.checkPoint, "</div>\n          <div style=\"font-size:11px;color:var(--slate-500);margin-top:2px\">").concat(item.machine, " \xB7 Logged: ").concat(item.loggedDate, " ").concat(item.loggedTime).concat(item.woRef ? ' · WO: <strong style="font-family:var(--font-mono)">' + item.woRef + '</strong>' : '', "</div>\n        </div>\n        <div style=\"display:flex;gap:6px\">").concat(priBadge(item.priority)).concat(statusPill(item.status), "</div>\n      </div>\n      ").concat(flowTrack(item), "\n      <div style=\"margin-top:10px\">\n        <div style=\"font-size:11px;font-weight:700;color:var(--slate-500);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px\">Timeline</div>\n        <div class=\"timeline-wf\">\n          ").concat(item.history.map(function (h, i) {
-      return "\n            <div class=\"tl-item\">\n              <div class=\"tl-dot\">".concat(h.icon || '📌', "</div>\n              <div class=\"tl-content\">\n                <div class=\"tl-title\">").concat(h.stage, "</div>\n                <div class=\"tl-meta\">").concat(h.by, " \xB7 ").concat(new Date(h.at).toLocaleString('en-IN', {
-        day: '2-digit',
-        month: 'short',
-        hour: '2-digit',
-        minute: '2-digit'
-      }), "</div>\n                ").concat(h.note ? "<div style=\"font-size:11px;color:var(--slate-600);margin-top:2px\">".concat(h.note, "</div>") : '', "\n              </div>\n            </div>\n          ");
-    }).join(''), "\n        </div>\n      </div>\n    </div>\n  ");
-  }).join('');
-}
-function renderConsolidated() {
-  var items = WF.getAll();
-  var list = document.getElementById('consol-list');
-  var now = new Date();
-  document.getElementById('consol-date').textContent = now.toLocaleDateString('en-IN', {
-    day: '2-digit',
-    month: 'short',
-    year: 'numeric'
-  });
-  document.getElementById('c-total').textContent = items.length;
-  document.getElementById('c-crit').textContent = items.filter(function (i) {
-    return i.priority === 'critical';
-  }).length;
-  document.getElementById('c-high').textContent = items.filter(function (i) {
-    return i.priority === 'high';
-  }).length;
-  document.getElementById('c-fwd').textContent = items.filter(function (i) {
-    return i.status !== 'pending_planner';
-  }).length;
-  if (!items.length) {
-    list.innerHTML = '<div class="alert alert-info">No items consolidated yet.</div>';
-    return;
-  }
-  list.innerHTML = "<div class=\"card\"><div class=\"table-wrap\"><table>\n    <thead><tr><th>ID</th><th>Abnormality</th><th>Machine</th><th>Priority</th><th>Logged</th><th>WO Ref</th><th>Status</th><th>Action</th></tr></thead>\n    <tbody>".concat(items.map(function (item) {
-    return "<tr>\n      <td style=\"font-family:var(--font-mono);font-size:11px\">".concat(item.id.slice(-8), "</td>\n      <td><div style=\"font-size:12px;font-weight:600\">").concat(item.checkPoint, "</div><div style=\"font-size:10px;color:var(--slate-400)\">").concat(item.observed || '', "</div></td>\n      <td>").concat(item.machine, "</td>\n      <td>").concat(priBadge(item.priority), "</td>\n      <td style=\"font-size:11px;white-space:nowrap\">").concat(item.loggedDate, "<br>").concat(item.loggedTime, "</td>\n      <td style=\"font-family:var(--font-mono);font-size:11px\">").concat(item.woRef || '—', "</td>\n      <td>").concat(statusPill(item.status), "</td>\n      <td><button class=\"btn btn-ghost btn-sm\" onclick=\"openDetail('").concat(item.id, "')\">Detail</button></td>\n    </tr>");
-  }).join(''), "</tbody>\n  </table></div></div>");
-}
-function showTab(name, el) {
-  document.querySelectorAll('[id^="tab-"]').forEach(function (t) {
-    return t.style.display = 'none';
-  });
-  document.getElementById('tab-' + name).style.display = 'block';
-  document.querySelectorAll('.sidebar-link').forEach(function (l) {
-    return l.classList.remove('active');
-  });
-  if (el) el.classList.add('active');
-  if (name === 'abnormalities') renderAbnTab();else if (name === 'audit') renderAuditTab();else if (name === 'history') renderHistoryTab();else if (name === 'consolidated') renderConsolidated();else if (name === 'calendar') {
-    var n = new Date();
-    ckBuildCalendar(ckCalYear || n.getFullYear(), ckCalMonth !== undefined ? ckCalMonth : n.getMonth());
-  }
-}
-function selEquip(btn, id, name) {
-  document.querySelectorAll('[id^="ebtn-"]').forEach(function (b) {
-    b.className = 'btn btn-secondary btn-sm';
-  });
-  btn.className = 'btn btn-primary btn-sm';
-  document.getElementById('eid').textContent = id;
-  document.getElementById('ename').textContent = name;
-  checkState = {};
-  updateProg();
-  document.querySelectorAll('.checklist-item').forEach(function (c) {
-    return c.classList.remove('ok', 'abnormal');
-  });
-  document.querySelectorAll('.check-btn').forEach(function (b) {
-    return b.classList.remove('active');
-  });
-}
-function markOK(idx, btn) {
-  checkState[idx] = 'ok';
-  var item = document.getElementById('ci-' + idx);
-  item.classList.remove('ok', 'abnormal');
-  item.classList.add('ok');
-  item.querySelectorAll('.check-btn').forEach(function (b) {
-    return b.classList.remove('active');
-  });
-  btn.classList.add('active');
-  updateProg();
-}
-function updateProg() {
-  var done = Object.keys(checkState).length,
-    total = 5;
-  document.getElementById('prog-txt').textContent = done + ' / ' + total;
-  document.getElementById('prog-fill').style.width = done / total * 100 + '%';
-  var abn = Object.values(checkState).filter(function (s) {
-    return s === 'abnormal';
-  }).length;
-  document.getElementById('prog-fill').className = 'progress-fill ' + (abn > 0 ? 'amber' : 'green');
-}
-function submitInsp() {
-  document.getElementById('insp-success').style.display = 'flex';
-}
-function captureAbnPhoto(id) {
-  var el = document.getElementById(id);
-  el.classList.add('captured');
-  el.innerHTML = '✅<br>Captured';
-}
-function openQuickAbn() {
-  document.getElementById('modal-cp-name').textContent = 'Quick Log (no checklist)';
-  document.getElementById('obs-val').value = '';
-  document.getElementById('prob-cause').value = '';
-  document.getElementById('abn-remarks').value = '';
-  document.getElementById('abn-modal-error').style.display = 'none';
-  ['abn-photo1', 'abn-photo2', 'abn-photo3'].forEach(function (id) {
-    var el = document.getElementById(id);
-    el.classList.remove('captured');
-    el.innerHTML = "\uD83D\uDCF7<br>".concat(id.slice(-6));
-  });
-  document.getElementById('abnModal').classList.add('open');
-}
-function openAbnModal(idx, name, observed) {
-  activeCI = idx;
-  checkState[idx] = 'abnormal';
-  var item = document.getElementById('ci-' + idx);
-  item.classList.remove('ok');
-  item.classList.add('abnormal');
-  item.querySelectorAll('.check-btn').forEach(function (b) {
-    return b.classList.remove('active');
-  });
-  item.querySelector('.check-btn-abn').classList.add('active');
-  updateProg();
-  document.getElementById('modal-cp-name').textContent = name;
-  document.getElementById('obs-val').value = observed || '';
-  document.getElementById('prob-cause').value = '';
-  document.getElementById('abn-remarks').value = '';
-  document.getElementById('abn-modal-error').style.display = 'none';
-  ['abn-photo1', 'abn-photo2', 'abn-photo3'].forEach(function (id) {
-    var el = document.getElementById(id);
-    el.classList.remove('captured');
-    el.innerHTML = "\uD83D\uDCF7<br>".concat(id.slice(-6));
-  });
-  document.getElementById('abnModal').classList.add('open');
-}
-function closeAbn() {
-  document.getElementById('abnModal').classList.remove('open');
-}
-function submitAbn() {
-  var cp = document.getElementById('modal-cp-name').textContent;
-  var obs = document.getElementById('obs-val').value.trim();
-  var cause = document.getElementById('prob-cause').value.trim();
-  var remarks = document.getElementById('abn-remarks').value.trim();
-  var machine = document.getElementById('abn-machine').value;
-  var prio = document.getElementById('abn-prio').value;
-  var errEl = document.getElementById('abn-modal-error');
-  if (!obs) {
-    errEl.textContent = 'Please enter observed value/condition.';
-    errEl.style.display = 'flex';
-    return;
-  }
-  errEl.style.display = 'none';
-  var photos = ['abn-photo1', 'abn-photo2', 'abn-photo3'].filter(function (id) {
-    return document.getElementById(id).classList.contains('captured');
-  }).length;
-  var item = WF.addAbn({
-    checkPoint: cp,
-    observed: obs,
-    cause: cause,
-    remarks: remarks,
-    machine: machine,
-    priority: prio,
-    photos: photos
-  });
-  closeAbn();
-  // Book on calendar
-  var now = new Date();
-  var key = "".concat(now.getFullYear(), "-").concat(String(now.getMonth() + 1).padStart(2, '0'), "-").concat(String(now.getDate()).padStart(2, '0'));
-  if (!ckEvents[key]) ckEvents[key] = [];
-  ckEvents[key].push({
-    type: 'wo',
-    label: cp + ' — ' + machine,
-    time: item.loggedTime,
-    icon: '⚠️',
-    status: 'logged',
-    woRef: null
-  });
-  // Inline confirmation
-  if (activeCI) {
-    var ciEl = document.getElementById('ci-' + activeCI);
-    if (ciEl) {
-      var old = ciEl.querySelector('.abn-confirm');
-      if (old) old.remove();
-      var pill = document.createElement('div');
-      pill.className = 'abn-confirm';
-      pill.style.cssText = 'display:flex;align-items:center;gap:8px;background:#ECFDF5;border:1px solid var(--green-border);border-radius:var(--radius);padding:7px 10px;margin-top:8px;font-size:11px;color:#065F46;font-weight:600;flex-wrap:wrap';
-      pill.innerHTML = "\u2705 Logged \xB7 <strong>ID: ".concat(item.id.slice(-8), "</strong> \xB7 Status: <span style=\"color:var(--blue-500)\">Forwarded to Planner</span> \xB7 <a href=\"#\" onclick=\"showTab('abnormalities',document.getElementById('sb-abn'));return false;\" style=\"color:var(--blue-500)\">View \u2192</a>");
-      ciEl.appendChild(pill);
-    }
-    activeCI = null;
-  }
-  // Update badges
-  var all = WF.getAll();
-  var abn = document.getElementById('abn-count-badge');
-  if (abn) abn.textContent = all.filter(function (i) {
-    return i.status !== 'closed';
-  }).length;
-  // Show toast
-  showToast('⚠️ Abnormality logged & forwarded to Planner!', 'success');
-}
-function logIIoTAlert(cp, obs, cause, machine, prio) {
-  document.getElementById('modal-cp-name').textContent = cp;
-  document.getElementById('obs-val').value = obs;
-  document.getElementById('prob-cause').value = cause;
-  document.getElementById('abn-machine').value = machine;
-  document.getElementById('abn-prio').value = prio;
-  document.getElementById('abn-remarks').value = 'Auto-detected by IIoT sensor system';
-  document.getElementById('abn-modal-error').style.display = 'none';
-  document.getElementById('abnModal').classList.add('open');
-}
-function openAudit(id) {
-  activeAuditId = id;
-  var items = WF.getAll();
-  var item = items.find(function (i) {
-    return i.id === id;
-  });
-  if (!item) return;
-  document.getElementById('audit-modal-title').textContent = '🔍 Audit: ' + item.checkPoint;
-  document.getElementById('audit-notes').value = '';
-  document.getElementById('audit-modal-body').innerHTML = "\n    <div style=\"display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px\">\n      <div class=\"stat-card\" style=\"--stat-color:#2563EB\"><div class=\"stat-label\">Machine</div><div class=\"stat-value\" style=\"font-size:16px\">".concat(item.machine, "</div></div>\n      <div class=\"stat-card\" style=\"--stat-color:#D97706\"><div class=\"stat-label\">WO Reference</div><div class=\"stat-value\" style=\"font-size:14px;font-family:var(--font-mono)\">").concat(item.woRef || '—', "</div></div>\n    </div>\n    <div style=\"background:var(--slate-50);border-radius:var(--radius);padding:12px;margin-bottom:12px\">\n      <div style=\"display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:12px\">\n        <div><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:2px\">Original Abnormality</div>").concat(item.checkPoint, "</div>\n        <div><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:2px\">Observed</div>").concat(item.observed || '—', "</div>\n        <div><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:2px\">Completed By</div>").concat(item.completedBy || '—', "</div>\n        <div><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:2px\">Completion Notes</div>").concat(item.completionNotes || '—', "</div>\n      </div>\n    </div>\n    <div class=\"alert alert-info\" style=\"font-size:12px\">\uD83D\uDD0D Verify: Is the issue fully resolved? Check physically at the machine before marking PASS.</div>\n    ").concat(item.reworkCount > 0 ? "<div class=\"alert alert-warning\" style=\"font-size:12px\">\u26A0\uFE0F This is Rework Attempt #".concat(item.reworkCount, ". Verify extra carefully.</div>") : '', "\n  ");
-  document.getElementById('auditModal').classList.add('open');
-}
-function submitAudit(pass) {
-  var notes = document.getElementById('audit-notes').value.trim();
-  if (!notes) {
-    showToast('Please enter audit remarks before submitting.', 'error');
-    return;
-  }
-  var item = WF.audit(activeAuditId, pass, notes);
-  document.getElementById('auditModal').classList.remove('open');
-  renderAuditTab();
-  var badge = document.getElementById('audit-count-badge');
-  if (badge) badge.textContent = WF.getAll().filter(function (i) {
-    return i.status === 'pending_audit';
-  }).length;
-  showToast(pass ? '✅ Audit PASSED — WO Closed!' : '🔁 Audit FAILED — Sent for Rework to Planner', 'success');
-}
-function openDetail(id) {
-  var item = WF.getAll().find(function (i) {
-    return i.id === id;
-  });
-  if (!item) return;
-  document.getElementById('detail-modal-title').textContent = '📄 ' + item.checkPoint;
-  document.getElementById('detail-modal-body').innerHTML = "\n    <div style=\"margin-bottom:14px\">".concat(flowTrack(item), "</div>\n    <div style=\"display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:12px;margin-bottom:14px\">\n      <div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Machine</div>").concat(item.machine, "</div>\n      <div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Priority</div>").concat(item.priority, "</div>\n      <div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Observed</div>").concat(item.observed || '—', "</div>\n      <div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Cause</div>").concat(item.cause || '—', "</div>\n      ").concat(item.woRef ? "<div style=\"background:var(--blue-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">WO Reference</div><strong style=\"font-family:var(--font-mono)\">".concat(item.woRef, "</strong></div>") : '', "\n      ").concat(item.assignedTo ? "<div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Assigned To</div>".concat(item.assignedTo, "</div>") : '', "\n    </div>\n    <div style=\"font-size:11px;font-weight:700;color:var(--slate-500);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px\">Workflow Timeline</div>\n    <div class=\"timeline-wf\">").concat(item.history.map(function (h) {
-    return "\n      <div class=\"tl-item\">\n        <div class=\"tl-dot\">".concat(h.icon || '📌', "</div>\n        <div class=\"tl-content\">\n          <div class=\"tl-title\">").concat(h.stage, "</div>\n          <div class=\"tl-meta\">").concat(h.by, " \xB7 ").concat(new Date(h.at).toLocaleString('en-IN', {
-      day: '2-digit',
-      month: 'short',
-      hour: '2-digit',
-      minute: '2-digit'
-    }), "</div>\n          ").concat(h.note ? "<div style=\"font-size:11px;color:var(--slate-600);margin-top:2px\">".concat(h.note, "</div>") : '', "\n        </div>\n      </div>");
-  }).join(''), "\n    </div>\n  ");
-  document.getElementById('detailModal').classList.add('open');
-}
-var CK_MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-var CK_DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-var ckCalYear, ckCalMonth;
-var ckEvents = {};
-function ckSeed(year, month) {
-  var k = function k(d) {
-    return "".concat(year, "-").concat(String(month + 1).padStart(2, '0'), "-").concat(String(d).padStart(2, '0'));
-  };
-  var dim = new Date(year, month + 1, 0).getDate();
-  for (var d = 1; d <= dim; d++) {
-    var dow = new Date(year, month, d).getDay();
-    if (dow === 0 || dow === 6) continue;
-    if (d % 2 === 0) {
-      if (!ckEvents[k(d)]) ckEvents[k(d)] = [];
-      ckEvents[k(d)].push({
-        type: 'insp',
-        label: 'CP-101 Daily PM',
-        time: '08:00',
-        icon: '⚙️'
-      });
-    }
-    if (dow === 1 && d <= 22) {
-      if (!ckEvents[k(d)]) ckEvents[k(d)] = [];
-      ckEvents[k(d)].push({
-        type: 'insp',
-        label: 'HX-204 Weekly PM',
-        time: '14:00',
-        icon: '🔥'
-      });
-    }
-    if (d <= 5) {
-      if (!ckEvents[k(d)]) ckEvents[k(d)] = [];
-      ckEvents[k(d)].push({
-        type: 'overdue',
-        label: 'COM-302 PM — OVERDUE',
-        time: '—',
-        icon: '💨'
-      });
-    }
-  }
-  // Add WO-booked events from workflow items
-  WF.getAll().forEach(function (item) {
-    if (item.loggedAt) {
-      var dt = new Date(item.loggedAt);
-      if (dt.getFullYear() === year && dt.getMonth() === month) {
-        var kk = k(dt.getDate());
-        if (!ckEvents[kk]) ckEvents[kk] = [];
-        ckEvents[kk].push({
-          type: 'wo',
-          label: item.checkPoint,
-          time: item.loggedTime,
-          icon: '⚠️',
-          status: item.status,
-          id: item.id
-        });
+};
+
+// ══════════════════════════════════════════════════════════════════════════
+// Status pill for each checkpoint row
+// ══════════════════════════════════════════════════════════════════════════
+function ResultButtons(_ref3) {
+  var value = _ref3.value,
+    onChange = _ref3.onChange,
+    disabled = _ref3.disabled;
+  var btn = function btn(label, val, color) {
+    return /*#__PURE__*/React.createElement("button", {
+      onClick: function onClick() {
+        return !disabled && onChange(val);
+      },
+      disabled: disabled,
+      style: {
+        padding: "6px 16px",
+        borderRadius: 7,
+        border: "1.5px solid ".concat(value === val ? color : "#e2e8f0"),
+        background: value === val ? color : "#fff",
+        color: value === val ? "#fff" : "#64748b",
+        fontWeight: 700,
+        fontSize: 12,
+        cursor: disabled ? "not-allowed" : "pointer",
+        opacity: disabled ? 0.6 : 1
       }
-    }
-    if (item.auditedAt && item.status === 'pending_audit') {
-      var _dt = new Date(item.auditedAt);
-      if (_dt.getFullYear() === year && _dt.getMonth() === month) {
-        var _kk = k(_dt.getDate());
-        if (!ckEvents[_kk]) ckEvents[_kk] = [];
-        ckEvents[_kk].push({
-          type: 'audit',
-          label: 'Audit Due: ' + item.checkPoint,
-          time: '—',
-          icon: '🔍',
-          id: item.id
-        });
-      }
-    }
-  });
-}
-function ckBuildCalendar(year, month) {
-  ckCalYear = year;
-  ckCalMonth = month;
-  ckEvents = {};
-  ckSeed(year, month);
-  var n = new Date(),
-    ty = n.getFullYear(),
-    tm = n.getMonth(),
-    td = n.getDate();
-  document.getElementById('ck-cal-month-label').textContent = CK_MONTHS[month] + ' ' + year;
-  document.getElementById('ck-cal-subtitle').textContent = 'Scheduled by Planner — Vishwas Landage · ' + CK_MONTHS[month] + ' ' + year;
-  var grid = document.getElementById('ck-cal-grid');
-  grid.innerHTML = '';
-  CK_DAYS.forEach(function (d) {
-    var h = document.createElement('div');
-    h.className = 'cal-day-header';
-    h.textContent = d;
-    grid.appendChild(h);
-  });
-  var firstDow = new Date(year, month, 1).getDay();
-  var offset = firstDow === 0 ? 6 : firstDow - 1;
-  var dimPrev = new Date(year, month, 0).getDate();
-  var dim = new Date(year, month + 1, 0).getDate();
-  for (var i = offset - 1; i >= 0; i--) {
-    var c = document.createElement('div');
-    c.className = 'cal-day';
-    c.style.color = 'var(--slate-300)';
-    c.textContent = dimPrev - i;
-    grid.appendChild(c);
-  }
-  var _loop = function _loop(d) {
-    var dk = "".concat(year, "-").concat(String(month + 1).padStart(2, '0'), "-").concat(String(d).padStart(2, '0'));
-    var evs = ckEvents[dk] || [];
-    var isToday = year === ty && month === tm && d === td;
-    var hasOver = evs.some(function (e) {
-      return e.type === 'overdue';
-    });
-    var hasWO = evs.some(function (e) {
-      return e.type === 'wo';
-    });
-    var hasAudit = evs.some(function (e) {
-      return e.type === 'audit';
-    });
-    var hasInsp = evs.some(function (e) {
-      return e.type === 'insp';
-    });
-    var cls = 'cal-day';
-    if (isToday) cls += ' today';
-    if (hasOver) cls += ' has-overdue';else if (hasWO || hasAudit) cls += ' has-wo';else if (hasInsp) cls += ' has-task';
-    var cell = document.createElement('div');
-    cell.className = cls;
-    cell.innerHTML = "<span>".concat(d, "</span>");
-    if (evs.length > 0) {
-      var dot = document.createElement('span');
-      dot.style.cssText = 'position:absolute;bottom:3px;left:50%;transform:translateX(-50%);display:flex;gap:2px';
-      evs.slice(0, 3).forEach(function (ev) {
-        var dd = document.createElement('span');
-        dd.style.cssText = "width:4px;height:4px;border-radius:50%;background:".concat(ev.type === 'overdue' ? 'var(--red)' : ev.type === 'audit' ? '#7C3AED' : ev.type === 'wo' ? 'var(--amber)' : isToday ? 'white' : 'var(--green)');
-        dot.appendChild(dd);
-      });
-      cell.appendChild(dot);
-      cell.style.cursor = 'pointer';
-      cell.addEventListener('click', function () {
-        return ckShowDay(d, month, year, dk, evs, isToday);
-      });
-    }
-    grid.appendChild(cell);
+    }, label);
   };
-  for (var d = 1; d <= dim; d++) {
-    _loop(d);
-  }
-  var rem = (offset + dim) % 7 === 0 ? 0 : 7 - (offset + dim) % 7;
-  for (var _d = 1; _d <= rem; _d++) {
-    var _c = document.createElement('div');
-    _c.className = 'cal-day';
-    _c.style.color = 'var(--slate-300)';
-    _c.textContent = _d;
-    grid.appendChild(_c);
-  }
-}
-function ckShowDay(day, month, year, dk, evs, isToday) {
-  var dt = document.getElementById('ck-day-detail'),
-    tl = document.getElementById('ck-day-title'),
-    body = document.getElementById('ck-day-body');
-  tl.textContent = '📅 ' + new Date(year, month, day).toLocaleDateString('en-IN', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric'
-  }) + (isToday ? ' — TODAY' : '');
-  var html = '<div style="display:flex;flex-direction:column;gap:8px">';
-  if (!evs.length) html += '<div style="color:var(--slate-400);font-size:13px">No tasks this day.</div>';else evs.forEach(function (ev) {
-    var border = ev.type === 'overdue' ? 'var(--red-border)' : ev.type === 'audit' ? '#DDD6FE' : ev.type === 'wo' ? 'var(--amber-border)' : 'var(--slate-200)';
-    var badge = ev.type === 'overdue' ? 'badge-abnormal' : ev.type === 'audit' ? 'badge-pending' : ev.type === 'wo' ? 'badge-progress' : 'badge-ok';
-    var bLabel = ev.type === 'overdue' ? 'Overdue' : ev.type === 'audit' ? 'Audit Due' : ev.type === 'wo' ? 'WO Logged' : 'PM Scheduled';
-    html += "<div style=\"display:flex;align-items:center;gap:10px;background:white;border-radius:var(--radius);padding:10px 12px;border:1px solid ".concat(border, "\">\n      <span style=\"font-size:18px\">").concat(ev.icon || '📋', "</span>\n      <div style=\"flex:1\"><div style=\"font-size:13px;font-weight:600\">").concat(ev.label, "</div><div style=\"font-size:11px;color:var(--slate-500)\">").concat(ev.time, "</div></div>\n      <span class=\"badge ").concat(badge, "\">").concat(bLabel, "</span>\n      ").concat(ev.id ? "<button class=\"btn btn-ghost btn-sm\" onclick=\"openDetail('".concat(ev.id, "');document.getElementById('ck-day-detail').style.display='none'\">Detail</button>") : '', "\n    </div>");
-  });
-  html += '</div>';
-  body.innerHTML = html;
-  dt.style.display = 'block';
-}
-function ckCalNav(dir) {
-  ckCalMonth += dir;
-  if (ckCalMonth > 11) {
-    ckCalMonth = 0;
-    ckCalYear++;
-  }
-  if (ckCalMonth < 0) {
-    ckCalMonth = 11;
-    ckCalYear--;
-  }
-  ckBuildCalendar(ckCalYear, ckCalMonth);
-}
-function ckCalToday() {
-  var n = new Date();
-  ckBuildCalendar(n.getFullYear(), n.getMonth());
-}
-function showToast(msg, type) {
-  var t = document.getElementById('wf-toast');
-  if (!t) {
-    t = document.createElement('div');
-    t.id = 'wf-toast';
-    t.style.cssText = 'position:fixed;bottom:24px;right:24px;padding:12px 18px;border-radius:var(--radius-lg);font-size:13px;font-weight:600;z-index:9999;box-shadow:var(--shadow-lg);max-width:360px;transition:opacity .3s';
-    document.body.appendChild(t);
-  }
-  t.style.background = type === 'error' ? 'var(--red-light)' : type === 'success' ? 'var(--green-light)' : 'var(--blue-50)';
-  t.style.color = type === 'error' ? '#991B1B' : type === 'success' ? '#065F46' : '#1E40AF';
-  t.style.border = "1px solid ".concat(type === 'error' ? 'var(--red-border)' : type === 'success' ? 'var(--green-border)' : '#BFDBFE');
-  t.textContent = msg;
-  t.style.opacity = '1';
-  clearTimeout(t._timer);
-  t._timer = setTimeout(function () {
-    return t.style.opacity = '0';
-  }, 3000);
-}
-function CheckerPage(_ref) {
-  var onNavigate = _ref.onNavigate;
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    function t() {
-      var n = new Date();
-      document.getElementById('ck-clock').textContent = n.toLocaleDateString('en-IN', {
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric'
-      }) + ' ' + n.toLocaleTimeString('en-IN', {
-        hour: '2-digit',
-        minute: '2-digit'
-      });
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 6
     }
-    t();
-    var _iv = setInterval(t, 1000);
-    return function () {
-      return clearInterval(_iv);
-    };
-  }, []);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    var cleanups = [];
-    var _storageHandler = function _storageHandler(e) {
-      if (e.key === 'smartpm_sync') {
-        var activeTab = document.querySelector('[id^="tab-"]:not([style*="none"])');
-        if (activeTab) {
-          var name = activeTab.id.replace('tab-', '');
-          if (name === 'abnormalities') renderAbnTab();else if (name === 'audit') renderAuditTab();else if (name === 'history') renderHistoryTab();
+  }, btn("OK", "OK", "#16a34a"), btn("Abnormal", "Abnormal", "#dc2626"));
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// One checklist item row
+// ══════════════════════════════════════════════════════════════════════════
+function CheckpointRow(_ref4) {
+  var item = _ref4.item,
+    existing = _ref4.existing,
+    submitted = _ref4.submitted,
+    onSaved = _ref4.onSaved;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)((existing === null || existing === void 0 ? void 0 : existing.result) || ""),
+    _useState2 = _slicedToArray(_useState, 2),
+    result = _useState2[0],
+    setResult = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)((existing === null || existing === void 0 ? void 0 : existing.current_value) || ""),
+    _useState4 = _slicedToArray(_useState3, 2),
+    currentValue = _useState4[0],
+    setCurrentValue = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)((existing === null || existing === void 0 ? void 0 : existing.remarks) || ""),
+    _useState6 = _slicedToArray(_useState5, 2),
+    remarks = _useState6[0],
+    setRemarks = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState8 = _slicedToArray(_useState7, 2),
+    saving = _useState8[0],
+    setSaving = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    _useState10 = _slicedToArray(_useState9, 2),
+    err = _useState10[0],
+    setErr = _useState10[1];
+  var save = /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(newResult) {
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            setResult(newResult);
+            setSaving(true);
+            setErr("");
+            _context.prev = 3;
+            _context.next = 6;
+            return (0,_services_checkerApi__WEBPACK_IMPORTED_MODULE_1__.saveCheckpoint)({
+              equipment_code: item.equipment_code,
+              checklist_item_id: item.cdb_object_id,
+              inspection_date: todayStr(),
+              result: newResult,
+              current_value: currentValue,
+              remarks: remarks,
+              checked_by: item.checked_by || ""
+            });
+          case 6:
+            onSaved();
+            _context.next = 12;
+            break;
+          case 9:
+            _context.prev = 9;
+            _context.t0 = _context["catch"](3);
+            setErr((_context.t0 === null || _context.t0 === void 0 ? void 0 : _context.t0.message) || "Save failed");
+          case 12:
+            _context.prev = 12;
+            setSaving(false);
+            return _context.finish(12);
+          case 15:
+          case "end":
+            return _context.stop();
         }
-        var badge = document.getElementById('audit-count-badge');
-        if (badge) badge.textContent = WF.getAll().filter(function (i) {
-          return i.status === 'pending_audit';
-        }).length;
-        var abadge = document.getElementById('abn-count-badge');
-        if (abadge) abadge.textContent = WF.getAll().filter(function (i) {
-          return i.status !== 'closed';
-        }).length;
-      }
+      }, _callee, null, [[3, 9, 12, 15]]);
+    }));
+    return function save(_x2) {
+      return _ref5.apply(this, arguments);
     };
-    window.addEventListener('storage', _storageHandler);
-    cleanups.push(function () {
-      return window.removeEventListener('storage', _storageHandler);
-    });
-    (function () {
-      document.getElementById('insp-today-label').textContent = new Date().toLocaleDateString('en-IN', {
-        weekday: 'long',
-        day: '2-digit',
-        month: 'long',
-        year: 'numeric'
-      });
-      document.getElementById('iiot-time').textContent = new Date().toLocaleTimeString('en-IN', {
-        hour: '2-digit',
-        minute: '2-digit'
-      });
-      var n = new Date();
-      ckCalYear = n.getFullYear();
-      ckCalMonth = n.getMonth();
-      var abad = document.getElementById('abn-count-badge');
-      if (abad) abad.textContent = WF.getAll().filter(function (i) {
-        return i.status !== 'closed';
-      }).length;
-      var aubd = document.getElementById('audit-count-badge');
-      if (aubd) aubd.textContent = WF.getAll().filter(function (i) {
-        return i.status === 'pending_audit';
-      }).length;
-    })();
-    return function () {
-      cleanups.forEach(function (fn) {
-        return fn();
-      });
-    };
-  }, []);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("style", null, "\n\n.wf-card{background:white;border-radius:var(--radius-lg);border:1.5px solid var(--slate-200);padding:16px 18px;margin-bottom:10px;transition:all .2s;position:relative;overflow:hidden}\n.wf-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}\n.wf-card.critical::before{background:var(--red)}\n.wf-card.high::before{background:var(--amber)}\n.wf-card.medium::before{background:#FBBF24}\n.wf-card.low::before{background:var(--green)}\n.wf-pill{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:700}\n.wf-pill.pending-planner{background:#EFF6FF;color:#1E40AF}\n.wf-pill.pending-executor{background:#FFFBEB;color:#92400E}\n.wf-pill.pending-audit{background:#ECFEFF;color:#155E75}\n.wf-pill.rework{background:#FFF1F2;color:#9F1239}\n.wf-pill.closed{background:#ECFDF5;color:#065F46}\n.flow-track{display:flex;align-items:center;gap:0;margin:12px 0 4px;flex-wrap:nowrap;overflow-x:auto}\n.flow-node{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:70px;flex-shrink:0}\n.flow-node-dot{width:24px;height:24px;border-radius:50%;border:2px solid var(--slate-300);background:white;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--slate-400)}\n.flow-node-dot.done{background:var(--green);border-color:var(--green);color:white}\n.flow-node-dot.active{background:var(--blue-500);border-color:var(--blue-500);color:white;box-shadow:0 0 0 3px rgba(37,99,235,.2)}\n.flow-node-dot.fail{background:var(--red);border-color:var(--red);color:white}\n.flow-node-label{font-size:9px;color:var(--slate-400);text-align:center;line-height:1.3;font-weight:600;text-transform:uppercase;letter-spacing:.3px}\n.flow-node-label.active{color:var(--blue-500)}\n.flow-connector{flex:1;height:2px;background:var(--slate-200);min-width:16px}\n.flow-connector.done{background:var(--green)}\n.audit-action-card{background:white;border:1.5px solid var(--slate-200);border-radius:var(--radius-lg);padding:16px 18px;margin-bottom:12px}\n.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}\n.cal-day-header{text-align:center;font-size:10px;font-weight:700;color:var(--slate-400);padding:4px}\n.cal-day{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;position:relative;transition:all .15s}\n.cal-day:hover{background:var(--blue-50)}\n.cal-day.today{background:var(--blue-500);color:white;font-weight:700}\n.cal-day.has-task::after{content:'';position:absolute;bottom:3px;width:4px;height:4px;border-radius:50%;background:var(--green)}\n.cal-day.today.has-task::after{background:white}\n.cal-day.has-overdue::after{background:var(--red)}\n.cal-day.has-wo::after{background:var(--amber)}\n.sop-inline{background:var(--blue-50);border:1px solid #BFDBFE;border-radius:var(--radius);padding:10px 12px;margin-top:6px;font-size:12px;display:none}\n.sop-inline.open{display:block}\n.sop-step-row{display:flex;gap:8px;margin-bottom:6px;align-items:flex-start}\n.sop-step-num{width:18px;height:18px;background:var(--blue-500);color:white;border-radius:50%;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}\n.photo-row{display:flex;gap:10px;margin:10px 0;flex-wrap:wrap}\n.photo-thumb{width:80px;height:60px;border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:11px;font-weight:600;text-align:center;line-height:1.3;border:2px dashed var(--slate-300);background:var(--slate-50);transition:all .2s;flex-shrink:0}\n.photo-thumb:hover{border-color:var(--blue-400)}\n.photo-thumb.captured{border-style:solid;border-color:var(--green);background:var(--green-light);color:var(--green)}\n.timeline-wf{padding:0}\n.tl-item{display:flex;gap:12px;padding:8px 0;position:relative}\n.tl-item:not(:last-child)::after{content:'';position:absolute;left:11px;top:28px;bottom:0;width:2px;background:var(--slate-200)}\n.tl-dot{width:24px;height:24px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;background:var(--blue-50);border:1.5px solid var(--blue-200)}\n.tl-content{flex:1}\n.tl-title{font-size:12px;font-weight:700;color:var(--blue-900)}\n.tl-meta{font-size:11px;color:var(--slate-400);margin-top:1px}\n.notif-dot{position:absolute;top:-2px;right:-2px;width:8px;height:8px;background:var(--red);border-radius:50%;border:1.5px solid white}\n\n"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("nav", {
-    className: "top-nav"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-    className: "nav-logo",
-    href: "#",
-    onClick: function onClick(e) {
-      e.preventDefault();
-      onNavigate && onNavigate('home');
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "nav-logo-icon"
-  }, "\uD83D\uDD0D"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "nav-logo-text"
-  }, "SmartPM"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "nav-logo-sub"
-  }, "Checker Portal"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "nav-spacer"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "nav-role-badge"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "nav-role-dot",
+  }();
+  var isAbnormal = result === "Abnormal";
+  return /*#__PURE__*/React.createElement("div", {
     style: {
-      background: '#059669'
+      border: "1.5px solid ".concat(isAbnormal ? "#fecaca" : "#e2e8f0"),
+      background: isAbnormal ? "#fef2f2" : "#fff",
+      borderRadius: 10,
+      padding: "12px 14px",
+      marginBottom: 8
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "nav-role-name"
-  }, "Sandeep Tapkir \xB7 Checker")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-    href: "#",
-    onClick: function onClick(e) {
-      e.preventDefault();
-      onNavigate && onNavigate('home');
-    },
-    className: "nav-home-btn",
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
-      marginLeft: 12
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "flex-start",
+      gap: 12,
+      flexWrap: "wrap"
     }
-  }, "\u2190 Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    id: "ck-clock",
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
-      color: 'rgba(255,255,255,.5)',
-      fontSize: 11,
-      fontFamily: 'var(--font-mono)',
-      marginLeft: 10
+      flex: 1,
+      minWidth: 200
     }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "app-layout"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("aside", {
-    className: "sidebar"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sidebar-section-label"
-  }, "My Tasks"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-    href: "#",
-    className: "sidebar-link active",
-    onClick: function onClick(e) {
-      showTab('inspection', e.currentTarget);
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "link-icon"
-  }, "\uD83D\uDD0D"), "PM Inspection", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "sidebar-badge amber"
-  }, "2")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-    href: "#",
-    className: "sidebar-link",
-    id: "sb-abn",
-    onClick: function onClick(e) {
-      showTab('abnormalities', e.currentTarget);
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "link-icon",
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
-      position: 'relative'
+      fontSize: 13,
+      fontWeight: 700,
+      color: "#0f172a"
     }
-  }, "\u26A0\uFE0F"), "Abnormalities", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "sidebar-badge",
-    id: "abn-count-badge"
-  }, "0")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-    href: "#",
-    className: "sidebar-link",
-    onClick: function onClick(e) {
-      showTab('iiot', e.currentTarget);
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "link-icon"
-  }, "\uD83D\uDCE1"), "IIoT Alerts", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "sidebar-badge"
-  }, "3")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-    href: "#",
-    className: "sidebar-link",
-    onClick: function onClick(e) {
-      showTab('consolidated', e.currentTarget);
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "link-icon"
-  }, "\uD83D\uDCCB"), "Consolidated List"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sidebar-divider"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sidebar-section-label"
-  }, "Audit & Schedule"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-    href: "#",
-    className: "sidebar-link",
-    id: "sb-audit",
-    onClick: function onClick(e) {
-      showTab('audit', e.currentTarget);
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "link-icon"
-  }, "\u2705"), "Audit Queue", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "sidebar-badge blue",
-    id: "audit-count-badge"
-  }, "0")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-    href: "#",
-    className: "sidebar-link",
-    onClick: function onClick(e) {
-      showTab('calendar', e.currentTarget);
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "link-icon"
-  }, "\uD83D\uDCC5"), "My Calendar"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-    href: "#",
-    className: "sidebar-link",
-    onClick: function onClick(e) {
-      showTab('history', e.currentTarget);
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "link-icon"
-  }, "\uD83D\uDCDC"), "History & Status"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sidebar-divider"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sidebar-section-label"
-  }, "Navigate"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-    href: "#",
-    onClick: function onClick(e) {
-      e.preventDefault();
-      onNavigate && onNavigate('planner');
-    },
-    className: "sidebar-link"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "link-icon"
-  }, "\uD83D\uDCCB"), "Planner View"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-    href: "#",
-    onClick: function onClick(e) {
-      e.preventDefault();
-      onNavigate && onNavigate('executor');
-    },
-    className: "sidebar-link"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "link-icon"
-  }, "\uD83D\uDD27"), "Executor View"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-    href: "#",
-    onClick: function onClick(e) {
-      e.preventDefault();
-      onNavigate && onNavigate('dashboard');
-    },
-    className: "sidebar-link"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "link-icon"
-  }, "\uD83D\uDCCA"), "Mentor Dashboard"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sidebar-divider"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sidebar-section-label"
-  }, "Quick Actions"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    style: {
-      padding: '4px 12px 12px'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "quick-action-btn",
-    onClick: function onClick(e) {
-      openQuickAbn();
-    }
-  }, "\u26A0\uFE0F Log Abnormality"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "quick-action-btn",
-    onClick: function onClick(e) {
-      showTab('audit', document.getElementById('sb-audit'));
-    }
-  }, "\u2705 Pending Audits"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "quick-action-btn",
-    onClick: function onClick(e) {
-      showTab('history', document.querySelector('[onclick*=history]'));
-    }
-  }, "\uD83D\uDCDC View History"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", {
-    className: "main-content"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    id: "tab-inspection"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "page-header"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "breadcrumb"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "Checker"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "breadcrumb-sep"
-  }, "\u203A"), "PM Inspection"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    style: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'flex-end',
-      flexWrap: 'wrap',
-      gap: 8
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "page-title"
-  }, "PM Inspection \u2014 ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    id: "insp-today-label"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "page-subtitle"
-  }, "Sandeep Tapkir \xB7 Plant A & B")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    style: {
-      display: 'flex',
-      gap: 8
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    id: "insp-success",
-    style: {
-      display: 'none',
-      alignItems: 'center',
-      gap: 8,
-      background: 'var(--green-light)',
-      border: '1px solid var(--green-border)',
-      borderRadius: 'var(--radius)',
-      padding: '8px 14px',
-      fontSize: 12,
-      color: '#065F46',
-      fontWeight: 600
-    }
-  }, "\u2705 Inspection submitted \u2014 abnormalities forwarded to Planner"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "btn btn-success btn-sm",
-    onClick: function onClick(e) {
-      submitInsp();
-    }
-  }, "\u2713 Submit Inspection")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "alert alert-warning"
-  }, "\u26A0\uFE0F COM-302 inspection overdue by 10 days. Prioritise immediately."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "card",
-    style: {
-      marginBottom: 14
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "card-title",
-    style: {
-      marginBottom: 10
-    }
-  }, "Select Equipment to Inspect"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    style: {
-      display: 'flex',
-      gap: 8,
-      flexWrap: 'wrap'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "btn btn-primary btn-sm",
-    id: "ebtn-cp101",
-    onClick: function onClick(e) {
-      selEquip(e.currentTarget, 'CP-101', 'CP-101 Crusher');
-    }
-  }, "\u2699\uFE0F CP-101 Crusher"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "btn btn-secondary btn-sm",
-    id: "ebtn-hx204",
-    onClick: function onClick(e) {
-      selEquip(e.currentTarget, 'HX-204', 'HX-204 Heat Exchanger');
-    }
-  }, "\uD83D\uDD25 HX-204 Heat Exch."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "btn btn-secondary btn-sm",
-    id: "ebtn-com302",
-    onClick: function onClick(e) {
-      selEquip(e.currentTarget, 'COM-302', 'COM-302 Compressor');
-    }
-  }, "\uD83D\uDCA8 COM-302 Compressor"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "btn btn-secondary btn-sm",
-    id: "ebtn-mdu115",
-    onClick: function onClick(e) {
-      selEquip(e.currentTarget, 'MDU-115', 'MDU-115 Motor Drive');
-    }
-  }, "\u26A1 MDU-115 Motor Drive"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "card"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    style: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      marginBottom: 12,
-      flexWrap: 'wrap',
-      gap: 8
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "card-title"
-  }, "Inspection Checklist \u2014 ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    id: "ename"
-  }, "CP-101 Crusher")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, item.title || item.check_point_title), (item.sop_ref || item.limit_value || item.instrument) && /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 11,
-      color: 'var(--slate-400)',
+      color: "#94a3b8",
       marginTop: 2
     }
-  }, "Equipment ID: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    id: "eid",
-    className: "font-mono",
+  }, [item.sop_ref, item.limit_value && "Limit: ".concat(item.limit_value), item.instrument && "Instrument: ".concat(item.instrument)].filter(Boolean).join(" · "))), /*#__PURE__*/React.createElement(ResultButtons, {
+    value: result,
+    onChange: save,
+    disabled: submitted || saving
+  })), isAbnormal && /*#__PURE__*/React.createElement("div", {
     style: {
-      fontFamily: 'var(--font-mono)'
+      display: "flex",
+      gap: 8,
+      marginTop: 10,
+      flexWrap: "wrap"
     }
-  }, "CP-101"), " \xB7 SOP-PM-001")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, /*#__PURE__*/React.createElement("input", {
+    value: currentValue,
+    onChange: function onChange(e) {
+      return setCurrentValue(e.target.value);
+    },
+    onBlur: function onBlur() {
+      return result && save(result);
+    },
+    placeholder: "Current value\u2026",
+    disabled: submitted,
     style: {
-      display: 'flex',
-      alignItems: 'center',
+      flex: 1,
+      minWidth: 120,
+      padding: "6px 10px",
+      borderRadius: 7,
+      border: "1.5px solid #fecaca",
+      fontSize: 12,
+      fontFamily: F,
+      outline: "none"
+    }
+  }), /*#__PURE__*/React.createElement("input", {
+    value: remarks,
+    onChange: function onChange(e) {
+      return setRemarks(e.target.value);
+    },
+    onBlur: function onBlur() {
+      return result && save(result);
+    },
+    placeholder: "Remarks\u2026",
+    disabled: submitted,
+    style: {
+      flex: 2,
+      minWidth: 160,
+      padding: "6px 10px",
+      borderRadius: 7,
+      border: "1.5px solid #fecaca",
+      fontSize: 12,
+      fontFamily: F,
+      outline: "none"
+    }
+  })), saving && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10,
+      color: "#d97706",
+      marginTop: 6
+    }
+  }, "Saving\u2026"), err && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10,
+      color: "#dc2626",
+      marginTop: 6
+    }
+  }, "\u2715 ", err));
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// Top nav — SmartPM / Checker Portal branding + role + clock + Home
+// ══════════════════════════════════════════════════════════════════════════
+function TopNav(_ref6) {
+  var checkedBy = _ref6.checkedBy,
+    onNavigate = _ref6.onNavigate;
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    _useState12 = _slicedToArray(_useState11, 2),
+    clock = _useState12[0],
+    setClock = _useState12[1];
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var tick = function tick() {
+      var n = new Date();
+      setClock(n.toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric"
+      }) + " " + n.toLocaleTimeString("en-GB", {
+        hour: "2-digit",
+        minute: "2-digit"
+      }));
+    };
+    tick();
+    var iv = setInterval(tick, 1000);
+    return function () {
+      return clearInterval(iv);
+    };
+  }, []);
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#0B1F3A",
+      height: 56,
+      display: "flex",
+      alignItems: "center",
+      padding: "0 20px",
+      gap: 12,
+      flexShrink: 0
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      alignItems: "center",
       gap: 10
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 32,
+      height: 32,
+      borderRadius: 6,
+      background: "linear-gradient(135deg,#3b82f6,#22c55e)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      fontSize: 15
+    }
+  }, "\uD83D\uDD0D"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: "#fff",
+      fontWeight: 800,
+      fontSize: 15,
+      fontFamily: F
+    }
+  }, "SmartPM"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: "rgba(255,255,255,.5)",
+      fontSize: 10,
+      textTransform: "uppercase",
+      letterSpacing: ".5px",
+      fontFamily: F
+    }
+  }, "Checker Portal"))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      alignItems: "center",
+      gap: 6,
+      background: "rgba(255,255,255,.08)",
+      border: "1px solid rgba(255,255,255,.12)",
+      borderRadius: 100,
+      padding: "5px 12px 5px 8px"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 8,
+      height: 8,
+      borderRadius: "50%",
+      background: "#22c55e"
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: "#fff",
+      fontSize: 13,
+      fontWeight: 700,
+      fontFamily: F
+    }
+  }, checkedBy, " \xB7 Checker")), /*#__PURE__*/React.createElement("button", {
+    onClick: function onClick() {
+      return onNavigate && onNavigate("home");
+    },
+    style: {
+      fontSize: 13,
+      fontWeight: 600,
+      color: "rgba(255,255,255,.75)",
+      background: "transparent",
+      border: "none",
+      padding: "5px 10px",
+      borderRadius: 6,
+      cursor: "pointer",
+      fontFamily: F
+    }
+  }, "\u2190 Home"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: "rgba(255,255,255,.5)",
+      fontSize: 13,
+      fontFamily: F
+    }
+  }, clock));
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// Sidebar — MY TASKS / AUDIT & SCHEDULE / NAVIGATE / QUICK ACTIONS
+// ══════════════════════════════════════════════════════════════════════════
+function SidebarLink(_ref7) {
+  var icon = _ref7.icon,
+    label = _ref7.label,
+    badge = _ref7.badge,
+    active = _ref7.active,
+    _onClick = _ref7.onClick;
+  return /*#__PURE__*/React.createElement("a", {
+    href: "#",
+    onClick: function onClick(e) {
+      e.preventDefault();
+      _onClick && _onClick();
+    },
+    style: {
+      display: "flex",
+      alignItems: "center",
+      gap: 10,
+      padding: "9px 20px",
+      fontSize: 14,
+      fontWeight: 600,
+      textDecoration: "none",
+      fontFamily: F,
+      borderLeft: "3px solid ".concat(active ? "#2563eb" : "transparent"),
+      background: active ? "#eff6ff" : "transparent",
+      color: active ? "#2563eb" : "#475569"
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 18,
+      textAlign: "center",
+      fontSize: 15,
+      flexShrink: 0
+    }
+  }, icon), /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 1
+    }
+  }, label), badge != null && badge > 0 && /*#__PURE__*/React.createElement("span", {
+    style: {
+      background: active ? "#2563eb" : "#f59e0b",
+      color: "#fff",
+      fontSize: 11,
+      fontWeight: 700,
+      minWidth: 20,
+      height: 20,
+      borderRadius: 100,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: "0 5px"
+    }
+  }, badge));
+}
+function SidebarLabel(_ref8) {
+  var children = _ref8.children;
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      fontWeight: 700,
+      letterSpacing: ".6px",
+      textTransform: "uppercase",
+      color: "#94a3b8",
+      padding: "14px 20px 6px",
+      fontFamily: F
+    }
+  }, children);
+}
+function QuickActionButton(_ref9) {
+  var icon = _ref9.icon,
+    label = _ref9.label,
+    onClick = _ref9.onClick;
+  return /*#__PURE__*/React.createElement("button", {
+    onClick: onClick,
+    style: {
+      display: "flex",
+      alignItems: "center",
+      gap: 8,
+      width: "100%",
+      textAlign: "left",
+      padding: "8px 12px",
+      borderRadius: 8,
+      marginBottom: 6,
+      cursor: "pointer",
+      background: "#eff6ff",
+      border: "1px solid #bfdbfe",
+      color: "#1e40af",
+      fontSize: 13,
+      fontWeight: 600,
+      fontFamily: F
+    }
+  }, /*#__PURE__*/React.createElement("span", null, icon), label);
+}
+var MY_TASKS = [{
+  id: "pm-inspection",
+  icon: "🔍",
+  label: "PM Inspection"
+}, {
+  id: "abnormalities",
+  icon: "⚠️",
+  label: "Abnormalities"
+}, {
+  id: "iiot-alerts",
+  icon: "📡",
+  label: "IIoT Alerts"
+}, {
+  id: "consolidated",
+  icon: "📋",
+  label: "Consolidated List"
+}];
+var AUDIT_SCHEDULE = [{
+  id: "audit-queue",
+  icon: "✅",
+  label: "Audit Queue"
+}, {
+  id: "my-calendar",
+  icon: "📅",
+  label: "My Calendar"
+}, {
+  id: "history-status",
+  icon: "🧾",
+  label: "History & Status"
+}];
+function CheckerSidebar(_ref10) {
+  var activeTab = _ref10.activeTab,
+    setActiveTab = _ref10.setActiveTab,
+    badges = _ref10.badges,
+    onNavigate = _ref10.onNavigate,
+    onQuickAction = _ref10.onQuickAction;
+  return /*#__PURE__*/React.createElement("aside", {
+    style: {
+      width: 240,
+      background: "#fff",
+      borderRight: "1px solid #e2e8f0",
+      overflowY: "auto",
+      flexShrink: 0
+    }
+  }, /*#__PURE__*/React.createElement(SidebarLabel, null, "My Tasks"), MY_TASKS.map(function (t) {
+    return /*#__PURE__*/React.createElement(SidebarLink, {
+      key: t.id,
+      icon: t.icon,
+      label: t.label,
+      badge: badges[t.id],
+      active: activeTab === t.id,
+      onClick: function onClick() {
+        return setActiveTab(t.id);
+      }
+    });
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      height: 1,
+      background: "#e2e8f0",
+      margin: "10px 20px"
+    }
+  }), /*#__PURE__*/React.createElement(SidebarLabel, null, "Audit & Schedule"), AUDIT_SCHEDULE.map(function (t) {
+    return /*#__PURE__*/React.createElement(SidebarLink, {
+      key: t.id,
+      icon: t.icon,
+      label: t.label,
+      badge: badges[t.id],
+      active: activeTab === t.id,
+      onClick: function onClick() {
+        return setActiveTab(t.id);
+      }
+    });
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      height: 1,
+      background: "#e2e8f0",
+      margin: "10px 20px"
+    }
+  }), /*#__PURE__*/React.createElement(SidebarLabel, null, "Navigate"), /*#__PURE__*/React.createElement(SidebarLink, {
+    icon: "\uD83D\uDCCB",
+    label: "Planner View",
+    onClick: function onClick() {
+      return onNavigate && onNavigate("planner");
+    }
+  }), /*#__PURE__*/React.createElement(SidebarLink, {
+    icon: "\uD83D\uDD27",
+    label: "Executor View",
+    onClick: function onClick() {
+      return onNavigate && onNavigate("executor");
+    }
+  }), /*#__PURE__*/React.createElement(SidebarLink, {
+    icon: "\uD83D\uDCCA",
+    label: "Mentor Dashboard",
+    onClick: function onClick() {
+      return onNavigate && onNavigate("dashboard");
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      height: 1,
+      background: "#e2e8f0",
+      margin: "10px 20px"
+    }
+  }), /*#__PURE__*/React.createElement(SidebarLabel, null, "Quick Actions"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: "4px 12px 16px"
+    }
+  }, /*#__PURE__*/React.createElement(QuickActionButton, {
+    icon: "\u26A0\uFE0F",
+    label: "Log Abnormality",
+    onClick: function onClick() {
+      return onQuickAction("log-abnormality");
+    }
+  }), /*#__PURE__*/React.createElement(QuickActionButton, {
+    icon: "\u2705",
+    label: "Pending Audits",
+    onClick: function onClick() {
+      return onQuickAction("pending-audits");
+    }
+  }), /*#__PURE__*/React.createElement(QuickActionButton, {
+    icon: "\uD83E\uDDFE",
+    label: "View History",
+    onClick: function onClick() {
+      return onQuickAction("view-history");
+    }
+  })));
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// Simple "not built yet" placeholder — same convention as AdminPage
+// ══════════════════════════════════════════════════════════════════════════
+function ComingSoon(_ref11) {
+  var title = _ref11.title,
+    subtitle = _ref11.subtitle;
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: "28px 28px"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 22,
+      fontWeight: 800,
+      color: "#0f172a",
+      marginBottom: 4,
+      fontFamily: F
+    }
+  }, title), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 14,
+      color: "#64748b",
+      marginBottom: 20,
+      fontFamily: F
+    }
+  }, subtitle), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 14,
+      color: "#94a3b8",
+      fontFamily: F
+    }
+  }, "This module hasn't been built yet."));
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// Main Checker Page
+// ══════════════════════════════════════════════════════════════════════════
+// No Redux here on purpose — this page can mount outside the app's <Provider>
+// tree (see HelloWorld.jsx), so it talks to the same collections Admin uses
+// via plain service calls (equipmentApi/plantApi/lineApi/machineApi) instead.
+function CheckerPage(_ref12) {
+  var _filteredEquipment$, _filteredEquipment$2;
+  var _ref12$checkedBy = _ref12.checkedBy,
+    checkedBy = _ref12$checkedBy === void 0 ? "Checker" : _ref12$checkedBy,
+    onNavigate = _ref12.onNavigate;
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("pm-inspection"),
+    _useState14 = _slicedToArray(_useState13, 2),
+    activeTab = _useState14[0],
+    setActiveTab = _useState14[1];
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState16 = _slicedToArray(_useState15, 2),
+    equipmentList = _useState16[0],
+    setEquipmentList = _useState16[1];
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState18 = _slicedToArray(_useState17, 2),
+    plantList = _useState18[0],
+    setPlantList = _useState18[1];
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState20 = _slicedToArray(_useState19, 2),
+    lineList = _useState20[0],
+    setLineList = _useState20[1];
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState22 = _slicedToArray(_useState21, 2),
+    machineList = _useState22[0],
+    setMachineList = _useState22[1];
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    _useState24 = _slicedToArray(_useState23, 2),
+    selectedEquipment = _useState24[0],
+    setSelectedEquipment = _useState24[1];
+
+  // Plant/Line/Machine filter — same behaviour as ChecklistBuilder's filter bar
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("all"),
+    _useState26 = _slicedToArray(_useState25, 2),
+    filterPlant = _useState26[0],
+    setFilterPlant = _useState26[1];
+  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("all"),
+    _useState28 = _slicedToArray(_useState27, 2),
+    filterLine = _useState28[0],
+    setFilterLine = _useState28[1];
+  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("all"),
+    _useState30 = _slicedToArray(_useState29, 2),
+    filterMachine = _useState30[0],
+    setFilterMachine = _useState30[1];
+  var _useState31 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState32 = _slicedToArray(_useState31, 2),
+    checklistItems = _useState32[0],
+    setChecklistItems = _useState32[1];
+  var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    _useState34 = _slicedToArray(_useState33, 2),
+    checklistHeaderFound = _useState34[0],
+    setChecklistHeaderFound = _useState34[1]; // true until we know otherwise
+  var _useState35 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+    _useState36 = _slicedToArray(_useState35, 2),
+    resultsMap = _useState36[0],
+    setResultsMap = _useState36[1];
+  var _useState37 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    _useState38 = _slicedToArray(_useState37, 2),
+    loading = _useState38[0],
+    setLoading = _useState38[1];
+  var _useState39 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState40 = _slicedToArray(_useState39, 2),
+    loadingItems = _useState40[0],
+    setLoadingItems = _useState40[1];
+  var _useState41 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    _useState42 = _slicedToArray(_useState41, 2),
+    error = _useState42[0],
+    setError = _useState42[1];
+  var _useState43 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState44 = _slicedToArray(_useState43, 2),
+    submitting = _useState44[0],
+    setSubmitting = _useState44[1];
+  var _useState45 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      pm_inspection_pending: 0,
+      abnormalities: 0,
+      iiot_alerts: 0
+    }),
+    _useState46 = _slicedToArray(_useState45, 2),
+    summary = _useState46[0],
+    setSummary = _useState46[1];
+  var today = todayStr();
+
+  // ── Load master/filter data on mount — same services ChecklistBuilder uses ──
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    setLoading(true);
+    Promise.all([(0,_services_equipmentApi__WEBPACK_IMPORTED_MODULE_2__.fetchEquipment)(), (0,_services_plantApi__WEBPACK_IMPORTED_MODULE_3__.fetchPlants)(), (0,_services_lineApi__WEBPACK_IMPORTED_MODULE_4__.fetchLines)(), (0,_services_machineApi__WEBPACK_IMPORTED_MODULE_5__.fetchMachines)()]).then(function (_ref13) {
+      var _ref14 = _slicedToArray(_ref13, 4),
+        eqJ = _ref14[0],
+        plantJ = _ref14[1],
+        lineJ = _ref14[2],
+        machineJ = _ref14[3];
+      var eqRows = rowsOf(eqJ).filter(function (e) {
+        var _e$is_active;
+        return String((_e$is_active = e.is_active) !== null && _e$is_active !== void 0 ? _e$is_active : "1") === "1";
+      });
+      setEquipmentList(eqRows);
+      setPlantList(rowsOf(plantJ));
+      setLineList(rowsOf(lineJ));
+      setMachineList(rowsOf(machineJ));
+      if (eqRows.length > 0) {
+        setSelectedEquipment(eqRows[0].equipment_code || eqRows[0].code);
+      }
+    })["catch"](function (e) {
+      return setError((e === null || e === void 0 ? void 0 : e.message) || "Failed to load equipment/filters");
+    })["finally"](function () {
+      return setLoading(false);
+    });
+    (0,_services_checkerApi__WEBPACK_IMPORTED_MODULE_1__.fetchDashboardSummary)(checkedBy).then(function (s) {
+      return setSummary(s);
+    })["catch"](function () {});
+  }, [checkedBy]);
+
+  // Line dropdown — scoped to filterPlant, deduped by name (same as Builder)
+  var lineOptions = _toConsumableArray(new Map(lineList.filter(function (l) {
+    return filterPlant === "all" || String(l.plant_code) === String(filterPlant);
+  }).map(function (l) {
+    return [l.line_name, l];
+  })).values());
+
+  // Machine dropdown — scoped to filterPlant + filterLine (same as Builder)
+  var machineOptions = _toConsumableArray(new Map(machineList.filter(function (m) {
+    return (filterPlant === "all" || String(m.plant_code) === String(filterPlant)) && (filterLine === "all" || String(m.line_name) === String(filterLine));
+  }).map(function (m) {
+    return [m.machine_name, m];
+  })).values());
+
+  // ── Scope equipment pills by Plant/Line/Machine ──
+  var filteredEquipment = equipmentList.filter(function (eq) {
+    if (filterPlant !== "all" && String(eq.plant_code) !== String(filterPlant)) return false;
+    if (filterLine !== "all" && String(eq.line || "") !== String(filterLine)) return false;
+    if (filterMachine !== "all" && String(eq.machine || "") !== String(filterMachine)) return false;
+    return true;
+  });
+
+  // If current selection falls outside the filter, fall back to the first
+  // equipment in the filtered list.
+  var effectiveSelectedEquipment = filteredEquipment.find(function (eq) {
+    return (eq.equipment_code || eq.code) === selectedEquipment;
+  }) ? selectedEquipment : ((_filteredEquipment$ = filteredEquipment[0]) === null || _filteredEquipment$ === void 0 ? void 0 : _filteredEquipment$.equipment_code) || ((_filteredEquipment$2 = filteredEquipment[0]) === null || _filteredEquipment$2 === void 0 ? void 0 : _filteredEquipment$2.code) || "";
+
+  // ── Load checklist items + today's results whenever equipment changes ──
+  var loadEquipmentData = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    if (!effectiveSelectedEquipment) return;
+    setLoadingItems(true);
+    setError("");
+    Promise.all([(0,_services_checkerApi__WEBPACK_IMPORTED_MODULE_1__.fetchChecklistItems)(effectiveSelectedEquipment), (0,_services_checkerApi__WEBPACK_IMPORTED_MODULE_1__.fetchInspectionResults)(effectiveSelectedEquipment, today)]).then(function (_ref15) {
+      var _ref16 = _slicedToArray(_ref15, 2),
+        itemsJ = _ref16[0],
+        resultsJ = _ref16[1];
+      setChecklistItems(rowsOf(itemsJ));
+      setChecklistHeaderFound(Boolean(itemsJ.header));
+      var results = rowsOf(resultsJ);
+      var map = {};
+      results.forEach(function (r) {
+        map[r.checklist_item_id] = r;
+      });
+      setResultsMap(map);
+    })["catch"](function (e) {
+      return setError((e === null || e === void 0 ? void 0 : e.message) || "Failed to load checklist");
+    })["finally"](function () {
+      return setLoadingItems(false);
+    });
+  }, [effectiveSelectedEquipment, today]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    loadEquipmentData();
+  }, [loadEquipmentData]);
+  var progress = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    var total = checklistItems.length;
+    var done = checklistItems.filter(function (i) {
+      return resultsMap[i.cdb_object_id];
+    }).length;
+    return {
+      done: done,
+      total: total
+    };
+  }, [checklistItems, resultsMap]);
+  var isSubmitted = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    return Object.values(resultsMap).some(function (r) {
+      return r.submitted_at;
+    });
+  }, [resultsMap]);
+  var canSubmit = progress.total > 0 && progress.done === progress.total && !isSubmitted;
+
+  // ── Sidebar badge counts (derived from what we already have client-side) ──
+  var pendingForCurrentEquipment = isSubmitted ? 0 : Math.max(progress.total - progress.done, 0);
+  var abnormalCount = Object.values(resultsMap).filter(function (r) {
+    return r.result === "Abnormal";
+  }).length;
+  var badges = {
+    "pm-inspection": pendingForCurrentEquipment,
+    abnormalities: abnormalCount,
+    "iiot-alerts": summary.iiot_alerts,
+    "audit-queue": 0
+  };
+  var handlePlantFilterChange = function handlePlantFilterChange(e) {
+    setFilterPlant(e.target.value);
+    setFilterLine("all");
+    setFilterMachine("all");
+  };
+  var handleLineFilterChange = function handleLineFilterChange(e) {
+    setFilterLine(e.target.value);
+    setFilterMachine("all");
+  };
+  var handleSubmit = /*#__PURE__*/function () {
+    var _ref17 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            setSubmitting(true);
+            setError("");
+            _context2.prev = 2;
+            _context2.next = 5;
+            return (0,_services_checkerApi__WEBPACK_IMPORTED_MODULE_1__.submitInspection)(effectiveSelectedEquipment, today);
+          case 5:
+            loadEquipmentData();
+            _context2.next = 11;
+            break;
+          case 8:
+            _context2.prev = 8;
+            _context2.t0 = _context2["catch"](2);
+            setError((_context2.t0 === null || _context2.t0 === void 0 ? void 0 : _context2.t0.message) || "Submit failed");
+          case 11:
+            _context2.prev = 11;
+            setSubmitting(false);
+            return _context2.finish(11);
+          case 14:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2, null, [[2, 8, 11, 14]]);
+    }));
+    return function handleSubmit() {
+      return _ref17.apply(this, arguments);
+    };
+  }();
+  var selectedEquipmentRow = filteredEquipment.find(function (eq) {
+    return (eq.equipment_code || eq.code) === effectiveSelectedEquipment;
+  });
+  var handleQuickAction = function handleQuickAction(action) {
+    if (action === "log-abnormality") setActiveTab("abnormalities");else if (action === "pending-audits") setActiveTab("audit-queue");else if (action === "view-history") setActiveTab("history-status");
+  };
+  var TAB_META = {
+    "pm-inspection": {
+      label: "PM Inspection",
+      subtitle: "".concat(checkedBy, " \xB7 Checker")
+    },
+    abnormalities: {
+      label: "Abnormalities",
+      subtitle: "Flagged out-of-limit readings"
+    },
+    "iiot-alerts": {
+      label: "IIoT Alerts",
+      subtitle: "Sensor-triggered notifications"
+    },
+    consolidated: {
+      label: "Consolidated List",
+      subtitle: "All tasks across equipment"
+    },
+    "audit-queue": {
+      label: "Audit Queue",
+      subtitle: "Inspections awaiting audit"
+    },
+    "my-calendar": {
+      label: "My Calendar",
+      subtitle: "Scheduled inspections"
+    },
+    "history-status": {
+      label: "History & Status",
+      subtitle: "Past submissions"
+    }
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: F,
+      background: "#f8fafc",
+      minHeight: "100vh",
+      display: "flex",
+      flexDirection: "column"
+    }
+  }, /*#__PURE__*/React.createElement(TopNav, {
+    checkedBy: checkedBy,
+    onNavigate: onNavigate
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      flex: 1,
+      minHeight: 0
+    }
+  }, /*#__PURE__*/React.createElement(CheckerSidebar, {
+    activeTab: activeTab,
+    setActiveTab: setActiveTab,
+    badges: badges,
+    onNavigate: onNavigate,
+    onQuickAction: handleQuickAction
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1,
+      minWidth: 0,
+      overflowY: "auto"
+    }
+  }, activeTab === "pm-inspection" && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#fff",
+      borderBottom: "1.5px solid #e2e8f0",
+      padding: "16px 20px"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 12,
-      color: 'var(--slate-500)'
+      color: "#94a3b8",
+      marginBottom: 6
     }
-  }, "Progress:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "progress-bar",
+  }, "Checker ", /*#__PURE__*/React.createElement("span", {
     style: {
-      width: 160
+      margin: "0 4px"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "progress-fill green",
-    id: "prog-fill",
+  }, "\u203A"), " ", TAB_META[activeTab].label), /*#__PURE__*/React.createElement("div", {
     style: {
-      width: 0
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "flex-start",
+      gap: 16,
+      flexWrap: "wrap"
     }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 22,
+      fontWeight: 800,
+      color: "#0f172a"
+    }
+  }, "PM Inspection \u2014 ", fmtDate(new Date())), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: "#64748b",
+      marginTop: 2
+    }
+  }, checkedBy, " \xB7 Checker", selectedEquipmentRow && " \xB7 ".concat(selectedEquipmentRow.plant_code || ""))), effectiveSelectedEquipment && checklistItems.length > 0 && !isSubmitted && /*#__PURE__*/React.createElement("button", {
+    onClick: handleSubmit,
+    disabled: !canSubmit || submitting,
+    style: {
+      padding: "10px 22px",
+      borderRadius: 8,
+      border: "none",
+      background: canSubmit && !submitting ? AC : "#cbd5e1",
+      color: "#fff",
+      fontWeight: 800,
+      fontSize: 13,
+      cursor: canSubmit && !submitting ? "pointer" : "not-allowed"
+    }
+  }, "\u2713 ", submitting ? "Submitting…" : "Submit Inspection"), isSubmitted && /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13,
+      fontWeight: 700,
+      color: AC
+    }
+  }, "\u2713 Inspection Submitted"))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#fff",
+      borderBottom: "1.5px solid #e2e8f0",
+      padding: "12px 20px",
+      display: "flex",
+      gap: 10,
+      flexWrap: "wrap"
+    }
+  }, [{
+    label: "Pending",
+    value: pendingForCurrentEquipment,
+    color: "#d97706"
+  }, {
+    label: "Abnormalities",
+    value: abnormalCount,
+    color: "#dc2626"
+  }, {
+    label: "IIoT Alerts",
+    value: summary.iiot_alerts,
+    color: "#2563eb"
+  }].map(function (_ref18) {
+    var label = _ref18.label,
+      value = _ref18.value,
+      color = _ref18.color;
+    return /*#__PURE__*/React.createElement("div", {
+      key: label,
+      style: {
+        background: "".concat(color, "12"),
+        border: "1.5px solid ".concat(color, "33"),
+        borderRadius: 10,
+        padding: "6px 14px",
+        textAlign: "center",
+        minWidth: 80
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 16,
+        fontWeight: 800,
+        color: color
+      }
+    }, value), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 9,
+        color: "#64748b",
+        textTransform: "uppercase"
+      }
+    }, label));
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#fff",
+      borderBottom: "1px solid #e2e8f0",
+      padding: "12px 20px",
+      display: "flex",
+      alignItems: "center",
+      gap: 12,
+      flexWrap: "wrap"
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13,
+      fontWeight: 700,
+      color: "#64748b",
+      textTransform: "uppercase",
+      letterSpacing: 0.5
+    }
+  }, "Filter:"), /*#__PURE__*/React.createElement("select", {
+    value: filterPlant,
+    onChange: handlePlantFilterChange,
+    style: {
+      width: 160,
+      fontSize: 13,
+      padding: "5px 8px",
+      border: "1.5px solid #cbd5e1",
+      borderRadius: 8,
+      color: "#334155",
+      background: "#fff",
+      outline: "none"
+    }
+  }, /*#__PURE__*/React.createElement("option", {
+    value: "all"
+  }, "All Plants"), plantList.map(function (p) {
+    return /*#__PURE__*/React.createElement("option", {
+      key: p.plant_code,
+      value: p.plant_code
+    }, p.plant_name, " (", p.plant_code, ")");
+  })), /*#__PURE__*/React.createElement("select", {
+    value: filterLine,
+    onChange: handleLineFilterChange,
+    style: {
+      width: 150,
+      fontSize: 13,
+      padding: "5px 8px",
+      border: "1.5px solid #cbd5e1",
+      borderRadius: 8,
+      color: "#334155",
+      background: "#fff",
+      outline: "none"
+    }
+  }, /*#__PURE__*/React.createElement("option", {
+    value: "all"
+  }, "All Lines"), lineOptions.map(function (l) {
+    return /*#__PURE__*/React.createElement("option", {
+      key: "".concat(l.plant_code, "-").concat(l.line_name),
+      value: l.line_name
+    }, l.line_name);
+  })), /*#__PURE__*/React.createElement("select", {
+    value: filterMachine,
+    onChange: function onChange(e) {
+      return setFilterMachine(e.target.value);
+    },
+    style: {
+      width: 160,
+      fontSize: 13,
+      padding: "5px 8px",
+      border: "1.5px solid #cbd5e1",
+      borderRadius: 8,
+      color: "#334155",
+      background: "#fff",
+      outline: "none"
+    }
+  }, /*#__PURE__*/React.createElement("option", {
+    value: "all"
+  }, "All Machines"), machineOptions.map(function (m) {
+    return /*#__PURE__*/React.createElement("option", {
+      key: "".concat(m.plant_code, "-").concat(m.line_name, "-").concat(m.machine_name),
+      value: m.machine_name
+    }, m.machine_name);
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 1,
+      height: 24,
+      background: "#e2e8f0"
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13,
+      fontWeight: 700,
+      color: "#64748b",
+      textTransform: "uppercase",
+      letterSpacing: 0.5
+    }
+  }, "Equipment:"), /*#__PURE__*/React.createElement("select", {
+    value: effectiveSelectedEquipment,
+    onChange: function onChange(e) {
+      return setSelectedEquipment(e.target.value);
+    },
+    disabled: loading || filteredEquipment.length === 0,
+    style: {
+      width: 260,
+      fontSize: 13,
+      fontWeight: 700,
+      padding: "5px 8px",
+      border: "1.5px solid #cbd5e1",
+      borderRadius: 8,
+      color: "#0f172a",
+      background: "#fff",
+      outline: "none"
+    }
+  }, loading && /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, "Loading equipment\u2026"), !loading && filteredEquipment.length === 0 && /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, "No equipment in this scope"), filteredEquipment.map(function (eq) {
+    var code = eq.equipment_code || eq.code;
+    return /*#__PURE__*/React.createElement("option", {
+      key: code,
+      value: code
+    }, code, " \u2014 ", eq.equipment_name || eq.name || "");
+  })), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12,
+      color: "#94a3b8",
+      whiteSpace: "nowrap"
+    }
+  }, filteredEquipment.length, "/", equipmentList.length), (filterPlant !== "all" || filterLine !== "all" || filterMachine !== "all") && /*#__PURE__*/React.createElement("button", {
+    onClick: function onClick() {
+      setFilterPlant("all");
+      setFilterLine("all");
+      setFilterMachine("all");
+    },
+    style: {
+      fontSize: 13,
+      fontWeight: 700,
+      color: "#2563eb",
+      background: "transparent",
+      border: "none",
+      cursor: "pointer",
+      padding: "5px 0"
+    }
+  }, "\u2715 Clear")), error && /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#fef2f2",
+      borderBottom: "1px solid #fecaca",
+      padding: "8px 20px",
+      fontSize: 12,
+      color: "#dc2626",
+      fontWeight: 600
+    }
+  }, "\u26A0 ", error), effectiveSelectedEquipment && /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: "14px 20px 0"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      marginBottom: 6
+    }
+  }, /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 12,
       fontWeight: 700,
-      color: 'var(--blue-900)'
-    },
-    id: "prog-txt"
-  }, "0 / 5"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    id: "ci-1",
-    className: "checklist-item"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "check-num"
-  }, "1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "check-content"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "check-title"
-  }, "Bearing Temperature Check"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "check-detail"
-  }, "T1 \xB7 Limit: <80\xB0C \xB7 Current: 86.3\xB0C \u26A0")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "check-actions"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "check-btn check-btn-ok",
-    onClick: function onClick(e) {
-      markOK(1, e.currentTarget);
+      color: "#475569"
     }
-  }, "OK"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "check-btn check-btn-abn",
-    onClick: function onClick(e) {
-      openAbnModal(1, 'Bearing Temperature Check — CP-101', '86.3°C (limit 80°C)');
-    }
-  }, "Abnormal"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    id: "ci-2",
-    className: "checklist-item"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "check-num"
-  }, "2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "check-content"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "check-title"
-  }, "Vibration Level \u2014 Drive End"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "check-detail"
-  }, "T2 \xB7 Limit: <4.5 mm/s \xB7 Current: 8.2 mm/s \uD83D\uDD34")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "check-actions"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "check-btn check-btn-ok",
-    onClick: function onClick(e) {
-      markOK(2, e.currentTarget);
-    }
-  }, "OK"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "check-btn check-btn-abn",
-    onClick: function onClick(e) {
-      openAbnModal(2, 'Vibration Level — Drive End', '8.2 mm/s (critical limit 4.5)');
-    }
-  }, "Abnormal"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    id: "ci-3",
-    className: "checklist-item"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "check-num"
-  }, "3"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "check-content"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "check-title"
-  }, "Oil Level \u2014 Gearbox"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "check-detail"
-  }, "T3 \xB7 Check sight glass \u2014 should be at mid mark")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "check-actions"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "check-btn check-btn-ok",
-    onClick: function onClick(e) {
-      markOK(3, e.currentTarget);
-    }
-  }, "OK"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "check-btn check-btn-abn",
-    onClick: function onClick(e) {
-      openAbnModal(3, 'Oil Level — Gearbox', 'Below minimum mark');
-    }
-  }, "Abnormal"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    id: "ci-4",
-    className: "checklist-item"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "check-num"
-  }, "4"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "check-content"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "check-title"
-  }, "Coupling Guard Integrity"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "check-detail"
-  }, "T5 \xB7 Visual \u2014 all bolts, no cracks, properly fitted")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "check-actions"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "check-btn check-btn-ok",
-    onClick: function onClick(e) {
-      markOK(4, e.currentTarget);
-    }
-  }, "OK"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "check-btn check-btn-abn",
-    onClick: function onClick(e) {
-      openAbnModal(4, 'Coupling Guard Integrity', 'Guard bolt missing');
-    }
-  }, "Abnormal"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    id: "ci-5",
-    className: "checklist-item"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "check-num"
-  }, "5"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "check-content"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "check-title"
-  }, "Motor Current Draw"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "check-detail"
-  }, "T3 \xB7 Rated: 48A \xB7 Max 55A \xB7 Check ammeter")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "check-actions"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "check-btn check-btn-ok",
-    onClick: function onClick(e) {
-      markOK(5, e.currentTarget);
-    }
-  }, "OK"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "check-btn check-btn-abn",
-    onClick: function onClick(e) {
-      openAbnModal(5, 'Motor Current Draw', '54.1A — approaching limit');
-    }
-  }, "Abnormal"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    id: "tab-abnormalities",
+  }, "Progress"), /*#__PURE__*/React.createElement("span", {
     style: {
-      display: 'none'
+      fontSize: 12,
+      fontWeight: 800,
+      color: AC
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "page-header"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "breadcrumb"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "Checker"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "breadcrumb-sep"
-  }, "\u203A"), "Logged Abnormalities"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, progress.done, "/", progress.total)), /*#__PURE__*/React.createElement("div", {
     style: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'flex-end',
-      flexWrap: 'wrap',
-      gap: 8
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "page-title"
-  }, "Logged Abnormalities"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "page-subtitle",
-    id: "abn-subtitle"
-  }, "Auto-forwarded to Planner in real time")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "btn btn-primary btn-sm",
-    onClick: function onClick(e) {
-      openQuickAbn();
-    }
-  }, "+ Log Abnormality"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    id: "abn-empty",
-    className: "alert alert-info",
-    style: {
-      display: 'none'
-    }
-  }, "\u2139\uFE0F No abnormalities logged yet. Start an inspection to log findings."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    id: "abn-list"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    id: "tab-iiot",
-    style: {
-      display: 'none'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "page-header"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "page-title"
-  }, "IIoT Auto-Detected Alerts"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "page-subtitle"
-  }, "Real-time sensor abnormalities \xB7 ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    id: "iiot-time"
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "alert alert-info"
-  }, "\u2139\uFE0F IIoT alerts below threshold are auto-logged to Consolidated List. Click \"Send to Planner\" to escalate."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    style: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit,minmax(190px,1fr))',
-      gap: 12,
-      marginBottom: 20
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sensor-card"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sensor-icon",
-    style: {
-      background: '#FEF2F2'
-    }
-  }, "\uD83C\uDF21\uFE0F"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sensor-info"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sensor-name"
-  }, "Bearing Temp \u2014 CP-101"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sensor-value warning"
-  }, "86.3\xB0C"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sensor-status",
-    style: {
-      color: 'var(--amber)'
-    }
-  }, "\u26A0 Above 80\xB0C"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sensor-card"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sensor-icon",
-    style: {
-      background: '#FEF2F2'
-    }
-  }, "\uD83D\uDCF3"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sensor-info"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sensor-name"
-  }, "Vibration \u2014 CP-101 DE"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sensor-value critical"
-  }, "8.2 mm/s"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sensor-status",
-    style: {
-      color: 'var(--red)'
-    }
-  }, "\uD83D\uDD34 Critical"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sensor-card"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sensor-icon",
-    style: {
-      background: '#FFFBEB'
-    }
-  }, "\u26A1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sensor-info"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sensor-name"
-  }, "Motor Current \u2014 MDU-115"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sensor-value warning"
-  }, "54.1A"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sensor-status",
-    style: {
-      color: 'var(--amber)'
-    }
-  }, "\u26A0 Warning"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sensor-card"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sensor-icon",
-    style: {
-      background: '#ECFDF5'
-    }
-  }, "\uD83D\uDD35"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sensor-info"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sensor-name"
-  }, "Pressure \u2014 HX-204"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sensor-value normal"
-  }, "5.8 Bar"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "sensor-status",
-    style: {
-      color: 'var(--green)'
-    }
-  }, "\u2713 Normal")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "card"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "card-header"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "card-title"
-  }, "Escalate IIoT Alert to Planner")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 8
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      padding: '10px 12px',
-      background: 'var(--red-light)',
-      border: '1px solid var(--red-border)',
-      borderRadius: 'var(--radius)',
-      flexWrap: 'wrap',
-      gap: 8
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong", {
-    style: {
-      fontSize: 13
-    }
-  }, "CP-101 Vibration 8.2 mm/s"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    style: {
-      fontSize: 11,
-      color: 'var(--slate-500)'
-    }
-  }, "Sensor ID: VIB-CP101-DE \xB7 Critical threshold breached")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "btn btn-danger btn-sm",
-    onClick: function onClick(e) {
-      logIIoTAlert('Vibration Critical — CP-101 DE', '8.2 mm/s (limit 4.5)', 'Bearing wear', 'CP-101', 'critical');
-    }
-  }, "\uD83D\uDD34 Escalate to Planner")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      padding: '10px 12px',
-      background: 'var(--amber-light)',
-      border: '1px solid var(--amber-border)',
-      borderRadius: 'var(--radius)',
-      flexWrap: 'wrap',
-      gap: 8
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong", {
-    style: {
-      fontSize: 13
-    }
-  }, "MDU-115 Motor Current 54.1A"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    style: {
-      fontSize: 11,
-      color: 'var(--slate-500)'
-    }
-  }, "Sensor ID: AMP-MDU115 \xB7 Warning threshold reached")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "btn btn-secondary btn-sm",
-    onClick: function onClick(e) {
-      logIIoTAlert('Motor Current High — MDU-115', '54.1A (rated 48A, max 55A)', 'Possible overload', 'MDU-115', 'medium');
-    }
-  }, "\u26A0 Escalate to Planner"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    id: "tab-consolidated",
-    style: {
-      display: 'none'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "page-header"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "page-title"
-  }, "Consolidated Repair List"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "page-subtitle"
-  }, "Manual + IIoT merged \xB7 Forwarded to Planner \xB7 ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    id: "consol-date"
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "stat-grid"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "stat-card",
-    style: {
-      '--stat-color': '#DC2626'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "stat-label"
-  }, "Critical"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "stat-value",
-    id: "c-crit"
-  }, "0")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "stat-card",
-    style: {
-      '--stat-color': '#D97706'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "stat-label"
-  }, "High"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "stat-value",
-    id: "c-high"
-  }, "0")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "stat-card",
-    style: {
-      '--stat-color': '#2563EB'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "stat-label"
-  }, "Total Logged"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "stat-value",
-    id: "c-total"
-  }, "0")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "stat-card",
-    style: {
-      '--stat-color': '#059669'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "stat-label"
-  }, "Forwarded to Planner"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "stat-value",
-    id: "c-fwd"
-  }, "0"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    id: "consol-list"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    id: "tab-audit",
-    style: {
-      display: 'none'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "page-header"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "breadcrumb"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "Checker"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "breadcrumb-sep"
-  }, "\u203A"), "Audit Queue"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "page-title"
-  }, "Work Order Audit Queue"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "page-subtitle"
-  }, "WOs completed by Executor \u2014 awaiting your quality verification"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    id: "audit-empty",
-    className: "alert alert-success",
-    style: {
-      display: 'none'
-    }
-  }, "\u2705 No WOs pending audit. All clear!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    id: "audit-list"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    id: "tab-calendar",
-    style: {
-      display: 'none'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "page-header"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "breadcrumb"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "Checker"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "breadcrumb-sep"
-  }, "\u203A"), "My Calendar"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "page-title"
-  }, "My Inspection Calendar"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "page-subtitle",
-    id: "ck-cal-subtitle"
-  }, "Scheduled by Planner \u2014 Vishwas Landage")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "card"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "card-header"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "card-title",
-    id: "ck-cal-month-label"
-  }, "\u2014"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    style: {
-      fontSize: 11,
-      color: 'var(--slate-400)',
-      marginTop: 2
-    }
-  }, "Real-time \xB7 Click any day for details")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 10,
-      flexWrap: 'wrap'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    style: {
-      display: 'flex',
-      gap: 8,
-      fontSize: 11,
-      color: 'var(--slate-500)',
-      alignItems: 'center'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 4
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    style: {
-      width: 8,
       height: 8,
-      background: 'var(--green)',
-      borderRadius: '50%',
-      display: 'inline-block'
+      background: "#e2e8f0",
+      borderRadius: 4,
+      overflow: "hidden"
     }
-  }), "PM Due"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 4
+      width: "".concat(progress.total > 0 ? progress.done / progress.total * 100 : 0, "%"),
+      height: "100%",
+      background: AC,
+      borderRadius: 4,
+      transition: "width .3s"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+  }))), /*#__PURE__*/React.createElement("div", {
     style: {
-      width: 8,
-      height: 8,
-      background: 'var(--amber)',
-      borderRadius: '50%',
-      display: 'inline-block'
+      padding: "16px 20px"
     }
-  }), "WO Booked"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+  }, loadingItems ? /*#__PURE__*/React.createElement("div", {
     style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 4
+      textAlign: "center",
+      padding: "40px 0",
+      color: "#94a3b8"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+  }, "Loading checklist\u2026") : !checklistHeaderFound ? /*#__PURE__*/React.createElement("div", {
     style: {
-      width: 8,
-      height: 8,
-      background: 'var(--red)',
-      borderRadius: '50%',
-      display: 'inline-block'
+      textAlign: "center",
+      padding: "40px 0",
+      color: "#94a3b8"
     }
-  }), "Overdue"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+  }, "No checklist has been built for this equipment yet \u2014 create one in PM Checklist Builder.") : checklistItems.length === 0 ? /*#__PURE__*/React.createElement("div", {
     style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 4
+      textAlign: "center",
+      padding: "40px 0",
+      color: "#94a3b8"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    style: {
-      width: 8,
-      height: 8,
-      background: '#7C3AED',
-      borderRadius: '50%',
-      display: 'inline-block'
-    }
-  }), "Audit Due")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    style: {
-      display: 'flex',
-      gap: 4
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "btn btn-secondary btn-sm",
-    onClick: function onClick(e) {
-      ckCalNav(-1);
-    }
-  }, "\u2039 Prev"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "btn btn-secondary btn-sm",
-    onClick: function onClick(e) {
-      ckCalNav(1);
-    }
-  }, "Next \u203A"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "btn btn-primary btn-sm",
-    onClick: function onClick(e) {
-      ckCalToday();
-    }
-  }, "Today")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "cal-grid",
-    id: "ck-cal-grid"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    id: "ck-day-detail",
-    style: {
-      display: 'none',
-      marginTop: 14,
-      borderRadius: 'var(--radius)',
-      overflow: 'hidden',
-      border: '1px solid var(--slate-200)'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    style: {
-      background: 'var(--blue-900)',
-      color: 'white',
-      padding: '10px 16px',
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    style: {
-      fontSize: 13,
-      fontWeight: 700
-    },
-    id: "ck-day-title"
-  }, "\u2014"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: function onClick(e) {
-      document.getElementById('ck-day-detail').style.display = 'none';
-    },
-    style: {
-      background: 'none',
-      border: 'none',
-      color: 'rgba(255,255,255,.6)',
-      cursor: 'pointer',
-      fontSize: 16
-    }
-  }, "\u2715")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    id: "ck-day-body",
-    style: {
-      padding: 14,
-      background: 'var(--slate-50)'
-    }
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    id: "tab-history",
-    style: {
-      display: 'none'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "page-header"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "breadcrumb"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "Checker"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "breadcrumb-sep"
-  }, "\u203A"), "History & Status"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "page-title"
-  }, "Full Workflow History"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "page-subtitle"
-  }, "All abnormalities logged \u2014 track status end-to-end"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    id: "history-list"
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "modal-overlay",
-    id: "abnModal"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "modal",
-    style: {
-      maxWidth: 580
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "modal-header"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "modal-title"
-  }, "\u26A0\uFE0F Log Abnormality"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "modal-close",
-    onClick: function onClick(e) {
-      closeAbn();
-    }
-  }, "\u2715")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "modal-body"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "alert alert-warning",
-    style: {
-      marginBottom: 14
-    }
-  }, "Check Point: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong", {
-    id: "modal-cp-name"
-  }, "\u2014")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "form-row"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "form-group"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
-    className: "form-label"
-  }, "Equipment / Machine"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
-    className: "form-select",
-    id: "abn-machine"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
-    value: "CP-101"
-  }, "\u2699\uFE0F CP-101 Crusher"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
-    value: "HX-204"
-  }, "\uD83D\uDD25 HX-204 Heat Exchanger"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
-    value: "COM-302"
-  }, "\uD83D\uDCA8 COM-302 Compressor"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
-    value: "MDU-115"
-  }, "\u26A1 MDU-115 Motor Drive"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
-    value: "Forging-Press"
-  }, "\uD83D\uDD28 Forging Press"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
-    value: "Robotic-Arm"
-  }, "\uD83E\uDD16 Robotic Arm"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "form-group"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
-    className: "form-label"
-  }, "Priority"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
-    className: "form-select",
-    id: "abn-prio"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
-    value: "critical"
-  }, "\uD83D\uDD34 Critical"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
-    value: "high"
-  }, "\uD83D\uDFE0 High"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
-    value: "medium"
-  }, "\uD83D\uDFE1 Medium"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
-    value: "low"
-  }, "\uD83D\uDFE2 Low")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "form-group"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
-    className: "form-label"
-  }, "Observed Value / Condition"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-    className: "form-input",
-    id: "obs-val",
-    placeholder: "e.g. 8.2 mm/s (limit 4.5 mm/s)"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "form-group"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
-    className: "form-label"
-  }, "Probable Cause"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-    className: "form-input",
-    id: "prob-cause",
-    placeholder: "e.g. Bearing wear / misalignment"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "form-group"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
-    className: "form-label"
-  }, "Remarks / Description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("textarea", {
-    className: "form-textarea",
-    id: "abn-remarks",
-    placeholder: "Describe in detail what you observed, when, and conditions\u2026",
-    defaultValue: ""
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "form-group"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
-    className: "form-label"
-  }, "Photo Evidence"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "photo-row"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "photo-thumb",
-    id: "abn-photo1",
-    onClick: function onClick(e) {
-      captureAbnPhoto('abn-photo1');
-    }
-  }, "\uD83D\uDCF7", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Photo 1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "photo-thumb",
-    id: "abn-photo2",
-    onClick: function onClick(e) {
-      captureAbnPhoto('abn-photo2');
-    }
-  }, "\uD83D\uDCF7", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Photo 2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "photo-thumb",
-    id: "abn-photo3",
-    onClick: function onClick(e) {
-      captureAbnPhoto('abn-photo3');
-    }
-  }, "\uD83D\uDCF7", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Photo 3"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    id: "abn-modal-error",
-    className: "alert alert-error",
-    style: {
-      display: 'none'
-    }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "modal-footer"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "btn btn-secondary",
-    onClick: function onClick(e) {
-      closeAbn();
-    }
-  }, "Cancel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "btn btn-danger",
-    onClick: function onClick(e) {
-      submitAbn();
-    }
-  }, "\uD83D\uDE80 Log & Forward to Planner")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "modal-overlay",
-    id: "auditModal"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "modal",
-    style: {
-      maxWidth: 560
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "modal-header"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "modal-title",
-    id: "audit-modal-title"
-  }, "Audit Work Order"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "modal-close",
-    onClick: function onClick(e) {
-      document.getElementById('auditModal').classList.remove('open');
-    }
-  }, "\u2715")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "modal-body",
-    id: "audit-modal-body"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "modal-footer"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "form-group",
-    style: {
-      flex: 1,
-      margin: 0
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("textarea", {
-    className: "form-textarea",
-    id: "audit-notes",
-    placeholder: "Audit remarks / findings\u2026",
-    style: {
-      minHeight: 60
-    },
-    defaultValue: ""
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    style: {
-      display: 'flex',
-      gap: 8,
-      alignItems: 'flex-end'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "btn btn-danger",
-    onClick: function onClick(e) {
-      submitAudit(false);
-    }
-  }, "\u2717 Fail \u2014 Send Rework"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "btn btn-success",
-    onClick: function onClick(e) {
-      submitAudit(true);
-    }
-  }, "\u2713 Pass \u2014 Close WO"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "modal-overlay",
-    id: "detailModal"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "modal",
-    style: {
-      maxWidth: 600
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "modal-header"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "modal-title",
-    id: "detail-modal-title"
-  }, "Abnormality Detail"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "modal-close",
-    onClick: function onClick(e) {
-      document.getElementById('detailModal').classList.remove('open');
-    }
-  }, "\u2715")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "modal-body",
-    id: "detail-modal-body"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "modal-footer"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "btn btn-secondary",
-    onClick: function onClick(e) {
-      document.getElementById('detailModal').classList.remove('open');
-    }
-  }, "Close"))))));
+  }, "No active check points found for this equipment") : checklistItems.map(function (item) {
+    return /*#__PURE__*/React.createElement(CheckpointRow, {
+      key: item.cdb_object_id,
+      item: _objectSpread(_objectSpread({}, item), {}, {
+        equipment_code: effectiveSelectedEquipment,
+        checked_by: checkedBy
+      }),
+      existing: resultsMap[item.cdb_object_id],
+      submitted: isSubmitted,
+      onSaved: loadEquipmentData
+    });
+  }))), activeTab === "abnormalities" && /*#__PURE__*/React.createElement(ComingSoon, {
+    title: "Abnormalities",
+    subtitle: "Flagged out-of-limit readings across your equipment"
+  }), activeTab === "iiot-alerts" && /*#__PURE__*/React.createElement(ComingSoon, {
+    title: "IIoT Alerts",
+    subtitle: "Sensor-triggered notifications requiring attention"
+  }), activeTab === "consolidated" && /*#__PURE__*/React.createElement(ComingSoon, {
+    title: "Consolidated List",
+    subtitle: "All tasks across equipment, plants and frequencies"
+  }), activeTab === "audit-queue" && /*#__PURE__*/React.createElement(ComingSoon, {
+    title: "Audit Queue",
+    subtitle: "Submitted inspections awaiting audit sign-off"
+  }), activeTab === "my-calendar" && /*#__PURE__*/React.createElement(ComingSoon, {
+    title: "My Calendar",
+    subtitle: "Scheduled inspection dates by equipment"
+  }), activeTab === "history-status" && /*#__PURE__*/React.createElement(ComingSoon, {
+    title: "History & Status",
+    subtitle: "Past submissions and their outcomes"
+  }))));
 }
+
+/***/ }),
+
+/***/ "./src/components/ChecklistBuilder.jsx":
+/*!*********************************************!*\
+  !*** ./src/components/ChecklistBuilder.jsx ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/dist/react-redux.mjs");
+/* harmony import */ var _actions_checklistActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/checklistActions */ "./src/actions/checklistActions.js");
+/* harmony import */ var _actions_equipmentActions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/equipmentActions */ "./src/actions/equipmentActions.js");
+/* harmony import */ var _actions_plantActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/plantActions */ "./src/actions/plantActions.js");
+/* harmony import */ var _actions_lineActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions/lineActions */ "./src/actions/lineActions.js");
+/* harmony import */ var _actions_machineActions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../actions/machineActions */ "./src/actions/machineActions.js");
+/* harmony import */ var _AddChecklistModal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./AddChecklistModal */ "./src/components/AddChecklistModal.jsx");
+/* harmony import */ var _AddCheckPointModal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./AddCheckPointModal */ "./src/components/AddCheckPointModal.jsx");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+// components/ChecklistBuilder.jsx
+// PM Checklist Builder — breadcrumb, title, "+ New Checklist" button, a flat
+// filter bar (Plant/Line/Machine) styled like Equipment Register's "Filter:"
+// bar, a checklist selector, the checklist card (title + Edit + Plant/Line/
+// Machine breadcrumb), Linked Equipment/Frequency dropdowns, numbered check
+// point rows, and a "+ Add Check Point" button. Data comes from Redux, API
+// calls go through action creators.
+
+
+
+
+
+
+
+
+
+
+var ChecklistBuilder = function ChecklistBuilder() {
+  var _ref, _filteredHeaders$find, _filteredHeaders$find2, _filteredHeaders$;
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_8__.useDispatch)();
+  var checklistState = (0,react_redux__WEBPACK_IMPORTED_MODULE_8__.useSelector)(function (s) {
+    return s.checklist;
+  });
+  var _useSelector = (0,react_redux__WEBPACK_IMPORTED_MODULE_8__.useSelector)(function (s) {
+      return s.equipment;
+    }),
+    equipmentItems = _useSelector.items;
+  var _useSelector2 = (0,react_redux__WEBPACK_IMPORTED_MODULE_8__.useSelector)(function (s) {
+      return s.plants;
+    }),
+    plantItems = _useSelector2.items;
+  var _useSelector3 = (0,react_redux__WEBPACK_IMPORTED_MODULE_8__.useSelector)(function (s) {
+      return s.lines;
+    }),
+    lineItems = _useSelector3.items;
+  var _useSelector4 = (0,react_redux__WEBPACK_IMPORTED_MODULE_8__.useSelector)(function (s) {
+      return s.machines;
+    }),
+    machineItems = _useSelector4.items;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    newChecklistOpen = _useState2[0],
+    setNewChecklistOpen = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    checkPointModalOpen = _useState4[0],
+    setCheckPointModalOpen = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState6 = _slicedToArray(_useState5, 2),
+    editingCheckPoint = _useState6[0],
+    setEditingCheckPoint = _useState6[1];
+
+  // Plant/Line/Machine filter used to scope the checklist list
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("all"),
+    _useState8 = _slicedToArray(_useState7, 2),
+    filterPlant = _useState8[0],
+    setFilterPlant = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("all"),
+    _useState10 = _slicedToArray(_useState9, 2),
+    filterLine = _useState10[0],
+    setFilterLine = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("all"),
+    _useState12 = _slicedToArray(_useState11, 2),
+    filterMachine = _useState12[0],
+    setFilterMachine = _useState12[1];
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    dispatch((0,_actions_checklistActions__WEBPACK_IMPORTED_MODULE_1__.loadChecklistHeaders)());
+    dispatch((0,_actions_checklistActions__WEBPACK_IMPORTED_MODULE_1__.loadChecklistItems)());
+    dispatch((0,_actions_equipmentActions__WEBPACK_IMPORTED_MODULE_2__.loadEquipment)());
+    dispatch((0,_actions_plantActions__WEBPACK_IMPORTED_MODULE_3__.loadPlants)());
+    dispatch((0,_actions_lineActions__WEBPACK_IMPORTED_MODULE_4__.loadLines)());
+    dispatch((0,_actions_machineActions__WEBPACK_IMPORTED_MODULE_5__.loadMachines)());
+  }, [dispatch]);
+
+  // If the "checklist" reducer isn't registered in store.js, s.checklist will
+  // be undefined — show a clear setup message instead of crashing the page.
+  if (!checklistState) {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "p-5 bg-[#FEF2F2] border border-[#FECACA] rounded-xl text-sm text-[#991B1B]"
+    }, /*#__PURE__*/React.createElement("strong", null, "Setup incomplete:"), " the \"checklist\" reducer is not registered in store.js. Add", " ", /*#__PURE__*/React.createElement("code", null, "import checklist from './reducers/checklistReducer';"), " ", "and include ", /*#__PURE__*/React.createElement("code", null, "checklist"), " in", " ", /*#__PURE__*/React.createElement("code", null, "combineReducers(", "{", " ...existing, checklist ", "}", ")"), ", then rebuild.");
+  }
+  var headers = checklistState.headers,
+    items = checklistState.items,
+    selectedHeaderId = checklistState.selectedHeaderId;
+
+  // Lookup to resolve a checklist header's equipment_code into the full
+  // equipment record (plant/line/machine) — the header only stores the code.
+  var equipmentByCode = Object.fromEntries(equipmentItems.map(function (eq) {
+    return [eq.equipment_code, eq];
+  }));
+  var plantNameByCode = Object.fromEntries(plantItems.map(function (p) {
+    return [String(p.plant_code), p.plant_name];
+  }));
+
+  // Line dropdown — scoped to filterPlant, deduped by name
+  var lineOptions = _toConsumableArray(new Map(lineItems.filter(function (l) {
+    return filterPlant === "all" || String(l.plant_code) === String(filterPlant);
+  }).map(function (l) {
+    return [l.line_name, l];
+  })).values());
+
+  // Machine dropdown — scoped to filterPlant + filterLine
+  var machineOptions = _toConsumableArray(new Map(machineItems.filter(function (m) {
+    return (filterPlant === "all" || String(m.plant_code) === String(filterPlant)) && (filterLine === "all" || String(m.line_name) === String(filterLine));
+  }).map(function (m) {
+    return [m.machine_name, m];
+  })).values());
+
+  // Scope the checklists by Plant/Line/Machine — resolve each header's
+  // equipment_code to its equipment record and match plant/line/machine.
+  var filteredHeaders = headers.items.filter(function (h) {
+    var eq = equipmentByCode[h.equipment_code];
+    if (!eq) return true; // keep checklists visible even if their equipment was removed
+    if (filterPlant !== "all" && String(eq.plant_code) !== String(filterPlant)) return false;
+    if (filterLine !== "all" && String(eq.line || "") !== String(filterLine)) return false;
+    if (filterMachine !== "all" && String(eq.machine || "") !== String(filterMachine)) return false;
+    return true;
+  });
+
+  // If the current selection falls outside the filter, auto-select the
+  // first item in the filtered list.
+  var effectiveSelectedId = (_ref = (_filteredHeaders$find = (_filteredHeaders$find2 = filteredHeaders.find(function (h) {
+    return h.cdb_object_id === selectedHeaderId;
+  })) === null || _filteredHeaders$find2 === void 0 ? void 0 : _filteredHeaders$find2.cdb_object_id) !== null && _filteredHeaders$find !== void 0 ? _filteredHeaders$find : (_filteredHeaders$ = filteredHeaders[0]) === null || _filteredHeaders$ === void 0 ? void 0 : _filteredHeaders$.cdb_object_id) !== null && _ref !== void 0 ? _ref : null;
+  var selectedHeader = headers.items.find(function (h) {
+    return h.cdb_object_id === effectiveSelectedId;
+  });
+  var selectedEquipment = selectedHeader ? equipmentByCode[selectedHeader.equipment_code] : null;
+  var checkPoints = items.items.filter(function (it) {
+    return it.equipment_code === (selectedHeader === null || selectedHeader === void 0 ? void 0 : selectedHeader.equipment_code);
+  }).sort(function (a, b) {
+    return Number(a.seq_no || 0) - Number(b.seq_no || 0);
+  });
+  var nextSeqNo = checkPoints.length ? Math.max.apply(Math, _toConsumableArray(checkPoints.map(function (c) {
+    return Number(c.seq_no || 0);
+  }))) + 1 : 1;
+  var handlePlantFilterChange = function handlePlantFilterChange(e) {
+    setFilterPlant(e.target.value);
+    setFilterLine("all");
+    setFilterMachine("all");
+  };
+  var handleLineFilterChange = function handleLineFilterChange(e) {
+    setFilterLine(e.target.value);
+    setFilterMachine("all");
+  };
+  var handleEquipmentChange = function handleEquipmentChange(e) {
+    if (!selectedHeader) return;
+    dispatch((0,_actions_checklistActions__WEBPACK_IMPORTED_MODULE_1__.editChecklistHeader)(selectedHeader.cdb_object_id, {
+      equipment_code: e.target.value
+    }));
+  };
+  var handleFrequencyChange = function handleFrequencyChange(e) {
+    if (!selectedHeader) return;
+    dispatch((0,_actions_checklistActions__WEBPACK_IMPORTED_MODULE_1__.editChecklistHeader)(selectedHeader.cdb_object_id, {
+      frequency: e.target.value
+    }));
+  };
+  var handleDeleteCheckPoint = function handleDeleteCheckPoint(cp) {
+    var ok = window.confirm("Delete \"".concat(cp.title, "\"?"));
+    if (ok) dispatch((0,_actions_checklistActions__WEBPACK_IMPORTED_MODULE_1__.removeCheckPoint)(cp.cdb_object_id));
+  };
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "mb-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-1.5 text-xs text-[#94A3B8] mb-2 flex-wrap"
+  }, "Admin", /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] text-[#CBD5E1]"
+  }, "\u203A"), "PM Checklists"), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center justify-between flex-wrap gap-2"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "text-[22px] font-bold text-[#0B1F3A] tracking-[-0.3px]"
+  }, "PM Checklist Builder"), /*#__PURE__*/React.createElement("div", {
+    className: "text-[13px] text-[#64748B] mt-[3px]"
+  }, "Define inspection points for each equipment")), /*#__PURE__*/React.createElement("button", {
+    className: "inline-flex items-center gap-1.5 py-2 px-4 rounded-lg text-[13px] font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-[#2563EB] text-white hover:bg-[#1E5291]",
+    onClick: function onClick() {
+      return setNewChecklistOpen(true);
+    }
+  }, "+ New Checklist"))), /*#__PURE__*/React.createElement("div", {
+    className: "bg-white border border-[#E2E8F0] rounded-xl py-3 px-4 mb-4 flex items-center gap-3 flex-wrap"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-sm font-bold text-[#64748B] uppercase tracking-[0.5px]"
+  }, "Filter:"), /*#__PURE__*/React.createElement("select", {
+    className: "w-[160px] text-sm py-[5px] px-2 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]",
+    value: filterPlant,
+    onChange: handlePlantFilterChange
+  }, /*#__PURE__*/React.createElement("option", {
+    value: "all"
+  }, "All Plants"), plantItems.map(function (p) {
+    return /*#__PURE__*/React.createElement("option", {
+      key: p.plant_code,
+      value: p.plant_code
+    }, p.plant_name, " (", p.plant_code, ")");
+  })), /*#__PURE__*/React.createElement("select", {
+    className: "w-[150px] text-sm py-[5px] px-2 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]",
+    value: filterLine,
+    onChange: handleLineFilterChange
+  }, /*#__PURE__*/React.createElement("option", {
+    value: "all"
+  }, "All Lines"), lineOptions.map(function (l) {
+    return /*#__PURE__*/React.createElement("option", {
+      key: "".concat(l.plant_code, "-").concat(l.line_name),
+      value: l.line_name
+    }, l.line_name);
+  })), /*#__PURE__*/React.createElement("select", {
+    className: "w-[160px] text-sm py-[5px] px-2 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]",
+    value: filterMachine,
+    onChange: function onChange(e) {
+      return setFilterMachine(e.target.value);
+    }
+  }, /*#__PURE__*/React.createElement("option", {
+    value: "all"
+  }, "All Machines"), machineOptions.map(function (m) {
+    return /*#__PURE__*/React.createElement("option", {
+      key: "".concat(m.plant_code, "-").concat(m.line_name, "-").concat(m.machine_name),
+      value: m.machine_name
+    }, m.machine_name);
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "w-px h-6 bg-[#E2E8F0]"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "text-sm font-bold text-[#64748B] uppercase tracking-[0.5px]"
+  }, "Checklist:"), /*#__PURE__*/React.createElement("select", {
+    className: "w-[300px] text-sm py-[5px] px-2 border-[1.5px] border-[#CBD5E1] rounded-lg font-semibold text-[#0B1F3A] bg-white outline-none focus:border-[#3B82F6] disabled:text-[#94A3B8] disabled:font-normal",
+    value: effectiveSelectedId || "",
+    onChange: function onChange(e) {
+      return dispatch((0,_actions_checklistActions__WEBPACK_IMPORTED_MODULE_1__.setSelectedChecklistHeader)(e.target.value));
+    },
+    disabled: filteredHeaders.length === 0
+  }, filteredHeaders.length === 0 && /*#__PURE__*/React.createElement("option", null, "No checklist in this scope"), filteredHeaders.map(function (h) {
+    return /*#__PURE__*/React.createElement("option", {
+      key: h.cdb_object_id,
+      value: h.cdb_object_id
+    }, h.checklist_name || "".concat(h.equipment_code || "Unknown Equipment", " \u2014 ").concat(h.frequency));
+  })), /*#__PURE__*/React.createElement("span", {
+    className: "text-xs text-[#94A3B8] whitespace-nowrap"
+  }, filteredHeaders.length, "/", headers.items.length), (filterPlant !== "all" || filterLine !== "all" || filterMachine !== "all") && /*#__PURE__*/React.createElement("button", {
+    className: "text-sm font-semibold text-[#2563EB] hover:text-[#1E5291] cursor-pointer bg-transparent border-none py-[5px]",
+    onClick: function onClick() {
+      setFilterPlant("all");
+      setFilterLine("all");
+      setFilterMachine("all");
+    }
+  }, "\u2715 Clear")), headers.status === "loading" && /*#__PURE__*/React.createElement("p", {
+    className: "text-sm text-[#64748B] py-2 -mt-2 mb-2"
+  }, "Loading checklists\u2026"), headers.status === "failed" && /*#__PURE__*/React.createElement("p", {
+    className: "text-sm text-[#DC2626] py-2 -mt-2 mb-2"
+  }, "Load failed: ", headers.error), headers.status === "succeeded" && headers.items.length === 0 && /*#__PURE__*/React.createElement("p", {
+    className: "text-sm text-[#64748B] py-2 -mt-2 mb-2"
+  }, "No checklists yet \u2014 create one with \"+ New Checklist\"."), headers.status === "succeeded" && headers.items.length > 0 && filteredHeaders.length === 0 && /*#__PURE__*/React.createElement("p", {
+    className: "text-sm text-[#64748B] py-2 -mt-2 mb-2"
+  }, "No checklist found in this scope \u2014 widen the filter or click \"Clear\"."), selectedHeader && /*#__PURE__*/React.createElement("div", {
+    className: "bg-white border border-[#E2E8F0] rounded-xl p-5 mb-5 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.06)]"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center justify-between mb-1 flex-wrap gap-2"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-sm font-bold text-[#0B1F3A]"
+  }, selectedHeader.checklist_name), /*#__PURE__*/React.createElement("button", {
+    className: "py-[5px] px-3 rounded-lg text-xs font-semibold cursor-pointer border border-[#CBD5E1] bg-white text-[#334155] hover:bg-[#F8FAFC]",
+    onClick: function onClick() {
+      return alert("Wire this button up to an inline edit field for the checklist title");
+    }
+  }, "Edit")), selectedEquipment && /*#__PURE__*/React.createElement("div", {
+    className: "text-xs text-[#94A3B8] mb-4 flex items-center gap-1.5 flex-wrap"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "font-medium text-[#64748B]"
+  }, plantNameByCode[String(selectedEquipment.plant_code)] || selectedEquipment.plant_code), selectedEquipment.line && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] text-[#CBD5E1]"
+  }, "\u203A"), /*#__PURE__*/React.createElement("span", null, selectedEquipment.line)), selectedEquipment.machine && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] text-[#CBD5E1]"
+  }, "\u203A"), /*#__PURE__*/React.createElement("span", null, selectedEquipment.machine)), /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] text-[#CBD5E1]"
+  }, "\u203A"), /*#__PURE__*/React.createElement("span", {
+    className: "font-semibold text-[#2563EB]"
+  }, selectedHeader.equipment_code)), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-end gap-2.5 mb-5 flex-wrap"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "text-[10px] font-semibold text-[#94A3B8] uppercase tracking-[0.4px] mb-1"
+  }, "Linked Equipment"), /*#__PURE__*/React.createElement("select", {
+    className: "w-[220px] text-xs py-[7px] px-2.5 border-[1.5px] border-[#CBD5E1] rounded-lg font-sans text-[#334155] bg-white outline-none focus:border-[#3B82F6]",
+    value: selectedHeader.equipment_code || "",
+    onChange: handleEquipmentChange
+  }, equipmentItems.map(function (eq) {
+    return /*#__PURE__*/React.createElement("option", {
+      key: eq.equipment_code,
+      value: eq.equipment_code
+    }, eq.equipment_code, " \u2014 ", eq.equipment_name);
+  }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "text-[10px] font-semibold text-[#94A3B8] uppercase tracking-[0.4px] mb-1"
+  }, "Frequency"), /*#__PURE__*/React.createElement("select", {
+    className: "w-[140px] text-xs py-[7px] px-2.5 border-[1.5px] border-[#CBD5E1] rounded-lg font-sans text-[#334155] bg-white outline-none focus:border-[#3B82F6]",
+    value: selectedHeader.frequency || "Daily",
+    onChange: handleFrequencyChange
+  }, /*#__PURE__*/React.createElement("option", {
+    value: "Daily"
+  }, "Daily"), /*#__PURE__*/React.createElement("option", {
+    value: "Weekly"
+  }, "Weekly"), /*#__PURE__*/React.createElement("option", {
+    value: "Monthly"
+  }, "Monthly"), /*#__PURE__*/React.createElement("option", {
+    value: "Quarterly"
+  }, "Quarterly")))), items.status === "loading" && /*#__PURE__*/React.createElement("p", {
+    className: "text-sm text-[#64748B] py-3"
+  }, "Loading check points\u2026"), items.status === "succeeded" && checkPoints.length === 0 && /*#__PURE__*/React.createElement("p", {
+    className: "text-sm text-[#64748B] py-3"
+  }, "No check points yet \u2014 add one with \"+ Add Check Point\"."), checkPoints.map(function (cp, idx) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: cp.cdb_object_id,
+      className: "flex items-center gap-4 py-3.5 border-b border-[#F1F5F9] last:border-b-0 group"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "w-7 h-7 rounded-full bg-[#F1F5F9] text-[#64748B] text-xs font-bold flex items-center justify-center flex-shrink-0"
+    }, idx + 1), /*#__PURE__*/React.createElement("div", {
+      className: "flex-1 min-w-0"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "text-[13px] font-semibold text-[#0B1F3A]"
+    }, cp.title), /*#__PURE__*/React.createElement("div", {
+      className: "text-xs text-[#64748B] mt-0.5"
+    }, [cp.sop_ref, cp.limit_value, cp.instrument && "Instrument: ".concat(cp.instrument)].filter(Boolean).join(" · "))), /*#__PURE__*/React.createElement("div", {
+      className: "flex items-center gap-3 flex-shrink-0"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "inline-flex items-center gap-1.5 text-xs font-semibold ".concat(String(cp.is_active) === "1" ? "text-[#059669]" : "text-[#94A3B8]")
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "w-1.5 h-1.5 rounded-full ".concat(String(cp.is_active) === "1" ? "bg-[#059669]" : "bg-[#94A3B8]")
+    }), String(cp.is_active) === "1" ? "Active" : "Inactive"), /*#__PURE__*/React.createElement("button", {
+      className: "text-xs font-semibold text-[#2563EB] opacity-0 group-hover:opacity-100 transition-opacity",
+      onClick: function onClick() {
+        setEditingCheckPoint(cp);
+        setCheckPointModalOpen(true);
+      }
+    }, "Edit"), /*#__PURE__*/React.createElement("button", {
+      className: "text-xs font-semibold text-[#DC2626] opacity-0 group-hover:opacity-100 transition-opacity",
+      onClick: function onClick() {
+        return handleDeleteCheckPoint(cp);
+      }
+    }, "Delete")));
+  }), /*#__PURE__*/React.createElement("button", {
+    className: "mt-4 py-2 px-4 rounded-lg text-[13px] font-semibold cursor-pointer border border-[#CBD5E1] bg-white text-[#334155] hover:bg-[#F8FAFC]",
+    onClick: function onClick() {
+      setEditingCheckPoint(null);
+      setCheckPointModalOpen(true);
+    }
+  }, "+ Add Check Point")), /*#__PURE__*/React.createElement(_AddChecklistModal__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    isOpen: newChecklistOpen,
+    onClose: function onClose() {
+      return setNewChecklistOpen(false);
+    }
+  }), /*#__PURE__*/React.createElement(_AddCheckPointModal__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    isOpen: checkPointModalOpen,
+    onClose: function onClose() {
+      setCheckPointModalOpen(false);
+      setEditingCheckPoint(null);
+    },
+    checklistHeaderId: effectiveSelectedId,
+    equipmentCode: selectedHeader === null || selectedHeader === void 0 ? void 0 : selectedHeader.equipment_code,
+    nextSeqNo: nextSeqNo,
+    checkPoint: editingCheckPoint
+  }));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ChecklistBuilder);
 
 /***/ }),
 
@@ -3910,9 +4570,9 @@ var ConfigMasterPicker = function ConfigMasterPicker(_ref) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center gap-2 py-3.5 px-4 border-b border-[#F1F5F9]"
   }, /*#__PURE__*/React.createElement("span", {
-    className: "text-[16px]"
+    className: "text-lg"
   }, "\u2699\uFE0F"), /*#__PURE__*/React.createElement("span", {
-    className: "text-[13px] font-bold text-[#64748B] uppercase tracking-[0.6px]"
+    className: "text-sm font-bold text-[#64748B] uppercase tracking-[0.6px]"
   }, "Configuration")), /*#__PURE__*/React.createElement("div", {
     className: "py-1.5"
   }, MASTERS.map(function (m, idx) {
@@ -3923,18 +4583,18 @@ var ConfigMasterPicker = function ConfigMasterPicker(_ref) {
         return onSelect(m.key);
       }
     }, /*#__PURE__*/React.createElement("span", {
-      className: "w-10 h-10 rounded-xl flex items-center justify-center text-lg shrink-0",
+      className: "w-10 h-10 rounded-xl flex items-center justify-center text-xl shrink-0",
       style: {
         background: m.bg
       }
     }, m.icon), /*#__PURE__*/React.createElement("span", {
       className: "flex-1 min-w-0"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "text-[15px] font-bold text-[#1E293B] leading-tight"
+      className: "text-base font-bold text-[#1E293B] leading-tight"
     }, m.label), /*#__PURE__*/React.createElement("div", {
-      className: "text-[13px] text-[#94A3B8] mt-0.5 leading-snug"
+      className: "text-sm text-[#94A3B8] mt-0.5 leading-snug"
     }, m.desc)), /*#__PURE__*/React.createElement("span", {
-      className: "text-[#CBD5E1] text-base shrink-0"
+      className: "text-[#CBD5E1] text-lg shrink-0"
     }, "\u203A"));
   }))));
 };
@@ -4023,22 +4683,22 @@ var ConfigurationModal = function ConfigurationModal(_ref) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center gap-2.5"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "w-8 h-8 bg-[#6366F1] rounded-md flex items-center justify-center text-base"
+    className: "w-8 h-8 bg-[#6366F1] rounded-md flex items-center justify-center text-lg"
   }, "\u2699\uFE0F"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-    className: "text-white text-[16px] font-bold tracking-[-0.2px]"
+    className: "text-white text-lg font-bold tracking-[-0.2px]"
   }, "System Configuration"), /*#__PURE__*/React.createElement("div", {
-    className: "text-white/40 text-[11px] font-normal tracking-[0.6px] uppercase"
+    className: "text-white/40 text-xs font-normal tracking-[0.6px] uppercase"
   }, "Master Data Management"))), /*#__PURE__*/React.createElement("div", {
     className: "flex-1"
   }), /*#__PURE__*/React.createElement("button", {
     onClick: onClose,
-    className: "text-white/[0.85] text-xs font-semibold no-underline py-[7px] px-3.5 rounded-md transition-all duration-150 bg-white/[0.08] border border-white/[0.14] cursor-pointer hover:bg-white/[0.18] hover:text-white"
+    className: "text-white/[0.85] text-sm font-semibold no-underline py-[7px] px-3.5 rounded-md transition-all duration-150 bg-white/[0.08] border border-white/[0.14] cursor-pointer hover:bg-white/[0.18] hover:text-white"
   }, "\u2715 Close")), /*#__PURE__*/React.createElement("div", {
     className: "flex pt-14 h-screen"
   }, /*#__PURE__*/React.createElement("aside", {
     className: "w-64 bg-white border-r border-[#E2E8F0] overflow-y-auto py-4 px-2.5 shrink-0"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "text-[11px] font-bold tracking-wider uppercase text-[#94A3B8] pt-2 px-2.5 pb-2"
+    className: "text-xs font-bold tracking-wider uppercase text-[#94A3B8] pt-2 px-2.5 pb-2"
   }, "Master Data APIs"), SIDEBAR_ITEMS.map(function (item) {
     var active = activeMaster === item.key;
     return /*#__PURE__*/React.createElement("button", {
@@ -4051,16 +4711,16 @@ var ConfigurationModal = function ConfigurationModal(_ref) {
         boxShadow: "inset 3px 0 0 #6366F1"
       } : undefined
     }, /*#__PURE__*/React.createElement("span", {
-      className: "w-9 h-9 rounded-lg flex items-center justify-center text-base shrink-0",
+      className: "w-9 h-9 rounded-lg flex items-center justify-center text-lg shrink-0",
       style: {
         background: item.bg
       }
     }, item.icon), /*#__PURE__*/React.createElement("span", {
       className: "flex-1 min-w-0"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "text-[14px] font-semibold leading-tight ".concat(active ? "text-[#3730A3]" : "text-[#1E293B]")
+      className: "text-base font-semibold leading-tight ".concat(active ? "text-[#3730A3]" : "text-[#1E293B]")
     }, item.label), /*#__PURE__*/React.createElement("div", {
-      className: "text-[13px] text-[#94A3B8] mt-0.5 leading-snug"
+      className: "text-sm text-[#94A3B8] mt-0.5 leading-snug"
     }, item.desc)));
   })), /*#__PURE__*/React.createElement("main", {
     className: "flex-1 pt-7 px-7 pb-10 overflow-y-auto"
@@ -9332,7 +9992,7 @@ var CATEGORY_ICON = {
   electrical: "⚡",
   instrumentation: "📡"
 };
-var badgeBase = "inline-flex items-center gap-1 py-[3px] px-2.5 rounded-full text-[13px] font-semibold whitespace-nowrap before:content-[''] before:w-[5px] before:h-[5px] before:rounded-full before:bg-current";
+var badgeBase = "inline-flex items-center gap-1 py-[3px] px-2.5 rounded-full text-sm font-semibold whitespace-nowrap before:content-[''] before:w-[5px] before:h-[5px] before:rounded-full before:bg-current";
 var EquipmentCard = function EquipmentCard(_ref) {
   var equipment = _ref.equipment,
     onEdit = _ref.onEdit,
@@ -9353,9 +10013,9 @@ var EquipmentCard = function EquipmentCard(_ref) {
   }, CATEGORY_ICON[category] || "⚙️"), /*#__PURE__*/React.createElement("div", {
     className: "flex-1"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "text-sm font-bold text-[#0B1F3A]"
+    className: "text-base font-bold text-[#0B1F3A]"
   }, equipment_name, " \u2014 ", equipment_code), /*#__PURE__*/React.createElement("div", {
-    className: "text-xs text-[#64748B] mt-0.5"
+    className: "text-sm text-[#64748B] mt-0.5"
   }, "Plant ", plant_code, " \xB7 ", location || "—", " \xB7 Last PM: ", last_pm_date || "—")), /*#__PURE__*/React.createElement("div", {
     className: "flex gap-2 mr-3"
   }, /*#__PURE__*/React.createElement("span", {
@@ -9365,22 +10025,22 @@ var EquipmentCard = function EquipmentCard(_ref) {
   }, iiot_status === "connected" ? "IIoT ●" : "No IIoT")), /*#__PURE__*/React.createElement("div", {
     className: "flex gap-4 mr-3 text-right"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "text-[13px] text-[#64748B]"
+    className: "text-sm text-[#64748B]"
   }, /*#__PURE__*/React.createElement("strong", {
-    className: "block text-sm text-[#0B1F3A] capitalize",
+    className: "block text-base text-[#0B1F3A] capitalize",
     style: {
       fontFamily: 'var(--font-mono)'
     }
   }, pm_frequency || "—"), "Frequency")), /*#__PURE__*/React.createElement("div", {
     className: "flex gap-1.5 shrink-0"
   }, /*#__PURE__*/React.createElement("button", {
-    className: "inline-flex items-center gap-1 py-[5px] px-2.5 rounded-lg text-xs font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-transparent text-[#2563EB] hover:bg-[#F0F7FF]",
+    className: "inline-flex items-center gap-1 py-[5px] px-2.5 rounded-lg text-sm font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-transparent text-[#2563EB] hover:bg-[#F0F7FF]",
     onClick: function onClick(e) {
       e.stopPropagation();
       onEdit && onEdit(equipment);
     }
   }, "\u270F\uFE0F Edit"), /*#__PURE__*/React.createElement("button", {
-    className: "inline-flex items-center gap-1 py-[5px] px-2.5 rounded-lg text-xs font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-transparent text-[#DC2626] hover:bg-[#FEF2F2]",
+    className: "inline-flex items-center gap-1 py-[5px] px-2.5 rounded-lg text-sm font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-transparent text-[#DC2626] hover:bg-[#FEF2F2]",
     onClick: function onClick(e) {
       e.stopPropagation();
       onDelete && onDelete(equipment);
@@ -9453,14 +10113,14 @@ var EquipmentStatsCards = function EquipmentStatsCards(_ref) {
         backgroundColor: c.color
       }
     }), /*#__PURE__*/React.createElement("div", {
-      className: "text-[13px] font-semibold tracking-wide uppercase text-[#64748B] mb-1.5"
+      className: "text-sm font-semibold tracking-wide uppercase text-[#64748B] mb-1.5"
     }, c.label), /*#__PURE__*/React.createElement("div", {
-      className: "text-[28px] font-bold text-[#0B1F3A] leading-none",
+      className: "text-3xl font-bold text-[#0B1F3A] leading-none",
       style: {
         fontFamily: 'var(--font-mono)'
       }
     }, c.value), /*#__PURE__*/React.createElement("div", {
-      className: "text-[13px] text-[#94A3B8] mt-1"
+      className: "text-sm text-[#94A3B8] mt-1"
     }, c.sub));
   }));
 };
@@ -13409,7 +14069,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 // UI Equipment Register ke card/table pattern ke saath consistent rakha gaya hai.
 
 
-var inputClass = "w-full py-[9px] px-3 border-[1.5px] border-[#CBD5E1] rounded-lg text-[14px] text-[#334155] bg-white outline-none focus:border-[#6366F1] focus:shadow-[0_0_0_3px_rgba(79,70,229,0.10)]";
+var inputClass = "w-full py-[9px] px-3 border-[1.5px] border-[#CBD5E1] rounded-lg text-base text-[#334155] bg-white outline-none focus:border-[#6366F1] focus:shadow-[0_0_0_3px_rgba(79,70,229,0.10)]";
 
 /**
  * Props:
@@ -13597,33 +14257,33 @@ var MasterCrudPanel = function MasterCrudPanel(_ref) {
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "mb-6 flex items-center justify-between flex-wrap gap-2"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-    className: "text-[24px] font-bold text-[#0B1F3A] tracking-[-0.3px]"
+    className: "text-2xl font-bold text-[#0B1F3A] tracking-[-0.3px]"
   }, title), /*#__PURE__*/React.createElement("div", {
-    className: "text-[14px] text-[#64748B] mt-[3px]"
+    className: "text-base text-[#64748B] mt-[3px]"
   }, description)), /*#__PURE__*/React.createElement("button", {
-    className: "inline-flex items-center gap-1.5 py-2 px-4 rounded-lg text-[14px] font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-[#4F46E5] text-white hover:bg-[#4338CA]",
+    className: "inline-flex items-center gap-1.5 py-2 px-4 rounded-lg text-base font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-[#4F46E5] text-white hover:bg-[#4338CA]",
     onClick: openAdd
   }, "+ Add ", title)), /*#__PURE__*/React.createElement("div", {
     className: "bg-white border border-[#E2E8F0] rounded-xl py-3 px-4 mb-4 flex items-center gap-3 flex-wrap"
   }, /*#__PURE__*/React.createElement("span", {
-    className: "text-[13px] font-bold text-[#64748B] uppercase tracking-[0.5px]"
+    className: "text-sm font-bold text-[#64748B] uppercase tracking-[0.5px]"
   }, "Search:"), /*#__PURE__*/React.createElement("input", {
-    className: "w-[240px] text-xs py-[5px] px-2.5 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#6366F1]",
+    className: "w-[240px] text-sm py-[5px] px-2.5 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#6366F1]",
     placeholder: "\uD83D\uDD0D Search ".concat(title.toLowerCase(), "\u2026"),
     value: search,
     onChange: function onChange(e) {
       return setSearch(e.target.value);
     }
   }), /*#__PURE__*/React.createElement("span", {
-    className: "text-xs text-[#94A3B8] ml-auto"
+    className: "text-sm text-[#94A3B8] ml-auto"
   }, filteredItems.length, " record", filteredItems.length === 1 ? "" : "s")), /*#__PURE__*/React.createElement("div", {
     className: "bg-white border border-[#E2E8F0] rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.06)] overflow-hidden"
   }, status === "loading" && /*#__PURE__*/React.createElement("p", {
-    className: "text-sm text-[#64748B] py-4 px-5"
+    className: "text-base text-[#64748B] py-4 px-5"
   }, "Loading\u2026"), status === "failed" && /*#__PURE__*/React.createElement("p", {
-    className: "text-sm text-[#DC2626] py-4 px-5"
+    className: "text-base text-[#DC2626] py-4 px-5"
   }, "Load failed: ", error), status === "succeeded" && filteredItems.length === 0 && /*#__PURE__*/React.createElement("p", {
-    className: "text-sm text-[#64748B] py-4 px-5"
+    className: "text-base text-[#64748B] py-4 px-5"
   }, "Koi record nahi mila."), filteredItems.length > 0 && /*#__PURE__*/React.createElement("table", {
     className: "w-full text-left border-collapse"
   }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", {
@@ -13631,10 +14291,10 @@ var MasterCrudPanel = function MasterCrudPanel(_ref) {
   }, columns.map(function (c) {
     return /*#__PURE__*/React.createElement("th", {
       key: c.key,
-      className: "text-[13px] font-bold text-[#64748B] uppercase tracking-[0.5px] py-3 px-4"
+      className: "text-sm font-bold text-[#64748B] uppercase tracking-[0.5px] py-3 px-4"
     }, c.label);
   }), /*#__PURE__*/React.createElement("th", {
-    className: "text-[13px] font-bold text-[#64748B] uppercase tracking-[0.5px] py-3 px-4 text-right"
+    className: "text-sm font-bold text-[#64748B] uppercase tracking-[0.5px] py-3 px-4 text-right"
   }, "Actions"))), /*#__PURE__*/React.createElement("tbody", null, filteredItems.map(function (row, idx) {
     return /*#__PURE__*/React.createElement("tr", {
       key: row[idKey],
@@ -13644,20 +14304,20 @@ var MasterCrudPanel = function MasterCrudPanel(_ref) {
         key: c.key,
         className: "py-2.5 px-4"
       }, /*#__PURE__*/React.createElement("span", {
-        className: "inline-flex items-center py-0.5 px-2.5 rounded-full bg-[#EEF2FF] text-[#4338CA] text-xs font-semibold"
+        className: "inline-flex items-center py-0.5 px-2.5 rounded-full bg-[#EEF2FF] text-[#4338CA] text-sm font-semibold"
       }, row[c.key])) : /*#__PURE__*/React.createElement("td", {
         key: c.key,
-        className: "text-sm text-[#334155] py-2.5 px-4"
+        className: "text-base text-[#334155] py-2.5 px-4"
       }, row[c.key]);
     }), /*#__PURE__*/React.createElement("td", {
       className: "text-right py-2.5 px-4 whitespace-nowrap"
     }, /*#__PURE__*/React.createElement("button", {
-      className: "inline-flex items-center gap-1 text-xs font-semibold text-[#4F46E5] mr-2 py-[3px] px-2.5 rounded-md bg-[#EEF2FF] border border-[#C7D2FE] cursor-pointer transition-all duration-150 hover:bg-[#4F46E5] hover:text-white hover:border-[#4F46E5]",
+      className: "inline-flex items-center gap-1 text-sm font-semibold text-[#4F46E5] mr-2 py-[3px] px-2.5 rounded-md bg-[#EEF2FF] border border-[#C7D2FE] cursor-pointer transition-all duration-150 hover:bg-[#4F46E5] hover:text-white hover:border-[#4F46E5]",
       onClick: function onClick() {
         return openEdit(row);
       }
     }, "\u270F\uFE0F Edit"), /*#__PURE__*/React.createElement("button", {
-      className: "inline-flex items-center gap-1 text-xs font-semibold text-[#DC2626] py-[3px] px-2.5 rounded-md bg-[#FEF2F2] border border-[#FECACA] cursor-pointer transition-all duration-150 hover:bg-[#DC2626] hover:text-white hover:border-[#DC2626]",
+      className: "inline-flex items-center gap-1 text-sm font-semibold text-[#DC2626] py-[3px] px-2.5 rounded-md bg-[#FEF2F2] border border-[#FECACA] cursor-pointer transition-all duration-150 hover:bg-[#DC2626] hover:text-white hover:border-[#DC2626]",
       onClick: function onClick() {
         return handleDelete(row);
       }
@@ -13669,21 +14329,21 @@ var MasterCrudPanel = function MasterCrudPanel(_ref) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "py-5 px-6 pb-4 border-b border-[#E2E8F0] flex items-center justify-between"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "text-base font-bold text-[#0B1F3A]"
+    className: "text-lg font-bold text-[#0B1F3A]"
   }, editingRow ? "Edit ".concat(title) : "Add New ".concat(title)), /*#__PURE__*/React.createElement("button", {
-    className: "w-8 h-8 rounded-md border-none bg-[#F1F5F9] cursor-pointer text-base flex items-center justify-center text-[#64748B] hover:bg-[#E2E8F0]",
+    className: "w-8 h-8 rounded-md border-none bg-[#F1F5F9] cursor-pointer text-lg flex items-center justify-center text-[#64748B] hover:bg-[#E2E8F0]",
     onClick: closeModal
   }, "\u2715")), /*#__PURE__*/React.createElement("div", {
     className: "py-5 px-6"
   }, formError && /*#__PURE__*/React.createElement("div", {
-    className: "mb-3 text-xs text-[#991B1B] bg-[#FEF2F2] py-2 px-3 rounded-lg"
+    className: "mb-3 text-sm text-[#991B1B] bg-[#FEF2F2] py-2 px-3 rounded-lg"
   }, formError), fields.map(function (f) {
     var _form$f$key;
     return /*#__PURE__*/React.createElement("div", {
       className: "mb-4",
       key: f.key
     }, /*#__PURE__*/React.createElement("label", {
-      className: "block text-xs font-semibold text-[#334155] mb-[5px]"
+      className: "block text-sm font-semibold text-[#334155] mb-[5px]"
     }, f.label), /*#__PURE__*/React.createElement("input", {
       className: inputClass,
       type: f.type === "number" ? "number" : "text",
@@ -13694,10 +14354,10 @@ var MasterCrudPanel = function MasterCrudPanel(_ref) {
   })), /*#__PURE__*/React.createElement("div", {
     className: "py-4 px-6 border-t border-[#E2E8F0] flex justify-end gap-2.5"
   }, /*#__PURE__*/React.createElement("button", {
-    className: "inline-flex items-center gap-1.5 py-[5px] px-3 rounded-lg text-xs font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-white text-[#334155] border border-[#CBD5E1] hover:bg-[#F8FAFC] hover:border-[#94A3B8]",
+    className: "inline-flex items-center gap-1.5 py-[5px] px-3 rounded-lg text-sm font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-white text-[#334155] border border-[#CBD5E1] hover:bg-[#F8FAFC] hover:border-[#94A3B8]",
     onClick: closeModal
   }, "Cancel"), /*#__PURE__*/React.createElement("button", {
-    className: "inline-flex items-center gap-1.5 py-2 px-4 rounded-lg text-[14px] font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-[#4F46E5] text-white hover:bg-[#4338CA] disabled:opacity-60",
+    className: "inline-flex items-center gap-1.5 py-2 px-4 rounded-lg text-base font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-[#4F46E5] text-white hover:bg-[#4338CA] disabled:opacity-60",
     onClick: handleSave,
     disabled: saving
   }, saving ? "Saving…" : editingRow ? "Update" : "Save")))));
@@ -15701,6 +16361,3400 @@ function PlannerPage(_ref3) {
 
 /***/ }),
 
+/***/ "./src/components/SOPLibrary.jsx":
+/*!***************************************!*\
+  !*** ./src/components/SOPLibrary.jsx ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _services_apiAuth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/apiAuth */ "./src/services/apiAuth.js");
+/* harmony import */ var _services_apiConfig__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/apiConfig */ "./src/services/apiConfig.js");
+/* harmony import */ var _services_csrfService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/csrfService */ "./src/services/csrfService.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+// components/SOPLibrary.jsx
+// SOP Library — list of uploaded SOPs (code, title, category, revision) with
+// an "Upload SOP" modal and a full-screen preview viewer. Follows the exact
+// same BLOB upload/preview/download pattern as SparePartPdfPanel.jsx, backed
+// by /internal/smartpm_admin_sop_document (see smartpm_admin_sop_document.py).
+//
+// Field names match the actual smartpm_admin_sop_library Class Designer
+// schema: sop_code Char(20), title Char(20), revision_no Integer,
+// revision_date Date, category Char(10), is_active Char(20). Both title and
+// category are very short columns, so inputs are capped to match
+// (maxLength 20 / 10) and category uses short codes (not full labels).
+
+
+
+
+
+var API_BASE = "/internal/smartpm_admin_sop_document";
+
+// value = what's stored in the Char(10) "category" column, label = what's shown in the UI
+var CATEGORY_OPTIONS = [{
+  value: "ROTATING",
+  label: "Rotating Equipment"
+}, {
+  value: "PUMP",
+  label: "Pumps"
+}, {
+  value: "COMPRESSOR",
+  label: "Compressors"
+}, {
+  value: "MOTOR",
+  label: "Motors & Drives"
+}, {
+  value: "HEATEXCH",
+  label: "Heat Exchangers"
+}, {
+  value: "ELECTRICAL",
+  label: "Electrical"
+}, {
+  value: "GENERAL",
+  label: "General"
+}];
+var categoryLabel = function categoryLabel(value) {
+  var _CATEGORY_OPTIONS$fin;
+  return ((_CATEGORY_OPTIONS$fin = CATEGORY_OPTIONS.find(function (c) {
+    return c.value === value;
+  })) === null || _CATEGORY_OPTIONS$fin === void 0 ? void 0 : _CATEGORY_OPTIONS$fin.label) || value;
+};
+var SOPLibrary = function SOPLibrary() {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState2 = _slicedToArray(_useState, 2),
+    sops = _useState2[0],
+    setSops = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    loading = _useState4[0],
+    setLoading = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState6 = _slicedToArray(_useState5, 2),
+    error = _useState6[0],
+    setError = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState8 = _slicedToArray(_useState7, 2),
+    uploadOpen = _useState8[0],
+    setUploadOpen = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState10 = _slicedToArray(_useState9, 2),
+    uploading = _useState10[0],
+    setUploading = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    _useState12 = _slicedToArray(_useState11, 2),
+    uploadError = _useState12[0],
+    setUploadError = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      sop_code: "",
+      title: "",
+      category: CATEGORY_OPTIONS[0].value,
+      revision_no: "1",
+      revision_date: ""
+    }),
+    _useState14 = _slicedToArray(_useState13, 2),
+    form = _useState14[0],
+    setForm = _useState14[1];
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState16 = _slicedToArray(_useState15, 2),
+    file = _useState16[0],
+    setFile = _useState16[1];
+  var fileInputRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState18 = _slicedToArray(_useState17, 2),
+    confirmDelete = _useState18[0],
+    setConfirmDelete = _useState18[1];
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState20 = _slicedToArray(_useState19, 2),
+    deleting = _useState20[0],
+    setDeleting = _useState20[1];
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState22 = _slicedToArray(_useState21, 2),
+    previewUrl = _useState22[0],
+    setPreviewUrl = _useState22[1];
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState24 = _slicedToArray(_useState23, 2),
+    previewSop = _useState24[0],
+    setPreviewSop = _useState24[1];
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(100),
+    _useState26 = _slicedToArray(_useState25, 2),
+    zoomLevel = _useState26[0],
+    setZoomLevel = _useState26[1];
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    fetchSops();
+  }, []);
+
+  // ── List ──────────────────────────────────────────────────────────────────
+  var fetchSops = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var data;
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            setLoading(true);
+            setError(null);
+            _context.prev = 2;
+            _context.next = 5;
+            return _services_apiAuth__WEBPACK_IMPORTED_MODULE_1__["default"].get("".concat(API_BASE, "?action=list"));
+          case 5:
+            data = _context.sent;
+            setSops(Array.isArray(data) ? data : []);
+            _context.next = 12;
+            break;
+          case 9:
+            _context.prev = 9;
+            _context.t0 = _context["catch"](2);
+            setError(_context.t0.message);
+          case 12:
+            _context.prev = 12;
+            setLoading(false);
+            return _context.finish(12);
+          case 15:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee, null, [[2, 9, 12, 15]]);
+    }));
+    return function fetchSops() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  // ── Upload — FormData with auth headers, same pattern as SparePartPdfPanel ──
+  var handleUpload = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      var formData, endpoint, headers, token, res, result;
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            if (!(!form.sop_code || !form.title)) {
+              _context2.next = 3;
+              break;
+            }
+            setUploadError("SOP Code and Title are required");
+            return _context2.abrupt("return");
+          case 3:
+            if (file) {
+              _context2.next = 6;
+              break;
+            }
+            setUploadError("Please choose a file to upload");
+            return _context2.abrupt("return");
+          case 6:
+            setUploading(true);
+            setUploadError("");
+            _context2.prev = 8;
+            formData = new FormData();
+            formData.append("file", file);
+            formData.append("sop_code", form.sop_code.slice(0, 20));
+            formData.append("title", form.title.slice(0, 20));
+            formData.append("category", form.category.slice(0, 10));
+            formData.append("revision_no", form.revision_no);
+            formData.append("revision_date", form.revision_date);
+
+            // FormData upload needs raw fetch — NO Content-Type header (the browser
+            // sets the multipart boundary itself), so we can't use apiAuth.post()
+            // (it always JSON.stringifies and forces Content-Type: application/json).
+            endpoint = "".concat(API_BASE, "?action=upload");
+            headers = {};
+            if (!_services_apiConfig__WEBPACK_IMPORTED_MODULE_2__.REQUIRES_AUTH) {
+              _context2.next = 24;
+              break;
+            }
+            headers["Authorization"] = _services_apiConfig__WEBPACK_IMPORTED_MODULE_2__.AUTH;
+            _context2.next = 22;
+            return _services_csrfService__WEBPACK_IMPORTED_MODULE_3__["default"].getCsrfToken();
+          case 22:
+            token = _context2.sent;
+            if (token) headers["X-CSRFToken"] = token;
+          case 24:
+            _context2.next = 26;
+            return fetch("".concat(_services_apiConfig__WEBPACK_IMPORTED_MODULE_2__.BASE).concat(endpoint), {
+              method: "POST",
+              headers: headers,
+              body: formData,
+              credentials: "include"
+            });
+          case 26:
+            res = _context2.sent;
+            if (res.ok) {
+              _context2.next = 33;
+              break;
+            }
+            _context2.t0 = Error;
+            _context2.next = 31;
+            return res.text();
+          case 31:
+            _context2.t1 = _context2.sent;
+            throw new _context2.t0(_context2.t1);
+          case 33:
+            _context2.next = 35;
+            return res.json();
+          case 35:
+            result = _context2.sent;
+            if (!result.error) {
+              _context2.next = 38;
+              break;
+            }
+            throw new Error(result.error);
+          case 38:
+            _afterUpload();
+            _context2.next = 44;
+            break;
+          case 41:
+            _context2.prev = 41;
+            _context2.t2 = _context2["catch"](8);
+            setUploadError(_context2.t2.message);
+          case 44:
+            _context2.prev = 44;
+            setUploading(false);
+            return _context2.finish(44);
+          case 47:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2, null, [[8, 41, 44, 47]]);
+    }));
+    return function handleUpload() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+  var _afterUpload = function _afterUpload() {
+    setUploadOpen(false);
+    setForm({
+      sop_code: "",
+      title: "",
+      category: CATEGORY_OPTIONS[0].value,
+      revision_no: "1",
+      revision_date: ""
+    });
+    setFile(null);
+    fetchSops();
+  };
+
+  // ── Delete ────────────────────────────────────────────────────────────────
+  var handleDeleteFinal = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+      var data;
+      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        while (1) switch (_context3.prev = _context3.next) {
+          case 0:
+            if (confirmDelete) {
+              _context3.next = 2;
+              break;
+            }
+            return _context3.abrupt("return");
+          case 2:
+            setDeleting(true);
+            _context3.prev = 3;
+            _context3.next = 6;
+            return _services_apiAuth__WEBPACK_IMPORTED_MODULE_1__["default"].get("".concat(API_BASE, "?action=delete&cdb_object_id=").concat(encodeURIComponent(confirmDelete.cdb_object_id)));
+          case 6:
+            data = _context3.sent;
+            if (!data.error) {
+              _context3.next = 9;
+              break;
+            }
+            throw new Error(data.error);
+          case 9:
+            setSops(function (prev) {
+              return prev.filter(function (s) {
+                return s.cdb_object_id !== confirmDelete.cdb_object_id;
+              });
+            });
+            setConfirmDelete(null);
+            _context3.next = 17;
+            break;
+          case 13:
+            _context3.prev = 13;
+            _context3.t0 = _context3["catch"](3);
+            setError(_context3.t0.message);
+            setConfirmDelete(null);
+          case 17:
+            _context3.prev = 17;
+            setDeleting(false);
+            return _context3.finish(17);
+          case 20:
+          case "end":
+            return _context3.stop();
+        }
+      }, _callee3, null, [[3, 13, 17, 20]]);
+    }));
+    return function handleDeleteFinal() {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+
+  // ── URL builders ──────────────────────────────────────────────────────────
+  var getPreviewUrl = function getPreviewUrl(blob_id) {
+    return "".concat(_services_apiConfig__WEBPACK_IMPORTED_MODULE_2__.BASE).concat(API_BASE, "?action=preview&blob_id=").concat(blob_id);
+  };
+  var getDownloadUrl = function getDownloadUrl(blob_id) {
+    return "".concat(_services_apiConfig__WEBPACK_IMPORTED_MODULE_2__.BASE).concat(API_BASE, "?action=download&blob_id=").concat(blob_id);
+  };
+  var formatRevisionDate = function formatRevisionDate(dateStr) {
+    if (!dateStr) return "";
+    var d = new Date(dateStr);
+    if (isNaN(d.getTime())) return dateStr;
+    return d.toLocaleDateString("en-US", {
+      month: "short",
+      year: "numeric"
+    });
+  };
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "mb-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-1.5 text-xs text-[#94A3B8] mb-2 flex-wrap"
+  }, "Admin", /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] text-[#CBD5E1]"
+  }, "\u203A"), "SOP Library"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "text-[22px] font-bold text-[#0B1F3A] tracking-[-0.3px]"
+  }, "SOP Library"), /*#__PURE__*/React.createElement("div", {
+    className: "text-[13px] text-[#64748B] mt-[3px]"
+  }, "Standard Operating Procedures for inspection tasks"))), error && /*#__PURE__*/React.createElement("div", {
+    className: "mb-4 text-sm text-[#991B1B] bg-[#FEF2F2] border border-[#FECACA] py-2 px-3 rounded-lg flex items-center justify-between"
+  }, /*#__PURE__*/React.createElement("span", null, error), /*#__PURE__*/React.createElement("button", {
+    className: "font-bold cursor-pointer bg-transparent border-none text-[#991B1B]",
+    onClick: function onClick() {
+      return setError(null);
+    }
+  }, "\u2715")), /*#__PURE__*/React.createElement("div", {
+    className: "bg-white border border-[#E2E8F0] rounded-xl p-5 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.06)]"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center justify-between mb-4 flex-wrap gap-2"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-sm font-bold text-[#0B1F3A]"
+  }, "Available SOPs"), /*#__PURE__*/React.createElement("button", {
+    className: "inline-flex items-center gap-1.5 py-[7px] px-4 rounded-lg text-[13px] font-semibold cursor-pointer border-none bg-[#2563EB] text-white hover:bg-[#1E5291]",
+    onClick: function onClick() {
+      return setUploadOpen(true);
+    }
+  }, "Upload SOP")), loading && /*#__PURE__*/React.createElement("p", {
+    className: "text-sm text-[#64748B] py-4"
+  }, "Loading SOPs\u2026"), !loading && sops.length === 0 && /*#__PURE__*/React.createElement("p", {
+    className: "text-sm text-[#64748B] py-4"
+  }, "No SOPs uploaded yet \u2014 click \"Upload SOP\" to add the first one."), sops.map(function (sop) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: sop.cdb_object_id,
+      className: "flex items-center gap-4 py-3.5 border-b border-[#F1F5F9] last:border-b-0 group"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "w-1.5 h-1.5 rounded-full bg-[#2563EB] flex-shrink-0"
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "text-[13px] font-bold text-[#2563EB] w-[110px] flex-shrink-0"
+    }, sop.sop_code), /*#__PURE__*/React.createElement("div", {
+      className: "flex-1 min-w-0"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "text-[13px] font-semibold text-[#0B1F3A]"
+    }, sop.title), sop.category && /*#__PURE__*/React.createElement("div", {
+      className: "text-xs text-[#94A3B8] mt-0.5"
+    }, categoryLabel(sop.category))), /*#__PURE__*/React.createElement("div", {
+      className: "text-xs text-[#94A3B8] flex-shrink-0 whitespace-nowrap"
+    }, "Rev ", sop.revision_no, " \xB7 ", formatRevisionDate(sop.revision_date)), /*#__PURE__*/React.createElement("div", {
+      className: "flex items-center gap-3 flex-shrink-0"
+    }, /*#__PURE__*/React.createElement("button", {
+      className: "text-xs font-semibold text-[#2563EB] hover:text-[#1E5291] cursor-pointer bg-transparent border-none",
+      onClick: function onClick() {
+        setPreviewUrl(getPreviewUrl(sop.blob_id));
+        setPreviewSop(sop);
+        setZoomLevel(100);
+      }
+    }, "View"), /*#__PURE__*/React.createElement("a", {
+      className: "text-xs font-semibold text-[#059669] hover:text-[#047857] no-underline",
+      href: getDownloadUrl(sop.blob_id)
+    }, "Download"), /*#__PURE__*/React.createElement("button", {
+      className: "text-xs font-semibold text-[#DC2626] opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer bg-transparent border-none",
+      onClick: function onClick() {
+        return setConfirmDelete(sop);
+      }
+    }, "Delete")));
+  })), uploadOpen && /*#__PURE__*/React.createElement("div", {
+    className: "fixed inset-0 bg-black/45 z-[200] flex items-center justify-center p-5"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "bg-white rounded-xl w-full max-w-[520px] max-h-[90vh] overflow-y-auto shadow-[0_10px_25px_rgba(0,0,0,0.08),0_4px_8px_rgba(0,0,0,0.04)]"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "py-5 px-6 pb-4 border-b border-[#E2E8F0] flex items-center justify-between"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-base font-bold text-[#0B1F3A]"
+  }, "Upload SOP"), /*#__PURE__*/React.createElement("button", {
+    className: "w-8 h-8 rounded-md border-none bg-[#F1F5F9] cursor-pointer text-base flex items-center justify-center text-[#64748B] hover:bg-[#E2E8F0]",
+    onClick: function onClick() {
+      return setUploadOpen(false);
+    }
+  }, "\u2715")), /*#__PURE__*/React.createElement("div", {
+    className: "py-5 px-6"
+  }, uploadError && /*#__PURE__*/React.createElement("div", {
+    className: "mb-3 text-xs text-[#991B1B] bg-[#FEF2F2] py-2 px-3 rounded-lg"
+  }, uploadError), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-2 gap-3.5 mb-4"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+    className: "block text-xs font-semibold text-[#334155] mb-[5px]"
+  }, "SOP Code ", /*#__PURE__*/React.createElement("span", {
+    className: "text-[#94A3B8] font-normal"
+  }, "(max 20 chars)")), /*#__PURE__*/React.createElement("input", {
+    className: "w-full py-[9px] px-3 border-[1.5px] border-[#CBD5E1] rounded-lg text-[13px] text-[#334155] bg-white outline-none focus:border-[#3B82F6]",
+    placeholder: "e.g. SOP-PM-005",
+    maxLength: 20,
+    value: form.sop_code,
+    onChange: function onChange(e) {
+      return setForm(function (f) {
+        return _objectSpread(_objectSpread({}, f), {}, {
+          sop_code: e.target.value
+        });
+      });
+    }
+  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+    className: "block text-xs font-semibold text-[#334155] mb-[5px]"
+  }, "Category"), /*#__PURE__*/React.createElement("select", {
+    className: "w-full py-[9px] px-3 border-[1.5px] border-[#CBD5E1] rounded-lg text-[13px] text-[#334155] bg-white outline-none focus:border-[#3B82F6]",
+    value: form.category,
+    onChange: function onChange(e) {
+      return setForm(function (f) {
+        return _objectSpread(_objectSpread({}, f), {}, {
+          category: e.target.value
+        });
+      });
+    }
+  }, CATEGORY_OPTIONS.map(function (c) {
+    return /*#__PURE__*/React.createElement("option", {
+      key: c.value,
+      value: c.value
+    }, c.label);
+  })))), /*#__PURE__*/React.createElement("div", {
+    className: "mb-4"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "block text-xs font-semibold text-[#334155] mb-[5px]"
+  }, "Title ", /*#__PURE__*/React.createElement("span", {
+    className: "text-[#94A3B8] font-normal"
+  }, "(max 20 chars \u2014 keep it short)")), /*#__PURE__*/React.createElement("input", {
+    className: "w-full py-[9px] px-3 border-[1.5px] border-[#CBD5E1] rounded-lg text-[13px] text-[#334155] bg-white outline-none focus:border-[#3B82F6]",
+    placeholder: "e.g. Daily Inspection",
+    maxLength: 20,
+    value: form.title,
+    onChange: function onChange(e) {
+      return setForm(function (f) {
+        return _objectSpread(_objectSpread({}, f), {}, {
+          title: e.target.value
+        });
+      });
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-2 gap-3.5 mb-4"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+    className: "block text-xs font-semibold text-[#334155] mb-[5px]"
+  }, "Revision No."), /*#__PURE__*/React.createElement("input", {
+    type: "number",
+    className: "w-full py-[9px] px-3 border-[1.5px] border-[#CBD5E1] rounded-lg text-[13px] text-[#334155] bg-white outline-none focus:border-[#3B82F6]",
+    placeholder: "e.g. 4",
+    value: form.revision_no,
+    onChange: function onChange(e) {
+      return setForm(function (f) {
+        return _objectSpread(_objectSpread({}, f), {}, {
+          revision_no: e.target.value
+        });
+      });
+    }
+  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+    className: "block text-xs font-semibold text-[#334155] mb-[5px]"
+  }, "Revision Date"), /*#__PURE__*/React.createElement("input", {
+    type: "date",
+    className: "w-full py-[9px] px-3 border-[1.5px] border-[#CBD5E1] rounded-lg text-[13px] text-[#334155] bg-white outline-none focus:border-[#3B82F6]",
+    value: form.revision_date,
+    onChange: function onChange(e) {
+      return setForm(function (f) {
+        return _objectSpread(_objectSpread({}, f), {}, {
+          revision_date: e.target.value
+        });
+      });
+    }
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "mb-2"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "block text-xs font-semibold text-[#334155] mb-[5px]"
+  }, "File"), /*#__PURE__*/React.createElement("button", {
+    className: "w-full py-[9px] px-3 border-[1.5px] border-dashed border-[#CBD5E1] rounded-lg text-[13px] text-[#64748B] bg-white cursor-pointer hover:border-[#3B82F6] text-left",
+    onClick: function onClick() {
+      var _fileInputRef$current;
+      return (_fileInputRef$current = fileInputRef.current) === null || _fileInputRef$current === void 0 ? void 0 : _fileInputRef$current.click();
+    }
+  }, file ? file.name : "Click to choose a PDF or document…"), /*#__PURE__*/React.createElement("input", {
+    ref: fileInputRef,
+    type: "file",
+    style: {
+      display: "none"
+    },
+    onChange: function onChange(e) {
+      return setFile(e.target.files[0] || null);
+    }
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "py-4 px-6 border-t border-[#E2E8F0] flex justify-end gap-2.5"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "py-2 px-4 rounded-lg text-[13px] font-semibold cursor-pointer border border-[#CBD5E1] bg-white text-[#334155] hover:bg-[#F8FAFC]",
+    onClick: function onClick() {
+      return setUploadOpen(false);
+    },
+    disabled: uploading
+  }, "Cancel"), /*#__PURE__*/React.createElement("button", {
+    className: "py-2 px-4 rounded-lg text-[13px] font-semibold cursor-pointer border-none bg-[#2563EB] text-white hover:bg-[#1E5291] disabled:opacity-60",
+    onClick: handleUpload,
+    disabled: uploading
+  }, uploading ? "Uploading…" : "Upload")))), confirmDelete && /*#__PURE__*/React.createElement("div", {
+    className: "fixed inset-0 bg-black/45 z-[200] flex items-center justify-center p-5"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "bg-white rounded-xl p-6 w-full max-w-[380px] shadow-[0_10px_25px_rgba(0,0,0,0.08)]"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-base font-bold text-[#0B1F3A] mb-2"
+  }, "Delete this SOP?"), /*#__PURE__*/React.createElement("p", {
+    className: "text-[13px] text-[#64748B] mb-5"
+  }, /*#__PURE__*/React.createElement("strong", {
+    className: "text-[#0B1F3A]"
+  }, confirmDelete.sop_code, " \u2014 ", confirmDelete.title), " ", "will be permanently removed from the library."), /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-end gap-2.5"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "py-2 px-4 rounded-lg text-[13px] font-semibold cursor-pointer border border-[#CBD5E1] bg-white text-[#334155] hover:bg-[#F8FAFC]",
+    onClick: function onClick() {
+      return setConfirmDelete(null);
+    }
+  }, "Cancel"), /*#__PURE__*/React.createElement("button", {
+    className: "py-2 px-4 rounded-lg text-[13px] font-semibold cursor-pointer border-none bg-[#DC2626] text-white hover:bg-[#B91C1C] disabled:opacity-60",
+    onClick: handleDeleteFinal,
+    disabled: deleting
+  }, deleting ? "Deleting…" : "Yes, Delete")))), previewUrl && /*#__PURE__*/React.createElement("div", {
+    className: "fixed inset-0 bg-[#111827] flex flex-col z-[300]"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center justify-between gap-3 py-2 px-4 bg-[#1E2535] border-b border-[#374151] text-white flex-shrink-0"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[13px] font-semibold text-[#E5E7EB] whitespace-nowrap overflow-hidden text-ellipsis max-w-[380px]"
+  }, previewSop === null || previewSop === void 0 ? void 0 : previewSop.sop_code, " \u2014 ", previewSop === null || previewSop === void 0 ? void 0 : previewSop.title), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-1.5 flex-1 justify-center"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "py-[5px] px-3 rounded-md bg-[#374151] border border-[#4B5563] text-white text-lg cursor-pointer leading-none",
+    onClick: function onClick() {
+      return setZoomLevel(function (z) {
+        return Math.max(50, z - 10);
+      });
+    }
+  }, "\u2212"), [75, 100, 125, 150, 200].map(function (z) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: z,
+      onClick: function onClick() {
+        return setZoomLevel(z);
+      },
+      className: "py-[5px] px-2.5 rounded-md text-[11px] font-semibold cursor-pointer",
+      style: {
+        background: zoomLevel === z ? "#3B82F6" : "#374151",
+        border: "1px solid ".concat(zoomLevel === z ? "#3B82F6" : "#4B5563"),
+        color: zoomLevel === z ? "#fff" : "#9CA3AF"
+      }
+    }, z, "%");
+  }), /*#__PURE__*/React.createElement("button", {
+    className: "py-[5px] px-3 rounded-md bg-[#374151] border border-[#4B5563] text-white text-lg cursor-pointer leading-none",
+    onClick: function onClick() {
+      return setZoomLevel(function (z) {
+        return Math.min(300, z + 10);
+      });
+    }
+  }, "+"), /*#__PURE__*/React.createElement("span", {
+    className: "text-xs text-[#6B7280] min-w-[40px] text-center"
+  }, zoomLevel, "%")), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-2 flex-shrink-0"
+  }, /*#__PURE__*/React.createElement("a", {
+    href: getDownloadUrl(previewSop === null || previewSop === void 0 ? void 0 : previewSop.blob_id),
+    className: "py-[6px] px-3.5 rounded-md bg-[#16A34A] text-white no-underline text-xs font-semibold"
+  }, "Download"), /*#__PURE__*/React.createElement("button", {
+    className: "py-[6px] px-3.5 rounded-md bg-[#DC2626] border-none text-white text-xs font-semibold cursor-pointer",
+    onClick: function onClick() {
+      setPreviewUrl(null);
+      setPreviewSop(null);
+      setZoomLevel(100);
+    }
+  }, "Close"))), /*#__PURE__*/React.createElement("div", {
+    className: "flex-1 overflow-auto bg-[#374151] flex justify-center items-start",
+    style: {
+      padding: zoomLevel <= 100 ? 0 : 20
+    }
+  }, /*#__PURE__*/React.createElement("iframe", {
+    src: previewUrl,
+    title: previewSop === null || previewSop === void 0 ? void 0 : previewSop.title,
+    className: "border-none block",
+    style: {
+      width: zoomLevel <= 100 ? "100%" : "".concat(zoomLevel, "%"),
+      minWidth: zoomLevel <= 100 ? "100%" : "800px",
+      height: "100%",
+      minHeight: "calc(100vh - 48px)"
+    }
+  }))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SOPLibrary);
+
+/***/ }),
+
+/***/ "./src/components/SpareStandardization.jsx":
+/*!*************************************************!*\
+  !*** ./src/components/SpareStandardization.jsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ SpareStandardization)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _spareStandardizationData__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./spareStandardizationData */ "./src/components/spareStandardizationData.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+
+
+
+// ── Single, self-contained STATIC tab for AdminPage. No Redux, no API — all
+// state is local useState and all data is imported from the static data file.
+// Renders inside AdminPage's <main>, so it brings no top-nav / sidebar of its
+// own; just a header + internal sub-tabs. Styling uses Tailwind arbitrary
+// values to match the rest of the Admin panel.
+
+// ── tiny presentational helpers ──────────────────────────────────────────
+var TONE = {
+  ok: 'bg-[#D1FAE5] text-[#047857]',
+  critical: 'bg-[#FEE2E2] text-[#B91C1C]',
+  high: 'bg-[#FFEDD5] text-[#C2410C]',
+  medium: 'bg-[#FEF3C7] text-[#B45309]',
+  low: 'bg-[#F1F5F9] text-[#475569]',
+  neutral: 'bg-[#F1F5F9] text-[#475569] border border-[#E2E8F0]'
+};
+var Badge = function Badge(_ref) {
+  var _ref$tone = _ref.tone,
+    tone = _ref$tone === void 0 ? 'neutral' : _ref$tone,
+    children = _ref.children;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "inline-flex items-center text-[11px] font-bold py-[3px] px-2.5 rounded-full leading-snug ".concat(TONE[tone])
+  }, children);
+};
+var statusTone = function statusTone(s) {
+  return s === 'Standardized' ? 'ok' : s === 'Under Review' ? 'medium' : 'critical';
+};
+var critInfo = function critInfo(c) {
+  return c === 'Critical' ? ['critical', 'Critical (Vital)'] : c === 'Essential' ? ['high', 'Essential'] : ['medium', 'Desirable'];
+};
+var locTone = function locTone(c) {
+  return c === 'Main Store' ? 'ok' : c === 'Maintenance Store' ? 'medium' : 'low';
+};
+var uniq = function uniq(arr) {
+  return _toConsumableArray(new Set(arr));
+};
+var FIELD = 'text-[10px] font-bold tracking-[0.4px] uppercase text-[#94A3B8] mb-1';
+var VAL = 'text-[13px] font-bold text-[#0F2942]';
+var CARD = 'bg-white border border-[#E2E8F0] rounded-xl p-4 mb-3.5';
+var INPUT = 'text-sm py-[9px] px-3 border-[1.5px] border-[#E2E8F0] rounded-lg text-[#334155] bg-white outline-none focus:border-[#60A5FA]';
+
+// Layout as inline styles so it renders correctly even if Tailwind's compiled
+// output.css hasn't been rebuilt to include these (responsive/arbitrary) grids.
+var GRID_KPI = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit,minmax(150px,1fr))',
+  gap: 10
+};
+var GRID_CARDS = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fill,minmax(230px,1fr))',
+  gap: 12
+};
+var GRID_LINKS = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit,minmax(240px,1fr))',
+  gap: 14
+};
+var GRID_FIELDS = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fill,minmax(150px,1fr))',
+  gap: 12
+};
+var GRID_2 = {
+  display: 'grid',
+  gridTemplateColumns: '1fr 1fr',
+  gap: 14
+};
+var KPI_TILE = {
+  background: '#fff',
+  border: '1px solid #E2E8F0',
+  borderRadius: 8,
+  padding: 14,
+  textAlign: 'center'
+};
+var KPI_VAL = {
+  fontSize: 22,
+  fontWeight: 700,
+  fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
+  color: '#0F2942'
+};
+var KPI_LBL = {
+  fontSize: 10,
+  color: '#94A3B8',
+  marginTop: 4,
+  fontWeight: 600,
+  letterSpacing: '.3px',
+  textTransform: 'uppercase'
+};
+
+// ── Part detail modal ─────────────────────────────────────────────────────
+function PartModal(_ref2) {
+  var code = _ref2.code,
+    onClose = _ref2.onClose;
+  var p = code && _spareStandardizationData__WEBPACK_IMPORTED_MODULE_1__.PARTS[code];
+  if (!p) return null;
+  var _critInfo = critInfo(p.criticality),
+    _critInfo2 = _slicedToArray(_critInfo, 2),
+    ctone = _critInfo2[0],
+    clabel = _critInfo2[1];
+  var total = p.plantStock.reduce(function (a, b) {
+    return a + b.stock;
+  }, 0);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "fixed inset-0 bg-[rgba(15,23,42,0.55)] z-[1000] flex items-center justify-center p-5",
+    onClick: onClose
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "bg-white rounded-2xl w-full max-w-[820px] max-h-[88vh] overflow-y-auto shadow-2xl",
+    onClick: function onClick(e) {
+      return e.stopPropagation();
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "flex items-center justify-between py-[18px] px-[22px] border-b border-[#E2E8F0] sticky top-0 bg-white"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "text-base font-bold text-[#0F2942]"
+  }, "\uD83D\uDD29 ", p.code, " \u2014 ", p.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: "bg-[#F1F5F9] w-[30px] h-[30px] rounded-lg text-[#64748B] cursor-pointer border-none",
+    onClick: onClose
+  }, "\u2715")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "p-[22px]"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "flex gap-1.5 flex-wrap mb-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Badge, {
+    tone: ctone
+  }, clabel), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Badge, {
+    tone: statusTone(p.status)
+  }, p.status), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Badge, null, "ABC-", p.abc), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Badge, null, p.category, " / ", p.sub)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    style: _objectSpread(_objectSpread({}, GRID_FIELDS), {}, {
+      marginBottom: 16
+    })
+  }, [['Standard Code', p.code], ['UOM', p.uom], ['HSN', p.hsn], ['Rotable?', p.rotable], ['Insurance?', p.insurance], ['Shelf Life', p.shelfLife]].map(function (_ref3) {
+    var _ref4 = _slicedToArray(_ref3, 2),
+      l = _ref4[0],
+      v = _ref4[1];
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "bg-white border border-[#E2E8F0] rounded-lg py-2.5 px-3",
+      key: l
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: FIELD
+    }, l), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "text-[13px] font-semibold text-[#0F2942]"
+    }, v));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: CARD
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: FIELD
+  }, "Specification"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "text-[13px] font-semibold text-[#0F2942]"
+  }, p.spec)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: CARD
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: FIELD
+  }, "BOM Location"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "text-[13px] font-semibold text-[#0F2942]"
+  }, p.bom.machine, " \u203A ", p.bom.assembly, " \u203A ", p.bom.sub, " \u203A ", p.bom.component)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: CARD
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "".concat(FIELD, " mb-2")
+  }, "OEM & Interchangeable Alternates"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", {
+    className: "w-full text-xs border-collapse"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
+    className: "text-left text-[#64748B]"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+    className: "py-1.5 pr-3"
+  }, "Make"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+    className: "py-1.5 pr-3"
+  }, "Part No."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+    className: "py-1.5"
+  }, "Note"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
+    className: "bg-[#EFF6FF]"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+    className: "py-1.5 pr-3 font-semibold"
+  }, p.oem.make), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+    className: "py-1.5 pr-3 font-mono"
+  }, p.oem.partNo), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+    className: "py-1.5"
+  }, "Primary OEM")), p.alternates.map(function (a, i) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
+      key: i
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+      className: "py-1.5 pr-3"
+    }, a.make), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+      className: "py-1.5 pr-3 font-mono"
+    }, a.partNo), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+      className: "py-1.5 text-[#64748B]"
+    }, a.note));
+  }))), p.legacyCodes.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "mt-2 text-[11px] text-[#64748B]"
+  }, "\uD83D\uDD17 Merged legacy codes: ", p.legacyCodes.join(', '))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: CARD
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "".concat(FIELD, " mb-2")
+  }, "Inventory Norms & Plant Stock (Total: ", total, " ", p.uom, ")"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "flex gap-4 mb-2 text-[13px]"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "Min ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("b", null, p.stockNorm.min)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "ROL ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("b", null, p.stockNorm.rol)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "Max ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("b", null, p.stockNorm.max))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "flex flex-wrap gap-1.5"
+  }, p.plantStock.map(function (ps) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+      key: ps.plant,
+      className: "text-[11px] font-semibold bg-[#F8FAFC] border border-[#E2E8F0] text-[#475569] py-1 px-2.5 rounded-full"
+    }, ps.plant, ": ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("b", {
+      className: "text-[#0F2942]"
+    }, ps.stock));
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "".concat(CARD, " mb-0")
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "".concat(FIELD, " mb-2")
+  }, "Approved Vendors"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", {
+    className: "w-full text-xs border-collapse"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
+    className: "text-left text-[#64748B]"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+    className: "py-1.5 pr-3"
+  }, "Vendor"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+    className: "py-1.5 pr-3"
+  }, "Lead Time"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+    className: "py-1.5"
+  }, "Last Price"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, p.vendors.map(function (v, i) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
+      key: i
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+      className: "py-1.5 pr-3"
+    }, v.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+      className: "py-1.5 pr-3"
+    }, v.leadTime), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+      className: "py-1.5"
+    }, v.price));
+  })))))));
+}
+
+// ── Location edit modal ─────────────────────────────────────────────────────
+var SUB_STORES = ['Sub-Store: Bearings', 'Sub-Store: Seals & Gaskets', 'Sub-Store: Electricals', 'Sub-Store: Electronics', 'Sub-Store: Friction Parts', 'Sub-Store: Insurance Spares Cage'];
+function LocationModal(_ref5) {
+  var row = _ref5.row,
+    onClose = _ref5.onClose,
+    onSave = _ref5.onSave;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(function () {
+      return {
+        category: row.loc.category,
+        plant: row.loc.plant,
+        subStore: row.loc.subStore || '',
+        remark: row.loc.remark || ''
+      };
+    }),
+    _useState2 = _slicedToArray(_useState, 2),
+    form = _useState2[0],
+    setForm = _useState2[1];
+  var showSub = form.category === 'Main Store' && form.plant === 'Ranjangaon R1';
+  var set = function set(k) {
+    return function (e) {
+      return setForm(function (f) {
+        return _objectSpread(_objectSpread({}, f), {}, _defineProperty({}, k, e.target.value));
+      });
+    };
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "fixed inset-0 bg-[rgba(15,23,42,0.55)] z-[1000] flex items-center justify-center p-5",
+    onClick: onClose
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "bg-white rounded-2xl w-full max-w-[460px] shadow-2xl",
+    onClick: function onClick(e) {
+      return e.stopPropagation();
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "flex items-center justify-between py-[18px] px-[22px] border-b border-[#E2E8F0]"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "text-base font-bold text-[#0F2942]"
+  }, "\uD83D\uDCCD Edit Storage Location"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: "bg-[#F1F5F9] w-[30px] h-[30px] rounded-lg text-[#64748B] cursor-pointer border-none",
+    onClick: onClose
+  }, "\u2715")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "p-[22px]"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "bg-[#EFF6FF] text-[#1D4ED8] text-[13px] rounded-lg py-3 px-4 mb-3.5"
+  }, "Editing location for ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("b", null, row.code, " \u2014 ", row.component, " / ", row.sub)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+    className: FIELD
+  }, "Storage Category"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
+    className: "".concat(INPUT, " w-full mb-3.5"),
+    value: form.category,
+    onChange: set('category')
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Plant Floor"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Main Store"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Maintenance Store")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+    className: FIELD
+  }, "Plant"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
+    className: "".concat(INPUT, " w-full mb-3.5"),
+    value: form.plant,
+    onChange: set('plant')
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Ranjangaon R1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Ranjangaon R2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Mundhwa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Baramati")), showSub && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+    className: FIELD
+  }, "Sub-Store (R1 \xB7 Main Store only)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
+    className: "".concat(INPUT, " w-full mb-3.5"),
+    value: form.subStore,
+    onChange: set('subStore')
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+    value: ""
+  }, "\u2014 None \u2014"), SUB_STORES.map(function (s) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+      key: s
+    }, s);
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+    className: FIELD
+  }, "Remark (bin / rack / note)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("textarea", {
+    className: "".concat(INPUT, " w-full mb-3.5 min-h-[80px]"),
+    value: form.remark,
+    onChange: set('remark'),
+    placeholder: "e.g. Bin B-14, Rack 3\u2026"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: "bg-[#2563EB] text-white text-sm font-semibold py-2.5 px-4 rounded-lg border-none cursor-pointer hover:bg-[#1E5291]",
+    onClick: function onClick() {
+      return onSave(row.code, form);
+    }
+  }, "Save Location"))));
+}
+
+// ── Hierarchy tree node ─────────────────────────────────────────────────────
+function TreeNode(_ref6) {
+  var label = _ref6.label,
+    icon = _ref6.icon,
+    count = _ref6.count,
+    depth = _ref6.depth,
+    expandable = _ref6.expandable,
+    open = _ref6.open,
+    selected = _ref6.selected,
+    onClick = _ref6.onClick;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "flex items-center gap-2 py-[7px] px-3.5 border-l-[3px] cursor-pointer text-[13px] transition-all\n      ".concat(selected ? 'bg-[#EFF6FF] border-l-[#3B82F6] text-[#2563EB] font-semibold' : 'border-l-transparent hover:bg-[#F8FAFC]'),
+    style: {
+      paddingLeft: 14 + depth * 16,
+      fontWeight: depth === 0 ? 700 : depth === 1 ? 600 : 500
+    },
+    onClick: onClick
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "w-3.5 text-[10px] text-[#94A3B8]",
+    style: {
+      visibility: expandable ? 'visible' : 'hidden',
+      transform: open ? 'rotate(90deg)' : 'none'
+    }
+  }, "\u25B6"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, icon), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "flex-1 leading-tight"
+  }, label), count != null && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "text-[10px] font-bold bg-[#F1F5F9] text-[#64748B] py-px px-1.5 rounded-full"
+  }, count));
+}
+
+// ── Part card (used in hierarchy detail) ────────────────────────────────────
+function PartCard(_ref7) {
+  var code = _ref7.code,
+    onOpen = _ref7.onOpen;
+  var p = _spareStandardizationData__WEBPACK_IMPORTED_MODULE_1__.PARTS[code];
+  if (!p) return null;
+  var _critInfo3 = critInfo(p.criticality),
+    _critInfo4 = _slicedToArray(_critInfo3, 2),
+    ctone = _critInfo4[0],
+    clabel = _critInfo4[1];
+  var accent = p.status === 'Standardized' ? '#059669' : p.status === 'Under Review' ? '#D97706' : '#DC2626';
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "relative bg-white border border-[#E2E8F0] rounded-2xl p-3.5 cursor-pointer overflow-hidden hover:shadow-md hover:border-[#60A5FA] transition-all",
+    onClick: function onClick() {
+      return onOpen(code);
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "absolute top-0 left-0 right-0 h-[3px]",
+    style: {
+      background: accent
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "font-mono text-[11px] text-[#94A3B8] font-bold"
+  }, p.code), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "text-[13px] font-bold text-[#0F2942] mt-1 mb-2"
+  }, p.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "flex gap-1.5 flex-wrap"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Badge, {
+    tone: ctone
+  }, clabel), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Badge, {
+    tone: statusTone(p.status)
+  }, p.status), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Badge, null, "ABC-", p.abc)));
+}
+
+// ═══════════════════════════════ MAIN ═══════════════════════════════════════
+var SUBTABS = [['overview', '📊 Overview'], ['browser', '🌳 Hierarchy'], ['catalog', '📚 Master Catalog'], ['duplicates', '🧩 Duplicates'], ['request', '➕ Request New']];
+function SpareStandardization() {
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('overview'),
+    _useState4 = _slicedToArray(_useState3, 2),
+    section = _useState4[0],
+    setSection = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(function () {
+      return _spareStandardizationData__WEBPACK_IMPORTED_MODULE_1__.MASTER_CATALOG.map(function (r) {
+        return _objectSpread(_objectSpread({}, r), {}, {
+          loc: _objectSpread({}, r.loc)
+        });
+      });
+    }),
+    _useState6 = _slicedToArray(_useState5, 2),
+    catalog = _useState6[0],
+    setCatalog = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      term: '',
+      location: 'all',
+      plant: 'all'
+    }),
+    _useState8 = _slicedToArray(_useState7, 2),
+    filters = _useState8[0],
+    setFilters = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState10 = _slicedToArray(_useState9, 2),
+    partCode = _useState10[0],
+    setPartCode = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState12 = _slicedToArray(_useState11, 2),
+    locRow = _useState12[0],
+    setLocRow = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState14 = _slicedToArray(_useState13, 2),
+    merged = _useState14[0],
+    setMerged = _useState14[1];
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState16 = _slicedToArray(_useState15, 2),
+    pending = _useState16[0],
+    setPending = _useState16[1];
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState18 = _slicedToArray(_useState17, 2),
+    sel = _useState18[0],
+    setSel = _useState18[1]; // hierarchy selection
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+    _useState20 = _slicedToArray(_useState19, 2),
+    open = _useState20[0],
+    setOpen = _useState20[1]; // tree expand map
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      desc: '',
+      plant: 'Ranjangaon R1',
+      bom: ''
+    }),
+    _useState22 = _slicedToArray(_useState21, 2),
+    req = _useState22[0],
+    setReq = _useState22[1];
+  var toggle = function toggle(id) {
+    return setOpen(function (o) {
+      return _objectSpread(_objectSpread({}, o), {}, _defineProperty({}, id, !o[id]));
+    });
+  };
+  var saveLoc = function saveLoc(code, form) {
+    setCatalog(function (rows) {
+      return rows.map(function (r) {
+        return r.code !== code ? r : _objectSpread(_objectSpread({}, r), {}, {
+          loc: {
+            category: form.category,
+            plant: form.plant,
+            subStore: form.category === 'Main Store' && form.plant === 'Ranjangaon R1' ? form.subStore || null : null,
+            remark: form.remark
+          }
+        });
+      });
+    });
+    setLocRow(null);
+  };
+
+  // catalog filter + KPIs (kept simple/inline; static dataset is small)
+  var rows = catalog.filter(function (r) {
+    var hay = "".concat(r.code, " ").concat(r.component, " ").concat(r.sub, " ").concat(r.fn, " ").concat(r.proposedMat, " ").concat(r.remarks).toLowerCase();
+    return (!filters.term || hay.includes(filters.term.toLowerCase())) && (filters.location === 'all' || r.loc.category === filters.location) && (filters.plant === 'all' || r.loc.plant === filters.plant);
+  });
+  var kpi = catalog.reduce(function (a, r) {
+    return {
+      total: catalog.length,
+      plant: a.plant + (r.loc.category === 'Plant Floor' ? 1 : 0),
+      main: a.main + (r.loc.category === 'Main Store' ? 1 : 0),
+      maint: a.maint + (r.loc.category === 'Maintenance Store' ? 1 : 0),
+      sub: a.sub + (r.loc.plant === 'Ranjangaon R1' && r.loc.subStore ? 1 : 0)
+    };
+  }, {
+    plant: 0,
+    main: 0,
+    maint: 0,
+    sub: 0
+  });
+  var dupWarn = req.desc.trim().length >= 4 ? Object.values(_spareStandardizationData__WEBPACK_IMPORTED_MODULE_1__.PARTS).filter(function (p) {
+    return p.name.toLowerCase().includes(req.desc.toLowerCase()) || req.desc.toLowerCase().includes(p.sub.toLowerCase());
+  }) : [];
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "mb-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "flex items-center gap-1.5 text-sm text-[#94A3B8] mb-2"
+  }, "Admin", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "text-xs text-[#CBD5E1]"
+  }, "\u203A"), "Spare Standardization"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "text-2xl font-bold text-[#0F2942] tracking-[-0.3px]"
+  }, "Spare Part Standardization"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "text-base text-[#64748B] mt-[3px]"
+  }, "One standard code per physical part \u2014 mapped across Machine \u203A Assembly \u203A Sub-Assembly \u203A Component, across all plants")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "flex gap-1.5 border-b border-[#E2E8F0] mb-5 flex-wrap"
+  }, SUBTABS.map(function (_ref8) {
+    var _ref9 = _slicedToArray(_ref8, 2),
+      id = _ref9[0],
+      label = _ref9[1];
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      key: id,
+      onClick: function onClick() {
+        return setSection(id);
+      },
+      className: "text-sm font-semibold py-2.5 px-3.5 border-none bg-transparent cursor-pointer border-b-2 -mb-px ".concat(section === id ? 'text-[#2563EB] border-b-[#2563EB]' : 'text-[#64748B] border-b-transparent hover:text-[#2563EB]')
+    }, label, id === 'duplicates' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+      className: "ml-1.5 bg-[#DC2626] text-white text-[10px] font-bold py-px px-1.5 rounded-full"
+    }, "3"));
+  })), section === 'overview' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "bg-[#EFF6FF] text-[#1D4ED8] text-[13px] rounded-lg py-3 px-4 mb-4 border border-[#BFDBFE]"
+  }, "\u2139\uFE0F Goal: eliminate duplicate part codes for the same physical spare across Ranjangaon R1/R2, Mundhwa and Baramati; enable cross-plant interchangeability; drive Min-Max norms off a single master record."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    style: _objectSpread(_objectSpread({}, GRID_KPI), {}, {
+      marginBottom: 20
+    })
+  }, [['10', 'Standardized SKUs', '#2563EB'], ['73%', 'Catalog Standardized', '#059669'], ['8', 'Legacy Codes Flagged', '#DC2626'], ['3', 'Duplicate Clusters Open', '#D97706'], ['₹4.6L', 'Est. Inventory Unlock', '#7C3AED']].map(function (_ref10) {
+    var _ref11 = _slicedToArray(_ref10, 3),
+      v = _ref11[0],
+      l = _ref11[1],
+      c = _ref11[2];
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      key: l,
+      style: _objectSpread(_objectSpread({}, KPI_TILE), {}, {
+        borderTop: "3px solid ".concat(c)
+      })
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      style: KPI_VAL
+    }, v), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      style: KPI_LBL
+    }, l));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    style: GRID_LINKS
+  }, [['browser', '🌳 Browse by Hierarchy', 'Drill Machine → Assembly → Component → Part'], ['duplicates', '🧩 Resolve Duplicates', '3 clusters awaiting merge into one code'], ['request', '➕ Request New Code', 'Checks for a near-duplicate before creating an SPC']].map(function (_ref12) {
+    var _ref13 = _slicedToArray(_ref12, 3),
+      go = _ref13[0],
+      t = _ref13[1],
+      d = _ref13[2];
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      key: go,
+      className: "".concat(CARD, " cursor-pointer hover:border-[#60A5FA]"),
+      onClick: function onClick() {
+        return setSection(go);
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "text-sm font-bold text-[#0F2942]"
+    }, t), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "text-xs text-[#64748B] mt-1"
+    }, d));
+  }))), section === 'browser' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "flex gap-0 border border-[#E2E8F0] rounded-xl overflow-hidden min-h-[520px]"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "w-[300px] bg-white border-r border-[#E2E8F0] overflow-y-auto py-3.5 shrink-0"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "px-3.5 pb-2 text-[10px] font-bold tracking-[0.8px] uppercase text-[#94A3B8]"
+  }, "Machine Hierarchy"), _spareStandardizationData__WEBPACK_IMPORTED_MODULE_1__.HIER.map(function (m, mi) {
+    var cnt = 0;
+    m.assemblies.forEach(function (a) {
+      return a.subs.forEach(function (s) {
+        return s.comps.forEach(function (c) {
+          cnt += c.parts.length;
+        });
+      });
+    });
+    var mid = "m".concat(mi);
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      key: m.id
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(TreeNode, {
+      label: m.name,
+      icon: m.icon,
+      count: "".concat(cnt, " pt."),
+      depth: 0,
+      expandable: true,
+      open: open[mid],
+      selected: sel && sel.k === mid,
+      onClick: function onClick() {
+        toggle(mid);
+        setSel({
+          k: mid,
+          level: 'machine',
+          mi: mi
+        });
+      }
+    }), open[mid] && m.assemblies.map(function (a, ai) {
+      var aid = "".concat(mid, "a").concat(ai);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        key: ai
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(TreeNode, {
+        label: a.name,
+        icon: "\uD83D\uDDC2\uFE0F",
+        depth: 1,
+        expandable: true,
+        open: open[aid],
+        selected: sel && sel.k === aid,
+        onClick: function onClick() {
+          toggle(aid);
+          setSel({
+            k: aid,
+            level: 'assembly',
+            mi: mi,
+            ai: ai
+          });
+        }
+      }), open[aid] && a.subs.map(function (s, si) {
+        var sid = "".concat(aid, "s").concat(si);
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          key: si
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(TreeNode, {
+          label: s.name,
+          icon: "\uD83D\uDCE6",
+          depth: 2,
+          expandable: true,
+          open: open[sid],
+          selected: sel && sel.k === sid,
+          onClick: function onClick() {
+            toggle(sid);
+            setSel({
+              k: sid,
+              level: 'sub',
+              mi: mi,
+              ai: ai,
+              si: si
+            });
+          }
+        }), open[sid] && s.comps.map(function (c, ci) {
+          var cid = "".concat(sid, "c").concat(ci);
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(TreeNode, {
+            key: ci,
+            label: c.name,
+            icon: "\uD83D\uDD27",
+            count: c.parts.length,
+            depth: 3,
+            selected: sel && sel.k === cid,
+            onClick: function onClick() {
+              return setSel({
+                k: cid,
+                level: 'comp',
+                mi: mi,
+                ai: ai,
+                si: si,
+                ci: ci
+              });
+            }
+          });
+        }));
+      }));
+    }));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "flex-1 overflow-y-auto p-6 min-w-0"
+  }, !sel ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "bg-[#EFF6FF] text-[#1D4ED8] text-[13px] rounded-lg py-3 px-4 border border-[#BFDBFE]"
+  }, "\u2139\uFE0F Select a Machine, Assembly, Sub-Assembly or Component on the left.") : function () {
+    var m = _spareStandardizationData__WEBPACK_IMPORTED_MODULE_1__.HIER[sel.mi];
+    var push = function push(arr, c) {
+      if (!arr.includes(c)) arr.push(c);
+    };
+    var title,
+      sub,
+      codes = [];
+    if (sel.level === 'machine') {
+      m.assemblies.forEach(function (a) {
+        return a.subs.forEach(function (s) {
+          return s.comps.forEach(function (c) {
+            return c.parts.forEach(function (p) {
+              return push(codes, p);
+            });
+          });
+        });
+      });
+      title = "".concat(m.icon, " ").concat(m.name);
+      sub = "".concat(m.assemblies.length, " Assemblies \xB7 ").concat(codes.length, " unique parts");
+    } else {
+      var a = m.assemblies[sel.ai];
+      if (sel.level === 'assembly') {
+        a.subs.forEach(function (s) {
+          return s.comps.forEach(function (c) {
+            return c.parts.forEach(function (p) {
+              return push(codes, p);
+            });
+          });
+        });
+        title = "\uD83D\uDDC2\uFE0F ".concat(a.name);
+        sub = "".concat(a.subs.length, " Sub-Assemblies \xB7 ").concat(codes.length, " parts");
+      } else {
+        var s = a.subs[sel.si];
+        if (sel.level === 'sub') {
+          s.comps.forEach(function (c) {
+            return c.parts.forEach(function (p) {
+              return push(codes, p);
+            });
+          });
+          title = "\uD83D\uDCE6 ".concat(s.name);
+          sub = "".concat(s.comps.length, " Components \xB7 ").concat(codes.length, " parts");
+        } else {
+          var c = s.comps[sel.ci];
+          codes = c.parts;
+          title = "\uD83D\uDD27 ".concat(c.name);
+          sub = "".concat(c.parts.length, " standardized part(s)");
+        }
+      }
+    }
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "text-xl font-bold text-[#0F2942]"
+    }, title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "text-sm text-[#64748B] mb-4"
+    }, sub), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      style: GRID_CARDS
+    }, uniq(codes).map(function (c) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(PartCard, {
+        key: c,
+        code: c,
+        onOpen: setPartCode
+      });
+    })));
+  }())), section === 'catalog' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    style: _objectSpread(_objectSpread({}, GRID_KPI), {}, {
+      marginBottom: 16
+    })
+  }, [[kpi.total, 'Total Records', '#2563EB'], [kpi.plant, 'On Plant / Not Stocked', '#059669'], [kpi.main, 'In Main Store', '#D97706'], [kpi.maint, 'In Maint. Store', '#DC2626'], [kpi.sub, 'R1 Sub-Store', '#7C3AED']].map(function (_ref14) {
+    var _ref15 = _slicedToArray(_ref14, 3),
+      v = _ref15[0],
+      l = _ref15[1],
+      c = _ref15[2];
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      key: l,
+      style: _objectSpread(_objectSpread({}, KPI_TILE), {}, {
+        borderTop: "3px solid ".concat(c)
+      })
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      style: KPI_VAL
+    }, v), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      style: KPI_LBL
+    }, l));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "flex gap-2 flex-wrap items-center mb-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    className: "".concat(INPUT, " w-[240px]"),
+    placeholder: "\uD83D\uDD0D Search code, component, material\u2026",
+    value: filters.term,
+    onChange: function onChange(e) {
+      return setFilters(function (f) {
+        return _objectSpread(_objectSpread({}, f), {}, {
+          term: e.target.value
+        });
+      });
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
+    className: INPUT,
+    value: filters.location,
+    onChange: function onChange(e) {
+      return setFilters(function (f) {
+        return _objectSpread(_objectSpread({}, f), {}, {
+          location: e.target.value
+        });
+      });
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+    value: "all"
+  }, "All Storage"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Plant Floor"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Main Store"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Maintenance Store")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
+    className: INPUT,
+    value: filters.plant,
+    onChange: function onChange(e) {
+      return setFilters(function (f) {
+        return _objectSpread(_objectSpread({}, f), {}, {
+          plant: e.target.value
+        });
+      });
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+    value: "all"
+  }, "All Plants"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Ranjangaon R1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Ranjangaon R2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Mundhwa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Baramati")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: "text-sm font-semibold py-[9px] px-3 rounded-lg bg-white text-[#334155] border border-[#CBD5E1] cursor-pointer hover:bg-[#F8FAFC]",
+    onClick: function onClick() {
+      return setFilters({
+        term: '',
+        location: 'all',
+        plant: 'all'
+      });
+    }
+  }, "\u2715 Clear"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "ml-auto text-[11px] text-[#94A3B8]"
+  }, "\uD83D\uDCA1 Row \u2192 full spec \xB7 \uD83D\uDCCD \u2192 edit location")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "overflow-auto border border-[#E2E8F0] rounded-lg max-h-[600px]"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", {
+    className: "w-full text-xs border-collapse"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
+    className: "text-left text-[#64748B]"
+  }, ['Std Code', 'Component', 'Sub', 'Function', 'Proposed Material', 'Insp. Freq.', 'Wear Limit', 'Storage', 'Remark'].map(function (h) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+      key: h,
+      className: "bg-[#F8FAFC] py-2.5 px-3.5 font-bold uppercase text-[11px] tracking-[0.3px] border-b border-[#E2E8F0] whitespace-nowrap"
+    }, h);
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, rows.map(function (r) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
+      key: r.code,
+      className: "cursor-pointer hover:bg-[#F8FAFC] border-b border-[#F1F5F9]",
+      onClick: function onClick() {
+        return setPartCode(_spareStandardizationData__WEBPACK_IMPORTED_MODULE_1__.PARTS[r.code] ? r.code : null);
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+      className: "py-2.5 px-3.5 font-mono font-bold"
+    }, r.code), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+      className: "py-2.5 px-3.5 font-semibold text-[#0F2942]"
+    }, r.component), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+      className: "py-2.5 px-3.5"
+    }, r.sub), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+      className: "py-2.5 px-3.5"
+    }, r.fn), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+      className: "py-2.5 px-3.5"
+    }, r.proposedMat), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+      className: "py-2.5 px-3.5"
+    }, r.inspFreq), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+      className: "py-2.5 px-3.5"
+    }, r.wearLimit), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+      className: "py-2.5 px-3.5",
+      onClick: function onClick(e) {
+        e.stopPropagation();
+        setLocRow(r);
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Badge, {
+      tone: locTone(r.loc.category)
+    }, r.loc.category), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "text-[11px] text-[#64748B] mt-0.5"
+    }, r.loc.plant, r.loc.subStore ? " \xB7 ".concat(r.loc.subStore) : '', " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+      className: "text-[#2563EB]"
+    }, "\uD83D\uDCCD edit"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+      className: "py-2.5 px-3.5"
+    }, r.loc.remark || '—'));
+  })))), rows.length === 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "bg-[#FEF3C7] text-[#92400E] text-[13px] rounded-lg py-3 px-4 mt-2.5 border border-[#FDE68A]"
+  }, "No records match the current filters.")), section === 'duplicates' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "bg-[#FEF3C7] text-[#92400E] text-[13px] rounded-lg py-3 px-4 mb-4 border border-[#FDE68A]"
+  }, "\u26A0\uFE0F 3 clusters detected by description/spec similarity across plant ERPs. Merge to stop duplicate purchasing and split stock records."), _spareStandardizationData__WEBPACK_IMPORTED_MODULE_1__.DUPLICATES.map(function (d, i) {
+    var done = merged.includes(i);
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      key: d.target,
+      className: "bg-white border border-[#E2E8F0] rounded-2xl py-4 px-[18px] mb-3.5 border-l-4 ".concat(done ? 'border-l-[#059669] opacity-70' : 'border-l-[#DC2626]')
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "flex justify-between items-start gap-3 mb-2.5 flex-wrap"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "text-[11px] font-bold text-[#DC2626] uppercase tracking-[0.4px]"
+    }, "Duplicate Cluster #", i + 1), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "text-[15px] font-bold text-[#0F2942]"
+    }, "Merge into ", d.target, " \u2014 ", d.targetName)), done ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Badge, {
+      tone: "ok"
+    }, "\u2713 Merged") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      className: "bg-[#059669] text-white text-xs font-semibold py-1.5 px-3 rounded-lg border-none cursor-pointer",
+      onClick: function onClick() {
+        return setMerged(function (m) {
+          return [].concat(_toConsumableArray(m), [i]);
+        });
+      }
+    }, "\u2713 Merge into Standard Code")), d.legacy.map(function (l) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        key: l.code,
+        className: "flex items-center gap-2.5 py-2 px-2.5 bg-[#F8FAFC] rounded-md mb-1.5 text-xs"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+        className: "font-bold text-[#64748B] w-[90px] shrink-0"
+      }, l.plant), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+        className: "font-mono font-bold text-[#0F2942] w-[120px] shrink-0"
+      }, l.code), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+        className: "text-[#64748B]"
+      }, l.desc));
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "text-xs text-[#059669] font-semibold mt-2"
+    }, "\uD83D\uDCB0 ", d.saving));
+  })), section === 'request' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "max-w-[760px]"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: CARD
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "text-sm font-bold text-[#0F2942] mb-3"
+  }, "New Part Request Form"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+    className: FIELD
+  }, "Part Description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    className: "".concat(INPUT, " w-full mb-3.5"),
+    placeholder: "e.g. Bearing, Deep Groove Ball, 6308",
+    value: req.desc,
+    onChange: function onChange(e) {
+      return setReq(function (r) {
+        return _objectSpread(_objectSpread({}, r), {}, {
+          desc: e.target.value
+        });
+      });
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    style: GRID_2
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+    className: FIELD
+  }, "Requesting Plant"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
+    className: "".concat(INPUT, " w-full"),
+    value: req.plant,
+    onChange: function onChange(e) {
+      return setReq(function (r) {
+        return _objectSpread(_objectSpread({}, r), {}, {
+          plant: e.target.value
+        });
+      });
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Ranjangaon R1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Ranjangaon R2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Mundhwa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Baramati"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+    className: FIELD
+  }, "Machine / Assembly / Component"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    className: "".concat(INPUT, " w-full"),
+    placeholder: "e.g. Forging Press / Main Drive / Bearing Housing",
+    value: req.bom,
+    onChange: function onChange(e) {
+      return setReq(function (r) {
+        return _objectSpread(_objectSpread({}, r), {}, {
+          bom: e.target.value
+        });
+      });
+    }
+  }))), dupWarn.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "bg-[#FEF3C7] text-[#92400E] text-[13px] rounded-lg py-3 px-4 my-3.5 border border-[#FDE68A]"
+  }, "\u26A0\uFE0F Possible existing match: ", dupWarn.map(function (h, i) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+      key: h.code
+    }, i > 0 ? ', ' : '', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("b", null, h.code), " (", h.name, ")");
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: "bg-[#2563EB] text-white text-sm font-semibold py-2.5 px-4 rounded-lg border-none cursor-pointer mt-3.5 hover:bg-[#1E5291]",
+    onClick: function onClick() {
+      if (req.desc.trim()) {
+        setPending(function (p) {
+          return [].concat(_toConsumableArray(p), [req]);
+        });
+        setReq({
+          desc: '',
+          plant: 'Ranjangaon R1',
+          bom: ''
+        });
+      }
+    }
+  }, "Submit for Master Data Approval")), pending.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: CARD
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "text-sm font-bold text-[#0F2942] mb-2"
+  }, "Pending Approval Queue"), pending.map(function (r, i) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      key: i,
+      className: "flex items-center gap-2.5 py-2 px-2.5 bg-[#FEF3C7] rounded-md mb-1.5 text-xs"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Badge, {
+      tone: "medium"
+    }, "Pending"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+      className: "font-bold text-[#0F2942]"
+    }, r.desc), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+      className: "text-[#64748B] ml-auto"
+    }, r.plant, " \xB7 ", r.bom || 'BOM not specified'));
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(PartModal, {
+    code: partCode,
+    onClose: function onClose() {
+      return setPartCode(null);
+    }
+  }), locRow && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(LocationModal, {
+    row: locRow,
+    onClose: function onClose() {
+      return setLocRow(null);
+    },
+    onSave: saveLoc
+  }));
+}
+
+/***/ }),
+
+/***/ "./src/components/spareStandardizationData.js":
+/*!****************************************************!*\
+  !*** ./src/components/spareStandardizationData.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DUPLICATES": () => (/* binding */ DUPLICATES),
+/* harmony export */   "HIER": () => (/* binding */ HIER),
+/* harmony export */   "MASTER_CATALOG": () => (/* binding */ MASTER_CATALOG),
+/* harmony export */   "PARTS": () => (/* binding */ PARTS)
+/* harmony export */ });
+// Static seed data for the Spare Standardization admin tab.
+// Plain data — no logic. Imported by SpareStandardization.jsx.
+
+var PARTS = {
+  'SPC-1001': {
+    code: 'SPC-1001',
+    name: 'Bearing, Spherical Roller, 6308-2RS-C3',
+    category: 'Mechanical',
+    sub: 'Bearing',
+    uom: 'NOS',
+    spec: 'Bore 40mm · OD 90mm · Width 23mm · C3 clearance · 2RS sealed',
+    criticality: 'Critical',
+    abc: 'A',
+    status: 'Standardized',
+    oem: {
+      make: 'SKF',
+      partNo: '6308-2RS-C3'
+    },
+    alternates: [{
+      make: 'FAG',
+      partNo: '6308-2RS-C3',
+      note: 'Fit/form/function identical — approved alternate'
+    }, {
+      make: 'NBC',
+      partNo: '6308-2RS-C3',
+      note: 'Domestic alternate, lower cost, longer lead time'
+    }],
+    legacyCodes: ['RJ-BRG-108 (Ranjangaon R1)', 'MW-BRG-0034 (Mundhwa)'],
+    vendors: [{
+      name: 'SKF India Ltd.',
+      leadTime: '7 days',
+      price: '₹4,200'
+    }, {
+      name: 'Local Bearing House, Pune',
+      leadTime: '3 days',
+      price: '₹3,650 (NBC alt.)'
+    }],
+    stockNorm: {
+      min: 2,
+      max: 10,
+      rol: 4
+    },
+    plantStock: [{
+      plant: 'Ranjangaon R1',
+      stock: 4
+    }, {
+      plant: 'Ranjangaon R2',
+      stock: 6
+    }, {
+      plant: 'Mundhwa',
+      stock: 2
+    }, {
+      plant: 'Baramati',
+      stock: 1
+    }],
+    appliedIn: [{
+      plant: 'Ranjangaon R1',
+      machine: 'Forging Press FP-2502'
+    }, {
+      plant: 'Ranjangaon R2',
+      machine: 'Forging Press (18 lines)'
+    }, {
+      plant: 'Baramati',
+      machine: 'Forging Press FP-01'
+    }],
+    rotable: 'No',
+    insurance: 'No',
+    shelfLife: '5 yrs (grease-packed, dry store)',
+    hsn: '8482',
+    bom: {
+      machine: 'Forging Press',
+      assembly: 'Main Drive & Flywheel',
+      sub: 'Flywheel Assembly',
+      component: 'Flywheel Bearing Housing'
+    }
+  },
+  'SPC-1002': {
+    code: 'SPC-1002',
+    name: 'Contactor, 3-Pole, 63A, AC-3 Duty',
+    category: 'Electrical',
+    sub: 'Contactor',
+    uom: 'NOS',
+    spec: '3-Pole · 63A AC-3 · 230V AC coil · Auxiliary contact 1NO+1NC',
+    criticality: 'Critical',
+    abc: 'A',
+    status: 'Standardized',
+    oem: {
+      make: 'Schneider Electric',
+      partNo: 'LC1D65M7'
+    },
+    alternates: [{
+      make: 'Siemens',
+      partNo: '3RT1046-1AP04',
+      note: 'Equivalent rating, mounting differs — verify panel clearance'
+    }, {
+      make: 'L&T',
+      partNo: 'MNX2-63',
+      note: 'Domestic alternate'
+    }],
+    legacyCodes: ['RJ-ELEC-221 (Ranjangaon R1)'],
+    vendors: [{
+      name: 'Schneider Electric India',
+      leadTime: '10 days',
+      price: '₹3,100'
+    }, {
+      name: 'Automation Spares, Pune',
+      leadTime: '2 days',
+      price: '₹2,850 (Siemens alt.)'
+    }],
+    stockNorm: {
+      min: 1,
+      max: 4,
+      rol: 2
+    },
+    plantStock: [{
+      plant: 'Ranjangaon R1',
+      stock: 1
+    }, {
+      plant: 'Ranjangaon R2',
+      stock: 2
+    }, {
+      plant: 'Baramati',
+      stock: 0
+    }],
+    appliedIn: [{
+      plant: 'Ranjangaon R1',
+      machine: 'Forging Press FP-2502 (Main Motor)'
+    }, {
+      plant: 'Ranjangaon R1',
+      machine: 'Trimming Press TP-2502 (Main Motor)'
+    }, {
+      plant: 'Ranjangaon R2',
+      machine: 'Induction Heater panels'
+    }],
+    rotable: 'No',
+    insurance: 'No',
+    shelfLife: '—',
+    hsn: '8536',
+    bom: {
+      machine: 'Forging Press / Trimming Press',
+      assembly: 'Main Drive',
+      sub: 'Motor Control Panel',
+      component: 'Main Motor Contactor'
+    }
+  },
+  'SPC-1003': {
+    code: 'SPC-1003',
+    name: 'Mechanical Seal, Cartridge Type, 45mm Shaft',
+    category: 'Mechanical',
+    sub: 'Seal',
+    uom: 'NOS',
+    spec: '45mm shaft · Carbon vs SiC faces · Viton O-ring · Max 100°C',
+    criticality: 'Essential',
+    abc: 'B',
+    status: 'Standardized',
+    oem: {
+      make: 'John Crane',
+      partNo: 'JC-5610-45'
+    },
+    alternates: [{
+      make: 'Flowserve',
+      partNo: 'ISC2-45',
+      note: 'Approved equivalent'
+    }],
+    legacyCodes: [],
+    vendors: [{
+      name: 'John Crane India',
+      leadTime: '14 days',
+      price: '₹8,900'
+    }],
+    stockNorm: {
+      min: 1,
+      max: 3,
+      rol: 1
+    },
+    plantStock: [{
+      plant: 'Ranjangaon R1',
+      stock: 1
+    }, {
+      plant: 'Ranjangaon R2',
+      stock: 1
+    }],
+    appliedIn: [{
+      plant: 'Ranjangaon R1',
+      machine: 'Coolant Pump — Circular Saw'
+    }],
+    rotable: 'Yes (send for reconditioning after removal)',
+    insurance: 'No',
+    shelfLife: '2 yrs (elastomer ageing)',
+    hsn: '8484',
+    bom: {
+      machine: 'Circular Saw',
+      assembly: 'Coolant System',
+      sub: 'Pump Assembly',
+      component: 'Pump Shaft Seal'
+    }
+  },
+  'SPC-1004': {
+    code: 'SPC-1004',
+    name: 'Hydraulic Oil, ISO VG 68',
+    category: 'Consumable',
+    sub: 'Lubricant',
+    uom: 'LTR',
+    spec: 'ISO VG 68 · Anti-wear hydraulic oil · Pour point -6°C',
+    criticality: 'Essential',
+    abc: 'A',
+    status: 'Standardized',
+    oem: {
+      make: 'Shell',
+      partNo: 'Tellus S2 M68'
+    },
+    alternates: [{
+      make: 'Servo (IOCL)',
+      partNo: 'Servo System HLP 68',
+      note: 'PSU alternate — same spec, easier local procurement'
+    }],
+    legacyCodes: ['RJ-OIL-VG68 (Ranjangaon R1)', 'MW-LUB-011 (Mundhwa)', 'R2-OIL-068 (Ranjangaon R2)'],
+    vendors: [{
+      name: 'Shell Lubricants India',
+      leadTime: '5 days',
+      price: '₹210/ltr'
+    }, {
+      name: 'IOCL Distributor',
+      leadTime: '2 days',
+      price: '₹185/ltr'
+    }],
+    stockNorm: {
+      min: 100,
+      max: 500,
+      rol: 200
+    },
+    plantStock: [{
+      plant: 'Ranjangaon R1',
+      stock: 220
+    }, {
+      plant: 'Ranjangaon R2',
+      stock: 340
+    }, {
+      plant: 'Mundhwa',
+      stock: 80
+    }, {
+      plant: 'Baramati',
+      stock: 60
+    }],
+    appliedIn: [{
+      plant: 'Ranjangaon R1',
+      machine: 'Forging Press FP-2502 hydraulics'
+    }, {
+      plant: 'Ranjangaon R2',
+      machine: 'Forging Press (18 lines)'
+    }, {
+      plant: 'Mundhwa',
+      machine: 'Compressor COM-302'
+    }],
+    rotable: 'No',
+    insurance: 'No',
+    shelfLife: '3 yrs sealed drum',
+    hsn: '2710',
+    bom: {
+      machine: 'Forging Press',
+      assembly: 'Hydraulic Overload Protection',
+      sub: 'Reservoir & Filtration',
+      component: 'Oil Reservoir'
+    }
+  },
+  'SPC-1005': {
+    code: 'SPC-1005',
+    name: 'V-Belt Set, Classical C-Section, 3550mm (Set of 6)',
+    category: 'Mechanical',
+    sub: 'Belt',
+    uom: 'SET',
+    spec: 'C-Section · 3550mm effective length · Matched set — replace as set only',
+    criticality: 'Essential',
+    abc: 'B',
+    status: 'Standardized',
+    oem: {
+      make: 'Fenner',
+      partNo: 'C140-SET6'
+    },
+    alternates: [{
+      make: 'Gates',
+      partNo: 'C140',
+      note: 'Individually approved, must still be replaced as a matched set'
+    }],
+    legacyCodes: [],
+    vendors: [{
+      name: 'Fenner India',
+      leadTime: '12 days',
+      price: '₹5,400/set'
+    }],
+    stockNorm: {
+      min: 1,
+      max: 3,
+      rol: 1
+    },
+    plantStock: [{
+      plant: 'Ranjangaon R1',
+      stock: 1
+    }, {
+      plant: 'Ranjangaon R2',
+      stock: 2
+    }],
+    appliedIn: [{
+      plant: 'Ranjangaon R1',
+      machine: 'Forging Press FP-2502 main drive'
+    }],
+    rotable: 'No',
+    insurance: 'No',
+    shelfLife: '4 yrs (rubber, store away from heat/UV)',
+    hsn: '4010',
+    bom: {
+      machine: 'Forging Press',
+      assembly: 'Main Drive & Flywheel',
+      sub: 'Flywheel Assembly',
+      component: 'Drive Belt System'
+    }
+  },
+  'SPC-1006': {
+    code: 'SPC-1006',
+    name: 'Sensor, Inductive Proximity, M18 PNP-NO, 8mm Sensing',
+    category: 'Electrical',
+    sub: 'Sensor',
+    uom: 'NOS',
+    spec: 'M18 barrel · PNP NO · 8mm sensing distance · IP67 · 10-30V DC',
+    criticality: 'Critical',
+    abc: 'A',
+    status: 'Standardized',
+    oem: {
+      make: 'Pepperl+Fuchs',
+      partNo: 'NBB8-18GM50-E2'
+    },
+    alternates: [{
+      make: 'Balluff',
+      partNo: 'BES M18MI',
+      note: 'Approved equivalent'
+    }, {
+      make: 'Omron',
+      partNo: 'E2E-X8MD1',
+      note: 'Approved equivalent, different cable gland thread'
+    }],
+    legacyCodes: ['R2-SENS-22 (Ranjangaon R2)', 'BRT-SEN-04 (Baramati)'],
+    vendors: [{
+      name: 'Pepperl+Fuchs India',
+      leadTime: '8 days',
+      price: '₹1,850'
+    }, {
+      name: 'Balluff India',
+      leadTime: '6 days',
+      price: '₹1,650'
+    }],
+    stockNorm: {
+      min: 3,
+      max: 12,
+      rol: 6
+    },
+    plantStock: [{
+      plant: 'Ranjangaon R1',
+      stock: 5
+    }, {
+      plant: 'Ranjangaon R2',
+      stock: 4
+    }, {
+      plant: 'Baramati',
+      stock: 2
+    }],
+    appliedIn: [{
+      plant: 'Ranjangaon R1',
+      machine: 'Robotic Arm RA-2502 — Safety Door'
+    }, {
+      plant: 'Ranjangaon R1',
+      machine: 'Trimming Press TP-2502 — Safety Gate'
+    }, {
+      plant: 'Ranjangaon R2',
+      machine: 'Circular Saw — Blade Guard'
+    }],
+    rotable: 'No',
+    insurance: 'No',
+    shelfLife: '—',
+    hsn: '8536',
+    bom: {
+      machine: 'Robotic Arm / Trimming Press',
+      assembly: 'Controller & Safety System',
+      sub: 'Safety I/O',
+      component: 'Door / Gate Interlock Sensor'
+    }
+  },
+  'SPC-1007': {
+    code: 'SPC-1007',
+    name: 'Encoder Backup Battery, 3.6V Lithium',
+    category: 'Electrical',
+    sub: 'Battery',
+    uom: 'NOS',
+    spec: '3.6V Lithium Thionyl Chloride · KR C4 controller compatible',
+    criticality: 'Essential',
+    abc: 'C',
+    status: 'Standardized',
+    oem: {
+      make: 'KUKA',
+      partNo: 'KUKA-BAT-0001'
+    },
+    alternates: [{
+      make: 'Saft',
+      partNo: 'LS14500',
+      note: 'Cell-level equivalent — verify connector'
+    }],
+    legacyCodes: [],
+    vendors: [{
+      name: 'KUKA Robotics India',
+      leadTime: '15 days',
+      price: '₹1,100'
+    }],
+    stockNorm: {
+      min: 2,
+      max: 8,
+      rol: 4
+    },
+    plantStock: [{
+      plant: 'Ranjangaon R1',
+      stock: 3
+    }, {
+      plant: 'Ranjangaon R2',
+      stock: 5
+    }],
+    appliedIn: [{
+      plant: 'Ranjangaon R1',
+      machine: 'Robotic Arm RA-2502'
+    }, {
+      plant: 'Ranjangaon R2',
+      machine: 'Robotic Arm (all lines)'
+    }],
+    rotable: 'No',
+    insurance: 'No',
+    shelfLife: '3 yrs',
+    hsn: '8507',
+    bom: {
+      machine: 'Robotic Arm',
+      assembly: 'Axes & Joint Drives',
+      sub: 'Encoder System',
+      component: 'Encoder Battery Pack'
+    }
+  },
+  'SPC-1008': {
+    code: 'SPC-1008',
+    name: 'Servo Gearbox, Axis-1, KR240 R2900',
+    category: 'Mechanical',
+    sub: 'Gearbox',
+    uom: 'NOS',
+    spec: 'Axis-1 RV reducer · Ratio per KUKA KR240 R2900 ultra spec · Backlash < 0.08mm new',
+    criticality: 'Critical',
+    abc: 'A',
+    status: 'Standardized',
+    oem: {
+      make: 'KUKA (Nabtesco RV)',
+      partNo: 'KUKA-GBX-A1-240'
+    },
+    alternates: [],
+    legacyCodes: [],
+    vendors: [{
+      name: 'KUKA Robotics India',
+      leadTime: '45 days',
+      price: '₹2,85,000'
+    }],
+    stockNorm: {
+      min: 0,
+      max: 1,
+      rol: 0
+    },
+    plantStock: [{
+      plant: 'Ranjangaon R1',
+      stock: 0
+    }, {
+      plant: 'Ranjangaon R2',
+      stock: 1
+    }],
+    appliedIn: [{
+      plant: 'Ranjangaon R1',
+      machine: 'Robotic Arm RA-2502'
+    }, {
+      plant: 'Ranjangaon R2',
+      machine: 'Robotic Arm (all lines)'
+    }],
+    rotable: 'Yes (exchange with OEM repair program)',
+    insurance: 'Yes — high value, long lead time',
+    shelfLife: '5 yrs sealed (rotate grease before install if > 2 yrs)',
+    hsn: '8483',
+    bom: {
+      machine: 'Robotic Arm',
+      assembly: 'Axes & Joint Drives',
+      sub: 'Axis 1 Drive',
+      component: 'Axis-1 Gearbox'
+    }
+  },
+  'SPC-1009': {
+    code: 'SPC-1009',
+    name: 'Pressure Relief Valve, 175 Bar Set Point',
+    category: 'Hydraulic',
+    sub: 'Valve',
+    uom: 'NOS',
+    spec: 'Direct-acting relief valve · Cracking pressure 175±5 Bar · 3/4" BSP port',
+    criticality: 'Critical',
+    abc: 'B',
+    status: 'Standardized',
+    oem: {
+      make: 'Bosch Rexroth',
+      partNo: 'DBD-6-175'
+    },
+    alternates: [{
+      make: 'Parker',
+      partNo: 'RD-Series-175',
+      note: 'Approved equivalent'
+    }],
+    legacyCodes: [],
+    vendors: [{
+      name: 'Bosch Rexroth India',
+      leadTime: '10 days',
+      price: '₹14,500'
+    }],
+    stockNorm: {
+      min: 1,
+      max: 2,
+      rol: 1
+    },
+    plantStock: [{
+      plant: 'Ranjangaon R1',
+      stock: 1
+    }, {
+      plant: 'Ranjangaon R2',
+      stock: 1
+    }],
+    appliedIn: [{
+      plant: 'Ranjangaon R1',
+      machine: 'Forging Press FP-2502'
+    }],
+    rotable: 'No',
+    insurance: 'No',
+    shelfLife: '—',
+    hsn: '8481',
+    bom: {
+      machine: 'Forging Press',
+      assembly: 'Hydraulic Overload Protection',
+      sub: 'Pressure Control',
+      component: 'Relief Valve Assembly'
+    }
+  },
+  'SPC-1010': {
+    code: 'SPC-1010',
+    name: 'Die Clamp Bolt, M36 x 150, Gr 10.9',
+    category: 'Mechanical',
+    sub: 'Fastener',
+    uom: 'NOS',
+    spec: 'M36 x 150mm · Property class 10.9 · Torque to 280 Nm',
+    criticality: 'Essential',
+    abc: 'C',
+    status: 'Standardized',
+    oem: {
+      make: 'Unbrako',
+      partNo: 'M36X150-109'
+    },
+    alternates: [],
+    legacyCodes: [],
+    vendors: [{
+      name: 'Unbrako Fasteners',
+      leadTime: '5 days',
+      price: '₹380'
+    }],
+    stockNorm: {
+      min: 8,
+      max: 20,
+      rol: 12
+    },
+    plantStock: [{
+      plant: 'Ranjangaon R1',
+      stock: 12
+    }, {
+      plant: 'Ranjangaon R2',
+      stock: 16
+    }],
+    appliedIn: [{
+      plant: 'Ranjangaon R1',
+      machine: 'Trimming Press TP-2502'
+    }],
+    rotable: 'No',
+    insurance: 'No',
+    shelfLife: '—',
+    hsn: '7318',
+    bom: {
+      machine: 'Trimming Press',
+      assembly: 'Die Clamp & Safety Gate',
+      sub: 'Die Clamping',
+      component: 'Clamp Bolt Set'
+    }
+  }
+};
+var HIER = [{
+  id: 'fp',
+  name: 'Forging Press',
+  icon: '🔨',
+  assemblies: [{
+    name: 'Main Drive & Flywheel',
+    subs: [{
+      name: 'Flywheel Assembly',
+      comps: [{
+        name: 'Flywheel Bearing Housing',
+        parts: ['SPC-1001']
+      }, {
+        name: 'Drive Belt System',
+        parts: ['SPC-1005']
+      }]
+    }, {
+      name: 'Motor Control Panel',
+      comps: [{
+        name: 'Main Motor Contactor',
+        parts: ['SPC-1002']
+      }]
+    }]
+  }, {
+    name: 'Hydraulic Overload Protection',
+    subs: [{
+      name: 'Pressure Control',
+      comps: [{
+        name: 'Relief Valve Assembly',
+        parts: ['SPC-1009']
+      }]
+    }, {
+      name: 'Reservoir & Filtration',
+      comps: [{
+        name: 'Oil Reservoir',
+        parts: ['SPC-1004']
+      }]
+    }]
+  }]
+}, {
+  id: 'ra',
+  name: 'Robotic Arm',
+  icon: '🤖',
+  assemblies: [{
+    name: 'Axes & Joint Drives',
+    subs: [{
+      name: 'Axis 1 Drive',
+      comps: [{
+        name: 'Axis-1 Gearbox',
+        parts: ['SPC-1008']
+      }]
+    }, {
+      name: 'Encoder System',
+      comps: [{
+        name: 'Encoder Battery Pack',
+        parts: ['SPC-1007']
+      }]
+    }]
+  }, {
+    name: 'Controller & Safety System',
+    subs: [{
+      name: 'Safety I/O',
+      comps: [{
+        name: 'Door Interlock Sensor',
+        parts: ['SPC-1006']
+      }]
+    }]
+  }]
+}, {
+  id: 'tp',
+  name: 'Trimming Press',
+  icon: '✂️',
+  assemblies: [{
+    name: 'Main Drive',
+    subs: [{
+      name: 'Motor Control Panel',
+      comps: [{
+        name: 'Main Motor Contactor',
+        parts: ['SPC-1002']
+      }]
+    }]
+  }, {
+    name: 'Die Clamp & Safety Gate',
+    subs: [{
+      name: 'Die Clamping',
+      comps: [{
+        name: 'Clamp Bolt Set',
+        parts: ['SPC-1010']
+      }]
+    }, {
+      name: 'Safety Gate Interlock',
+      comps: [{
+        name: 'Gate Sensor',
+        parts: ['SPC-1006']
+      }]
+    }]
+  }]
+}, {
+  id: 'saw',
+  name: 'Circular Saw',
+  icon: '🪚',
+  assemblies: [{
+    name: 'Coolant System',
+    subs: [{
+      name: 'Pump Assembly',
+      comps: [{
+        name: 'Pump Shaft Seal',
+        parts: ['SPC-1003']
+      }]
+    }]
+  }]
+}];
+var DUPLICATES = [{
+  target: 'SPC-1001',
+  targetName: 'Bearing, Spherical Roller, 6308-2RS-C3',
+  legacy: [{
+    plant: 'Ranjangaon R1',
+    code: 'RJ-BRG-108',
+    desc: 'Bearing 6308'
+  }, {
+    plant: 'Mundhwa',
+    code: 'MW-BRG-0034',
+    desc: 'SKF Brg 6308 2RS'
+  }, {
+    plant: 'Baramati',
+    code: 'BRT-BEAR-19',
+    desc: 'Ball brg 6308'
+  }],
+  saving: '₹38,000 stock unlock + eliminates 2 duplicate purchase lines'
+}, {
+  target: 'SPC-1006',
+  targetName: 'Sensor, Inductive Proximity, M18 PNP-NO',
+  legacy: [{
+    plant: 'Ranjangaon R2',
+    code: 'R2-SENS-22',
+    desc: 'Inductive sensor M18 PNP'
+  }, {
+    plant: 'Baramati',
+    code: 'BRT-SEN-04',
+    desc: 'Prox switch 18mm'
+  }],
+  saving: '₹11,000 stock unlock + common vendor rate contract'
+}, {
+  target: 'SPC-1004',
+  targetName: 'Hydraulic Oil, ISO VG 68',
+  legacy: [{
+    plant: 'Ranjangaon R1',
+    code: 'RJ-OIL-VG68',
+    desc: 'Hyd oil VG68'
+  }, {
+    plant: 'Mundhwa',
+    code: 'MW-LUB-011',
+    desc: 'Hydraulic oil 68 grade'
+  }, {
+    plant: 'Ranjangaon R2',
+    code: 'R2-OIL-068',
+    desc: 'ISO 68 oil'
+  }],
+  saving: '₹1,10,000 volume-consolidated annual rate contract'
+}];
+var MASTER_CATALOG = [
+// ── Converted from OEM Spare Part Master ──
+{
+  code: 'SPC-1001',
+  component: 'Forging Press',
+  sub: 'Flywheel Bearing Housing',
+  fn: 'Flywheel rotational support',
+  existingMat: '—',
+  proposedMat: 'SKF 6308-2RS-C3 (Spherical Roller class)',
+  hardness: '—',
+  surface: '—',
+  opTemp: '<95°C',
+  load: 'Dynamic radial',
+  lube: 'ISO VG 220 / Grease',
+  inspFreq: 'Monthly',
+  wearLimit: 'Vibration >7 mm/s',
+  replCriteria: 'Replace on vibration/temp trend',
+  remarks: 'Merged from RJ-BRG-108, MW-BRG-0034',
+  loc: {
+    category: 'Main Store',
+    plant: 'Ranjangaon R1',
+    subStore: 'Sub-Store: Bearings',
+    remark: 'Bin B-14'
+  }
+}, {
+  code: 'SPC-1002',
+  component: 'Forging Press / Trimming Press',
+  sub: 'Main Motor Contactor',
+  fn: 'Motor switching',
+  existingMat: '—',
+  proposedMat: 'Schneider LC1D65M7',
+  hardness: '—',
+  surface: '—',
+  opTemp: 'Ambient (panel)',
+  load: 'Electrical AC-3',
+  lube: '—',
+  inspFreq: 'Quarterly',
+  wearLimit: 'Contact pitting',
+  replCriteria: 'Replace on contact wear/failure',
+  remarks: 'Standard across Forging & Trimming panels',
+  loc: {
+    category: 'Main Store',
+    plant: 'Ranjangaon R1',
+    subStore: 'Sub-Store: Electricals',
+    remark: 'Panel spares rack'
+  }
+}, {
+  code: 'SPC-1003',
+  component: 'Circular Saw',
+  sub: 'Pump Shaft Seal',
+  fn: 'Coolant pump sealing',
+  existingMat: '—',
+  proposedMat: 'John Crane JC-5610-45',
+  hardness: '—',
+  surface: '—',
+  opTemp: '<100°C',
+  load: 'Rotary seal',
+  lube: '—',
+  inspFreq: 'Monthly',
+  wearLimit: 'Leakage',
+  replCriteria: 'Replace on leakage',
+  remarks: 'Rotable — recondition after removal',
+  loc: {
+    category: 'Maintenance Store',
+    plant: 'Ranjangaon R1',
+    subStore: null,
+    remark: 'Near pump repair bay'
+  }
+}, {
+  code: 'SPC-1004',
+  component: 'Forging Press',
+  sub: 'Oil Reservoir',
+  fn: 'Hydraulic power transmission',
+  existingMat: '—',
+  proposedMat: 'Shell Tellus S2 M68',
+  hardness: '—',
+  surface: '—',
+  opTemp: '40-80°C',
+  load: 'Continuous duty',
+  lube: 'Self',
+  inspFreq: 'Monthly',
+  wearLimit: 'NAS>9 contamination',
+  replCriteria: 'Flush & change',
+  remarks: 'Merged 3 plant-local codes',
+  loc: {
+    category: 'Main Store',
+    plant: 'Ranjangaon R2',
+    subStore: null,
+    remark: 'Drum storage — Oil Room R3'
+  }
+}, {
+  code: 'SPC-1005',
+  component: 'Forging Press',
+  sub: 'Drive Belt System',
+  fn: 'Power transmission to flywheel',
+  existingMat: '—',
+  proposedMat: 'Fenner C140 Set of 6',
+  hardness: '—',
+  surface: '—',
+  opTemp: 'Ambient',
+  load: 'Shock/cyclic',
+  lube: '—',
+  inspFreq: 'Weekly visual',
+  wearLimit: 'Cracking/glazing',
+  replCriteria: 'Replace as set',
+  remarks: 'Never replace individually',
+  loc: {
+    category: 'Main Store',
+    plant: 'Ranjangaon R2',
+    subStore: null,
+    remark: 'Belt rack — shaded, dry'
+  }
+}, {
+  code: 'SPC-1006',
+  component: 'Robotic Arm / Trimming Press',
+  sub: 'Door/Gate Interlock Sensor',
+  fn: 'Safety interlock feedback',
+  existingMat: '—',
+  proposedMat: 'Pepperl+Fuchs NBB8-18GM50-E2',
+  hardness: '—',
+  surface: '—',
+  opTemp: '-25 to 80°C',
+  load: 'Electrical',
+  lube: '—',
+  inspFreq: 'Monthly',
+  wearLimit: 'Signal fault',
+  replCriteria: 'Replace on fault',
+  remarks: 'Merged R2-SENS-22, BRT-SEN-04',
+  loc: {
+    category: 'Main Store',
+    plant: 'Ranjangaon R1',
+    subStore: 'Sub-Store: Electronics',
+    remark: 'ESD safe bin'
+  }
+}, {
+  code: 'SPC-1007',
+  component: 'Robotic Arm',
+  sub: 'Encoder Battery Pack',
+  fn: 'Position memory backup',
+  existingMat: '—',
+  proposedMat: 'KUKA-BAT-0001 (3.6V Li)',
+  hardness: '—',
+  surface: '—',
+  opTemp: 'Ambient',
+  load: 'Standby',
+  lube: '—',
+  inspFreq: 'Monthly (backup log)',
+  wearLimit: 'Voltage <3.4V',
+  replCriteria: 'Replace on low voltage',
+  remarks: '—',
+  loc: {
+    category: 'Main Store',
+    plant: 'Ranjangaon R1',
+    subStore: 'Sub-Store: Electronics',
+    remark: 'ESD safe bin'
+  }
+}, {
+  code: 'SPC-1008',
+  component: 'Robotic Arm',
+  sub: 'Axis-1 Gearbox',
+  fn: 'Precision speed reduction',
+  existingMat: '—',
+  proposedMat: 'KUKA/Nabtesco RV reducer',
+  hardness: '—',
+  surface: '—',
+  opTemp: 'Ambient',
+  load: 'Dynamic precision',
+  lube: 'Shell Tivela S320',
+  inspFreq: 'Quarterly backlash check',
+  wearLimit: 'Backlash >0.08mm',
+  replCriteria: 'Exchange via OEM repair',
+  remarks: 'Insurance spare — high value',
+  loc: {
+    category: 'Maintenance Store',
+    plant: 'Ranjangaon R2',
+    subStore: null,
+    remark: 'Insurance Spares Cage — approval req.'
+  }
+}, {
+  code: 'SPC-1009',
+  component: 'Forging Press',
+  sub: 'Relief Valve Assembly',
+  fn: 'Overload protection',
+  existingMat: '—',
+  proposedMat: 'Bosch Rexroth DBD-6-175',
+  hardness: '—',
+  surface: '—',
+  opTemp: '40-80°C',
+  load: 'Hydraulic pressure',
+  lube: 'ISO VG68 oil',
+  inspFreq: 'Monthly',
+  wearLimit: 'Pressure drift',
+  replCriteria: 'Replace on failed crack test',
+  remarks: 'Do not adjust setting',
+  loc: {
+    category: 'Maintenance Store',
+    plant: 'Ranjangaon R1',
+    subStore: null,
+    remark: 'Hydraulics repair bay'
+  }
+}, {
+  code: 'SPC-1010',
+  component: 'Trimming Press',
+  sub: 'Clamp Bolt Set',
+  fn: 'Die holding',
+  existingMat: '—',
+  proposedMat: 'Unbrako M36x150 Gr10.9',
+  hardness: '—',
+  surface: '—',
+  opTemp: 'Ambient',
+  load: 'Tensile',
+  lube: '—',
+  inspFreq: 'Every die change (torque check)',
+  wearLimit: 'Thread damage',
+  replCriteria: 'Replace on damage',
+  remarks: 'Torque to 280 Nm',
+  loc: {
+    category: 'Main Store',
+    plant: 'Ranjangaon R1',
+    subStore: null,
+    remark: 'Fasteners bin F-02'
+  }
+},
+// ── Merged from Component/Material Standardization Sheet ──
+{
+  code: 'SPC-2001',
+  component: 'RAM',
+  sub: 'Guide Surface',
+  fn: 'Vertical sliding guidance',
+  existingMat: '—',
+  proposedMat: 'EN-GJL-300 + Turcite',
+  hardness: '220-250 HB',
+  surface: 'PTFE/Turcite Liner',
+  opTemp: '40-70°C',
+  load: 'Impact + Sliding',
+  lube: 'ISO VG 220',
+  inspFreq: 'Monthly',
+  wearLimit: '0.30 mm',
+  replCriteria: '>0.30 mm wear',
+  remarks: 'Standard for all presses',
+  loc: {
+    category: 'Maintenance Store',
+    plant: 'Ranjangaon R1',
+    subStore: null,
+    remark: 'Liner kit stocked as service item'
+  }
+}, {
+  code: 'SPC-2002',
+  component: 'Clutch',
+  sub: 'Clutch Plate',
+  fn: 'Torque transmission',
+  existingMat: '—',
+  proposedMat: 'Non-asbestos friction composite',
+  hardness: '85-95 Shore D',
+  surface: 'Heat resistant coating',
+  opTemp: '80-150°C',
+  load: 'Cyclic friction',
+  lube: 'Dry',
+  inspFreq: 'Weekly',
+  wearLimit: '25% thickness loss',
+  replCriteria: 'Replace at limit',
+  remarks: '—',
+  loc: {
+    category: 'Main Store',
+    plant: 'Ranjangaon R1',
+    subStore: 'Sub-Store: Friction Parts',
+    remark: 'FIFO — check heat-pack date'
+  }
+}, {
+  code: 'SPC-2003',
+  component: 'Brake',
+  sub: 'Brake Plate',
+  fn: 'Press stopping',
+  existingMat: '—',
+  proposedMat: 'Ceramic friction composite',
+  hardness: '90-100 Shore D',
+  surface: 'Heat resistant coating',
+  opTemp: '100-180°C',
+  load: 'Dynamic braking',
+  lube: 'Dry',
+  inspFreq: 'Weekly',
+  wearLimit: '20% wear',
+  replCriteria: 'Replace at limit',
+  remarks: '—',
+  loc: {
+    category: 'Main Store',
+    plant: 'Ranjangaon R1',
+    subStore: 'Sub-Store: Friction Parts',
+    remark: 'Paired with clutch plate change'
+  }
+}, {
+  code: 'SPC-2004',
+  component: 'Guide System',
+  sub: 'Guide Liner',
+  fn: 'Ram guidance',
+  existingMat: '—',
+  proposedMat: 'SAE660 Bronze / Turcite',
+  hardness: '70-90 HB',
+  surface: 'PTFE',
+  opTemp: '40-80°C',
+  load: 'Sliding + Impact',
+  lube: 'NLGI-2 Grease',
+  inspFreq: 'Monthly',
+  wearLimit: '0.25 mm',
+  replCriteria: 'Replace above limit',
+  remarks: '—',
+  loc: {
+    category: 'Maintenance Store',
+    plant: 'Ranjangaon R2',
+    subStore: null,
+    remark: 'Kept near line for quick swap'
+  }
+}, {
+  code: 'SPC-2005',
+  component: 'Connecting Rod',
+  sub: 'Big End',
+  fn: 'Force transmission',
+  existingMat: '—',
+  proposedMat: '42CrMo4 QT',
+  hardness: '280-320 HB',
+  surface: 'Shot peening',
+  opTemp: '40-90°C',
+  load: 'Cyclic fatigue',
+  lube: 'Oil Splash',
+  inspFreq: 'Quarterly',
+  wearLimit: 'Crack not allowed',
+  replCriteria: 'Immediate replacement',
+  remarks: '—',
+  loc: {
+    category: 'Main Store',
+    plant: 'Ranjangaon R1',
+    subStore: 'Sub-Store: Insurance Spares Cage',
+    remark: 'High value — approval needed to issue'
+  }
+}, {
+  code: 'SPC-2006',
+  component: 'Bush',
+  sub: 'Connecting Rod Bush',
+  fn: 'Oscillating support',
+  existingMat: '—',
+  proposedMat: 'SAE660 Bronze',
+  hardness: '65-75 HB',
+  surface: 'Graphite plug optional',
+  opTemp: '40-90°C',
+  load: 'Oscillating load',
+  lube: 'EP Grease',
+  inspFreq: 'Monthly',
+  wearLimit: '0.15 mm clearance',
+  replCriteria: 'Replace',
+  remarks: '—',
+  loc: {
+    category: 'Maintenance Store',
+    plant: 'Mundhwa',
+    subStore: null,
+    remark: '—'
+  }
+}, {
+  code: 'SPC-2007',
+  component: 'Bearing',
+  sub: 'Main Bearing',
+  fn: 'Rotational support',
+  existingMat: '—',
+  proposedMat: 'Spherical Roller Bearing 222 Series (OEM)',
+  hardness: 'OEM',
+  surface: 'OEM',
+  opTemp: '<95°C',
+  load: 'Dynamic radial load',
+  lube: 'ISO VG 220',
+  inspFreq: 'Monthly',
+  wearLimit: 'Vibration >7 mm/s',
+  replCriteria: 'Replace',
+  remarks: '—',
+  loc: {
+    category: 'Main Store',
+    plant: 'Ranjangaon R2',
+    subStore: null,
+    remark: 'Long lead time — maintain 1 nos buffer'
+  }
+}, {
+  code: 'SPC-2008',
+  component: 'Crankshaft',
+  sub: 'Main Journal',
+  fn: 'Power transmission',
+  existingMat: '—',
+  proposedMat: '42CrMo4 QT',
+  hardness: '280-320 HB',
+  surface: 'Induction Hardening',
+  opTemp: '40-90°C',
+  load: 'Alternating bending',
+  lube: 'Oil circulation',
+  inspFreq: 'Quarterly',
+  wearLimit: 'Crack not allowed',
+  replCriteria: 'Immediate replacement',
+  remarks: '—',
+  loc: {
+    category: 'Plant Floor',
+    plant: 'Ranjangaon R1',
+    subStore: null,
+    remark: 'Not stocked — OEM reconditioning only'
+  }
+}, {
+  code: 'SPC-2009',
+  component: 'Flywheel',
+  sub: 'Bore and Keyway',
+  fn: 'Energy storage',
+  existingMat: '—',
+  proposedMat: 'FG260 / Cast Steel',
+  hardness: '200-240 HB',
+  surface: 'Dynamic balancing',
+  opTemp: 'Ambient',
+  load: 'Rotational',
+  lube: 'None',
+  inspFreq: 'Half yearly',
+  wearLimit: 'Keyway wear 0.2 mm',
+  replCriteria: 'Repair/replace',
+  remarks: '—',
+  loc: {
+    category: 'Plant Floor',
+    plant: 'Ranjangaon R1',
+    subStore: null,
+    remark: 'Not a stock item — site machining/repair'
+  }
+}, {
+  code: 'SPC-2010',
+  component: 'Main Gear',
+  sub: 'Gear Teeth',
+  fn: 'Speed reduction',
+  existingMat: '—',
+  proposedMat: '18CrNiMo7-6',
+  hardness: '58-62 HRC',
+  surface: 'Carburized and Ground',
+  opTemp: '50-80°C',
+  load: 'Shock load',
+  lube: 'ISO VG 320',
+  inspFreq: 'Monthly',
+  wearLimit: 'Pitting 10%',
+  replCriteria: 'Replace',
+  remarks: '—',
+  loc: {
+    category: 'Main Store',
+    plant: 'Ranjangaon R2',
+    subStore: null,
+    remark: 'Matched set with pinion — order together'
+  }
+}, {
+  code: 'SPC-2011',
+  component: 'Pinion Gear',
+  sub: 'Teeth',
+  fn: 'Power transmission',
+  existingMat: '—',
+  proposedMat: '18CrNiMo7-6',
+  hardness: '58-62 HRC',
+  surface: 'Carburized',
+  opTemp: '50-80°C',
+  load: 'Shock load',
+  lube: 'ISO VG 320',
+  inspFreq: 'Monthly',
+  wearLimit: 'Pitting 10%',
+  replCriteria: 'Replace',
+  remarks: '—',
+  loc: {
+    category: 'Main Store',
+    plant: 'Ranjangaon R2',
+    subStore: null,
+    remark: 'Matched set with main gear'
+  }
+}, {
+  code: 'SPC-2012',
+  component: 'Eccentric Shaft',
+  sub: 'Eccentric Journal',
+  fn: 'Stroke generation',
+  existingMat: '—',
+  proposedMat: '42CrMo4 QT',
+  hardness: '280-320 HB',
+  surface: 'Induction hardened',
+  opTemp: '40-90°C',
+  load: 'Alternating load',
+  lube: 'Oil circulation',
+  inspFreq: 'Quarterly',
+  wearLimit: 'Crack not allowed',
+  replCriteria: 'Replace immediately',
+  remarks: '—',
+  loc: {
+    category: 'Plant Floor',
+    plant: 'Baramati',
+    subStore: null,
+    remark: 'OEM reconditioning only'
+  }
+}, {
+  code: 'SPC-2013',
+  component: 'Crown Bearing',
+  sub: 'Roller Bearing',
+  fn: 'Shaft support',
+  existingMat: '—',
+  proposedMat: 'SKF/FAG Standard (OEM)',
+  hardness: 'OEM',
+  surface: 'OEM',
+  opTemp: '<95°C',
+  load: 'Dynamic load',
+  lube: 'Oil circulation',
+  inspFreq: 'Monthly',
+  wearLimit: 'Vibration >7 mm/s',
+  replCriteria: 'Replace',
+  remarks: '—',
+  loc: {
+    category: 'Main Store',
+    plant: 'Ranjangaon R1',
+    subStore: 'Sub-Store: Bearings',
+    remark: 'Critical spare — shelf stored'
+  }
+}, {
+  code: 'SPC-2014',
+  component: 'Pitman',
+  sub: 'Body',
+  fn: 'Force transmission',
+  existingMat: '—',
+  proposedMat: 'Forged Alloy Steel',
+  hardness: '280-320 HB',
+  surface: 'Shot peening',
+  opTemp: 'Ambient',
+  load: 'Compression load',
+  lube: 'Oil splash',
+  inspFreq: 'Quarterly',
+  wearLimit: 'Crack not allowed',
+  replCriteria: 'Replace',
+  remarks: '—',
+  loc: {
+    category: 'Maintenance Store',
+    plant: 'Mundhwa',
+    subStore: null,
+    remark: '—'
+  }
+}, {
+  code: 'SPC-2015',
+  component: 'Slide Adjustment Screw',
+  sub: 'Threads',
+  fn: 'Shut height adjustment',
+  existingMat: '—',
+  proposedMat: 'EN24',
+  hardness: '32-36 HRC',
+  surface: 'Nitriding',
+  opTemp: '40-70°C',
+  load: 'Static load',
+  lube: 'EP Grease',
+  inspFreq: 'Quarterly',
+  wearLimit: 'Backlash >0.5 mm',
+  replCriteria: 'Replace',
+  remarks: '—',
+  loc: {
+    category: 'Maintenance Store',
+    plant: 'Ranjangaon R1',
+    subStore: null,
+    remark: 'Check backlash before issue'
+  }
+}, {
+  code: 'SPC-2016',
+  component: 'Slide Nut',
+  sub: 'Nut',
+  fn: 'Height adjustment',
+  existingMat: '—',
+  proposedMat: 'Phosphor Bronze',
+  hardness: '90-110 HB',
+  surface: 'None',
+  opTemp: '40-70°C',
+  load: 'Static load',
+  lube: 'Grease',
+  inspFreq: 'Quarterly',
+  wearLimit: 'Backlash >0.5 mm',
+  replCriteria: 'Replace',
+  remarks: '—',
+  loc: {
+    category: 'Maintenance Store',
+    plant: 'Ranjangaon R1',
+    subStore: null,
+    remark: '—'
+  }
+}, {
+  code: 'SPC-2017',
+  component: 'Counterbalance Cylinder',
+  sub: 'Rod',
+  fn: 'Balance ram weight',
+  existingMat: '—',
+  proposedMat: 'Hard Chrome Steel',
+  hardness: '50-55 HRC',
+  surface: 'Hard Chrome',
+  opTemp: 'Ambient',
+  load: 'Cyclic load',
+  lube: 'Pneumatic oil',
+  inspFreq: 'Monthly',
+  wearLimit: 'Seal leakage',
+  replCriteria: 'Replace seals',
+  remarks: '—',
+  loc: {
+    category: 'Main Store',
+    plant: 'Ranjangaon R2',
+    subStore: null,
+    remark: '—'
+  }
+}, {
+  code: 'SPC-2018',
+  component: 'Counterbalance Cylinder',
+  sub: 'Seal Kit',
+  fn: 'Air sealing',
+  existingMat: '—',
+  proposedMat: 'NBR/Viton (OEM)',
+  hardness: 'OEM',
+  surface: 'None',
+  opTemp: '20-80°C',
+  load: 'Pneumatic',
+  lube: 'Pneumatic oil',
+  inspFreq: 'Monthly',
+  wearLimit: 'Leakage',
+  replCriteria: 'Replace',
+  remarks: '—',
+  loc: {
+    category: 'Main Store',
+    plant: 'Ranjangaon R1',
+    subStore: 'Sub-Store: Seals & Gaskets',
+    remark: '—'
+  }
+}, {
+  code: 'SPC-2019',
+  component: 'Pneumatic Clutch',
+  sub: 'Piston Seal',
+  fn: 'Clutch actuation',
+  existingMat: '—',
+  proposedMat: 'NBR/Viton (OEM)',
+  hardness: 'OEM',
+  surface: 'None',
+  opTemp: '20-80°C',
+  load: 'Pneumatic',
+  lube: 'Pneumatic oil',
+  inspFreq: 'Monthly',
+  wearLimit: 'Leakage',
+  replCriteria: 'Replace',
+  remarks: '—',
+  loc: {
+    category: 'Main Store',
+    plant: 'Ranjangaon R1',
+    subStore: 'Sub-Store: Seals & Gaskets',
+    remark: '—'
+  }
+}, {
+  code: 'SPC-2020',
+  component: 'Brake Cylinder',
+  sub: 'Piston Seal',
+  fn: 'Brake actuation',
+  existingMat: '—',
+  proposedMat: 'NBR/Viton (OEM)',
+  hardness: 'OEM',
+  surface: 'None',
+  opTemp: '20-80°C',
+  load: 'Pneumatic',
+  lube: 'Pneumatic oil',
+  inspFreq: 'Monthly',
+  wearLimit: 'Leakage',
+  replCriteria: 'Replace',
+  remarks: '—',
+  loc: {
+    category: 'Main Store',
+    plant: 'Ranjangaon R1',
+    subStore: 'Sub-Store: Seals & Gaskets',
+    remark: '—'
+  }
+}, {
+  code: 'SPC-2021',
+  component: 'Tie Rod',
+  sub: 'Rod',
+  fn: 'Frame integrity',
+  existingMat: '—',
+  proposedMat: 'EN24',
+  hardness: '280-320 HB',
+  surface: 'Shot peening',
+  opTemp: 'Ambient',
+  load: 'Tensile load',
+  lube: 'None',
+  inspFreq: 'Yearly',
+  wearLimit: 'Crack not allowed',
+  replCriteria: 'Replace',
+  remarks: '—',
+  loc: {
+    category: 'Plant Floor',
+    plant: 'Baramati',
+    subStore: null,
+    remark: 'Structural — inspect only, replace on failure'
+  }
+}, {
+  code: 'SPC-2022',
+  component: 'Frame',
+  sub: 'Upright/Crown',
+  fn: 'Structural support',
+  existingMat: '—',
+  proposedMat: 'Cast Steel GS52',
+  hardness: '180-220 HB',
+  surface: 'Stress relieved',
+  opTemp: 'Ambient',
+  load: 'Static + Dynamic',
+  lube: 'None',
+  inspFreq: 'Yearly',
+  wearLimit: 'Crack not allowed',
+  replCriteria: 'Repair/replace',
+  remarks: '—',
+  loc: {
+    category: 'Plant Floor',
+    plant: 'Ranjangaon R2',
+    subStore: null,
+    remark: 'Not stocked — major repair job'
+  }
+}, {
+  code: 'SPC-2023',
+  component: 'Lubrication System',
+  sub: 'Pump',
+  fn: 'Oil circulation',
+  existingMat: '—',
+  proposedMat: 'CI Body (OEM)',
+  hardness: 'OEM',
+  surface: 'None',
+  opTemp: '40-80°C',
+  load: 'Continuous duty',
+  lube: 'ISO VG 220',
+  inspFreq: 'Monthly',
+  wearLimit: 'Flow reduction 20%',
+  replCriteria: 'Replace',
+  remarks: '—',
+  loc: {
+    category: 'Maintenance Store',
+    plant: 'Ranjangaon R2',
+    subStore: null,
+    remark: '—'
+  }
+}, {
+  code: 'SPC-2024',
+  component: 'Lubrication System',
+  sub: 'Filter',
+  fn: 'Oil cleaning',
+  existingMat: '—',
+  proposedMat: 'Cellulose/Microglass (OEM)',
+  hardness: 'OEM',
+  surface: 'None',
+  opTemp: '40-80°C',
+  load: 'Continuous duty',
+  lube: 'Oil',
+  inspFreq: 'Monthly',
+  wearLimit: 'DP high',
+  replCriteria: 'Replace',
+  remarks: '—',
+  loc: {
+    category: 'Main Store',
+    plant: 'Ranjangaon R2',
+    subStore: null,
+    remark: 'Fast-moving consumable'
+  }
+}, {
+  code: 'SPC-2025',
+  component: 'Hydraulic Overload Protector',
+  sub: 'Cylinder',
+  fn: 'Overload protection',
+  existingMat: '—',
+  proposedMat: 'Alloy Steel',
+  hardness: '280-320 HB',
+  surface: 'Honed',
+  opTemp: '40-80°C',
+  load: 'Hydraulic pressure',
+  lube: 'ISO VG 68',
+  inspFreq: 'Monthly',
+  wearLimit: 'Pressure drop',
+  replCriteria: 'Repair',
+  remarks: '—',
+  loc: {
+    category: 'Maintenance Store',
+    plant: 'Ranjangaon R1',
+    subStore: null,
+    remark: '—'
+  }
+}, {
+  code: 'SPC-2026',
+  component: 'Hydraulic Overload Protector',
+  sub: 'Seal Kit',
+  fn: 'Hydraulic sealing',
+  existingMat: '—',
+  proposedMat: 'NBR/Viton (OEM)',
+  hardness: 'OEM',
+  surface: 'None',
+  opTemp: '40-80°C',
+  load: 'Hydraulic',
+  lube: 'ISO VG 68',
+  inspFreq: 'Monthly',
+  wearLimit: 'Leakage',
+  replCriteria: 'Replace',
+  remarks: '—',
+  loc: {
+    category: 'Main Store',
+    plant: 'Ranjangaon R1',
+    subStore: 'Sub-Store: Seals & Gaskets',
+    remark: '—'
+  }
+}, {
+  code: 'SPC-2027',
+  component: 'Knockout System',
+  sub: 'Knockout Pin',
+  fn: 'Component ejection',
+  existingMat: '—',
+  proposedMat: 'EN31',
+  hardness: '58-60 HRC',
+  surface: 'Through hardened',
+  opTemp: 'Ambient',
+  load: 'Impact load',
+  lube: 'Grease',
+  inspFreq: 'Monthly',
+  wearLimit: 'Wear >0.3 mm',
+  replCriteria: 'Replace',
+  remarks: '—',
+  loc: {
+    category: 'Main Store',
+    plant: 'Mundhwa',
+    subStore: null,
+    remark: '—'
+  }
+}, {
+  code: 'SPC-2028',
+  component: 'Die Cushion',
+  sub: 'Cushion Cylinder',
+  fn: 'Bottom support',
+  existingMat: '—',
+  proposedMat: 'Alloy Steel',
+  hardness: '280-320 HB',
+  surface: 'Honed',
+  opTemp: 'Ambient',
+  load: 'Cyclic hydraulic load',
+  lube: 'Hydraulic Oil ISO VG 46',
+  inspFreq: 'Monthly',
+  wearLimit: 'Leakage',
+  replCriteria: 'Repair',
+  remarks: '—',
+  loc: {
+    category: 'Maintenance Store',
+    plant: 'Baramati',
+    subStore: null,
+    remark: '—'
+  }
+}, {
+  code: 'SPC-2029',
+  component: 'Slide Gib',
+  sub: 'Wear Surface',
+  fn: 'Alignment',
+  existingMat: '—',
+  proposedMat: 'SAE660 Bronze/Turcite',
+  hardness: '70-90 HB',
+  surface: 'PTFE',
+  opTemp: 'Ambient',
+  load: 'Sliding',
+  lube: 'Grease',
+  inspFreq: 'Monthly',
+  wearLimit: '0.25 mm',
+  replCriteria: 'Replace',
+  remarks: '—',
+  loc: {
+    category: 'Maintenance Store',
+    plant: 'Ranjangaon R1',
+    subStore: null,
+    remark: '—'
+  }
+}, {
+  code: 'SPC-2030',
+  component: 'Bolster Plate',
+  sub: 'Top Surface',
+  fn: 'Die support',
+  existingMat: '—',
+  proposedMat: 'FG260 / Cast Steel',
+  hardness: '200-240 HB',
+  surface: 'Ground',
+  opTemp: 'Ambient',
+  load: 'Static + Impact',
+  lube: 'None',
+  inspFreq: 'Half yearly',
+  wearLimit: 'Flatness >0.2 mm',
+  replCriteria: 'Regrind',
+  remarks: '—',
+  loc: {
+    category: 'Plant Floor',
+    plant: 'Ranjangaon R2',
+    subStore: null,
+    remark: 'Regrind on machine / send out — not stocked as new'
+  }
+}, {
+  code: 'SPC-2031',
+  component: 'Die Clamp',
+  sub: 'Clamp Block',
+  fn: 'Die holding',
+  existingMat: '—',
+  proposedMat: 'EN24',
+  hardness: '32-36 HRC',
+  surface: 'Black oxide',
+  opTemp: 'Ambient',
+  load: 'Tensile load',
+  lube: 'Grease',
+  inspFreq: 'Quarterly',
+  wearLimit: 'Crack not allowed',
+  replCriteria: 'Replace',
+  remarks: '—',
+  loc: {
+    category: 'Main Store',
+    plant: 'Ranjangaon R1',
+    subStore: null,
+    remark: '—'
+  }
+}, {
+  code: 'SPC-2032',
+  component: 'Key and Keyway',
+  sub: 'Power transmission',
+  fn: 'Torque transmission',
+  existingMat: '—',
+  proposedMat: 'EN8',
+  hardness: '28-32 HRC',
+  surface: 'Black oxide',
+  opTemp: 'Ambient',
+  load: 'Shock load',
+  lube: 'None',
+  inspFreq: 'Quarterly',
+  wearLimit: 'Wear >10%',
+  replCriteria: 'Replace',
+  remarks: '—',
+  loc: {
+    category: 'Main Store',
+    plant: 'Mundhwa',
+    subStore: null,
+    remark: '—'
+  }
+}, {
+  code: 'SPC-2033',
+  component: 'Coupling',
+  sub: 'Flexible Element',
+  fn: 'Motor-drive connection',
+  existingMat: '—',
+  proposedMat: 'Polyurethane/Steel (OEM)',
+  hardness: 'OEM',
+  surface: 'None',
+  opTemp: 'Ambient',
+  load: 'Torsional load',
+  lube: 'None',
+  inspFreq: 'Quarterly',
+  wearLimit: 'Crack/wear',
+  replCriteria: 'Replace',
+  remarks: '—',
+  loc: {
+    category: 'Main Store',
+    plant: 'Baramati',
+    subStore: null,
+    remark: '—'
+  }
+}, {
+  code: 'SPC-2034',
+  component: 'Motor Bearing',
+  sub: 'DE/NDE Bearing',
+  fn: 'Motor support',
+  existingMat: '—',
+  proposedMat: 'SKF/FAG Standard (OEM)',
+  hardness: 'OEM',
+  surface: 'OEM',
+  opTemp: '<90°C',
+  load: 'Rotational load',
+  lube: 'Grease',
+  inspFreq: 'Monthly',
+  wearLimit: 'Vibration >4.5 mm/s',
+  replCriteria: 'Replace',
+  remarks: '—',
+  loc: {
+    category: 'Main Store',
+    plant: 'Ranjangaon R2',
+    subStore: null,
+    remark: '—'
+  }
+}, {
+  code: 'SPC-2035',
+  component: 'Encoder/Resolver',
+  sub: 'Sensor',
+  fn: 'Position feedback',
+  existingMat: '—',
+  proposedMat: 'OEM',
+  hardness: 'None',
+  surface: '—',
+  opTemp: '<70°C',
+  load: 'Electrical',
+  lube: 'None',
+  inspFreq: 'Monthly',
+  wearLimit: 'Signal loss',
+  replCriteria: 'Replace',
+  remarks: '—',
+  loc: {
+    category: 'Main Store',
+    plant: 'Ranjangaon R1',
+    subStore: 'Sub-Store: Electronics',
+    remark: 'ESD safe storage required'
+  }
+}];
+
+/***/ }),
+
 /***/ "./src/containers/MainComponent.jsx":
 /*!******************************************!*\
   !*** ./src/containers/MainComponent.jsx ***!
@@ -15764,6 +19818,105 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 function prefixNS(name) {
   return "".concat("kalyani-iot-smart_maintenance_system", "-").concat(name);
+}
+
+/***/ }),
+
+/***/ "./src/reducers/checklistReducer.js":
+/*!******************************************!*\
+  !*** ./src/reducers/checklistReducer.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ checklistReducer)
+/* harmony export */ });
+/* harmony import */ var _actions_checklistActions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/checklistActions */ "./src/actions/checklistActions.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+/**
+ * ─── CHECKLIST REDUCER ───────────────────────────────────────────────
+ * store.js ke rootReducer mein register karna hai:
+ *   import checklist from './reducers/checklistReducer';
+ *   const rootReducer = combineReducers({ ..., checklist });
+ * ─────────────────────────────────────────────────────────────────────
+ */
+
+
+var initialState = {
+  headers: {
+    items: [],
+    status: "idle",
+    error: null
+  },
+  items: {
+    items: [],
+    status: "idle",
+    error: null
+  },
+  selectedHeaderId: null
+};
+function checklistReducer() {
+  var _ref, _state$selectedHeader, _action$payload$;
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  switch (action.type) {
+    case _actions_checklistActions__WEBPACK_IMPORTED_MODULE_0__.CHECKLIST_HEADERS_LOAD_REQUEST:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        headers: _objectSpread(_objectSpread({}, state.headers), {}, {
+          status: "loading"
+        })
+      });
+    case _actions_checklistActions__WEBPACK_IMPORTED_MODULE_0__.CHECKLIST_HEADERS_LOAD_SUCCESS:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        headers: {
+          items: action.payload,
+          status: "succeeded",
+          error: null
+        },
+        // Pehli baar load hone par first header auto-select ho jaye
+        selectedHeaderId: (_ref = (_state$selectedHeader = state.selectedHeaderId) !== null && _state$selectedHeader !== void 0 ? _state$selectedHeader : (_action$payload$ = action.payload[0]) === null || _action$payload$ === void 0 ? void 0 : _action$payload$.cdb_object_id) !== null && _ref !== void 0 ? _ref : null
+      });
+    case _actions_checklistActions__WEBPACK_IMPORTED_MODULE_0__.CHECKLIST_HEADERS_LOAD_FAILURE:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        headers: _objectSpread(_objectSpread({}, state.headers), {}, {
+          status: "failed",
+          error: action.payload
+        })
+      });
+    case _actions_checklistActions__WEBPACK_IMPORTED_MODULE_0__.CHECKLIST_ITEMS_LOAD_REQUEST:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        items: _objectSpread(_objectSpread({}, state.items), {}, {
+          status: "loading"
+        })
+      });
+    case _actions_checklistActions__WEBPACK_IMPORTED_MODULE_0__.CHECKLIST_ITEMS_LOAD_SUCCESS:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        items: {
+          items: action.payload,
+          status: "succeeded",
+          error: null
+        }
+      });
+    case _actions_checklistActions__WEBPACK_IMPORTED_MODULE_0__.CHECKLIST_ITEMS_LOAD_FAILURE:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        items: _objectSpread(_objectSpread({}, state.items), {}, {
+          status: "failed",
+          error: action.payload
+        })
+      });
+    case _actions_checklistActions__WEBPACK_IMPORTED_MODULE_0__.CHECKLIST_SET_SELECTED_HEADER:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        selectedHeaderId: action.payload
+      });
+    default:
+      return state;
+  }
 }
 
 /***/ }),
@@ -16527,6 +20680,452 @@ var AuthService = /*#__PURE__*/function () {
 
 /***/ }),
 
+/***/ "./src/services/checkerApi.js":
+/*!************************************!*\
+  !*** ./src/services/checkerApi.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "fetchChecklistItems": () => (/* binding */ fetchChecklistItems),
+/* harmony export */   "fetchDashboardSummary": () => (/* binding */ fetchDashboardSummary),
+/* harmony export */   "fetchEquipmentList": () => (/* binding */ fetchEquipmentList),
+/* harmony export */   "fetchInspectionResults": () => (/* binding */ fetchInspectionResults),
+/* harmony export */   "saveCheckpoint": () => (/* binding */ saveCheckpoint),
+/* harmony export */   "submitInspection": () => (/* binding */ submitInspection)
+/* harmony export */ });
+/* harmony import */ var _apiConfig__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./apiConfig */ "./src/services/apiConfig.js");
+/* harmony import */ var _csrfService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./csrfService */ "./src/services/csrfService.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+// js/src/services/checkerApi.js
+// Checker Portal API — 100% collection REST, NO /internal/ endpoints.
+// Reuses apiConfig (BASE/AUTH) + csrfService.
+//
+// Tables used (all already exist):
+//   smartpm_admin_equipment_master     → equipment list
+//   smartpm_admin_checklist_header      → one row per equipment + frequency
+//   smartpm_admin_checklist_item        → check points, linked via checklist_header_id
+//   smartpm_checker_insp_result         → inspection results (save/submit here)
+//
+// NOTE on checklist item lookup:
+//   Check point rows are NOT guaranteed to have equipment_code populated
+//   (the Builder's AddCheckPointModal only sets checklist_header_id).
+//   So we resolve equipment_code -> header -> checklist_header_id -> items,
+//   the same relation ChecklistBuilder.jsx uses. This is the fix for
+//   "No checklist items found for this equipment".
+//
+// NOTE on column mapping:
+//   The result table stores the OK/Abnormal value in column `smresult`,
+//   but CheckerPage uses `result`. We translate here (result <-> smresult)
+//   so CheckerPage.jsx needs NO changes.
+//   `checked_by` is a Date column in the DB, so we do NOT write the checker
+//   name into it (would be a type error). Left untouched.
+
+
+
+var BASIC_AUTH = _apiConfig__WEBPACK_IMPORTED_MODULE_0__.AUTH;
+var EQUIPMENT_API = "".concat(_apiConfig__WEBPACK_IMPORTED_MODULE_0__.BASE, "/api/v1/collection/smartpm_admin_equipment_master");
+var HEADER_API = "".concat(_apiConfig__WEBPACK_IMPORTED_MODULE_0__.BASE, "/api/v1/collection/smartpm_admin_checklist_header");
+var CHECKLIST_ITEM_API = "".concat(_apiConfig__WEBPACK_IMPORTED_MODULE_0__.BASE, "/api/v1/collection/smartpm_admin_checklist_item");
+var RESULT_API = "".concat(_apiConfig__WEBPACK_IMPORTED_MODULE_0__.BASE, "/api/v1/collection/smartpm_checker_insp_result");
+
+// ── low-level helpers ────────────────────────────────────────────────────────
+function doGet(_x) {
+  return _doGet.apply(this, arguments);
+}
+function _doGet() {
+  _doGet = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6(url) {
+    var res;
+    return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+      while (1) switch (_context6.prev = _context6.next) {
+        case 0:
+          _context6.next = 2;
+          return fetch(url, {
+            headers: {
+              Accept: "application/json",
+              Authorization: BASIC_AUTH
+            },
+            credentials: "include"
+          });
+        case 2:
+          res = _context6.sent;
+          if (res.ok) {
+            _context6.next = 5;
+            break;
+          }
+          throw new Error("HTTP ".concat(res.status));
+        case 5:
+          return _context6.abrupt("return", res.json());
+        case 6:
+        case "end":
+          return _context6.stop();
+      }
+    }, _callee6);
+  }));
+  return _doGet.apply(this, arguments);
+}
+function doPost(_x2, _x3) {
+  return _doPost.apply(this, arguments);
+}
+function _doPost() {
+  _doPost = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7(url, body) {
+    var csrfToken, res, json;
+    return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+      while (1) switch (_context7.prev = _context7.next) {
+        case 0:
+          _context7.next = 2;
+          return _csrfService__WEBPACK_IMPORTED_MODULE_1__["default"].getCsrfToken();
+        case 2:
+          csrfToken = _context7.sent;
+          _context7.next = 5;
+          return fetch(url, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: BASIC_AUTH,
+              "X-CSRFToken": csrfToken
+            },
+            credentials: "include",
+            body: JSON.stringify(body)
+          });
+        case 5:
+          res = _context7.sent;
+          _context7.next = 8;
+          return res.json();
+        case 8:
+          json = _context7.sent;
+          if (!(!res.ok || json !== null && json !== void 0 && json.error)) {
+            _context7.next = 11;
+            break;
+          }
+          throw new Error((json === null || json === void 0 ? void 0 : json.error) || "HTTP ".concat(res.status));
+        case 11:
+          return _context7.abrupt("return", json);
+        case 12:
+        case "end":
+          return _context7.stop();
+      }
+    }, _callee7);
+  }));
+  return _doPost.apply(this, arguments);
+}
+function doPatch(_x4, _x5) {
+  return _doPatch.apply(this, arguments);
+} // Collection responses can come back under different keys — normalise them.
+function _doPatch() {
+  _doPatch = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8(url, body) {
+    var csrfToken, res, json;
+    return _regeneratorRuntime().wrap(function _callee8$(_context8) {
+      while (1) switch (_context8.prev = _context8.next) {
+        case 0:
+          _context8.next = 2;
+          return _csrfService__WEBPACK_IMPORTED_MODULE_1__["default"].getCsrfToken();
+        case 2:
+          csrfToken = _context8.sent;
+          _context8.next = 5;
+          return fetch(url, {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: BASIC_AUTH,
+              "X-CSRFToken": csrfToken
+            },
+            credentials: "include",
+            body: JSON.stringify(body)
+          });
+        case 5:
+          res = _context8.sent;
+          _context8.next = 8;
+          return res.json();
+        case 8:
+          json = _context8.sent;
+          if (!(!res.ok || json !== null && json !== void 0 && json.error)) {
+            _context8.next = 11;
+            break;
+          }
+          throw new Error((json === null || json === void 0 ? void 0 : json.error) || "HTTP ".concat(res.status));
+        case 11:
+          return _context8.abrupt("return", json);
+        case 12:
+        case "end":
+          return _context8.stop();
+      }
+    }, _callee8);
+  }));
+  return _doPatch.apply(this, arguments);
+}
+var extractRows = function extractRows(j) {
+  var _ref, _ref2, _j$objects;
+  return (_ref = (_ref2 = (_j$objects = j === null || j === void 0 ? void 0 : j.objects) !== null && _j$objects !== void 0 ? _j$objects : j === null || j === void 0 ? void 0 : j.data) !== null && _ref2 !== void 0 ? _ref2 : j === null || j === void 0 ? void 0 : j.results) !== null && _ref !== void 0 ? _ref : [];
+};
+
+// OData-style filter builder
+var filterUrl = function filterUrl(base, clause) {
+  return "".concat(base, "?$filter=").concat(encodeURIComponent(clause));
+};
+
+// ── Equipment list (active only) ─────────────────────────────────────────────
+var fetchEquipmentList = function fetchEquipmentList() {
+  return doGet(filterUrl(EQUIPMENT_API, "is_active eq '1'"));
+};
+
+// ── Checklist items for a given equipment ──
+// smartpm_admin_checklist_item has its OWN equipment_code column, so we query
+// it directly — no need to go through checklist_id (which is typed Integer
+// on the item table, while the header's id is a UUID string, so joining on
+// that would likely throw a type-mismatch error anyway).
+// We separately check the header table just to tell "no checklist built yet"
+// apart from "checklist built but no active check points".
+// Returns: { objects: [...activeItems sorted by seq_no], header: headerRowOrNull }
+var fetchChecklistItems = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(equipmentCode) {
+    var headers, header, items, activeSorted;
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          _context.t0 = extractRows;
+          _context.next = 3;
+          return doGet(filterUrl(HEADER_API, "equipment_code eq '".concat(equipmentCode, "'")));
+        case 3:
+          _context.t1 = _context.sent;
+          headers = (0, _context.t0)(_context.t1);
+          header = headers[0] || null;
+          _context.t2 = extractRows;
+          _context.next = 9;
+          return doGet(filterUrl(CHECKLIST_ITEM_API, "equipment_code eq '".concat(equipmentCode, "'")));
+        case 9:
+          _context.t3 = _context.sent;
+          items = (0, _context.t2)(_context.t3);
+          activeSorted = items.filter(function (it) {
+            var _it$is_active;
+            return String((_it$is_active = it.is_active) !== null && _it$is_active !== void 0 ? _it$is_active : "1") === "1";
+          }).sort(function (a, b) {
+            return Number(a.seq_no || 0) - Number(b.seq_no || 0);
+          });
+          return _context.abrupt("return", {
+            objects: activeSorted,
+            header: header
+          });
+        case 13:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee);
+  }));
+  return function fetchChecklistItems(_x6) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+
+// ── Existing inspection results for equipment + date ──
+// Maps DB column `smresult` → `result` so CheckerPage reads it unchanged.
+var fetchInspectionResults = /*#__PURE__*/function () {
+  var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(equipmentCode, inspectionDate) {
+    var json, rows;
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.next = 2;
+          return doGet(filterUrl(RESULT_API, "equipment_code eq '".concat(equipmentCode, "' and inspection_date eq '").concat(inspectionDate, "'")));
+        case 2:
+          json = _context2.sent;
+          rows = extractRows(json).map(function (r) {
+            return _objectSpread(_objectSpread({}, r), {}, {
+              result: r.smresult
+            });
+          });
+          return _context2.abrupt("return", {
+            objects: rows
+          });
+        case 5:
+        case "end":
+          return _context2.stop();
+      }
+    }, _callee2);
+  }));
+  return function fetchInspectionResults(_x7, _x8) {
+    return _ref4.apply(this, arguments);
+  };
+}();
+
+// ── Save / update one checkpoint result (upsert via REST) ──
+// CheckerPage sends: { equipment_code, checklist_item_id, inspection_date,
+//                      result, current_value, remarks, checked_by }
+var saveCheckpoint = /*#__PURE__*/function () {
+  var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(payload) {
+    var equipment_code, checklist_item_id, inspection_date, result, current_value, remarks, existing, body;
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
+        case 0:
+          equipment_code = payload.equipment_code, checklist_item_id = payload.checklist_item_id, inspection_date = payload.inspection_date, result = payload.result, current_value = payload.current_value, remarks = payload.remarks; // does a row already exist for this equipment + date + item?
+          _context3.t0 = extractRows;
+          _context3.next = 4;
+          return doGet(filterUrl(RESULT_API, "equipment_code eq '".concat(equipment_code, "' and inspection_date eq '").concat(inspection_date, "' and checklist_item_id eq '").concat(checklist_item_id, "'")));
+        case 4:
+          _context3.t1 = _context3.sent;
+          existing = (0, _context3.t0)(_context3.t1)[0];
+          // write `smresult` (the real column); do NOT write checked_by (Date column).
+          body = {
+            equipment_code: equipment_code,
+            checklist_item_id: checklist_item_id,
+            inspection_date: inspection_date,
+            smresult: result,
+            current_value: current_value || "",
+            remarks: remarks || ""
+          };
+          if (!(existing !== null && existing !== void 0 && existing.cdb_object_id)) {
+            _context3.next = 9;
+            break;
+          }
+          return _context3.abrupt("return", doPatch("".concat(RESULT_API, "/").concat(existing.cdb_object_id), body));
+        case 9:
+          return _context3.abrupt("return", doPost(RESULT_API, body));
+        case 10:
+        case "end":
+          return _context3.stop();
+      }
+    }, _callee3);
+  }));
+  return function saveCheckpoint(_x9) {
+    return _ref5.apply(this, arguments);
+  };
+}();
+
+// ── Bulk submit — stamp submitted_at on every row for equipment + date ──
+var submitInspection = /*#__PURE__*/function () {
+  var _ref6 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(equipmentCode, inspectionDate) {
+    var rows;
+    return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+      while (1) switch (_context4.prev = _context4.next) {
+        case 0:
+          _context4.t0 = extractRows;
+          _context4.next = 3;
+          return doGet(filterUrl(RESULT_API, "equipment_code eq '".concat(equipmentCode, "' and inspection_date eq '").concat(inspectionDate, "'")));
+        case 3:
+          _context4.t1 = _context4.sent;
+          rows = (0, _context4.t0)(_context4.t1);
+          _context4.next = 7;
+          return Promise.all(rows.filter(function (r) {
+            return r.cdb_object_id;
+          }).map(function (r) {
+            return doPatch("".concat(RESULT_API, "/").concat(r.cdb_object_id), {
+              submitted_at: inspectionDate
+            });
+          }));
+        case 7:
+          return _context4.abrupt("return", {
+            ok: true,
+            count: rows.length
+          });
+        case 8:
+        case "end":
+          return _context4.stop();
+      }
+    }, _callee4);
+  }));
+  return function submitInspection(_x10, _x11) {
+    return _ref6.apply(this, arguments);
+  };
+}();
+
+// ── Sidebar badge counts ──
+// No backend summary endpoint exists, so return zeros (CheckerPage already
+// tolerates a missing/zero summary). Wire to a real source later if needed.
+var fetchDashboardSummary = /*#__PURE__*/function () {
+  var _ref7 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+    return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+      while (1) switch (_context5.prev = _context5.next) {
+        case 0:
+          return _context5.abrupt("return", {
+            pm_inspection_pending: 0,
+            abnormalities: 0,
+            iiot_alerts: 0
+          });
+        case 1:
+        case "end":
+          return _context5.stop();
+      }
+    }, _callee5);
+  }));
+  return function fetchDashboardSummary() {
+    return _ref7.apply(this, arguments);
+  };
+}();
+
+/***/ }),
+
+/***/ "./src/services/checklistApi.js":
+/*!**************************************!*\
+  !*** ./src/services/checklistApi.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createChecklistHeader": () => (/* binding */ createChecklistHeader),
+/* harmony export */   "createChecklistItem": () => (/* binding */ createChecklistItem),
+/* harmony export */   "deleteChecklistHeader": () => (/* binding */ deleteChecklistHeader),
+/* harmony export */   "deleteChecklistItem": () => (/* binding */ deleteChecklistItem),
+/* harmony export */   "fetchChecklistHeaders": () => (/* binding */ fetchChecklistHeaders),
+/* harmony export */   "fetchChecklistItems": () => (/* binding */ fetchChecklistItems),
+/* harmony export */   "updateChecklistHeader": () => (/* binding */ updateChecklistHeader),
+/* harmony export */   "updateChecklistItem": () => (/* binding */ updateChecklistItem)
+/* harmony export */ });
+/* harmony import */ var _apiAuth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./apiAuth */ "./src/services/apiAuth.js");
+/**
+ * ─── CHECKLIST SERVICE ───────────────────────────────────────────────
+ * REST calls for the PM Checklist Builder — routed through apiAuth.js.
+ * Two collections: header (one checklist = one equipment + frequency)
+ * and item (the check points inside a checklist).
+ * Classnames match PmAdmChkHeader / AdmChkItm defined in __init__.py.
+ * ─────────────────────────────────────────────────────────────────────
+ */
+
+
+var HEADER_URL = "/api/v1/collection/smartpm_admin_checklist_header";
+var ITEM_URL = "/api/v1/collection/smartpm_admin_checklist_item";
+
+// ── Checklist Header (CP-101 — Centrifugal Pump Daily Checklist) ──
+function fetchChecklistHeaders() {
+  return _apiAuth__WEBPACK_IMPORTED_MODULE_0__["default"].get(HEADER_URL);
+}
+function createChecklistHeader(data) {
+  return _apiAuth__WEBPACK_IMPORTED_MODULE_0__["default"].post(HEADER_URL, data);
+}
+function updateChecklistHeader(cdbObjectId, data) {
+  return _apiAuth__WEBPACK_IMPORTED_MODULE_0__["default"].putOrPatch("".concat(HEADER_URL, "/").concat(cdbObjectId), data);
+}
+function deleteChecklistHeader(cdbObjectId) {
+  return _apiAuth__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("".concat(HEADER_URL, "/").concat(cdbObjectId));
+}
+
+// ── Checklist Items (Bearing Temperature Check, Oil Level, etc.) ──
+function fetchChecklistItems() {
+  return _apiAuth__WEBPACK_IMPORTED_MODULE_0__["default"].get(ITEM_URL);
+}
+function createChecklistItem(data) {
+  return _apiAuth__WEBPACK_IMPORTED_MODULE_0__["default"].post(ITEM_URL, data);
+}
+function updateChecklistItem(cdbObjectId, data) {
+  return _apiAuth__WEBPACK_IMPORTED_MODULE_0__["default"].putOrPatch("".concat(ITEM_URL, "/").concat(cdbObjectId), data);
+}
+function deleteChecklistItem(cdbObjectId) {
+  return _apiAuth__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("".concat(ITEM_URL, "/").concat(cdbObjectId));
+}
+
+/***/ }),
+
 /***/ "./src/services/csrfService.js":
 /*!*************************************!*\
   !*** ./src/services/csrfService.js ***!
@@ -16844,11 +21443,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "./node_modules/redux/dist/redux.mjs");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! redux */ "./node_modules/redux/dist/redux.mjs");
 /* harmony import */ var _reducers_equipmentReducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./reducers/equipmentReducer */ "./src/reducers/equipmentReducer.js");
 /* harmony import */ var _reducers_plantsReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reducers/plantsReducer */ "./src/reducers/plantsReducer.js");
 /* harmony import */ var _reducers_linesReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./reducers/linesReducer */ "./src/reducers/linesReducer.js");
 /* harmony import */ var _reducers_machinesReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./reducers/machinesReducer */ "./src/reducers/machinesReducer.js");
+/* harmony import */ var _reducers_checklistReducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./reducers/checklistReducer */ "./src/reducers/checklistReducer.js");
 /**
  * ─── STORE ───────────────────────────────────────────────────────────
  * Ye store CMDBuild (cs-web-components-base) ke apne Registry-based
@@ -16864,12 +21464,14 @@ __webpack_require__.r(__webpack_exports__);
  // 👈 naya import
  // 👈 Line Name filter ke liye
  // 👈 Machine Name filter ke liye
+ // 👈 ye import line add karo
 
-var rootReducer = (0,redux__WEBPACK_IMPORTED_MODULE_4__.combineReducers)({
+var rootReducer = (0,redux__WEBPACK_IMPORTED_MODULE_5__.combineReducers)({
   equipment: _reducers_equipmentReducer__WEBPACK_IMPORTED_MODULE_0__["default"],
   plants: _reducers_plantsReducer__WEBPACK_IMPORTED_MODULE_1__["default"],
   lines: _reducers_linesReducer__WEBPACK_IMPORTED_MODULE_2__["default"],
-  machines: _reducers_machinesReducer__WEBPACK_IMPORTED_MODULE_3__["default"]
+  machines: _reducers_machinesReducer__WEBPACK_IMPORTED_MODULE_3__["default"],
+  checklist: _reducers_checklistReducer__WEBPACK_IMPORTED_MODULE_4__["default"]
 });
 
 // Chhota thunk middleware, khud likha hai — redux-thunk package install
@@ -16885,7 +21487,7 @@ var thunkMiddleware = function thunkMiddleware(store) {
     };
   };
 };
-var store = (0,redux__WEBPACK_IMPORTED_MODULE_4__.createStore)(rootReducer, (0,redux__WEBPACK_IMPORTED_MODULE_4__.applyMiddleware)(thunkMiddleware));
+var store = (0,redux__WEBPACK_IMPORTED_MODULE_5__.createStore)(rootReducer, (0,redux__WEBPACK_IMPORTED_MODULE_5__.applyMiddleware)(thunkMiddleware));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
 
 /***/ }),
@@ -16909,7 +21511,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "*{margin:0;padding:0;box-sizing:border-box}\n:root{\n  --blue-900:#0B1F3A;--blue-800:#122D52;--blue-700:#1A3F6F;\n  --blue-600:#1E5291;--blue-500:#2563EB;--blue-400:#3B82F6;\n  --blue-100:#EFF6FF;--blue-50:#F0F7FF;\n  --slate-700:#334155;--slate-600:#475569;--slate-500:#64748B;\n  --slate-400:#94A3B8;--slate-300:#CBD5E1;--slate-200:#E2E8F0;\n  --slate-100:#F1F5F9;--slate-50:#F8FAFC;\n  --white:#FFFFFF;\n  --green:#059669;--green-light:#ECFDF5;--green-border:#A7F3D0;\n  --amber:#D97706;--amber-light:#FFFBEB;--amber-border:#FDE68A;\n  --red:#DC2626;--red-light:#FEF2F2;--red-border:#FECACA;\n  --purple:#7C3AED;--purple-light:#F5F3FF;\n  --cyan:#0891B2;--cyan-light:#ECFEFF;\n  /* 100% offline system fonts — no internet / CDN dependency */\n  --font-main:\"Segoe UI\",\"Helvetica Neue\",Helvetica,Arial,sans-serif;\n  --font-mono:\"Segoe UI\",\"Helvetica Neue\",Helvetica,Arial,sans-serif;\n  --radius:8px;--radius-lg:12px;\n  --shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.06);\n  --shadow-md:0 4px 6px rgba(0,0,0,.07),0 2px 4px rgba(0,0,0,.06);\n  --shadow-lg:0 10px 25px rgba(0,0,0,.08),0 4px 8px rgba(0,0,0,.04);\n  --sidebar-w:240px;\n}\nbody{font-family:var(--font-main);background:var(--slate-50);color:var(--slate-700);min-height:100vh;display:flex;flex-direction:column}\n.top-nav{background:var(--blue-900);height:56px;display:flex;align-items:center;padding:0 20px;gap:12px;box-shadow:0 2px 8px rgba(0,0,0,.25);position:fixed;top:0;left:0;right:0;z-index:100}\n.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}\n.nav-logo-icon{width:32px;height:32px;background:var(--blue-500);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px}\n.nav-logo-text{color:white;font-size:15px;font-weight:700;letter-spacing:-.2px}\n.nav-logo-sub{color:rgba(255,255,255,.4);font-size:10px;font-weight:400;letter-spacing:.6px;text-transform:uppercase}\n.nav-spacer{flex:1}\n.nav-role-badge{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:100px;padding:5px 12px 5px 8px}\n.nav-role-dot{width:8px;height:8px;border-radius:50%}\n.nav-role-name{color:white;font-size:12px;font-weight:600}\n.nav-home-btn{color:rgba(255,255,255,.55);font-size:12px;text-decoration:none;padding:5px 10px;border-radius:6px;transition:all .15s}\n.nav-home-btn:hover{background:rgba(255,255,255,.08);color:white}\n.app-layout{display:flex;padding-top:56px;min-height:100vh}\n.sidebar{width:var(--sidebar-w);background:white;border-right:1px solid var(--slate-200);position:fixed;top:56px;left:0;bottom:0;overflow-y:auto;padding:20px 0}\n.sidebar-section-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--slate-400);padding:14px 20px 6px}\n.sidebar-link{display:flex;align-items:center;gap:10px;padding:9px 20px;color:var(--slate-600);font-size:13px;font-weight:500;text-decoration:none;transition:all .15s;border-left:3px solid transparent}\n.sidebar-link:hover{background:var(--slate-50);color:var(--blue-500)}\n.sidebar-link.active{background:var(--blue-50);color:var(--blue-500);border-left-color:var(--blue-500);font-weight:600}\n.sidebar-link .link-icon{width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}\n.sidebar-badge{margin-left:auto;background:var(--red);color:white;font-size:10px;font-weight:700;padding:2px 6px;border-radius:100px}\n.sidebar-badge.amber{background:var(--amber)}\n.sidebar-badge.blue{background:var(--blue-500)}\n.sidebar-divider{height:1px;background:var(--slate-200);margin:10px 0}\n.main-content{margin-left:var(--sidebar-w);flex:1;padding:28px 28px 40px;max-width:calc(100% - var(--sidebar-w))}\n.page-header{margin-bottom:24px}\n.page-title{font-size:22px;font-weight:700;color:var(--blue-900);letter-spacing:-.3px}\n.page-subtitle{font-size:13px;color:var(--slate-500);margin-top:3px}\n.breadcrumb{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--slate-400);margin-bottom:8px}\n.breadcrumb a{color:var(--slate-400);text-decoration:none}\n.breadcrumb a:hover{color:var(--blue-500)}\n.breadcrumb-sep{font-size:10px}\n.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:24px}\n.stat-card{background:white;border:1px solid var(--slate-200);border-radius:var(--radius-lg);padding:18px 20px;position:relative;overflow:hidden}\n.stat-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--stat-color,var(--blue-500))}\n.stat-label{font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--slate-500);margin-bottom:6px}\n.stat-value{font-size:26px;font-weight:700;color:var(--blue-900);line-height:1;font-family:var(--font-mono)}\n.stat-sub{font-size:11px;color:var(--slate-400);margin-top:4px}\n.stat-trend{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:600;margin-top:4px}\n.stat-trend.up{color:var(--green)}\n.stat-trend.down{color:var(--red)}\n.card{background:white;border:1px solid var(--slate-200);border-radius:var(--radius-lg);padding:20px;margin-bottom:20px;box-shadow:var(--shadow)}\n.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px}\n.card-title{font-size:14px;font-weight:700;color:var(--blue-900)}\n.card-subtitle{font-size:12px;color:var(--slate-500);margin-top:2px}\n.table-wrap{overflow-x:auto}\ntable{width:100%;border-collapse:collapse;font-size:13px}\nth{text-align:left;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--slate-500);padding:10px 14px;border-bottom:2px solid var(--slate-200);white-space:nowrap;background:var(--slate-50)}\ntd{padding:11px 14px;border-bottom:1px solid var(--slate-100);color:var(--slate-700);vertical-align:middle}\ntr:hover td{background:var(--slate-50)}\ntr:last-child td{border-bottom:none}\n.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:100px;font-size:11px;font-weight:600;white-space:nowrap}\n.badge::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor}\n.badge-ok{background:#ECFDF5;color:#065F46}\n.badge-abnormal{background:#FEF2F2;color:#991B1B}\n.badge-pending{background:#FFFBEB;color:#92400E}\n.badge-progress{background:#EFF6FF;color:#1E40AF}\n.badge-closed{background:var(--slate-100);color:var(--slate-500)}\n.badge-critical{background:#FFF1F2;color:#9F1239}\n.badge-high{background:#FEF2F2;color:#991B1B}\n.badge-medium{background:#FFFBEB;color:#92400E}\n.badge-low{background:#F0FDF4;color:#14532D}\n.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--radius);font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .15s;text-decoration:none;white-space:nowrap}\n.btn-primary{background:var(--blue-500);color:white}\n.btn-primary:hover{background:var(--blue-600)}\n.btn-secondary{background:white;color:var(--slate-700);border:1px solid var(--slate-300)}\n.btn-secondary:hover{background:var(--slate-50);border-color:var(--slate-400)}\n.btn-success{background:var(--green);color:white}\n.btn-success:hover{background:#047857}\n.btn-danger{background:var(--red);color:white}\n.btn-danger:hover{background:#B91C1C}\n.btn-sm{padding:5px 12px;font-size:12px}\n.btn-ghost{background:transparent;color:var(--blue-500);padding:5px 8px;border:none}\n.btn-ghost:hover{background:var(--blue-50)}\n.form-group{margin-bottom:16px}\n.form-label{display:block;font-size:12px;font-weight:600;color:var(--slate-700);margin-bottom:5px}\n.form-input,.form-select,.form-textarea{width:100%;padding:9px 12px;border:1.5px solid var(--slate-300);border-radius:var(--radius);font-size:13px;font-family:var(--font-main);color:var(--slate-700);background:white;transition:border-color .15s;outline:none}\n.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--blue-400);box-shadow:0 0 0 3px rgba(37,99,235,.08)}\n.form-textarea{resize:vertical;min-height:80px}\n.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}\n.form-hint{font-size:11px;color:var(--slate-400);margin-top:4px}\n.checklist-item{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;border:1.5px solid var(--slate-200);border-radius:var(--radius);margin-bottom:8px;background:white;transition:all .2s}\n.checklist-item.ok{border-color:var(--green-border);background:var(--green-light)}\n.checklist-item.abnormal{border-color:var(--red-border);background:var(--red-light)}\n.check-num{width:26px;height:26px;border-radius:50%;background:var(--slate-100);color:var(--slate-500);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}\n.check-content{flex:1}\n.check-title{font-size:13px;font-weight:600;color:var(--blue-900);margin-bottom:2px}\n.check-detail{font-size:12px;color:var(--slate-500)}\n.check-actions{display:flex;gap:8px;margin-left:auto;flex-shrink:0;align-items:flex-start}\n.check-btn{padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid;transition:all .15s}\n.check-btn-ok{background:white;color:var(--green);border-color:var(--green)}\n.check-btn-ok:hover,.check-btn-ok.active{background:var(--green);color:white}\n.check-btn-abn{background:white;color:var(--red);border-color:var(--red)}\n.check-btn-abn:hover,.check-btn-abn.active{background:var(--red);color:white}\n.priority-bar{display:flex;align-items:center;gap:6px}\n.priority-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}\n.priority-dot.critical{background:#9F1239}\n.priority-dot.high{background:var(--red)}\n.priority-dot.medium{background:var(--amber)}\n.priority-dot.low{background:var(--green)}\n.progress-bar{height:8px;background:var(--slate-200);border-radius:100px;overflow:hidden}\n.progress-fill{height:100%;border-radius:100px;background:var(--blue-500);transition:width .4s ease}\n.progress-fill.green{background:var(--green)}\n.progress-fill.amber{background:var(--amber)}\n.progress-fill.red{background:var(--red)}\n.alert{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:var(--radius);margin-bottom:16px;font-size:13px;border:1px solid}\n.alert-info{background:var(--blue-50);border-color:#BFDBFE;color:#1E40AF}\n.alert-warning{background:var(--amber-light);border-color:var(--amber-border);color:#92400E}\n.alert-success{background:var(--green-light);border-color:var(--green-border);color:#065F46}\n.alert-error{background:var(--red-light);border-color:var(--red-border);color:#991B1B}\n.tabs{display:flex;border-bottom:2px solid var(--slate-200);margin-bottom:20px;gap:0;flex-wrap:wrap}\n.tab{padding:10px 18px;font-size:13px;font-weight:500;color:var(--slate-500);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s;text-decoration:none;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none}\n.tab:hover{color:var(--blue-500)}\n.tab.active{color:var(--blue-500);border-bottom-color:var(--blue-500);font-weight:700}\n.photo-upload{border:2px dashed var(--slate-300);border-radius:var(--radius);padding:24px;text-align:center;cursor:pointer;transition:all .2s;background:var(--slate-50)}\n.photo-upload:hover{border-color:var(--blue-400);background:var(--blue-50)}\n.photo-upload-icon{font-size:28px;margin-bottom:8px}\n.photo-upload-text{font-size:13px;color:var(--slate-500)}\n.photo-upload-hint{font-size:11px;color:var(--slate-400);margin-top:3px}\n.timeline{padding-left:4px}\n.timeline-item{display:flex;gap:14px;margin-bottom:16px;position:relative}\n.timeline-item:not(:last-child)::before{content:'';position:absolute;left:15px;top:30px;bottom:-16px;width:2px;background:var(--slate-200)}\n.timeline-dot{width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;border:2px solid white;box-shadow:0 0 0 1px var(--slate-200)}\n.timeline-content{flex:1;padding-top:4px}\n.timeline-title{font-size:13px;font-weight:600;color:var(--blue-900);margin-bottom:2px}\n.timeline-meta{font-size:11px;color:var(--slate-400)}\n.sensor-card{background:white;border:1px solid var(--slate-200);border-radius:var(--radius);padding:14px 16px;display:flex;align-items:center;gap:12px}\n.sensor-icon{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}\n.sensor-info{flex:1}\n.sensor-name{font-size:12px;font-weight:600;color:var(--blue-900)}\n.sensor-value{font-size:18px;font-weight:700;font-family:var(--font-mono);line-height:1.2}\n.sensor-status{font-size:11px;margin-top:2px}\n.sensor-value.normal{color:var(--green)}\n.sensor-value.warning{color:var(--amber)}\n.sensor-value.critical{color:var(--red)}\n.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:center;justify-content:center;padding:20px}\n.modal-overlay.open{display:flex}\n.modal{background:white;border-radius:var(--radius-lg);width:100%;max-width:560px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg)}\n.modal-header{padding:20px 24px 16px;border-bottom:1px solid var(--slate-200);display:flex;align-items:center;justify-content:space-between}\n.modal-title{font-size:16px;font-weight:700;color:var(--blue-900)}\n.modal-close{width:32px;height:32px;border-radius:6px;border:none;background:var(--slate-100);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--slate-500)}\n.modal-close:hover{background:var(--slate-200)}\n.modal-body{padding:20px 24px}\n.modal-footer{padding:16px 24px;border-top:1px solid var(--slate-200);display:flex;justify-content:flex-end;gap:10px}\n.sop-panel{background:var(--blue-50);border:1px solid #BFDBFE;border-radius:var(--radius);padding:14px;margin-top:8px;display:none}\n.sop-panel.open{display:block}\n.sop-step{display:flex;gap:10px;margin-bottom:8px;font-size:12px;color:var(--slate-700)}\n.sop-step-num{width:20px;height:20px;border-radius:50%;background:var(--blue-500);color:white;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}\n\n/* ── TOOLTIPS ── */\n[title]{position:relative;cursor:help}\n.tooltip-hint{display:inline-block;width:14px;height:14px;border-radius:50%;background:var(--slate-300);color:var(--slate-600);font-size:9px;font-weight:700;text-align:center;line-height:14px;cursor:help;flex-shrink:0}\n\n/* ── QUICK ACTION DOCK ── */\n.quick-actions{display:flex;flex-direction:column;gap:6px;padding:12px 16px;border-top:1px solid var(--slate-200);margin-top:8px}\n.quick-action-btn{display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:var(--radius);background:var(--blue-50);border:1px solid #BFDBFE;color:var(--blue-600);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;text-decoration:none;width:100%}\n.quick-action-btn:hover{background:var(--blue-500);color:white;border-color:var(--blue-500)}\n\n/* ── ESCALATION ALERT BANNER ── */\n.esc-banner{display:flex;align-items:center;gap:10px;background:#FFF1F2;border:1.5px solid #FECDD3;border-radius:var(--radius);padding:10px 14px;font-size:12px;color:#9F1239;font-weight:600;margin-bottom:12px}\n\n/* ── STATUS INDICATOR DOTS ── */\n.status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;display:inline-block}\n.status-dot.green{background:var(--green)}\n.status-dot.amber{background:var(--amber)}\n.status-dot.red{background:var(--red)}\n.status-dot.blue{background:var(--blue-500)}\n\n/* ── IMPROVED BREADCRUMB ── */\n.breadcrumb{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--slate-400);margin-bottom:8px;flex-wrap:wrap}\n.breadcrumb a,.breadcrumb span:not(.breadcrumb-sep){color:var(--slate-400);text-decoration:none;transition:color .15s}\n.breadcrumb a:hover{color:var(--blue-500)}\n.breadcrumb span:last-child{color:var(--slate-600);font-weight:600}\n.breadcrumb-sep{font-size:10px;color:var(--slate-300)}\n\n/* ── FILTER CHIP ── */\n.filter-chip{display:inline-flex;align-items:center;gap:5px;background:var(--blue-50);border:1px solid #BFDBFE;color:var(--blue-700);border-radius:100px;padding:3px 10px;font-size:11px;font-weight:600}\n.filter-chip .fc-remove{cursor:pointer;color:var(--blue-400);font-size:12px;font-weight:700;line-height:1}\n.filter-chip .fc-remove:hover{color:var(--red)}\n\n/* ── PRIORITY SORT INDICATOR ── */\n.sort-indicator{font-size:10px;color:var(--slate-400);margin-left:4px}", "",{"version":3,"sources":["webpack://./src/components/shared.css"],"names":[],"mappings":"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","sourcesContent":["*{margin:0;padding:0;box-sizing:border-box}\n:root{\n  --blue-900:#0B1F3A;--blue-800:#122D52;--blue-700:#1A3F6F;\n  --blue-600:#1E5291;--blue-500:#2563EB;--blue-400:#3B82F6;\n  --blue-100:#EFF6FF;--blue-50:#F0F7FF;\n  --slate-700:#334155;--slate-600:#475569;--slate-500:#64748B;\n  --slate-400:#94A3B8;--slate-300:#CBD5E1;--slate-200:#E2E8F0;\n  --slate-100:#F1F5F9;--slate-50:#F8FAFC;\n  --white:#FFFFFF;\n  --green:#059669;--green-light:#ECFDF5;--green-border:#A7F3D0;\n  --amber:#D97706;--amber-light:#FFFBEB;--amber-border:#FDE68A;\n  --red:#DC2626;--red-light:#FEF2F2;--red-border:#FECACA;\n  --purple:#7C3AED;--purple-light:#F5F3FF;\n  --cyan:#0891B2;--cyan-light:#ECFEFF;\n  /* 100% offline system fonts — no internet / CDN dependency */\n  --font-main:\"Segoe UI\",\"Helvetica Neue\",Helvetica,Arial,sans-serif;\n  --font-mono:\"Segoe UI\",\"Helvetica Neue\",Helvetica,Arial,sans-serif;\n  --radius:8px;--radius-lg:12px;\n  --shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.06);\n  --shadow-md:0 4px 6px rgba(0,0,0,.07),0 2px 4px rgba(0,0,0,.06);\n  --shadow-lg:0 10px 25px rgba(0,0,0,.08),0 4px 8px rgba(0,0,0,.04);\n  --sidebar-w:240px;\n}\nbody{font-family:var(--font-main);background:var(--slate-50);color:var(--slate-700);min-height:100vh;display:flex;flex-direction:column}\n.top-nav{background:var(--blue-900);height:56px;display:flex;align-items:center;padding:0 20px;gap:12px;box-shadow:0 2px 8px rgba(0,0,0,.25);position:fixed;top:0;left:0;right:0;z-index:100}\n.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}\n.nav-logo-icon{width:32px;height:32px;background:var(--blue-500);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px}\n.nav-logo-text{color:white;font-size:15px;font-weight:700;letter-spacing:-.2px}\n.nav-logo-sub{color:rgba(255,255,255,.4);font-size:10px;font-weight:400;letter-spacing:.6px;text-transform:uppercase}\n.nav-spacer{flex:1}\n.nav-role-badge{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:100px;padding:5px 12px 5px 8px}\n.nav-role-dot{width:8px;height:8px;border-radius:50%}\n.nav-role-name{color:white;font-size:12px;font-weight:600}\n.nav-home-btn{color:rgba(255,255,255,.55);font-size:12px;text-decoration:none;padding:5px 10px;border-radius:6px;transition:all .15s}\n.nav-home-btn:hover{background:rgba(255,255,255,.08);color:white}\n.app-layout{display:flex;padding-top:56px;min-height:100vh}\n.sidebar{width:var(--sidebar-w);background:white;border-right:1px solid var(--slate-200);position:fixed;top:56px;left:0;bottom:0;overflow-y:auto;padding:20px 0}\n.sidebar-section-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--slate-400);padding:14px 20px 6px}\n.sidebar-link{display:flex;align-items:center;gap:10px;padding:9px 20px;color:var(--slate-600);font-size:13px;font-weight:500;text-decoration:none;transition:all .15s;border-left:3px solid transparent}\n.sidebar-link:hover{background:var(--slate-50);color:var(--blue-500)}\n.sidebar-link.active{background:var(--blue-50);color:var(--blue-500);border-left-color:var(--blue-500);font-weight:600}\n.sidebar-link .link-icon{width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}\n.sidebar-badge{margin-left:auto;background:var(--red);color:white;font-size:10px;font-weight:700;padding:2px 6px;border-radius:100px}\n.sidebar-badge.amber{background:var(--amber)}\n.sidebar-badge.blue{background:var(--blue-500)}\n.sidebar-divider{height:1px;background:var(--slate-200);margin:10px 0}\n.main-content{margin-left:var(--sidebar-w);flex:1;padding:28px 28px 40px;max-width:calc(100% - var(--sidebar-w))}\n.page-header{margin-bottom:24px}\n.page-title{font-size:22px;font-weight:700;color:var(--blue-900);letter-spacing:-.3px}\n.page-subtitle{font-size:13px;color:var(--slate-500);margin-top:3px}\n.breadcrumb{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--slate-400);margin-bottom:8px}\n.breadcrumb a{color:var(--slate-400);text-decoration:none}\n.breadcrumb a:hover{color:var(--blue-500)}\n.breadcrumb-sep{font-size:10px}\n.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:24px}\n.stat-card{background:white;border:1px solid var(--slate-200);border-radius:var(--radius-lg);padding:18px 20px;position:relative;overflow:hidden}\n.stat-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--stat-color,var(--blue-500))}\n.stat-label{font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--slate-500);margin-bottom:6px}\n.stat-value{font-size:26px;font-weight:700;color:var(--blue-900);line-height:1;font-family:var(--font-mono)}\n.stat-sub{font-size:11px;color:var(--slate-400);margin-top:4px}\n.stat-trend{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:600;margin-top:4px}\n.stat-trend.up{color:var(--green)}\n.stat-trend.down{color:var(--red)}\n.card{background:white;border:1px solid var(--slate-200);border-radius:var(--radius-lg);padding:20px;margin-bottom:20px;box-shadow:var(--shadow)}\n.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px}\n.card-title{font-size:14px;font-weight:700;color:var(--blue-900)}\n.card-subtitle{font-size:12px;color:var(--slate-500);margin-top:2px}\n.table-wrap{overflow-x:auto}\ntable{width:100%;border-collapse:collapse;font-size:13px}\nth{text-align:left;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--slate-500);padding:10px 14px;border-bottom:2px solid var(--slate-200);white-space:nowrap;background:var(--slate-50)}\ntd{padding:11px 14px;border-bottom:1px solid var(--slate-100);color:var(--slate-700);vertical-align:middle}\ntr:hover td{background:var(--slate-50)}\ntr:last-child td{border-bottom:none}\n.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:100px;font-size:11px;font-weight:600;white-space:nowrap}\n.badge::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor}\n.badge-ok{background:#ECFDF5;color:#065F46}\n.badge-abnormal{background:#FEF2F2;color:#991B1B}\n.badge-pending{background:#FFFBEB;color:#92400E}\n.badge-progress{background:#EFF6FF;color:#1E40AF}\n.badge-closed{background:var(--slate-100);color:var(--slate-500)}\n.badge-critical{background:#FFF1F2;color:#9F1239}\n.badge-high{background:#FEF2F2;color:#991B1B}\n.badge-medium{background:#FFFBEB;color:#92400E}\n.badge-low{background:#F0FDF4;color:#14532D}\n.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--radius);font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .15s;text-decoration:none;white-space:nowrap}\n.btn-primary{background:var(--blue-500);color:white}\n.btn-primary:hover{background:var(--blue-600)}\n.btn-secondary{background:white;color:var(--slate-700);border:1px solid var(--slate-300)}\n.btn-secondary:hover{background:var(--slate-50);border-color:var(--slate-400)}\n.btn-success{background:var(--green);color:white}\n.btn-success:hover{background:#047857}\n.btn-danger{background:var(--red);color:white}\n.btn-danger:hover{background:#B91C1C}\n.btn-sm{padding:5px 12px;font-size:12px}\n.btn-ghost{background:transparent;color:var(--blue-500);padding:5px 8px;border:none}\n.btn-ghost:hover{background:var(--blue-50)}\n.form-group{margin-bottom:16px}\n.form-label{display:block;font-size:12px;font-weight:600;color:var(--slate-700);margin-bottom:5px}\n.form-input,.form-select,.form-textarea{width:100%;padding:9px 12px;border:1.5px solid var(--slate-300);border-radius:var(--radius);font-size:13px;font-family:var(--font-main);color:var(--slate-700);background:white;transition:border-color .15s;outline:none}\n.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--blue-400);box-shadow:0 0 0 3px rgba(37,99,235,.08)}\n.form-textarea{resize:vertical;min-height:80px}\n.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}\n.form-hint{font-size:11px;color:var(--slate-400);margin-top:4px}\n.checklist-item{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;border:1.5px solid var(--slate-200);border-radius:var(--radius);margin-bottom:8px;background:white;transition:all .2s}\n.checklist-item.ok{border-color:var(--green-border);background:var(--green-light)}\n.checklist-item.abnormal{border-color:var(--red-border);background:var(--red-light)}\n.check-num{width:26px;height:26px;border-radius:50%;background:var(--slate-100);color:var(--slate-500);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}\n.check-content{flex:1}\n.check-title{font-size:13px;font-weight:600;color:var(--blue-900);margin-bottom:2px}\n.check-detail{font-size:12px;color:var(--slate-500)}\n.check-actions{display:flex;gap:8px;margin-left:auto;flex-shrink:0;align-items:flex-start}\n.check-btn{padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid;transition:all .15s}\n.check-btn-ok{background:white;color:var(--green);border-color:var(--green)}\n.check-btn-ok:hover,.check-btn-ok.active{background:var(--green);color:white}\n.check-btn-abn{background:white;color:var(--red);border-color:var(--red)}\n.check-btn-abn:hover,.check-btn-abn.active{background:var(--red);color:white}\n.priority-bar{display:flex;align-items:center;gap:6px}\n.priority-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}\n.priority-dot.critical{background:#9F1239}\n.priority-dot.high{background:var(--red)}\n.priority-dot.medium{background:var(--amber)}\n.priority-dot.low{background:var(--green)}\n.progress-bar{height:8px;background:var(--slate-200);border-radius:100px;overflow:hidden}\n.progress-fill{height:100%;border-radius:100px;background:var(--blue-500);transition:width .4s ease}\n.progress-fill.green{background:var(--green)}\n.progress-fill.amber{background:var(--amber)}\n.progress-fill.red{background:var(--red)}\n.alert{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:var(--radius);margin-bottom:16px;font-size:13px;border:1px solid}\n.alert-info{background:var(--blue-50);border-color:#BFDBFE;color:#1E40AF}\n.alert-warning{background:var(--amber-light);border-color:var(--amber-border);color:#92400E}\n.alert-success{background:var(--green-light);border-color:var(--green-border);color:#065F46}\n.alert-error{background:var(--red-light);border-color:var(--red-border);color:#991B1B}\n.tabs{display:flex;border-bottom:2px solid var(--slate-200);margin-bottom:20px;gap:0;flex-wrap:wrap}\n.tab{padding:10px 18px;font-size:13px;font-weight:500;color:var(--slate-500);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s;text-decoration:none;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none}\n.tab:hover{color:var(--blue-500)}\n.tab.active{color:var(--blue-500);border-bottom-color:var(--blue-500);font-weight:700}\n.photo-upload{border:2px dashed var(--slate-300);border-radius:var(--radius);padding:24px;text-align:center;cursor:pointer;transition:all .2s;background:var(--slate-50)}\n.photo-upload:hover{border-color:var(--blue-400);background:var(--blue-50)}\n.photo-upload-icon{font-size:28px;margin-bottom:8px}\n.photo-upload-text{font-size:13px;color:var(--slate-500)}\n.photo-upload-hint{font-size:11px;color:var(--slate-400);margin-top:3px}\n.timeline{padding-left:4px}\n.timeline-item{display:flex;gap:14px;margin-bottom:16px;position:relative}\n.timeline-item:not(:last-child)::before{content:'';position:absolute;left:15px;top:30px;bottom:-16px;width:2px;background:var(--slate-200)}\n.timeline-dot{width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;border:2px solid white;box-shadow:0 0 0 1px var(--slate-200)}\n.timeline-content{flex:1;padding-top:4px}\n.timeline-title{font-size:13px;font-weight:600;color:var(--blue-900);margin-bottom:2px}\n.timeline-meta{font-size:11px;color:var(--slate-400)}\n.sensor-card{background:white;border:1px solid var(--slate-200);border-radius:var(--radius);padding:14px 16px;display:flex;align-items:center;gap:12px}\n.sensor-icon{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}\n.sensor-info{flex:1}\n.sensor-name{font-size:12px;font-weight:600;color:var(--blue-900)}\n.sensor-value{font-size:18px;font-weight:700;font-family:var(--font-mono);line-height:1.2}\n.sensor-status{font-size:11px;margin-top:2px}\n.sensor-value.normal{color:var(--green)}\n.sensor-value.warning{color:var(--amber)}\n.sensor-value.critical{color:var(--red)}\n.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:center;justify-content:center;padding:20px}\n.modal-overlay.open{display:flex}\n.modal{background:white;border-radius:var(--radius-lg);width:100%;max-width:560px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg)}\n.modal-header{padding:20px 24px 16px;border-bottom:1px solid var(--slate-200);display:flex;align-items:center;justify-content:space-between}\n.modal-title{font-size:16px;font-weight:700;color:var(--blue-900)}\n.modal-close{width:32px;height:32px;border-radius:6px;border:none;background:var(--slate-100);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--slate-500)}\n.modal-close:hover{background:var(--slate-200)}\n.modal-body{padding:20px 24px}\n.modal-footer{padding:16px 24px;border-top:1px solid var(--slate-200);display:flex;justify-content:flex-end;gap:10px}\n.sop-panel{background:var(--blue-50);border:1px solid #BFDBFE;border-radius:var(--radius);padding:14px;margin-top:8px;display:none}\n.sop-panel.open{display:block}\n.sop-step{display:flex;gap:10px;margin-bottom:8px;font-size:12px;color:var(--slate-700)}\n.sop-step-num{width:20px;height:20px;border-radius:50%;background:var(--blue-500);color:white;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}\n\n/* ── TOOLTIPS ── */\n[title]{position:relative;cursor:help}\n.tooltip-hint{display:inline-block;width:14px;height:14px;border-radius:50%;background:var(--slate-300);color:var(--slate-600);font-size:9px;font-weight:700;text-align:center;line-height:14px;cursor:help;flex-shrink:0}\n\n/* ── QUICK ACTION DOCK ── */\n.quick-actions{display:flex;flex-direction:column;gap:6px;padding:12px 16px;border-top:1px solid var(--slate-200);margin-top:8px}\n.quick-action-btn{display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:var(--radius);background:var(--blue-50);border:1px solid #BFDBFE;color:var(--blue-600);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;text-decoration:none;width:100%}\n.quick-action-btn:hover{background:var(--blue-500);color:white;border-color:var(--blue-500)}\n\n/* ── ESCALATION ALERT BANNER ── */\n.esc-banner{display:flex;align-items:center;gap:10px;background:#FFF1F2;border:1.5px solid #FECDD3;border-radius:var(--radius);padding:10px 14px;font-size:12px;color:#9F1239;font-weight:600;margin-bottom:12px}\n\n/* ── STATUS INDICATOR DOTS ── */\n.status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;display:inline-block}\n.status-dot.green{background:var(--green)}\n.status-dot.amber{background:var(--amber)}\n.status-dot.red{background:var(--red)}\n.status-dot.blue{background:var(--blue-500)}\n\n/* ── IMPROVED BREADCRUMB ── */\n.breadcrumb{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--slate-400);margin-bottom:8px;flex-wrap:wrap}\n.breadcrumb a,.breadcrumb span:not(.breadcrumb-sep){color:var(--slate-400);text-decoration:none;transition:color .15s}\n.breadcrumb a:hover{color:var(--blue-500)}\n.breadcrumb span:last-child{color:var(--slate-600);font-weight:600}\n.breadcrumb-sep{font-size:10px;color:var(--slate-300)}\n\n/* ── FILTER CHIP ── */\n.filter-chip{display:inline-flex;align-items:center;gap:5px;background:var(--blue-50);border:1px solid #BFDBFE;color:var(--blue-700);border-radius:100px;padding:3px 10px;font-size:11px;font-weight:600}\n.filter-chip .fc-remove{cursor:pointer;color:var(--blue-400);font-size:12px;font-weight:700;line-height:1}\n.filter-chip .fc-remove:hover{color:var(--red)}\n\n/* ── PRIORITY SORT INDICATOR ── */\n.sort-indicator{font-size:10px;color:var(--slate-400);margin-left:4px}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "*{margin:0;padding:0;box-sizing:border-box}\n:root{\n  --blue-900:#0B1F3A;--blue-800:#122D52;--blue-700:#1A3F6F;\n  --blue-600:#1E5291;--blue-500:#2563EB;--blue-400:#3B82F6;\n  --blue-100:#EFF6FF;--blue-50:#F0F7FF;\n  --slate-700:#334155;--slate-600:#475569;--slate-500:#64748B;\n  --slate-400:#94A3B8;--slate-300:#CBD5E1;--slate-200:#E2E8F0;\n  --slate-100:#F1F5F9;--slate-50:#F8FAFC;\n  --white:#FFFFFF;\n  --green:#059669;--green-light:#ECFDF5;--green-border:#A7F3D0;\n  --amber:#D97706;--amber-light:#FFFBEB;--amber-border:#FDE68A;\n  --red:#DC2626;--red-light:#FEF2F2;--red-border:#FECACA;\n  --purple:#7C3AED;--purple-light:#F5F3FF;\n  --cyan:#0891B2;--cyan-light:#ECFEFF;\n  /* 100% offline system fonts — no internet / CDN dependency */\n  --font-main:\"Segoe UI\",\"Helvetica Neue\",Helvetica,Arial,sans-serif;\n  --font-mono:\"Segoe UI\",\"Helvetica Neue\",Helvetica,Arial,sans-serif;\n  /* ── SINGLE SOURCE OF TRUTH — font size scale ──────────────────────\n     Same scale jo tailwind.config.js mein Admin/Configuration UI ke\n     liye define hai (text-xs/sm/base/lg/xl/2xl/3xl). Purane pages\n     (Home/Dashboard/Planner/Executor/Checker) jab bhi refactor ho,\n     inline px ki jagah yehi variables use karna. */\n  --fs-xs:11px;--fs-sm:13px;--fs-base:14px;--fs-lg:16px;\n  --fs-xl:18px;--fs-2xl:22px;--fs-3xl:26px;\n  --radius:8px;--radius-lg:12px;\n  --shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.06);\n  --shadow-md:0 4px 6px rgba(0,0,0,.07),0 2px 4px rgba(0,0,0,.06);\n  --shadow-lg:0 10px 25px rgba(0,0,0,.08),0 4px 8px rgba(0,0,0,.04);\n  --sidebar-w:240px;\n}\nbody{font-family:var(--font-main);background:var(--slate-50);color:var(--slate-700);min-height:100vh;display:flex;flex-direction:column}\n.top-nav{background:var(--blue-900);height:56px;display:flex;align-items:center;padding:0 20px;gap:12px;box-shadow:0 2px 8px rgba(0,0,0,.25);position:fixed;top:0;left:0;right:0;z-index:100}\n.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}\n.nav-logo-icon{width:32px;height:32px;background:var(--blue-500);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px}\n.nav-logo-text{color:white;font-size:15px;font-weight:700;letter-spacing:-.2px}\n.nav-logo-sub{color:rgba(255,255,255,.4);font-size:10px;font-weight:400;letter-spacing:.6px;text-transform:uppercase}\n.nav-spacer{flex:1}\n.nav-role-badge{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:100px;padding:5px 12px 5px 8px}\n.nav-role-dot{width:8px;height:8px;border-radius:50%}\n.nav-role-name{color:white;font-size:12px;font-weight:600}\n.nav-home-btn{color:rgba(255,255,255,.55);font-size:12px;text-decoration:none;padding:5px 10px;border-radius:6px;transition:all .15s}\n.nav-home-btn:hover{background:rgba(255,255,255,.08);color:white}\n.app-layout{display:flex;padding-top:56px;min-height:100vh}\n.sidebar{width:var(--sidebar-w);background:white;border-right:1px solid var(--slate-200);position:fixed;top:56px;left:0;bottom:0;overflow-y:auto;padding:20px 0}\n.sidebar-section-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--slate-400);padding:14px 20px 6px}\n.sidebar-link{display:flex;align-items:center;gap:10px;padding:9px 20px;color:var(--slate-600);font-size:13px;font-weight:500;text-decoration:none;transition:all .15s;border-left:3px solid transparent}\n.sidebar-link:hover{background:var(--slate-50);color:var(--blue-500)}\n.sidebar-link.active{background:var(--blue-50);color:var(--blue-500);border-left-color:var(--blue-500);font-weight:600}\n.sidebar-link .link-icon{width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}\n.sidebar-badge{margin-left:auto;background:var(--red);color:white;font-size:10px;font-weight:700;padding:2px 6px;border-radius:100px}\n.sidebar-badge.amber{background:var(--amber)}\n.sidebar-badge.blue{background:var(--blue-500)}\n.sidebar-divider{height:1px;background:var(--slate-200);margin:10px 0}\n.main-content{margin-left:var(--sidebar-w);flex:1;padding:28px 28px 40px;max-width:calc(100% - var(--sidebar-w))}\n.page-header{margin-bottom:24px}\n.page-title{font-size:22px;font-weight:700;color:var(--blue-900);letter-spacing:-.3px}\n.page-subtitle{font-size:13px;color:var(--slate-500);margin-top:3px}\n.breadcrumb{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--slate-400);margin-bottom:8px}\n.breadcrumb a{color:var(--slate-400);text-decoration:none}\n.breadcrumb a:hover{color:var(--blue-500)}\n.breadcrumb-sep{font-size:10px}\n.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:24px}\n.stat-card{background:white;border:1px solid var(--slate-200);border-radius:var(--radius-lg);padding:18px 20px;position:relative;overflow:hidden}\n.stat-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--stat-color,var(--blue-500))}\n.stat-label{font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--slate-500);margin-bottom:6px}\n.stat-value{font-size:26px;font-weight:700;color:var(--blue-900);line-height:1;font-family:var(--font-mono)}\n.stat-sub{font-size:11px;color:var(--slate-400);margin-top:4px}\n.stat-trend{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:600;margin-top:4px}\n.stat-trend.up{color:var(--green)}\n.stat-trend.down{color:var(--red)}\n.card{background:white;border:1px solid var(--slate-200);border-radius:var(--radius-lg);padding:20px;margin-bottom:20px;box-shadow:var(--shadow)}\n.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px}\n.card-title{font-size:14px;font-weight:700;color:var(--blue-900)}\n.card-subtitle{font-size:12px;color:var(--slate-500);margin-top:2px}\n.table-wrap{overflow-x:auto}\ntable{width:100%;border-collapse:collapse;font-size:13px}\nth{text-align:left;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--slate-500);padding:10px 14px;border-bottom:2px solid var(--slate-200);white-space:nowrap;background:var(--slate-50)}\ntd{padding:11px 14px;border-bottom:1px solid var(--slate-100);color:var(--slate-700);vertical-align:middle}\ntr:hover td{background:var(--slate-50)}\ntr:last-child td{border-bottom:none}\n.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:100px;font-size:11px;font-weight:600;white-space:nowrap}\n.badge::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor}\n.badge-ok{background:#ECFDF5;color:#065F46}\n.badge-abnormal{background:#FEF2F2;color:#991B1B}\n.badge-pending{background:#FFFBEB;color:#92400E}\n.badge-progress{background:#EFF6FF;color:#1E40AF}\n.badge-closed{background:var(--slate-100);color:var(--slate-500)}\n.badge-critical{background:#FFF1F2;color:#9F1239}\n.badge-high{background:#FEF2F2;color:#991B1B}\n.badge-medium{background:#FFFBEB;color:#92400E}\n.badge-low{background:#F0FDF4;color:#14532D}\n.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--radius);font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .15s;text-decoration:none;white-space:nowrap}\n.btn-primary{background:var(--blue-500);color:white}\n.btn-primary:hover{background:var(--blue-600)}\n.btn-secondary{background:white;color:var(--slate-700);border:1px solid var(--slate-300)}\n.btn-secondary:hover{background:var(--slate-50);border-color:var(--slate-400)}\n.btn-success{background:var(--green);color:white}\n.btn-success:hover{background:#047857}\n.btn-danger{background:var(--red);color:white}\n.btn-danger:hover{background:#B91C1C}\n.btn-sm{padding:5px 12px;font-size:12px}\n.btn-ghost{background:transparent;color:var(--blue-500);padding:5px 8px;border:none}\n.btn-ghost:hover{background:var(--blue-50)}\n.form-group{margin-bottom:16px}\n.form-label{display:block;font-size:12px;font-weight:600;color:var(--slate-700);margin-bottom:5px}\n.form-input,.form-select,.form-textarea{width:100%;padding:9px 12px;border:1.5px solid var(--slate-300);border-radius:var(--radius);font-size:13px;font-family:var(--font-main);color:var(--slate-700);background:white;transition:border-color .15s;outline:none}\n.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--blue-400);box-shadow:0 0 0 3px rgba(37,99,235,.08)}\n.form-textarea{resize:vertical;min-height:80px}\n.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}\n.form-hint{font-size:11px;color:var(--slate-400);margin-top:4px}\n.checklist-item{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;border:1.5px solid var(--slate-200);border-radius:var(--radius);margin-bottom:8px;background:white;transition:all .2s}\n.checklist-item.ok{border-color:var(--green-border);background:var(--green-light)}\n.checklist-item.abnormal{border-color:var(--red-border);background:var(--red-light)}\n.check-num{width:26px;height:26px;border-radius:50%;background:var(--slate-100);color:var(--slate-500);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}\n.check-content{flex:1}\n.check-title{font-size:13px;font-weight:600;color:var(--blue-900);margin-bottom:2px}\n.check-detail{font-size:12px;color:var(--slate-500)}\n.check-actions{display:flex;gap:8px;margin-left:auto;flex-shrink:0;align-items:flex-start}\n.check-btn{padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid;transition:all .15s}\n.check-btn-ok{background:white;color:var(--green);border-color:var(--green)}\n.check-btn-ok:hover,.check-btn-ok.active{background:var(--green);color:white}\n.check-btn-abn{background:white;color:var(--red);border-color:var(--red)}\n.check-btn-abn:hover,.check-btn-abn.active{background:var(--red);color:white}\n.priority-bar{display:flex;align-items:center;gap:6px}\n.priority-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}\n.priority-dot.critical{background:#9F1239}\n.priority-dot.high{background:var(--red)}\n.priority-dot.medium{background:var(--amber)}\n.priority-dot.low{background:var(--green)}\n.progress-bar{height:8px;background:var(--slate-200);border-radius:100px;overflow:hidden}\n.progress-fill{height:100%;border-radius:100px;background:var(--blue-500);transition:width .4s ease}\n.progress-fill.green{background:var(--green)}\n.progress-fill.amber{background:var(--amber)}\n.progress-fill.red{background:var(--red)}\n.alert{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:var(--radius);margin-bottom:16px;font-size:13px;border:1px solid}\n.alert-info{background:var(--blue-50);border-color:#BFDBFE;color:#1E40AF}\n.alert-warning{background:var(--amber-light);border-color:var(--amber-border);color:#92400E}\n.alert-success{background:var(--green-light);border-color:var(--green-border);color:#065F46}\n.alert-error{background:var(--red-light);border-color:var(--red-border);color:#991B1B}\n.tabs{display:flex;border-bottom:2px solid var(--slate-200);margin-bottom:20px;gap:0;flex-wrap:wrap}\n.tab{padding:10px 18px;font-size:13px;font-weight:500;color:var(--slate-500);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s;text-decoration:none;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none}\n.tab:hover{color:var(--blue-500)}\n.tab.active{color:var(--blue-500);border-bottom-color:var(--blue-500);font-weight:700}\n.photo-upload{border:2px dashed var(--slate-300);border-radius:var(--radius);padding:24px;text-align:center;cursor:pointer;transition:all .2s;background:var(--slate-50)}\n.photo-upload:hover{border-color:var(--blue-400);background:var(--blue-50)}\n.photo-upload-icon{font-size:28px;margin-bottom:8px}\n.photo-upload-text{font-size:13px;color:var(--slate-500)}\n.photo-upload-hint{font-size:11px;color:var(--slate-400);margin-top:3px}\n.timeline{padding-left:4px}\n.timeline-item{display:flex;gap:14px;margin-bottom:16px;position:relative}\n.timeline-item:not(:last-child)::before{content:'';position:absolute;left:15px;top:30px;bottom:-16px;width:2px;background:var(--slate-200)}\n.timeline-dot{width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;border:2px solid white;box-shadow:0 0 0 1px var(--slate-200)}\n.timeline-content{flex:1;padding-top:4px}\n.timeline-title{font-size:13px;font-weight:600;color:var(--blue-900);margin-bottom:2px}\n.timeline-meta{font-size:11px;color:var(--slate-400)}\n.sensor-card{background:white;border:1px solid var(--slate-200);border-radius:var(--radius);padding:14px 16px;display:flex;align-items:center;gap:12px}\n.sensor-icon{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}\n.sensor-info{flex:1}\n.sensor-name{font-size:12px;font-weight:600;color:var(--blue-900)}\n.sensor-value{font-size:18px;font-weight:700;font-family:var(--font-mono);line-height:1.2}\n.sensor-status{font-size:11px;margin-top:2px}\n.sensor-value.normal{color:var(--green)}\n.sensor-value.warning{color:var(--amber)}\n.sensor-value.critical{color:var(--red)}\n.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:center;justify-content:center;padding:20px}\n.modal-overlay.open{display:flex}\n.modal{background:white;border-radius:var(--radius-lg);width:100%;max-width:560px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg)}\n.modal-header{padding:20px 24px 16px;border-bottom:1px solid var(--slate-200);display:flex;align-items:center;justify-content:space-between}\n.modal-title{font-size:16px;font-weight:700;color:var(--blue-900)}\n.modal-close{width:32px;height:32px;border-radius:6px;border:none;background:var(--slate-100);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--slate-500)}\n.modal-close:hover{background:var(--slate-200)}\n.modal-body{padding:20px 24px}\n.modal-footer{padding:16px 24px;border-top:1px solid var(--slate-200);display:flex;justify-content:flex-end;gap:10px}\n.sop-panel{background:var(--blue-50);border:1px solid #BFDBFE;border-radius:var(--radius);padding:14px;margin-top:8px;display:none}\n.sop-panel.open{display:block}\n.sop-step{display:flex;gap:10px;margin-bottom:8px;font-size:12px;color:var(--slate-700)}\n.sop-step-num{width:20px;height:20px;border-radius:50%;background:var(--blue-500);color:white;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}\n\n/* ── TOOLTIPS ── */\n[title]{position:relative;cursor:help}\n.tooltip-hint{display:inline-block;width:14px;height:14px;border-radius:50%;background:var(--slate-300);color:var(--slate-600);font-size:9px;font-weight:700;text-align:center;line-height:14px;cursor:help;flex-shrink:0}\n\n/* ── QUICK ACTION DOCK ── */\n.quick-actions{display:flex;flex-direction:column;gap:6px;padding:12px 16px;border-top:1px solid var(--slate-200);margin-top:8px}\n.quick-action-btn{display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:var(--radius);background:var(--blue-50);border:1px solid #BFDBFE;color:var(--blue-600);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;text-decoration:none;width:100%}\n.quick-action-btn:hover{background:var(--blue-500);color:white;border-color:var(--blue-500)}\n\n/* ── ESCALATION ALERT BANNER ── */\n.esc-banner{display:flex;align-items:center;gap:10px;background:#FFF1F2;border:1.5px solid #FECDD3;border-radius:var(--radius);padding:10px 14px;font-size:12px;color:#9F1239;font-weight:600;margin-bottom:12px}\n\n/* ── STATUS INDICATOR DOTS ── */\n.status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;display:inline-block}\n.status-dot.green{background:var(--green)}\n.status-dot.amber{background:var(--amber)}\n.status-dot.red{background:var(--red)}\n.status-dot.blue{background:var(--blue-500)}\n\n/* ── IMPROVED BREADCRUMB ── */\n.breadcrumb{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--slate-400);margin-bottom:8px;flex-wrap:wrap}\n.breadcrumb a,.breadcrumb span:not(.breadcrumb-sep){color:var(--slate-400);text-decoration:none;transition:color .15s}\n.breadcrumb a:hover{color:var(--blue-500)}\n.breadcrumb span:last-child{color:var(--slate-600);font-weight:600}\n.breadcrumb-sep{font-size:10px;color:var(--slate-300)}\n\n/* ── FILTER CHIP ── */\n.filter-chip{display:inline-flex;align-items:center;gap:5px;background:var(--blue-50);border:1px solid #BFDBFE;color:var(--blue-700);border-radius:100px;padding:3px 10px;font-size:11px;font-weight:600}\n.filter-chip .fc-remove{cursor:pointer;color:var(--blue-400);font-size:12px;font-weight:700;line-height:1}\n.filter-chip .fc-remove:hover{color:var(--red)}\n\n/* ── PRIORITY SORT INDICATOR ── */\n.sort-indicator{font-size:10px;color:var(--slate-400);margin-left:4px}", "",{"version":3,"sources":["webpack://./src/components/shared.css"],"names":[],"mappings":"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","sourcesContent":["*{margin:0;padding:0;box-sizing:border-box}\n:root{\n  --blue-900:#0B1F3A;--blue-800:#122D52;--blue-700:#1A3F6F;\n  --blue-600:#1E5291;--blue-500:#2563EB;--blue-400:#3B82F6;\n  --blue-100:#EFF6FF;--blue-50:#F0F7FF;\n  --slate-700:#334155;--slate-600:#475569;--slate-500:#64748B;\n  --slate-400:#94A3B8;--slate-300:#CBD5E1;--slate-200:#E2E8F0;\n  --slate-100:#F1F5F9;--slate-50:#F8FAFC;\n  --white:#FFFFFF;\n  --green:#059669;--green-light:#ECFDF5;--green-border:#A7F3D0;\n  --amber:#D97706;--amber-light:#FFFBEB;--amber-border:#FDE68A;\n  --red:#DC2626;--red-light:#FEF2F2;--red-border:#FECACA;\n  --purple:#7C3AED;--purple-light:#F5F3FF;\n  --cyan:#0891B2;--cyan-light:#ECFEFF;\n  /* 100% offline system fonts — no internet / CDN dependency */\n  --font-main:\"Segoe UI\",\"Helvetica Neue\",Helvetica,Arial,sans-serif;\n  --font-mono:\"Segoe UI\",\"Helvetica Neue\",Helvetica,Arial,sans-serif;\n  /* ── SINGLE SOURCE OF TRUTH — font size scale ──────────────────────\n     Same scale jo tailwind.config.js mein Admin/Configuration UI ke\n     liye define hai (text-xs/sm/base/lg/xl/2xl/3xl). Purane pages\n     (Home/Dashboard/Planner/Executor/Checker) jab bhi refactor ho,\n     inline px ki jagah yehi variables use karna. */\n  --fs-xs:11px;--fs-sm:13px;--fs-base:14px;--fs-lg:16px;\n  --fs-xl:18px;--fs-2xl:22px;--fs-3xl:26px;\n  --radius:8px;--radius-lg:12px;\n  --shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.06);\n  --shadow-md:0 4px 6px rgba(0,0,0,.07),0 2px 4px rgba(0,0,0,.06);\n  --shadow-lg:0 10px 25px rgba(0,0,0,.08),0 4px 8px rgba(0,0,0,.04);\n  --sidebar-w:240px;\n}\nbody{font-family:var(--font-main);background:var(--slate-50);color:var(--slate-700);min-height:100vh;display:flex;flex-direction:column}\n.top-nav{background:var(--blue-900);height:56px;display:flex;align-items:center;padding:0 20px;gap:12px;box-shadow:0 2px 8px rgba(0,0,0,.25);position:fixed;top:0;left:0;right:0;z-index:100}\n.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}\n.nav-logo-icon{width:32px;height:32px;background:var(--blue-500);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px}\n.nav-logo-text{color:white;font-size:15px;font-weight:700;letter-spacing:-.2px}\n.nav-logo-sub{color:rgba(255,255,255,.4);font-size:10px;font-weight:400;letter-spacing:.6px;text-transform:uppercase}\n.nav-spacer{flex:1}\n.nav-role-badge{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:100px;padding:5px 12px 5px 8px}\n.nav-role-dot{width:8px;height:8px;border-radius:50%}\n.nav-role-name{color:white;font-size:12px;font-weight:600}\n.nav-home-btn{color:rgba(255,255,255,.55);font-size:12px;text-decoration:none;padding:5px 10px;border-radius:6px;transition:all .15s}\n.nav-home-btn:hover{background:rgba(255,255,255,.08);color:white}\n.app-layout{display:flex;padding-top:56px;min-height:100vh}\n.sidebar{width:var(--sidebar-w);background:white;border-right:1px solid var(--slate-200);position:fixed;top:56px;left:0;bottom:0;overflow-y:auto;padding:20px 0}\n.sidebar-section-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--slate-400);padding:14px 20px 6px}\n.sidebar-link{display:flex;align-items:center;gap:10px;padding:9px 20px;color:var(--slate-600);font-size:13px;font-weight:500;text-decoration:none;transition:all .15s;border-left:3px solid transparent}\n.sidebar-link:hover{background:var(--slate-50);color:var(--blue-500)}\n.sidebar-link.active{background:var(--blue-50);color:var(--blue-500);border-left-color:var(--blue-500);font-weight:600}\n.sidebar-link .link-icon{width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}\n.sidebar-badge{margin-left:auto;background:var(--red);color:white;font-size:10px;font-weight:700;padding:2px 6px;border-radius:100px}\n.sidebar-badge.amber{background:var(--amber)}\n.sidebar-badge.blue{background:var(--blue-500)}\n.sidebar-divider{height:1px;background:var(--slate-200);margin:10px 0}\n.main-content{margin-left:var(--sidebar-w);flex:1;padding:28px 28px 40px;max-width:calc(100% - var(--sidebar-w))}\n.page-header{margin-bottom:24px}\n.page-title{font-size:22px;font-weight:700;color:var(--blue-900);letter-spacing:-.3px}\n.page-subtitle{font-size:13px;color:var(--slate-500);margin-top:3px}\n.breadcrumb{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--slate-400);margin-bottom:8px}\n.breadcrumb a{color:var(--slate-400);text-decoration:none}\n.breadcrumb a:hover{color:var(--blue-500)}\n.breadcrumb-sep{font-size:10px}\n.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:24px}\n.stat-card{background:white;border:1px solid var(--slate-200);border-radius:var(--radius-lg);padding:18px 20px;position:relative;overflow:hidden}\n.stat-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--stat-color,var(--blue-500))}\n.stat-label{font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--slate-500);margin-bottom:6px}\n.stat-value{font-size:26px;font-weight:700;color:var(--blue-900);line-height:1;font-family:var(--font-mono)}\n.stat-sub{font-size:11px;color:var(--slate-400);margin-top:4px}\n.stat-trend{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:600;margin-top:4px}\n.stat-trend.up{color:var(--green)}\n.stat-trend.down{color:var(--red)}\n.card{background:white;border:1px solid var(--slate-200);border-radius:var(--radius-lg);padding:20px;margin-bottom:20px;box-shadow:var(--shadow)}\n.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px}\n.card-title{font-size:14px;font-weight:700;color:var(--blue-900)}\n.card-subtitle{font-size:12px;color:var(--slate-500);margin-top:2px}\n.table-wrap{overflow-x:auto}\ntable{width:100%;border-collapse:collapse;font-size:13px}\nth{text-align:left;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--slate-500);padding:10px 14px;border-bottom:2px solid var(--slate-200);white-space:nowrap;background:var(--slate-50)}\ntd{padding:11px 14px;border-bottom:1px solid var(--slate-100);color:var(--slate-700);vertical-align:middle}\ntr:hover td{background:var(--slate-50)}\ntr:last-child td{border-bottom:none}\n.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:100px;font-size:11px;font-weight:600;white-space:nowrap}\n.badge::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor}\n.badge-ok{background:#ECFDF5;color:#065F46}\n.badge-abnormal{background:#FEF2F2;color:#991B1B}\n.badge-pending{background:#FFFBEB;color:#92400E}\n.badge-progress{background:#EFF6FF;color:#1E40AF}\n.badge-closed{background:var(--slate-100);color:var(--slate-500)}\n.badge-critical{background:#FFF1F2;color:#9F1239}\n.badge-high{background:#FEF2F2;color:#991B1B}\n.badge-medium{background:#FFFBEB;color:#92400E}\n.badge-low{background:#F0FDF4;color:#14532D}\n.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--radius);font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .15s;text-decoration:none;white-space:nowrap}\n.btn-primary{background:var(--blue-500);color:white}\n.btn-primary:hover{background:var(--blue-600)}\n.btn-secondary{background:white;color:var(--slate-700);border:1px solid var(--slate-300)}\n.btn-secondary:hover{background:var(--slate-50);border-color:var(--slate-400)}\n.btn-success{background:var(--green);color:white}\n.btn-success:hover{background:#047857}\n.btn-danger{background:var(--red);color:white}\n.btn-danger:hover{background:#B91C1C}\n.btn-sm{padding:5px 12px;font-size:12px}\n.btn-ghost{background:transparent;color:var(--blue-500);padding:5px 8px;border:none}\n.btn-ghost:hover{background:var(--blue-50)}\n.form-group{margin-bottom:16px}\n.form-label{display:block;font-size:12px;font-weight:600;color:var(--slate-700);margin-bottom:5px}\n.form-input,.form-select,.form-textarea{width:100%;padding:9px 12px;border:1.5px solid var(--slate-300);border-radius:var(--radius);font-size:13px;font-family:var(--font-main);color:var(--slate-700);background:white;transition:border-color .15s;outline:none}\n.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--blue-400);box-shadow:0 0 0 3px rgba(37,99,235,.08)}\n.form-textarea{resize:vertical;min-height:80px}\n.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}\n.form-hint{font-size:11px;color:var(--slate-400);margin-top:4px}\n.checklist-item{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;border:1.5px solid var(--slate-200);border-radius:var(--radius);margin-bottom:8px;background:white;transition:all .2s}\n.checklist-item.ok{border-color:var(--green-border);background:var(--green-light)}\n.checklist-item.abnormal{border-color:var(--red-border);background:var(--red-light)}\n.check-num{width:26px;height:26px;border-radius:50%;background:var(--slate-100);color:var(--slate-500);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}\n.check-content{flex:1}\n.check-title{font-size:13px;font-weight:600;color:var(--blue-900);margin-bottom:2px}\n.check-detail{font-size:12px;color:var(--slate-500)}\n.check-actions{display:flex;gap:8px;margin-left:auto;flex-shrink:0;align-items:flex-start}\n.check-btn{padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid;transition:all .15s}\n.check-btn-ok{background:white;color:var(--green);border-color:var(--green)}\n.check-btn-ok:hover,.check-btn-ok.active{background:var(--green);color:white}\n.check-btn-abn{background:white;color:var(--red);border-color:var(--red)}\n.check-btn-abn:hover,.check-btn-abn.active{background:var(--red);color:white}\n.priority-bar{display:flex;align-items:center;gap:6px}\n.priority-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}\n.priority-dot.critical{background:#9F1239}\n.priority-dot.high{background:var(--red)}\n.priority-dot.medium{background:var(--amber)}\n.priority-dot.low{background:var(--green)}\n.progress-bar{height:8px;background:var(--slate-200);border-radius:100px;overflow:hidden}\n.progress-fill{height:100%;border-radius:100px;background:var(--blue-500);transition:width .4s ease}\n.progress-fill.green{background:var(--green)}\n.progress-fill.amber{background:var(--amber)}\n.progress-fill.red{background:var(--red)}\n.alert{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:var(--radius);margin-bottom:16px;font-size:13px;border:1px solid}\n.alert-info{background:var(--blue-50);border-color:#BFDBFE;color:#1E40AF}\n.alert-warning{background:var(--amber-light);border-color:var(--amber-border);color:#92400E}\n.alert-success{background:var(--green-light);border-color:var(--green-border);color:#065F46}\n.alert-error{background:var(--red-light);border-color:var(--red-border);color:#991B1B}\n.tabs{display:flex;border-bottom:2px solid var(--slate-200);margin-bottom:20px;gap:0;flex-wrap:wrap}\n.tab{padding:10px 18px;font-size:13px;font-weight:500;color:var(--slate-500);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s;text-decoration:none;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none}\n.tab:hover{color:var(--blue-500)}\n.tab.active{color:var(--blue-500);border-bottom-color:var(--blue-500);font-weight:700}\n.photo-upload{border:2px dashed var(--slate-300);border-radius:var(--radius);padding:24px;text-align:center;cursor:pointer;transition:all .2s;background:var(--slate-50)}\n.photo-upload:hover{border-color:var(--blue-400);background:var(--blue-50)}\n.photo-upload-icon{font-size:28px;margin-bottom:8px}\n.photo-upload-text{font-size:13px;color:var(--slate-500)}\n.photo-upload-hint{font-size:11px;color:var(--slate-400);margin-top:3px}\n.timeline{padding-left:4px}\n.timeline-item{display:flex;gap:14px;margin-bottom:16px;position:relative}\n.timeline-item:not(:last-child)::before{content:'';position:absolute;left:15px;top:30px;bottom:-16px;width:2px;background:var(--slate-200)}\n.timeline-dot{width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;border:2px solid white;box-shadow:0 0 0 1px var(--slate-200)}\n.timeline-content{flex:1;padding-top:4px}\n.timeline-title{font-size:13px;font-weight:600;color:var(--blue-900);margin-bottom:2px}\n.timeline-meta{font-size:11px;color:var(--slate-400)}\n.sensor-card{background:white;border:1px solid var(--slate-200);border-radius:var(--radius);padding:14px 16px;display:flex;align-items:center;gap:12px}\n.sensor-icon{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}\n.sensor-info{flex:1}\n.sensor-name{font-size:12px;font-weight:600;color:var(--blue-900)}\n.sensor-value{font-size:18px;font-weight:700;font-family:var(--font-mono);line-height:1.2}\n.sensor-status{font-size:11px;margin-top:2px}\n.sensor-value.normal{color:var(--green)}\n.sensor-value.warning{color:var(--amber)}\n.sensor-value.critical{color:var(--red)}\n.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:center;justify-content:center;padding:20px}\n.modal-overlay.open{display:flex}\n.modal{background:white;border-radius:var(--radius-lg);width:100%;max-width:560px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg)}\n.modal-header{padding:20px 24px 16px;border-bottom:1px solid var(--slate-200);display:flex;align-items:center;justify-content:space-between}\n.modal-title{font-size:16px;font-weight:700;color:var(--blue-900)}\n.modal-close{width:32px;height:32px;border-radius:6px;border:none;background:var(--slate-100);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--slate-500)}\n.modal-close:hover{background:var(--slate-200)}\n.modal-body{padding:20px 24px}\n.modal-footer{padding:16px 24px;border-top:1px solid var(--slate-200);display:flex;justify-content:flex-end;gap:10px}\n.sop-panel{background:var(--blue-50);border:1px solid #BFDBFE;border-radius:var(--radius);padding:14px;margin-top:8px;display:none}\n.sop-panel.open{display:block}\n.sop-step{display:flex;gap:10px;margin-bottom:8px;font-size:12px;color:var(--slate-700)}\n.sop-step-num{width:20px;height:20px;border-radius:50%;background:var(--blue-500);color:white;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}\n\n/* ── TOOLTIPS ── */\n[title]{position:relative;cursor:help}\n.tooltip-hint{display:inline-block;width:14px;height:14px;border-radius:50%;background:var(--slate-300);color:var(--slate-600);font-size:9px;font-weight:700;text-align:center;line-height:14px;cursor:help;flex-shrink:0}\n\n/* ── QUICK ACTION DOCK ── */\n.quick-actions{display:flex;flex-direction:column;gap:6px;padding:12px 16px;border-top:1px solid var(--slate-200);margin-top:8px}\n.quick-action-btn{display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:var(--radius);background:var(--blue-50);border:1px solid #BFDBFE;color:var(--blue-600);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;text-decoration:none;width:100%}\n.quick-action-btn:hover{background:var(--blue-500);color:white;border-color:var(--blue-500)}\n\n/* ── ESCALATION ALERT BANNER ── */\n.esc-banner{display:flex;align-items:center;gap:10px;background:#FFF1F2;border:1.5px solid #FECDD3;border-radius:var(--radius);padding:10px 14px;font-size:12px;color:#9F1239;font-weight:600;margin-bottom:12px}\n\n/* ── STATUS INDICATOR DOTS ── */\n.status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;display:inline-block}\n.status-dot.green{background:var(--green)}\n.status-dot.amber{background:var(--amber)}\n.status-dot.red{background:var(--red)}\n.status-dot.blue{background:var(--blue-500)}\n\n/* ── IMPROVED BREADCRUMB ── */\n.breadcrumb{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--slate-400);margin-bottom:8px;flex-wrap:wrap}\n.breadcrumb a,.breadcrumb span:not(.breadcrumb-sep){color:var(--slate-400);text-decoration:none;transition:color .15s}\n.breadcrumb a:hover{color:var(--blue-500)}\n.breadcrumb span:last-child{color:var(--slate-600);font-weight:600}\n.breadcrumb-sep{font-size:10px;color:var(--slate-300)}\n\n/* ── FILTER CHIP ── */\n.filter-chip{display:inline-flex;align-items:center;gap:5px;background:var(--blue-50);border:1px solid #BFDBFE;color:var(--blue-700);border-radius:100px;padding:3px 10px;font-size:11px;font-weight:600}\n.filter-chip .fc-remove{cursor:pointer;color:var(--blue-400);font-size:12px;font-weight:700;line-height:1}\n.filter-chip .fc-remove:hover{color:var(--red)}\n\n/* ── PRIORITY SORT INDICATOR ── */\n.sort-indicator{font-size:10px;color:var(--slate-400);margin-left:4px}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -16935,7 +21537,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "*, ::before, ::after {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n  --tw-contain-size:  ;\n  --tw-contain-layout:  ;\n  --tw-contain-paint:  ;\n  --tw-contain-style:  ;\n}\n\n::backdrop {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n  --tw-contain-size:  ;\n  --tw-contain-layout:  ;\n  --tw-contain-paint:  ;\n  --tw-contain-style:  ;\n}\n\n/*\n! tailwindcss v3.4.19 | MIT License | https://tailwindcss.com\n*/\n\n/*\n1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)\n2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)\n*/\n\n*,\n::before,\n::after {\n  box-sizing: border-box;\n  /* 1 */\n  border-width: 0;\n  /* 2 */\n  border-style: solid;\n  /* 2 */\n  border-color: #e5e7eb;\n  /* 2 */\n}\n\n::before,\n::after {\n  --tw-content: '';\n}\n\n/*\n1. Use a consistent sensible line-height in all browsers.\n2. Prevent adjustments of font size after orientation changes in iOS.\n3. Use a more readable tab size.\n4. Use the user's configured `sans` font-family by default.\n5. Use the user's configured `sans` font-feature-settings by default.\n6. Use the user's configured `sans` font-variation-settings by default.\n7. Disable tap highlights on iOS\n*/\n\nhtml,\n:host {\n  line-height: 1.5;\n  /* 1 */\n  -webkit-text-size-adjust: 100%;\n  /* 2 */\n  -moz-tab-size: 4;\n  /* 3 */\n  -o-tab-size: 4;\n     tab-size: 4;\n  /* 3 */\n  font-family: ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\";\n  /* 4 */\n  font-feature-settings: normal;\n  /* 5 */\n  font-variation-settings: normal;\n  /* 6 */\n  -webkit-tap-highlight-color: transparent;\n  /* 7 */\n}\n\n/*\n1. Remove the margin in all browsers.\n2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.\n*/\n\nbody {\n  margin: 0;\n  /* 1 */\n  line-height: inherit;\n  /* 2 */\n}\n\n/*\n1. Add the correct height in Firefox.\n2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)\n3. Ensure horizontal rules are visible by default.\n*/\n\nhr {\n  height: 0;\n  /* 1 */\n  color: inherit;\n  /* 2 */\n  border-top-width: 1px;\n  /* 3 */\n}\n\n/*\nAdd the correct text decoration in Chrome, Edge, and Safari.\n*/\n\nabbr:where([title]) {\n  -webkit-text-decoration: underline dotted;\n          text-decoration: underline dotted;\n}\n\n/*\nRemove the default font size and weight for headings.\n*/\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  font-size: inherit;\n  font-weight: inherit;\n}\n\n/*\nReset links to optimize for opt-in styling instead of opt-out.\n*/\n\na {\n  color: inherit;\n  text-decoration: inherit;\n}\n\n/*\nAdd the correct font weight in Edge and Safari.\n*/\n\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/*\n1. Use the user's configured `mono` font-family by default.\n2. Use the user's configured `mono` font-feature-settings by default.\n3. Use the user's configured `mono` font-variation-settings by default.\n4. Correct the odd `em` font sizing in all browsers.\n*/\n\ncode,\nkbd,\nsamp,\npre {\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace;\n  /* 1 */\n  font-feature-settings: normal;\n  /* 2 */\n  font-variation-settings: normal;\n  /* 3 */\n  font-size: 1em;\n  /* 4 */\n}\n\n/*\nAdd the correct font size in all browsers.\n*/\n\nsmall {\n  font-size: 80%;\n}\n\n/*\nPrevent `sub` and `sup` elements from affecting the line height in all browsers.\n*/\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/*\n1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)\n2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)\n3. Remove gaps between table borders by default.\n*/\n\ntable {\n  text-indent: 0;\n  /* 1 */\n  border-color: inherit;\n  /* 2 */\n  border-collapse: collapse;\n  /* 3 */\n}\n\n/*\n1. Change the font styles in all browsers.\n2. Remove the margin in Firefox and Safari.\n3. Remove default padding in all browsers.\n*/\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit;\n  /* 1 */\n  font-feature-settings: inherit;\n  /* 1 */\n  font-variation-settings: inherit;\n  /* 1 */\n  font-size: 100%;\n  /* 1 */\n  font-weight: inherit;\n  /* 1 */\n  line-height: inherit;\n  /* 1 */\n  letter-spacing: inherit;\n  /* 1 */\n  color: inherit;\n  /* 1 */\n  margin: 0;\n  /* 2 */\n  padding: 0;\n  /* 3 */\n}\n\n/*\nRemove the inheritance of text transform in Edge and Firefox.\n*/\n\nbutton,\nselect {\n  text-transform: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Remove default button styles.\n*/\n\nbutton,\ninput:where([type='button']),\ninput:where([type='reset']),\ninput:where([type='submit']) {\n  -webkit-appearance: button;\n  /* 1 */\n  background-color: transparent;\n  /* 2 */\n  background-image: none;\n  /* 2 */\n}\n\n/*\nUse the modern Firefox focus style for all focusable elements.\n*/\n\n:-moz-focusring {\n  outline: auto;\n}\n\n/*\nRemove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)\n*/\n\n:-moz-ui-invalid {\n  box-shadow: none;\n}\n\n/*\nAdd the correct vertical alignment in Chrome and Firefox.\n*/\n\nprogress {\n  vertical-align: baseline;\n}\n\n/*\nCorrect the cursor style of increment and decrement buttons in Safari.\n*/\n\n::-webkit-inner-spin-button,\n::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/*\n1. Correct the odd appearance in Chrome and Safari.\n2. Correct the outline style in Safari.\n*/\n\n[type='search'] {\n  -webkit-appearance: textfield;\n  /* 1 */\n  outline-offset: -2px;\n  /* 2 */\n}\n\n/*\nRemove the inner padding in Chrome and Safari on macOS.\n*/\n\n::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Change font properties to `inherit` in Safari.\n*/\n\n::-webkit-file-upload-button {\n  -webkit-appearance: button;\n  /* 1 */\n  font: inherit;\n  /* 2 */\n}\n\n/*\nAdd the correct display in Chrome and Safari.\n*/\n\nsummary {\n  display: list-item;\n}\n\n/*\nRemoves the default spacing and border for appropriate elements.\n*/\n\nblockquote,\ndl,\ndd,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\nhr,\nfigure,\np,\npre {\n  margin: 0;\n}\n\nfieldset {\n  margin: 0;\n  padding: 0;\n}\n\nlegend {\n  padding: 0;\n}\n\nol,\nul,\nmenu {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n\n/*\nReset default styling for dialogs.\n*/\n\ndialog {\n  padding: 0;\n}\n\n/*\nPrevent resizing textareas horizontally by default.\n*/\n\ntextarea {\n  resize: vertical;\n}\n\n/*\n1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)\n2. Set the default placeholder color to the user's configured gray 400 color.\n*/\n\ninput::-moz-placeholder, textarea::-moz-placeholder {\n  opacity: 1;\n  /* 1 */\n  color: #9ca3af;\n  /* 2 */\n}\n\ninput::placeholder,\ntextarea::placeholder {\n  opacity: 1;\n  /* 1 */\n  color: #9ca3af;\n  /* 2 */\n}\n\n/*\nSet the default cursor for buttons.\n*/\n\nbutton,\n[role=\"button\"] {\n  cursor: pointer;\n}\n\n/*\nMake sure disabled buttons don't get the pointer cursor.\n*/\n\n:disabled {\n  cursor: default;\n}\n\n/*\n1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)\n2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)\n   This can trigger a poorly considered lint error in some tools but is included by design.\n*/\n\nimg,\nsvg,\nvideo,\ncanvas,\naudio,\niframe,\nembed,\nobject {\n  display: block;\n  /* 1 */\n  vertical-align: middle;\n  /* 2 */\n}\n\n/*\nConstrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)\n*/\n\nimg,\nvideo {\n  max-width: 100%;\n  height: auto;\n}\n\n/* Make elements with the HTML hidden attribute stay hidden by default */\n\n[hidden]:where(:not([hidden=\"until-found\"])) {\n  display: none;\n}\n\n.visible {\n  visibility: visible;\n}\n\n.static {\n  position: static;\n}\n\n.fixed {\n  position: fixed;\n}\n\n.absolute {\n  position: absolute;\n}\n\n.relative {\n  position: relative;\n}\n\n.inset-0 {\n  inset: 0px;\n}\n\n.bottom-0 {\n  bottom: 0px;\n}\n\n.left-0 {\n  left: 0px;\n}\n\n.right-0 {\n  right: 0px;\n}\n\n.top-0 {\n  top: 0px;\n}\n\n.top-14 {\n  top: 3.5rem;\n}\n\n.isolate {\n  isolation: isolate;\n}\n\n.z-\\[100\\] {\n  z-index: 100;\n}\n\n.z-\\[200\\] {\n  z-index: 200;\n}\n\n.z-\\[300\\] {\n  z-index: 300;\n}\n\n.z-\\[400\\] {\n  z-index: 400;\n}\n\n.my-2\\.5 {\n  margin-top: 0.625rem;\n  margin-bottom: 0.625rem;\n}\n\n.mb-1 {\n  margin-bottom: 0.25rem;\n}\n\n.mb-1\\.5 {\n  margin-bottom: 0.375rem;\n}\n\n.mb-2 {\n  margin-bottom: 0.5rem;\n}\n\n.mb-2\\.5 {\n  margin-bottom: 0.625rem;\n}\n\n.mb-3 {\n  margin-bottom: 0.75rem;\n}\n\n.mb-4 {\n  margin-bottom: 1rem;\n}\n\n.mb-5 {\n  margin-bottom: 1.25rem;\n}\n\n.mb-6 {\n  margin-bottom: 1.5rem;\n}\n\n.mb-\\[5px\\] {\n  margin-bottom: 5px;\n}\n\n.ml-2\\.5 {\n  margin-left: 0.625rem;\n}\n\n.ml-60 {\n  margin-left: 15rem;\n}\n\n.ml-auto {\n  margin-left: auto;\n}\n\n.mr-2 {\n  margin-right: 0.5rem;\n}\n\n.mr-3 {\n  margin-right: 0.75rem;\n}\n\n.mt-0\\.5 {\n  margin-top: 0.125rem;\n}\n\n.mt-1 {\n  margin-top: 0.25rem;\n}\n\n.mt-\\[3px\\] {\n  margin-top: 3px;\n}\n\n.block {\n  display: block;\n}\n\n.inline-block {\n  display: inline-block;\n}\n\n.flex {\n  display: flex;\n}\n\n.inline-flex {\n  display: inline-flex;\n}\n\n.table {\n  display: table;\n}\n\n.grid {\n  display: grid;\n}\n\n.hidden {\n  display: none;\n}\n\n.h-10 {\n  height: 2.5rem;\n}\n\n.h-11 {\n  height: 2.75rem;\n}\n\n.h-14 {\n  height: 3.5rem;\n}\n\n.h-2 {\n  height: 0.5rem;\n}\n\n.h-8 {\n  height: 2rem;\n}\n\n.h-9 {\n  height: 2.25rem;\n}\n\n.h-\\[18px\\] {\n  height: 18px;\n}\n\n.h-\\[3px\\] {\n  height: 3px;\n}\n\n.h-px {\n  height: 1px;\n}\n\n.h-screen {\n  height: 100vh;\n}\n\n.max-h-\\[90vh\\] {\n  max-height: 90vh;\n}\n\n.min-h-screen {\n  min-height: 100vh;\n}\n\n.w-10 {\n  width: 2.5rem;\n}\n\n.w-11 {\n  width: 2.75rem;\n}\n\n.w-2 {\n  width: 0.5rem;\n}\n\n.w-60 {\n  width: 15rem;\n}\n\n.w-64 {\n  width: 16rem;\n}\n\n.w-8 {\n  width: 2rem;\n}\n\n.w-9 {\n  width: 2.25rem;\n}\n\n.w-\\[150px\\] {\n  width: 150px;\n}\n\n.w-\\[160px\\] {\n  width: 160px;\n}\n\n.w-\\[180px\\] {\n  width: 180px;\n}\n\n.w-\\[18px\\] {\n  width: 18px;\n}\n\n.w-\\[240px\\] {\n  width: 240px;\n}\n\n.w-\\[300px\\] {\n  width: 300px;\n}\n\n.w-full {\n  width: 100%;\n}\n\n.min-w-0 {\n  min-width: 0px;\n}\n\n.max-w-\\[480px\\] {\n  max-width: 480px;\n}\n\n.max-w-\\[560px\\] {\n  max-width: 560px;\n}\n\n.max-w-\\[1440px\\] {\n  max-width: 1440px;\n}\n\n.max-w-\\[1200px\\] {\n  max-width: 1200px;\n}\n\n.flex-1 {\n  flex: 1 1 0%;\n}\n\n.shrink-0 {\n  flex-shrink: 0;\n}\n\n.border-collapse {\n  border-collapse: collapse;\n}\n\n.cursor-pointer {\n  cursor: pointer;\n}\n\n.grid-cols-2 {\n  grid-template-columns: repeat(2, minmax(0, 1fr));\n}\n\n.flex-col {\n  flex-direction: column;\n}\n\n.flex-wrap {\n  flex-wrap: wrap;\n}\n\n.items-center {\n  align-items: center;\n}\n\n.justify-end {\n  justify-content: flex-end;\n}\n\n.justify-center {\n  justify-content: center;\n}\n\n.justify-between {\n  justify-content: space-between;\n}\n\n.gap-1 {\n  gap: 0.25rem;\n}\n\n.gap-1\\.5 {\n  gap: 0.375rem;\n}\n\n.gap-2 {\n  gap: 0.5rem;\n}\n\n.gap-2\\.5 {\n  gap: 0.625rem;\n}\n\n.gap-3 {\n  gap: 0.75rem;\n}\n\n.gap-3\\.5 {\n  gap: 0.875rem;\n}\n\n.gap-4 {\n  gap: 1rem;\n}\n\n.overflow-hidden {\n  overflow: hidden;\n}\n\n.overflow-y-auto {\n  overflow-y: auto;\n}\n\n.whitespace-nowrap {\n  white-space: nowrap;\n}\n\n.rounded-2xl {\n  border-radius: 1rem;\n}\n\n.rounded-\\[10px\\] {\n  border-radius: 10px;\n}\n\n.rounded-full {\n  border-radius: 9999px;\n}\n\n.rounded-lg {\n  border-radius: 0.5rem;\n}\n\n.rounded-md {\n  border-radius: 0.375rem;\n}\n\n.rounded-xl {\n  border-radius: 0.75rem;\n}\n\n.border {\n  border-width: 1px;\n}\n\n.border-\\[1\\.5px\\] {\n  border-width: 1.5px;\n}\n\n.border-b {\n  border-bottom-width: 1px;\n}\n\n.border-l-\\[3px\\] {\n  border-left-width: 3px;\n}\n\n.border-r {\n  border-right-width: 1px;\n}\n\n.border-t {\n  border-top-width: 1px;\n}\n\n.border-none {\n  border-style: none;\n}\n\n.border-\\[\\#BFDBFE\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(191 219 254 / var(--tw-border-opacity, 1));\n}\n\n.border-\\[\\#C7D2FE\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(199 210 254 / var(--tw-border-opacity, 1));\n}\n\n.border-\\[\\#CBD5E1\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(203 213 225 / var(--tw-border-opacity, 1));\n}\n\n.border-\\[\\#E2E8F0\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(226 232 240 / var(--tw-border-opacity, 1));\n}\n\n.border-\\[\\#EEF2F6\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(238 242 246 / var(--tw-border-opacity, 1));\n}\n\n.border-\\[\\#F1F5F9\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(241 245 249 / var(--tw-border-opacity, 1));\n}\n\n.border-\\[\\#F8FAFC\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(248 250 252 / var(--tw-border-opacity, 1));\n}\n\n.border-\\[\\#FECACA\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(254 202 202 / var(--tw-border-opacity, 1));\n}\n\n.border-white\\/\\[0\\.12\\] {\n  border-color: rgb(255 255 255 / 0.12);\n}\n\n.border-white\\/\\[0\\.14\\] {\n  border-color: rgb(255 255 255 / 0.14);\n}\n\n.border-l-\\[\\#2563EB\\] {\n  --tw-border-opacity: 1;\n  border-left-color: rgb(37 99 235 / var(--tw-border-opacity, 1));\n}\n\n.border-l-transparent {\n  border-left-color: transparent;\n}\n\n.bg-\\[\\#0B1F3A\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(11 31 58 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#1E1B4B\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(30 27 75 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#2563EB\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(37 99 235 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#4F46E5\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(79 70 229 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#6366F1\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(99 102 241 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#7C3AED\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(124 58 237 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#E2E8F0\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(226 232 240 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#ECFDF5\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(236 253 245 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#EEF2FF\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(238 242 255 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#EFF6FF\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(239 246 255 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#F0F7FF\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(240 247 255 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#F1F5F9\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(241 245 249 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#F8FAFC\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(248 250 252 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#FAFBFC\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(250 251 252 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#FEF2F2\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(254 242 242 / var(--tw-bg-opacity, 1));\n}\n\n.bg-black\\/45 {\n  background-color: rgb(0 0 0 / 0.45);\n}\n\n.bg-transparent {\n  background-color: transparent;\n}\n\n.bg-white {\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));\n}\n\n.bg-white\\/\\[0\\.08\\] {\n  background-color: rgb(255 255 255 / 0.08);\n}\n\n.p-5 {\n  padding: 1.25rem;\n}\n\n.px-2 {\n  padding-left: 0.5rem;\n  padding-right: 0.5rem;\n}\n\n.px-2\\.5 {\n  padding-left: 0.625rem;\n  padding-right: 0.625rem;\n}\n\n.px-3 {\n  padding-left: 0.75rem;\n  padding-right: 0.75rem;\n}\n\n.px-3\\.5 {\n  padding-left: 0.875rem;\n  padding-right: 0.875rem;\n}\n\n.px-4 {\n  padding-left: 1rem;\n  padding-right: 1rem;\n}\n\n.px-5 {\n  padding-left: 1.25rem;\n  padding-right: 1.25rem;\n}\n\n.px-6 {\n  padding-left: 1.5rem;\n  padding-right: 1.5rem;\n}\n\n.px-7 {\n  padding-left: 1.75rem;\n  padding-right: 1.75rem;\n}\n\n.px-\\[18px\\] {\n  padding-left: 18px;\n  padding-right: 18px;\n}\n\n.py-0\\.5 {\n  padding-top: 0.125rem;\n  padding-bottom: 0.125rem;\n}\n\n.py-1\\.5 {\n  padding-top: 0.375rem;\n  padding-bottom: 0.375rem;\n}\n\n.py-2 {\n  padding-top: 0.5rem;\n  padding-bottom: 0.5rem;\n}\n\n.py-2\\.5 {\n  padding-top: 0.625rem;\n  padding-bottom: 0.625rem;\n}\n\n.py-3 {\n  padding-top: 0.75rem;\n  padding-bottom: 0.75rem;\n}\n\n.py-3\\.5 {\n  padding-top: 0.875rem;\n  padding-bottom: 0.875rem;\n}\n\n.py-4 {\n  padding-top: 1rem;\n  padding-bottom: 1rem;\n}\n\n.py-5 {\n  padding-top: 1.25rem;\n  padding-bottom: 1.25rem;\n}\n\n.py-\\[18px\\] {\n  padding-top: 18px;\n  padding-bottom: 18px;\n}\n\n.py-\\[3px\\] {\n  padding-top: 3px;\n  padding-bottom: 3px;\n}\n\n.py-\\[5px\\] {\n  padding-top: 5px;\n  padding-bottom: 5px;\n}\n\n.py-\\[7px\\] {\n  padding-top: 7px;\n  padding-bottom: 7px;\n}\n\n.py-\\[9px\\] {\n  padding-top: 9px;\n  padding-bottom: 9px;\n}\n\n.pb-1\\.5 {\n  padding-bottom: 0.375rem;\n}\n\n.pb-10 {\n  padding-bottom: 2.5rem;\n}\n\n.pb-2 {\n  padding-bottom: 0.5rem;\n}\n\n.pb-3 {\n  padding-bottom: 0.75rem;\n}\n\n.pb-4 {\n  padding-bottom: 1rem;\n}\n\n.pl-2 {\n  padding-left: 0.5rem;\n}\n\n.pr-3 {\n  padding-right: 0.75rem;\n}\n\n.pt-1 {\n  padding-top: 0.25rem;\n}\n\n.pt-14 {\n  padding-top: 3.5rem;\n}\n\n.pt-2 {\n  padding-top: 0.5rem;\n}\n\n.pt-3\\.5 {\n  padding-top: 0.875rem;\n}\n\n.pt-7 {\n  padding-top: 1.75rem;\n}\n\n.text-left {\n  text-align: left;\n}\n\n.text-right {\n  text-align: right;\n}\n\n.font-\\[\\'Roboto_Mono\\'\\] {\n  font-family: 'Roboto Mono';\n}\n\n.font-mono {\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace;\n}\n\n.font-sans {\n  font-family: ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\";\n}\n\n.text-\\[10px\\] {\n  font-size: 10px;\n}\n\n.text-\\[11px\\] {\n  font-size: 11px;\n}\n\n.text-\\[12px\\] {\n  font-size: 12px;\n}\n\n.text-\\[13px\\] {\n  font-size: 13px;\n}\n\n.text-\\[14px\\] {\n  font-size: 14px;\n}\n\n.text-\\[15px\\] {\n  font-size: 15px;\n}\n\n.text-\\[22px\\] {\n  font-size: 22px;\n}\n\n.text-\\[26px\\] {\n  font-size: 26px;\n}\n\n.text-base {\n  font-size: 1rem;\n  line-height: 1.5rem;\n}\n\n.text-lg {\n  font-size: 1.125rem;\n  line-height: 1.75rem;\n}\n\n.text-sm {\n  font-size: 0.875rem;\n  line-height: 1.25rem;\n}\n\n.text-xl {\n  font-size: 1.25rem;\n  line-height: 1.75rem;\n}\n\n.text-xs {\n  font-size: 0.75rem;\n  line-height: 1rem;\n}\n\n.text-\\[16px\\] {\n  font-size: 16px;\n}\n\n.text-\\[24px\\] {\n  font-size: 24px;\n}\n\n.text-\\[28px\\] {\n  font-size: 28px;\n}\n\n.font-bold {\n  font-weight: 700;\n}\n\n.font-medium {\n  font-weight: 500;\n}\n\n.font-normal {\n  font-weight: 400;\n}\n\n.font-semibold {\n  font-weight: 600;\n}\n\n.uppercase {\n  text-transform: uppercase;\n}\n\n.capitalize {\n  text-transform: capitalize;\n}\n\n.leading-none {\n  line-height: 1;\n}\n\n.leading-snug {\n  line-height: 1.375;\n}\n\n.leading-tight {\n  line-height: 1.25;\n}\n\n.tracking-\\[-0\\.2px\\] {\n  letter-spacing: -0.2px;\n}\n\n.tracking-\\[-0\\.3px\\] {\n  letter-spacing: -0.3px;\n}\n\n.tracking-\\[0\\.5px\\] {\n  letter-spacing: 0.5px;\n}\n\n.tracking-\\[0\\.6px\\] {\n  letter-spacing: 0.6px;\n}\n\n.tracking-wide {\n  letter-spacing: 0.025em;\n}\n\n.tracking-wider {\n  letter-spacing: 0.05em;\n}\n\n.text-\\[\\#065F46\\] {\n  --tw-text-opacity: 1;\n  color: rgb(6 95 70 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#0B1F3A\\] {\n  --tw-text-opacity: 1;\n  color: rgb(11 31 58 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#1E293B\\] {\n  --tw-text-opacity: 1;\n  color: rgb(30 41 59 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#1E40AF\\] {\n  --tw-text-opacity: 1;\n  color: rgb(30 64 175 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#1E5291\\] {\n  --tw-text-opacity: 1;\n  color: rgb(30 82 145 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#2563EB\\] {\n  --tw-text-opacity: 1;\n  color: rgb(37 99 235 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#334155\\] {\n  --tw-text-opacity: 1;\n  color: rgb(51 65 85 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#3730A3\\] {\n  --tw-text-opacity: 1;\n  color: rgb(55 48 163 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#4338CA\\] {\n  --tw-text-opacity: 1;\n  color: rgb(67 56 202 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#475569\\] {\n  --tw-text-opacity: 1;\n  color: rgb(71 85 105 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#4F46E5\\] {\n  --tw-text-opacity: 1;\n  color: rgb(79 70 229 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#64748B\\] {\n  --tw-text-opacity: 1;\n  color: rgb(100 116 139 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#94A3B8\\] {\n  --tw-text-opacity: 1;\n  color: rgb(148 163 184 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#991B1B\\] {\n  --tw-text-opacity: 1;\n  color: rgb(153 27 27 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#CBD5E1\\] {\n  --tw-text-opacity: 1;\n  color: rgb(203 213 225 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#DC2626\\] {\n  --tw-text-opacity: 1;\n  color: rgb(220 38 38 / var(--tw-text-opacity, 1));\n}\n\n.text-white {\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255 / var(--tw-text-opacity, 1));\n}\n\n.text-white\\/40 {\n  color: rgb(255 255 255 / 0.4);\n}\n\n.text-white\\/50 {\n  color: rgb(255 255 255 / 0.5);\n}\n\n.text-white\\/\\[0\\.55\\] {\n  color: rgb(255 255 255 / 0.55);\n}\n\n.text-white\\/\\[0\\.75\\] {\n  color: rgb(255 255 255 / 0.75);\n}\n\n.text-white\\/\\[0\\.85\\] {\n  color: rgb(255 255 255 / 0.85);\n}\n\n.underline {\n  text-decoration-line: underline;\n}\n\n.line-through {\n  text-decoration-line: line-through;\n}\n\n.no-underline {\n  text-decoration-line: none;\n}\n\n.shadow-\\[0_10px_25px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.08\\)\\2c 0_4px_8px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.04\\)\\] {\n  --tw-shadow: 0 10px 25px rgba(0,0,0,0.08),0 4px 8px rgba(0,0,0,0.04);\n  --tw-shadow-colored: 0 10px 25px var(--tw-shadow-color), 0 4px 8px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.shadow-\\[0_16px_40px_rgba\\(15\\2c 23\\2c 42\\2c 0\\.16\\)\\2c 0_4px_10px_rgba\\(15\\2c 23\\2c 42\\2c 0\\.08\\)\\] {\n  --tw-shadow: 0 16px 40px rgba(15,23,42,0.16),0 4px 10px rgba(15,23,42,0.08);\n  --tw-shadow-colored: 0 16px 40px var(--tw-shadow-color), 0 4px 10px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.shadow-\\[0_1px_3px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.08\\)\\2c 0_1px_2px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.06\\)\\] {\n  --tw-shadow: 0 1px 3px rgba(0,0,0,0.08),0 1px 2px rgba(0,0,0,0.06);\n  --tw-shadow-colored: 0 1px 3px var(--tw-shadow-color), 0 1px 2px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.shadow-\\[0_2px_8px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.25\\)\\] {\n  --tw-shadow: 0 2px 8px rgba(0,0,0,0.25);\n  --tw-shadow-colored: 0 2px 8px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.outline-none {\n  outline: 2px solid transparent;\n  outline-offset: 2px;\n}\n\n.filter {\n  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);\n}\n\n.transition-all {\n  transition-property: all;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\n\n.transition-colors {\n  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\n\n.duration-150 {\n  transition-duration: 150ms;\n}\n\n.\\[grid-template-columns\\:repeat\\(auto-fit\\2c minmax\\(160px\\2c 1fr\\)\\)\\] {\n  grid-template-columns: repeat(auto-fit,minmax(160px,1fr));\n}\n\n.\\[max-width\\:calc\\(100\\%-15rem\\)\\] {\n  max-width: calc(100% - 15rem);\n}\n\n.before\\:h-\\[5px\\]::before {\n  content: var(--tw-content);\n  height: 5px;\n}\n\n.before\\:w-\\[5px\\]::before {\n  content: var(--tw-content);\n  width: 5px;\n}\n\n.before\\:rounded-full::before {\n  content: var(--tw-content);\n  border-radius: 9999px;\n}\n\n.before\\:bg-current::before {\n  content: var(--tw-content);\n  background-color: currentColor;\n}\n\n.before\\:content-\\[\\'\\'\\]::before {\n  --tw-content: '';\n  content: var(--tw-content);\n}\n\n.hover\\:border-\\[\\#2563EB\\]:hover {\n  --tw-border-opacity: 1;\n  border-color: rgb(37 99 235 / var(--tw-border-opacity, 1));\n}\n\n.hover\\:border-\\[\\#3B82F6\\]:hover {\n  --tw-border-opacity: 1;\n  border-color: rgb(59 130 246 / var(--tw-border-opacity, 1));\n}\n\n.hover\\:border-\\[\\#4F46E5\\]:hover {\n  --tw-border-opacity: 1;\n  border-color: rgb(79 70 229 / var(--tw-border-opacity, 1));\n}\n\n.hover\\:border-\\[\\#94A3B8\\]:hover {\n  --tw-border-opacity: 1;\n  border-color: rgb(148 163 184 / var(--tw-border-opacity, 1));\n}\n\n.hover\\:border-\\[\\#DC2626\\]:hover {\n  --tw-border-opacity: 1;\n  border-color: rgb(220 38 38 / var(--tw-border-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#1E5291\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(30 82 145 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#2563EB\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(37 99 235 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#4338CA\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(67 56 202 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#4F46E5\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(79 70 229 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#DC2626\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(220 38 38 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#E2E8F0\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(226 232 240 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#EEF2FF\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(238 242 255 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#F0F7FF\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(240 247 255 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#F8FAFC\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(248 250 252 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#FEF2F2\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(254 242 242 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-white\\/\\[0\\.08\\]:hover {\n  background-color: rgb(255 255 255 / 0.08);\n}\n\n.hover\\:bg-white\\/\\[0\\.16\\]:hover {\n  background-color: rgb(255 255 255 / 0.16);\n}\n\n.hover\\:bg-white\\/\\[0\\.18\\]:hover {\n  background-color: rgb(255 255 255 / 0.18);\n}\n\n.hover\\:text-\\[\\#2563EB\\]:hover {\n  --tw-text-opacity: 1;\n  color: rgb(37 99 235 / var(--tw-text-opacity, 1));\n}\n\n.hover\\:text-white:hover {\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255 / var(--tw-text-opacity, 1));\n}\n\n.hover\\:shadow-\\[0_4px_6px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.07\\)\\2c 0_2px_4px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.06\\)\\]:hover {\n  --tw-shadow: 0 4px 6px rgba(0,0,0,0.07),0 2px 4px rgba(0,0,0,0.06);\n  --tw-shadow-colored: 0 4px 6px var(--tw-shadow-color), 0 2px 4px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.focus\\:border-\\[\\#3B82F6\\]:focus {\n  --tw-border-opacity: 1;\n  border-color: rgb(59 130 246 / var(--tw-border-opacity, 1));\n}\n\n.focus\\:border-\\[\\#6366F1\\]:focus {\n  --tw-border-opacity: 1;\n  border-color: rgb(99 102 241 / var(--tw-border-opacity, 1));\n}\n\n.focus\\:shadow-\\[0_0_0_3px_rgba\\(37\\2c 99\\2c 235\\2c 0\\.08\\)\\]:focus {\n  --tw-shadow: 0 0 0 3px rgba(37,99,235,0.08);\n  --tw-shadow-colored: 0 0 0 3px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.focus\\:shadow-\\[0_0_0_3px_rgba\\(79\\2c 70\\2c 229\\2c 0\\.10\\)\\]:focus {\n  --tw-shadow: 0 0 0 3px rgba(79,70,229,0.10);\n  --tw-shadow-colored: 0 0 0 3px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.disabled\\:opacity-60:disabled {\n  opacity: 0.6;\n}", "",{"version":3,"sources":["webpack://./src/output.css"],"names":[],"mappings":"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","sourcesContent":["*, ::before, ::after {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n  --tw-contain-size:  ;\n  --tw-contain-layout:  ;\n  --tw-contain-paint:  ;\n  --tw-contain-style:  ;\n}\n\n::backdrop {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n  --tw-contain-size:  ;\n  --tw-contain-layout:  ;\n  --tw-contain-paint:  ;\n  --tw-contain-style:  ;\n}\n\n/*\n! tailwindcss v3.4.19 | MIT License | https://tailwindcss.com\n*/\n\n/*\n1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)\n2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)\n*/\n\n*,\n::before,\n::after {\n  box-sizing: border-box;\n  /* 1 */\n  border-width: 0;\n  /* 2 */\n  border-style: solid;\n  /* 2 */\n  border-color: #e5e7eb;\n  /* 2 */\n}\n\n::before,\n::after {\n  --tw-content: '';\n}\n\n/*\n1. Use a consistent sensible line-height in all browsers.\n2. Prevent adjustments of font size after orientation changes in iOS.\n3. Use a more readable tab size.\n4. Use the user's configured `sans` font-family by default.\n5. Use the user's configured `sans` font-feature-settings by default.\n6. Use the user's configured `sans` font-variation-settings by default.\n7. Disable tap highlights on iOS\n*/\n\nhtml,\n:host {\n  line-height: 1.5;\n  /* 1 */\n  -webkit-text-size-adjust: 100%;\n  /* 2 */\n  -moz-tab-size: 4;\n  /* 3 */\n  -o-tab-size: 4;\n     tab-size: 4;\n  /* 3 */\n  font-family: ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\";\n  /* 4 */\n  font-feature-settings: normal;\n  /* 5 */\n  font-variation-settings: normal;\n  /* 6 */\n  -webkit-tap-highlight-color: transparent;\n  /* 7 */\n}\n\n/*\n1. Remove the margin in all browsers.\n2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.\n*/\n\nbody {\n  margin: 0;\n  /* 1 */\n  line-height: inherit;\n  /* 2 */\n}\n\n/*\n1. Add the correct height in Firefox.\n2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)\n3. Ensure horizontal rules are visible by default.\n*/\n\nhr {\n  height: 0;\n  /* 1 */\n  color: inherit;\n  /* 2 */\n  border-top-width: 1px;\n  /* 3 */\n}\n\n/*\nAdd the correct text decoration in Chrome, Edge, and Safari.\n*/\n\nabbr:where([title]) {\n  -webkit-text-decoration: underline dotted;\n          text-decoration: underline dotted;\n}\n\n/*\nRemove the default font size and weight for headings.\n*/\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  font-size: inherit;\n  font-weight: inherit;\n}\n\n/*\nReset links to optimize for opt-in styling instead of opt-out.\n*/\n\na {\n  color: inherit;\n  text-decoration: inherit;\n}\n\n/*\nAdd the correct font weight in Edge and Safari.\n*/\n\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/*\n1. Use the user's configured `mono` font-family by default.\n2. Use the user's configured `mono` font-feature-settings by default.\n3. Use the user's configured `mono` font-variation-settings by default.\n4. Correct the odd `em` font sizing in all browsers.\n*/\n\ncode,\nkbd,\nsamp,\npre {\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace;\n  /* 1 */\n  font-feature-settings: normal;\n  /* 2 */\n  font-variation-settings: normal;\n  /* 3 */\n  font-size: 1em;\n  /* 4 */\n}\n\n/*\nAdd the correct font size in all browsers.\n*/\n\nsmall {\n  font-size: 80%;\n}\n\n/*\nPrevent `sub` and `sup` elements from affecting the line height in all browsers.\n*/\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/*\n1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)\n2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)\n3. Remove gaps between table borders by default.\n*/\n\ntable {\n  text-indent: 0;\n  /* 1 */\n  border-color: inherit;\n  /* 2 */\n  border-collapse: collapse;\n  /* 3 */\n}\n\n/*\n1. Change the font styles in all browsers.\n2. Remove the margin in Firefox and Safari.\n3. Remove default padding in all browsers.\n*/\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit;\n  /* 1 */\n  font-feature-settings: inherit;\n  /* 1 */\n  font-variation-settings: inherit;\n  /* 1 */\n  font-size: 100%;\n  /* 1 */\n  font-weight: inherit;\n  /* 1 */\n  line-height: inherit;\n  /* 1 */\n  letter-spacing: inherit;\n  /* 1 */\n  color: inherit;\n  /* 1 */\n  margin: 0;\n  /* 2 */\n  padding: 0;\n  /* 3 */\n}\n\n/*\nRemove the inheritance of text transform in Edge and Firefox.\n*/\n\nbutton,\nselect {\n  text-transform: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Remove default button styles.\n*/\n\nbutton,\ninput:where([type='button']),\ninput:where([type='reset']),\ninput:where([type='submit']) {\n  -webkit-appearance: button;\n  /* 1 */\n  background-color: transparent;\n  /* 2 */\n  background-image: none;\n  /* 2 */\n}\n\n/*\nUse the modern Firefox focus style for all focusable elements.\n*/\n\n:-moz-focusring {\n  outline: auto;\n}\n\n/*\nRemove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)\n*/\n\n:-moz-ui-invalid {\n  box-shadow: none;\n}\n\n/*\nAdd the correct vertical alignment in Chrome and Firefox.\n*/\n\nprogress {\n  vertical-align: baseline;\n}\n\n/*\nCorrect the cursor style of increment and decrement buttons in Safari.\n*/\n\n::-webkit-inner-spin-button,\n::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/*\n1. Correct the odd appearance in Chrome and Safari.\n2. Correct the outline style in Safari.\n*/\n\n[type='search'] {\n  -webkit-appearance: textfield;\n  /* 1 */\n  outline-offset: -2px;\n  /* 2 */\n}\n\n/*\nRemove the inner padding in Chrome and Safari on macOS.\n*/\n\n::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Change font properties to `inherit` in Safari.\n*/\n\n::-webkit-file-upload-button {\n  -webkit-appearance: button;\n  /* 1 */\n  font: inherit;\n  /* 2 */\n}\n\n/*\nAdd the correct display in Chrome and Safari.\n*/\n\nsummary {\n  display: list-item;\n}\n\n/*\nRemoves the default spacing and border for appropriate elements.\n*/\n\nblockquote,\ndl,\ndd,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\nhr,\nfigure,\np,\npre {\n  margin: 0;\n}\n\nfieldset {\n  margin: 0;\n  padding: 0;\n}\n\nlegend {\n  padding: 0;\n}\n\nol,\nul,\nmenu {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n\n/*\nReset default styling for dialogs.\n*/\n\ndialog {\n  padding: 0;\n}\n\n/*\nPrevent resizing textareas horizontally by default.\n*/\n\ntextarea {\n  resize: vertical;\n}\n\n/*\n1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)\n2. Set the default placeholder color to the user's configured gray 400 color.\n*/\n\ninput::-moz-placeholder, textarea::-moz-placeholder {\n  opacity: 1;\n  /* 1 */\n  color: #9ca3af;\n  /* 2 */\n}\n\ninput::placeholder,\ntextarea::placeholder {\n  opacity: 1;\n  /* 1 */\n  color: #9ca3af;\n  /* 2 */\n}\n\n/*\nSet the default cursor for buttons.\n*/\n\nbutton,\n[role=\"button\"] {\n  cursor: pointer;\n}\n\n/*\nMake sure disabled buttons don't get the pointer cursor.\n*/\n\n:disabled {\n  cursor: default;\n}\n\n/*\n1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)\n2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)\n   This can trigger a poorly considered lint error in some tools but is included by design.\n*/\n\nimg,\nsvg,\nvideo,\ncanvas,\naudio,\niframe,\nembed,\nobject {\n  display: block;\n  /* 1 */\n  vertical-align: middle;\n  /* 2 */\n}\n\n/*\nConstrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)\n*/\n\nimg,\nvideo {\n  max-width: 100%;\n  height: auto;\n}\n\n/* Make elements with the HTML hidden attribute stay hidden by default */\n\n[hidden]:where(:not([hidden=\"until-found\"])) {\n  display: none;\n}\n\n.visible {\n  visibility: visible;\n}\n\n.static {\n  position: static;\n}\n\n.fixed {\n  position: fixed;\n}\n\n.absolute {\n  position: absolute;\n}\n\n.relative {\n  position: relative;\n}\n\n.inset-0 {\n  inset: 0px;\n}\n\n.bottom-0 {\n  bottom: 0px;\n}\n\n.left-0 {\n  left: 0px;\n}\n\n.right-0 {\n  right: 0px;\n}\n\n.top-0 {\n  top: 0px;\n}\n\n.top-14 {\n  top: 3.5rem;\n}\n\n.isolate {\n  isolation: isolate;\n}\n\n.z-\\[100\\] {\n  z-index: 100;\n}\n\n.z-\\[200\\] {\n  z-index: 200;\n}\n\n.z-\\[300\\] {\n  z-index: 300;\n}\n\n.z-\\[400\\] {\n  z-index: 400;\n}\n\n.my-2\\.5 {\n  margin-top: 0.625rem;\n  margin-bottom: 0.625rem;\n}\n\n.mb-1 {\n  margin-bottom: 0.25rem;\n}\n\n.mb-1\\.5 {\n  margin-bottom: 0.375rem;\n}\n\n.mb-2 {\n  margin-bottom: 0.5rem;\n}\n\n.mb-2\\.5 {\n  margin-bottom: 0.625rem;\n}\n\n.mb-3 {\n  margin-bottom: 0.75rem;\n}\n\n.mb-4 {\n  margin-bottom: 1rem;\n}\n\n.mb-5 {\n  margin-bottom: 1.25rem;\n}\n\n.mb-6 {\n  margin-bottom: 1.5rem;\n}\n\n.mb-\\[5px\\] {\n  margin-bottom: 5px;\n}\n\n.ml-2\\.5 {\n  margin-left: 0.625rem;\n}\n\n.ml-60 {\n  margin-left: 15rem;\n}\n\n.ml-auto {\n  margin-left: auto;\n}\n\n.mr-2 {\n  margin-right: 0.5rem;\n}\n\n.mr-3 {\n  margin-right: 0.75rem;\n}\n\n.mt-0\\.5 {\n  margin-top: 0.125rem;\n}\n\n.mt-1 {\n  margin-top: 0.25rem;\n}\n\n.mt-\\[3px\\] {\n  margin-top: 3px;\n}\n\n.block {\n  display: block;\n}\n\n.inline-block {\n  display: inline-block;\n}\n\n.flex {\n  display: flex;\n}\n\n.inline-flex {\n  display: inline-flex;\n}\n\n.table {\n  display: table;\n}\n\n.grid {\n  display: grid;\n}\n\n.hidden {\n  display: none;\n}\n\n.h-10 {\n  height: 2.5rem;\n}\n\n.h-11 {\n  height: 2.75rem;\n}\n\n.h-14 {\n  height: 3.5rem;\n}\n\n.h-2 {\n  height: 0.5rem;\n}\n\n.h-8 {\n  height: 2rem;\n}\n\n.h-9 {\n  height: 2.25rem;\n}\n\n.h-\\[18px\\] {\n  height: 18px;\n}\n\n.h-\\[3px\\] {\n  height: 3px;\n}\n\n.h-px {\n  height: 1px;\n}\n\n.h-screen {\n  height: 100vh;\n}\n\n.max-h-\\[90vh\\] {\n  max-height: 90vh;\n}\n\n.min-h-screen {\n  min-height: 100vh;\n}\n\n.w-10 {\n  width: 2.5rem;\n}\n\n.w-11 {\n  width: 2.75rem;\n}\n\n.w-2 {\n  width: 0.5rem;\n}\n\n.w-60 {\n  width: 15rem;\n}\n\n.w-64 {\n  width: 16rem;\n}\n\n.w-8 {\n  width: 2rem;\n}\n\n.w-9 {\n  width: 2.25rem;\n}\n\n.w-\\[150px\\] {\n  width: 150px;\n}\n\n.w-\\[160px\\] {\n  width: 160px;\n}\n\n.w-\\[180px\\] {\n  width: 180px;\n}\n\n.w-\\[18px\\] {\n  width: 18px;\n}\n\n.w-\\[240px\\] {\n  width: 240px;\n}\n\n.w-\\[300px\\] {\n  width: 300px;\n}\n\n.w-full {\n  width: 100%;\n}\n\n.min-w-0 {\n  min-width: 0px;\n}\n\n.max-w-\\[480px\\] {\n  max-width: 480px;\n}\n\n.max-w-\\[560px\\] {\n  max-width: 560px;\n}\n\n.max-w-\\[1440px\\] {\n  max-width: 1440px;\n}\n\n.max-w-\\[1200px\\] {\n  max-width: 1200px;\n}\n\n.flex-1 {\n  flex: 1 1 0%;\n}\n\n.shrink-0 {\n  flex-shrink: 0;\n}\n\n.border-collapse {\n  border-collapse: collapse;\n}\n\n.cursor-pointer {\n  cursor: pointer;\n}\n\n.grid-cols-2 {\n  grid-template-columns: repeat(2, minmax(0, 1fr));\n}\n\n.flex-col {\n  flex-direction: column;\n}\n\n.flex-wrap {\n  flex-wrap: wrap;\n}\n\n.items-center {\n  align-items: center;\n}\n\n.justify-end {\n  justify-content: flex-end;\n}\n\n.justify-center {\n  justify-content: center;\n}\n\n.justify-between {\n  justify-content: space-between;\n}\n\n.gap-1 {\n  gap: 0.25rem;\n}\n\n.gap-1\\.5 {\n  gap: 0.375rem;\n}\n\n.gap-2 {\n  gap: 0.5rem;\n}\n\n.gap-2\\.5 {\n  gap: 0.625rem;\n}\n\n.gap-3 {\n  gap: 0.75rem;\n}\n\n.gap-3\\.5 {\n  gap: 0.875rem;\n}\n\n.gap-4 {\n  gap: 1rem;\n}\n\n.overflow-hidden {\n  overflow: hidden;\n}\n\n.overflow-y-auto {\n  overflow-y: auto;\n}\n\n.whitespace-nowrap {\n  white-space: nowrap;\n}\n\n.rounded-2xl {\n  border-radius: 1rem;\n}\n\n.rounded-\\[10px\\] {\n  border-radius: 10px;\n}\n\n.rounded-full {\n  border-radius: 9999px;\n}\n\n.rounded-lg {\n  border-radius: 0.5rem;\n}\n\n.rounded-md {\n  border-radius: 0.375rem;\n}\n\n.rounded-xl {\n  border-radius: 0.75rem;\n}\n\n.border {\n  border-width: 1px;\n}\n\n.border-\\[1\\.5px\\] {\n  border-width: 1.5px;\n}\n\n.border-b {\n  border-bottom-width: 1px;\n}\n\n.border-l-\\[3px\\] {\n  border-left-width: 3px;\n}\n\n.border-r {\n  border-right-width: 1px;\n}\n\n.border-t {\n  border-top-width: 1px;\n}\n\n.border-none {\n  border-style: none;\n}\n\n.border-\\[\\#BFDBFE\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(191 219 254 / var(--tw-border-opacity, 1));\n}\n\n.border-\\[\\#C7D2FE\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(199 210 254 / var(--tw-border-opacity, 1));\n}\n\n.border-\\[\\#CBD5E1\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(203 213 225 / var(--tw-border-opacity, 1));\n}\n\n.border-\\[\\#E2E8F0\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(226 232 240 / var(--tw-border-opacity, 1));\n}\n\n.border-\\[\\#EEF2F6\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(238 242 246 / var(--tw-border-opacity, 1));\n}\n\n.border-\\[\\#F1F5F9\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(241 245 249 / var(--tw-border-opacity, 1));\n}\n\n.border-\\[\\#F8FAFC\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(248 250 252 / var(--tw-border-opacity, 1));\n}\n\n.border-\\[\\#FECACA\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(254 202 202 / var(--tw-border-opacity, 1));\n}\n\n.border-white\\/\\[0\\.12\\] {\n  border-color: rgb(255 255 255 / 0.12);\n}\n\n.border-white\\/\\[0\\.14\\] {\n  border-color: rgb(255 255 255 / 0.14);\n}\n\n.border-l-\\[\\#2563EB\\] {\n  --tw-border-opacity: 1;\n  border-left-color: rgb(37 99 235 / var(--tw-border-opacity, 1));\n}\n\n.border-l-transparent {\n  border-left-color: transparent;\n}\n\n.bg-\\[\\#0B1F3A\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(11 31 58 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#1E1B4B\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(30 27 75 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#2563EB\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(37 99 235 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#4F46E5\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(79 70 229 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#6366F1\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(99 102 241 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#7C3AED\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(124 58 237 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#E2E8F0\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(226 232 240 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#ECFDF5\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(236 253 245 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#EEF2FF\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(238 242 255 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#EFF6FF\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(239 246 255 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#F0F7FF\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(240 247 255 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#F1F5F9\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(241 245 249 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#F8FAFC\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(248 250 252 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#FAFBFC\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(250 251 252 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#FEF2F2\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(254 242 242 / var(--tw-bg-opacity, 1));\n}\n\n.bg-black\\/45 {\n  background-color: rgb(0 0 0 / 0.45);\n}\n\n.bg-transparent {\n  background-color: transparent;\n}\n\n.bg-white {\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));\n}\n\n.bg-white\\/\\[0\\.08\\] {\n  background-color: rgb(255 255 255 / 0.08);\n}\n\n.p-5 {\n  padding: 1.25rem;\n}\n\n.px-2 {\n  padding-left: 0.5rem;\n  padding-right: 0.5rem;\n}\n\n.px-2\\.5 {\n  padding-left: 0.625rem;\n  padding-right: 0.625rem;\n}\n\n.px-3 {\n  padding-left: 0.75rem;\n  padding-right: 0.75rem;\n}\n\n.px-3\\.5 {\n  padding-left: 0.875rem;\n  padding-right: 0.875rem;\n}\n\n.px-4 {\n  padding-left: 1rem;\n  padding-right: 1rem;\n}\n\n.px-5 {\n  padding-left: 1.25rem;\n  padding-right: 1.25rem;\n}\n\n.px-6 {\n  padding-left: 1.5rem;\n  padding-right: 1.5rem;\n}\n\n.px-7 {\n  padding-left: 1.75rem;\n  padding-right: 1.75rem;\n}\n\n.px-\\[18px\\] {\n  padding-left: 18px;\n  padding-right: 18px;\n}\n\n.py-0\\.5 {\n  padding-top: 0.125rem;\n  padding-bottom: 0.125rem;\n}\n\n.py-1\\.5 {\n  padding-top: 0.375rem;\n  padding-bottom: 0.375rem;\n}\n\n.py-2 {\n  padding-top: 0.5rem;\n  padding-bottom: 0.5rem;\n}\n\n.py-2\\.5 {\n  padding-top: 0.625rem;\n  padding-bottom: 0.625rem;\n}\n\n.py-3 {\n  padding-top: 0.75rem;\n  padding-bottom: 0.75rem;\n}\n\n.py-3\\.5 {\n  padding-top: 0.875rem;\n  padding-bottom: 0.875rem;\n}\n\n.py-4 {\n  padding-top: 1rem;\n  padding-bottom: 1rem;\n}\n\n.py-5 {\n  padding-top: 1.25rem;\n  padding-bottom: 1.25rem;\n}\n\n.py-\\[18px\\] {\n  padding-top: 18px;\n  padding-bottom: 18px;\n}\n\n.py-\\[3px\\] {\n  padding-top: 3px;\n  padding-bottom: 3px;\n}\n\n.py-\\[5px\\] {\n  padding-top: 5px;\n  padding-bottom: 5px;\n}\n\n.py-\\[7px\\] {\n  padding-top: 7px;\n  padding-bottom: 7px;\n}\n\n.py-\\[9px\\] {\n  padding-top: 9px;\n  padding-bottom: 9px;\n}\n\n.pb-1\\.5 {\n  padding-bottom: 0.375rem;\n}\n\n.pb-10 {\n  padding-bottom: 2.5rem;\n}\n\n.pb-2 {\n  padding-bottom: 0.5rem;\n}\n\n.pb-3 {\n  padding-bottom: 0.75rem;\n}\n\n.pb-4 {\n  padding-bottom: 1rem;\n}\n\n.pl-2 {\n  padding-left: 0.5rem;\n}\n\n.pr-3 {\n  padding-right: 0.75rem;\n}\n\n.pt-1 {\n  padding-top: 0.25rem;\n}\n\n.pt-14 {\n  padding-top: 3.5rem;\n}\n\n.pt-2 {\n  padding-top: 0.5rem;\n}\n\n.pt-3\\.5 {\n  padding-top: 0.875rem;\n}\n\n.pt-7 {\n  padding-top: 1.75rem;\n}\n\n.text-left {\n  text-align: left;\n}\n\n.text-right {\n  text-align: right;\n}\n\n.font-\\[\\'Roboto_Mono\\'\\] {\n  font-family: 'Roboto Mono';\n}\n\n.font-mono {\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace;\n}\n\n.font-sans {\n  font-family: ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\";\n}\n\n.text-\\[10px\\] {\n  font-size: 10px;\n}\n\n.text-\\[11px\\] {\n  font-size: 11px;\n}\n\n.text-\\[12px\\] {\n  font-size: 12px;\n}\n\n.text-\\[13px\\] {\n  font-size: 13px;\n}\n\n.text-\\[14px\\] {\n  font-size: 14px;\n}\n\n.text-\\[15px\\] {\n  font-size: 15px;\n}\n\n.text-\\[22px\\] {\n  font-size: 22px;\n}\n\n.text-\\[26px\\] {\n  font-size: 26px;\n}\n\n.text-base {\n  font-size: 1rem;\n  line-height: 1.5rem;\n}\n\n.text-lg {\n  font-size: 1.125rem;\n  line-height: 1.75rem;\n}\n\n.text-sm {\n  font-size: 0.875rem;\n  line-height: 1.25rem;\n}\n\n.text-xl {\n  font-size: 1.25rem;\n  line-height: 1.75rem;\n}\n\n.text-xs {\n  font-size: 0.75rem;\n  line-height: 1rem;\n}\n\n.text-\\[16px\\] {\n  font-size: 16px;\n}\n\n.text-\\[24px\\] {\n  font-size: 24px;\n}\n\n.text-\\[28px\\] {\n  font-size: 28px;\n}\n\n.font-bold {\n  font-weight: 700;\n}\n\n.font-medium {\n  font-weight: 500;\n}\n\n.font-normal {\n  font-weight: 400;\n}\n\n.font-semibold {\n  font-weight: 600;\n}\n\n.uppercase {\n  text-transform: uppercase;\n}\n\n.capitalize {\n  text-transform: capitalize;\n}\n\n.leading-none {\n  line-height: 1;\n}\n\n.leading-snug {\n  line-height: 1.375;\n}\n\n.leading-tight {\n  line-height: 1.25;\n}\n\n.tracking-\\[-0\\.2px\\] {\n  letter-spacing: -0.2px;\n}\n\n.tracking-\\[-0\\.3px\\] {\n  letter-spacing: -0.3px;\n}\n\n.tracking-\\[0\\.5px\\] {\n  letter-spacing: 0.5px;\n}\n\n.tracking-\\[0\\.6px\\] {\n  letter-spacing: 0.6px;\n}\n\n.tracking-wide {\n  letter-spacing: 0.025em;\n}\n\n.tracking-wider {\n  letter-spacing: 0.05em;\n}\n\n.text-\\[\\#065F46\\] {\n  --tw-text-opacity: 1;\n  color: rgb(6 95 70 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#0B1F3A\\] {\n  --tw-text-opacity: 1;\n  color: rgb(11 31 58 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#1E293B\\] {\n  --tw-text-opacity: 1;\n  color: rgb(30 41 59 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#1E40AF\\] {\n  --tw-text-opacity: 1;\n  color: rgb(30 64 175 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#1E5291\\] {\n  --tw-text-opacity: 1;\n  color: rgb(30 82 145 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#2563EB\\] {\n  --tw-text-opacity: 1;\n  color: rgb(37 99 235 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#334155\\] {\n  --tw-text-opacity: 1;\n  color: rgb(51 65 85 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#3730A3\\] {\n  --tw-text-opacity: 1;\n  color: rgb(55 48 163 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#4338CA\\] {\n  --tw-text-opacity: 1;\n  color: rgb(67 56 202 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#475569\\] {\n  --tw-text-opacity: 1;\n  color: rgb(71 85 105 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#4F46E5\\] {\n  --tw-text-opacity: 1;\n  color: rgb(79 70 229 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#64748B\\] {\n  --tw-text-opacity: 1;\n  color: rgb(100 116 139 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#94A3B8\\] {\n  --tw-text-opacity: 1;\n  color: rgb(148 163 184 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#991B1B\\] {\n  --tw-text-opacity: 1;\n  color: rgb(153 27 27 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#CBD5E1\\] {\n  --tw-text-opacity: 1;\n  color: rgb(203 213 225 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#DC2626\\] {\n  --tw-text-opacity: 1;\n  color: rgb(220 38 38 / var(--tw-text-opacity, 1));\n}\n\n.text-white {\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255 / var(--tw-text-opacity, 1));\n}\n\n.text-white\\/40 {\n  color: rgb(255 255 255 / 0.4);\n}\n\n.text-white\\/50 {\n  color: rgb(255 255 255 / 0.5);\n}\n\n.text-white\\/\\[0\\.55\\] {\n  color: rgb(255 255 255 / 0.55);\n}\n\n.text-white\\/\\[0\\.75\\] {\n  color: rgb(255 255 255 / 0.75);\n}\n\n.text-white\\/\\[0\\.85\\] {\n  color: rgb(255 255 255 / 0.85);\n}\n\n.underline {\n  text-decoration-line: underline;\n}\n\n.line-through {\n  text-decoration-line: line-through;\n}\n\n.no-underline {\n  text-decoration-line: none;\n}\n\n.shadow-\\[0_10px_25px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.08\\)\\2c 0_4px_8px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.04\\)\\] {\n  --tw-shadow: 0 10px 25px rgba(0,0,0,0.08),0 4px 8px rgba(0,0,0,0.04);\n  --tw-shadow-colored: 0 10px 25px var(--tw-shadow-color), 0 4px 8px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.shadow-\\[0_16px_40px_rgba\\(15\\2c 23\\2c 42\\2c 0\\.16\\)\\2c 0_4px_10px_rgba\\(15\\2c 23\\2c 42\\2c 0\\.08\\)\\] {\n  --tw-shadow: 0 16px 40px rgba(15,23,42,0.16),0 4px 10px rgba(15,23,42,0.08);\n  --tw-shadow-colored: 0 16px 40px var(--tw-shadow-color), 0 4px 10px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.shadow-\\[0_1px_3px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.08\\)\\2c 0_1px_2px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.06\\)\\] {\n  --tw-shadow: 0 1px 3px rgba(0,0,0,0.08),0 1px 2px rgba(0,0,0,0.06);\n  --tw-shadow-colored: 0 1px 3px var(--tw-shadow-color), 0 1px 2px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.shadow-\\[0_2px_8px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.25\\)\\] {\n  --tw-shadow: 0 2px 8px rgba(0,0,0,0.25);\n  --tw-shadow-colored: 0 2px 8px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.outline-none {\n  outline: 2px solid transparent;\n  outline-offset: 2px;\n}\n\n.filter {\n  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);\n}\n\n.transition-all {\n  transition-property: all;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\n\n.transition-colors {\n  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\n\n.duration-150 {\n  transition-duration: 150ms;\n}\n\n.\\[grid-template-columns\\:repeat\\(auto-fit\\2c minmax\\(160px\\2c 1fr\\)\\)\\] {\n  grid-template-columns: repeat(auto-fit,minmax(160px,1fr));\n}\n\n.\\[max-width\\:calc\\(100\\%-15rem\\)\\] {\n  max-width: calc(100% - 15rem);\n}\n\n.before\\:h-\\[5px\\]::before {\n  content: var(--tw-content);\n  height: 5px;\n}\n\n.before\\:w-\\[5px\\]::before {\n  content: var(--tw-content);\n  width: 5px;\n}\n\n.before\\:rounded-full::before {\n  content: var(--tw-content);\n  border-radius: 9999px;\n}\n\n.before\\:bg-current::before {\n  content: var(--tw-content);\n  background-color: currentColor;\n}\n\n.before\\:content-\\[\\'\\'\\]::before {\n  --tw-content: '';\n  content: var(--tw-content);\n}\n\n.hover\\:border-\\[\\#2563EB\\]:hover {\n  --tw-border-opacity: 1;\n  border-color: rgb(37 99 235 / var(--tw-border-opacity, 1));\n}\n\n.hover\\:border-\\[\\#3B82F6\\]:hover {\n  --tw-border-opacity: 1;\n  border-color: rgb(59 130 246 / var(--tw-border-opacity, 1));\n}\n\n.hover\\:border-\\[\\#4F46E5\\]:hover {\n  --tw-border-opacity: 1;\n  border-color: rgb(79 70 229 / var(--tw-border-opacity, 1));\n}\n\n.hover\\:border-\\[\\#94A3B8\\]:hover {\n  --tw-border-opacity: 1;\n  border-color: rgb(148 163 184 / var(--tw-border-opacity, 1));\n}\n\n.hover\\:border-\\[\\#DC2626\\]:hover {\n  --tw-border-opacity: 1;\n  border-color: rgb(220 38 38 / var(--tw-border-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#1E5291\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(30 82 145 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#2563EB\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(37 99 235 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#4338CA\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(67 56 202 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#4F46E5\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(79 70 229 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#DC2626\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(220 38 38 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#E2E8F0\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(226 232 240 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#EEF2FF\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(238 242 255 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#F0F7FF\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(240 247 255 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#F8FAFC\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(248 250 252 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#FEF2F2\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(254 242 242 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-white\\/\\[0\\.08\\]:hover {\n  background-color: rgb(255 255 255 / 0.08);\n}\n\n.hover\\:bg-white\\/\\[0\\.16\\]:hover {\n  background-color: rgb(255 255 255 / 0.16);\n}\n\n.hover\\:bg-white\\/\\[0\\.18\\]:hover {\n  background-color: rgb(255 255 255 / 0.18);\n}\n\n.hover\\:text-\\[\\#2563EB\\]:hover {\n  --tw-text-opacity: 1;\n  color: rgb(37 99 235 / var(--tw-text-opacity, 1));\n}\n\n.hover\\:text-white:hover {\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255 / var(--tw-text-opacity, 1));\n}\n\n.hover\\:shadow-\\[0_4px_6px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.07\\)\\2c 0_2px_4px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.06\\)\\]:hover {\n  --tw-shadow: 0 4px 6px rgba(0,0,0,0.07),0 2px 4px rgba(0,0,0,0.06);\n  --tw-shadow-colored: 0 4px 6px var(--tw-shadow-color), 0 2px 4px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.focus\\:border-\\[\\#3B82F6\\]:focus {\n  --tw-border-opacity: 1;\n  border-color: rgb(59 130 246 / var(--tw-border-opacity, 1));\n}\n\n.focus\\:border-\\[\\#6366F1\\]:focus {\n  --tw-border-opacity: 1;\n  border-color: rgb(99 102 241 / var(--tw-border-opacity, 1));\n}\n\n.focus\\:shadow-\\[0_0_0_3px_rgba\\(37\\2c 99\\2c 235\\2c 0\\.08\\)\\]:focus {\n  --tw-shadow: 0 0 0 3px rgba(37,99,235,0.08);\n  --tw-shadow-colored: 0 0 0 3px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.focus\\:shadow-\\[0_0_0_3px_rgba\\(79\\2c 70\\2c 229\\2c 0\\.10\\)\\]:focus {\n  --tw-shadow: 0 0 0 3px rgba(79,70,229,0.10);\n  --tw-shadow-colored: 0 0 0 3px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.disabled\\:opacity-60:disabled {\n  opacity: 0.6;\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "*, ::before, ::after {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n  --tw-contain-size:  ;\n  --tw-contain-layout:  ;\n  --tw-contain-paint:  ;\n  --tw-contain-style:  ;\n}\n\n::backdrop {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n  --tw-contain-size:  ;\n  --tw-contain-layout:  ;\n  --tw-contain-paint:  ;\n  --tw-contain-style:  ;\n}\n\n/*\n! tailwindcss v3.4.19 | MIT License | https://tailwindcss.com\n*/\n\n/*\n1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)\n2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)\n*/\n\n*,\n::before,\n::after {\n  box-sizing: border-box;\n  /* 1 */\n  border-width: 0;\n  /* 2 */\n  border-style: solid;\n  /* 2 */\n  border-color: #e5e7eb;\n  /* 2 */\n}\n\n::before,\n::after {\n  --tw-content: '';\n}\n\n/*\n1. Use a consistent sensible line-height in all browsers.\n2. Prevent adjustments of font size after orientation changes in iOS.\n3. Use a more readable tab size.\n4. Use the user's configured `sans` font-family by default.\n5. Use the user's configured `sans` font-feature-settings by default.\n6. Use the user's configured `sans` font-variation-settings by default.\n7. Disable tap highlights on iOS\n*/\n\nhtml,\n:host {\n  line-height: 1.5;\n  /* 1 */\n  -webkit-text-size-adjust: 100%;\n  /* 2 */\n  -moz-tab-size: 4;\n  /* 3 */\n  -o-tab-size: 4;\n     tab-size: 4;\n  /* 3 */\n  font-family: ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\";\n  /* 4 */\n  font-feature-settings: normal;\n  /* 5 */\n  font-variation-settings: normal;\n  /* 6 */\n  -webkit-tap-highlight-color: transparent;\n  /* 7 */\n}\n\n/*\n1. Remove the margin in all browsers.\n2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.\n*/\n\nbody {\n  margin: 0;\n  /* 1 */\n  line-height: inherit;\n  /* 2 */\n}\n\n/*\n1. Add the correct height in Firefox.\n2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)\n3. Ensure horizontal rules are visible by default.\n*/\n\nhr {\n  height: 0;\n  /* 1 */\n  color: inherit;\n  /* 2 */\n  border-top-width: 1px;\n  /* 3 */\n}\n\n/*\nAdd the correct text decoration in Chrome, Edge, and Safari.\n*/\n\nabbr:where([title]) {\n  -webkit-text-decoration: underline dotted;\n          text-decoration: underline dotted;\n}\n\n/*\nRemove the default font size and weight for headings.\n*/\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  font-size: inherit;\n  font-weight: inherit;\n}\n\n/*\nReset links to optimize for opt-in styling instead of opt-out.\n*/\n\na {\n  color: inherit;\n  text-decoration: inherit;\n}\n\n/*\nAdd the correct font weight in Edge and Safari.\n*/\n\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/*\n1. Use the user's configured `mono` font-family by default.\n2. Use the user's configured `mono` font-feature-settings by default.\n3. Use the user's configured `mono` font-variation-settings by default.\n4. Correct the odd `em` font sizing in all browsers.\n*/\n\ncode,\nkbd,\nsamp,\npre {\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace;\n  /* 1 */\n  font-feature-settings: normal;\n  /* 2 */\n  font-variation-settings: normal;\n  /* 3 */\n  font-size: 1em;\n  /* 4 */\n}\n\n/*\nAdd the correct font size in all browsers.\n*/\n\nsmall {\n  font-size: 80%;\n}\n\n/*\nPrevent `sub` and `sup` elements from affecting the line height in all browsers.\n*/\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/*\n1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)\n2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)\n3. Remove gaps between table borders by default.\n*/\n\ntable {\n  text-indent: 0;\n  /* 1 */\n  border-color: inherit;\n  /* 2 */\n  border-collapse: collapse;\n  /* 3 */\n}\n\n/*\n1. Change the font styles in all browsers.\n2. Remove the margin in Firefox and Safari.\n3. Remove default padding in all browsers.\n*/\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit;\n  /* 1 */\n  font-feature-settings: inherit;\n  /* 1 */\n  font-variation-settings: inherit;\n  /* 1 */\n  font-size: 100%;\n  /* 1 */\n  font-weight: inherit;\n  /* 1 */\n  line-height: inherit;\n  /* 1 */\n  letter-spacing: inherit;\n  /* 1 */\n  color: inherit;\n  /* 1 */\n  margin: 0;\n  /* 2 */\n  padding: 0;\n  /* 3 */\n}\n\n/*\nRemove the inheritance of text transform in Edge and Firefox.\n*/\n\nbutton,\nselect {\n  text-transform: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Remove default button styles.\n*/\n\nbutton,\ninput:where([type='button']),\ninput:where([type='reset']),\ninput:where([type='submit']) {\n  -webkit-appearance: button;\n  /* 1 */\n  background-color: transparent;\n  /* 2 */\n  background-image: none;\n  /* 2 */\n}\n\n/*\nUse the modern Firefox focus style for all focusable elements.\n*/\n\n:-moz-focusring {\n  outline: auto;\n}\n\n/*\nRemove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)\n*/\n\n:-moz-ui-invalid {\n  box-shadow: none;\n}\n\n/*\nAdd the correct vertical alignment in Chrome and Firefox.\n*/\n\nprogress {\n  vertical-align: baseline;\n}\n\n/*\nCorrect the cursor style of increment and decrement buttons in Safari.\n*/\n\n::-webkit-inner-spin-button,\n::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/*\n1. Correct the odd appearance in Chrome and Safari.\n2. Correct the outline style in Safari.\n*/\n\n[type='search'] {\n  -webkit-appearance: textfield;\n  /* 1 */\n  outline-offset: -2px;\n  /* 2 */\n}\n\n/*\nRemove the inner padding in Chrome and Safari on macOS.\n*/\n\n::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Change font properties to `inherit` in Safari.\n*/\n\n::-webkit-file-upload-button {\n  -webkit-appearance: button;\n  /* 1 */\n  font: inherit;\n  /* 2 */\n}\n\n/*\nAdd the correct display in Chrome and Safari.\n*/\n\nsummary {\n  display: list-item;\n}\n\n/*\nRemoves the default spacing and border for appropriate elements.\n*/\n\nblockquote,\ndl,\ndd,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\nhr,\nfigure,\np,\npre {\n  margin: 0;\n}\n\nfieldset {\n  margin: 0;\n  padding: 0;\n}\n\nlegend {\n  padding: 0;\n}\n\nol,\nul,\nmenu {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n\n/*\nReset default styling for dialogs.\n*/\n\ndialog {\n  padding: 0;\n}\n\n/*\nPrevent resizing textareas horizontally by default.\n*/\n\ntextarea {\n  resize: vertical;\n}\n\n/*\n1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)\n2. Set the default placeholder color to the user's configured gray 400 color.\n*/\n\ninput::-moz-placeholder, textarea::-moz-placeholder {\n  opacity: 1;\n  /* 1 */\n  color: #9ca3af;\n  /* 2 */\n}\n\ninput::placeholder,\ntextarea::placeholder {\n  opacity: 1;\n  /* 1 */\n  color: #9ca3af;\n  /* 2 */\n}\n\n/*\nSet the default cursor for buttons.\n*/\n\nbutton,\n[role=\"button\"] {\n  cursor: pointer;\n}\n\n/*\nMake sure disabled buttons don't get the pointer cursor.\n*/\n\n:disabled {\n  cursor: default;\n}\n\n/*\n1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)\n2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)\n   This can trigger a poorly considered lint error in some tools but is included by design.\n*/\n\nimg,\nsvg,\nvideo,\ncanvas,\naudio,\niframe,\nembed,\nobject {\n  display: block;\n  /* 1 */\n  vertical-align: middle;\n  /* 2 */\n}\n\n/*\nConstrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)\n*/\n\nimg,\nvideo {\n  max-width: 100%;\n  height: auto;\n}\n\n/* Make elements with the HTML hidden attribute stay hidden by default */\n\n[hidden]:where(:not([hidden=\"until-found\"])) {\n  display: none;\n}\n\n.visible {\n  visibility: visible;\n}\n\n.static {\n  position: static;\n}\n\n.fixed {\n  position: fixed;\n}\n\n.absolute {\n  position: absolute;\n}\n\n.relative {\n  position: relative;\n}\n\n.inset-0 {\n  inset: 0px;\n}\n\n.bottom-0 {\n  bottom: 0px;\n}\n\n.left-0 {\n  left: 0px;\n}\n\n.right-0 {\n  right: 0px;\n}\n\n.top-0 {\n  top: 0px;\n}\n\n.top-14 {\n  top: 3.5rem;\n}\n\n.isolate {\n  isolation: isolate;\n}\n\n.z-\\[100\\] {\n  z-index: 100;\n}\n\n.z-\\[200\\] {\n  z-index: 200;\n}\n\n.z-\\[300\\] {\n  z-index: 300;\n}\n\n.z-\\[400\\] {\n  z-index: 400;\n}\n\n.my-2\\.5 {\n  margin-top: 0.625rem;\n  margin-bottom: 0.625rem;\n}\n\n.mb-1 {\n  margin-bottom: 0.25rem;\n}\n\n.mb-1\\.5 {\n  margin-bottom: 0.375rem;\n}\n\n.mb-2 {\n  margin-bottom: 0.5rem;\n}\n\n.mb-2\\.5 {\n  margin-bottom: 0.625rem;\n}\n\n.mb-3 {\n  margin-bottom: 0.75rem;\n}\n\n.mb-4 {\n  margin-bottom: 1rem;\n}\n\n.mb-5 {\n  margin-bottom: 1.25rem;\n}\n\n.mb-6 {\n  margin-bottom: 1.5rem;\n}\n\n.mb-\\[5px\\] {\n  margin-bottom: 5px;\n}\n\n.ml-2\\.5 {\n  margin-left: 0.625rem;\n}\n\n.ml-60 {\n  margin-left: 15rem;\n}\n\n.ml-auto {\n  margin-left: auto;\n}\n\n.mr-2 {\n  margin-right: 0.5rem;\n}\n\n.mr-3 {\n  margin-right: 0.75rem;\n}\n\n.mt-0\\.5 {\n  margin-top: 0.125rem;\n}\n\n.mt-1 {\n  margin-top: 0.25rem;\n}\n\n.mt-\\[3px\\] {\n  margin-top: 3px;\n}\n\n.block {\n  display: block;\n}\n\n.inline-block {\n  display: inline-block;\n}\n\n.flex {\n  display: flex;\n}\n\n.inline-flex {\n  display: inline-flex;\n}\n\n.table {\n  display: table;\n}\n\n.grid {\n  display: grid;\n}\n\n.hidden {\n  display: none;\n}\n\n.h-10 {\n  height: 2.5rem;\n}\n\n.h-11 {\n  height: 2.75rem;\n}\n\n.h-14 {\n  height: 3.5rem;\n}\n\n.h-2 {\n  height: 0.5rem;\n}\n\n.h-8 {\n  height: 2rem;\n}\n\n.h-9 {\n  height: 2.25rem;\n}\n\n.h-\\[18px\\] {\n  height: 18px;\n}\n\n.h-\\[3px\\] {\n  height: 3px;\n}\n\n.h-px {\n  height: 1px;\n}\n\n.h-screen {\n  height: 100vh;\n}\n\n.max-h-\\[90vh\\] {\n  max-height: 90vh;\n}\n\n.min-h-screen {\n  min-height: 100vh;\n}\n\n.w-10 {\n  width: 2.5rem;\n}\n\n.w-11 {\n  width: 2.75rem;\n}\n\n.w-2 {\n  width: 0.5rem;\n}\n\n.w-60 {\n  width: 15rem;\n}\n\n.w-64 {\n  width: 16rem;\n}\n\n.w-8 {\n  width: 2rem;\n}\n\n.w-9 {\n  width: 2.25rem;\n}\n\n.w-\\[150px\\] {\n  width: 150px;\n}\n\n.w-\\[160px\\] {\n  width: 160px;\n}\n\n.w-\\[180px\\] {\n  width: 180px;\n}\n\n.w-\\[18px\\] {\n  width: 18px;\n}\n\n.w-\\[240px\\] {\n  width: 240px;\n}\n\n.w-\\[300px\\] {\n  width: 300px;\n}\n\n.w-full {\n  width: 100%;\n}\n\n.min-w-0 {\n  min-width: 0px;\n}\n\n.max-w-\\[1200px\\] {\n  max-width: 1200px;\n}\n\n.max-w-\\[1440px\\] {\n  max-width: 1440px;\n}\n\n.max-w-\\[480px\\] {\n  max-width: 480px;\n}\n\n.max-w-\\[560px\\] {\n  max-width: 560px;\n}\n\n.flex-1 {\n  flex: 1 1 0%;\n}\n\n.shrink-0 {\n  flex-shrink: 0;\n}\n\n.border-collapse {\n  border-collapse: collapse;\n}\n\n.cursor-pointer {\n  cursor: pointer;\n}\n\n.grid-cols-2 {\n  grid-template-columns: repeat(2, minmax(0, 1fr));\n}\n\n.flex-col {\n  flex-direction: column;\n}\n\n.flex-wrap {\n  flex-wrap: wrap;\n}\n\n.items-center {\n  align-items: center;\n}\n\n.justify-end {\n  justify-content: flex-end;\n}\n\n.justify-center {\n  justify-content: center;\n}\n\n.justify-between {\n  justify-content: space-between;\n}\n\n.gap-1 {\n  gap: 0.25rem;\n}\n\n.gap-1\\.5 {\n  gap: 0.375rem;\n}\n\n.gap-2 {\n  gap: 0.5rem;\n}\n\n.gap-2\\.5 {\n  gap: 0.625rem;\n}\n\n.gap-3 {\n  gap: 0.75rem;\n}\n\n.gap-3\\.5 {\n  gap: 0.875rem;\n}\n\n.gap-4 {\n  gap: 1rem;\n}\n\n.overflow-hidden {\n  overflow: hidden;\n}\n\n.overflow-y-auto {\n  overflow-y: auto;\n}\n\n.whitespace-nowrap {\n  white-space: nowrap;\n}\n\n.rounded-2xl {\n  border-radius: 1rem;\n}\n\n.rounded-\\[10px\\] {\n  border-radius: 10px;\n}\n\n.rounded-full {\n  border-radius: 9999px;\n}\n\n.rounded-lg {\n  border-radius: 0.5rem;\n}\n\n.rounded-md {\n  border-radius: 0.375rem;\n}\n\n.rounded-xl {\n  border-radius: 0.75rem;\n}\n\n.border {\n  border-width: 1px;\n}\n\n.border-\\[1\\.5px\\] {\n  border-width: 1.5px;\n}\n\n.border-b {\n  border-bottom-width: 1px;\n}\n\n.border-l-\\[3px\\] {\n  border-left-width: 3px;\n}\n\n.border-r {\n  border-right-width: 1px;\n}\n\n.border-t {\n  border-top-width: 1px;\n}\n\n.border-none {\n  border-style: none;\n}\n\n.border-\\[\\#BFDBFE\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(191 219 254 / var(--tw-border-opacity, 1));\n}\n\n.border-\\[\\#C7D2FE\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(199 210 254 / var(--tw-border-opacity, 1));\n}\n\n.border-\\[\\#CBD5E1\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(203 213 225 / var(--tw-border-opacity, 1));\n}\n\n.border-\\[\\#E2E8F0\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(226 232 240 / var(--tw-border-opacity, 1));\n}\n\n.border-\\[\\#EEF2F6\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(238 242 246 / var(--tw-border-opacity, 1));\n}\n\n.border-\\[\\#F1F5F9\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(241 245 249 / var(--tw-border-opacity, 1));\n}\n\n.border-\\[\\#F8FAFC\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(248 250 252 / var(--tw-border-opacity, 1));\n}\n\n.border-\\[\\#FECACA\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(254 202 202 / var(--tw-border-opacity, 1));\n}\n\n.border-white\\/\\[0\\.12\\] {\n  border-color: rgb(255 255 255 / 0.12);\n}\n\n.border-white\\/\\[0\\.14\\] {\n  border-color: rgb(255 255 255 / 0.14);\n}\n\n.border-l-\\[\\#2563EB\\] {\n  --tw-border-opacity: 1;\n  border-left-color: rgb(37 99 235 / var(--tw-border-opacity, 1));\n}\n\n.border-l-transparent {\n  border-left-color: transparent;\n}\n\n.bg-\\[\\#0B1F3A\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(11 31 58 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#1E1B4B\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(30 27 75 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#2563EB\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(37 99 235 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#4F46E5\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(79 70 229 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#6366F1\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(99 102 241 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#7C3AED\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(124 58 237 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#E2E8F0\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(226 232 240 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#ECFDF5\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(236 253 245 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#EEF2FF\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(238 242 255 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#EFF6FF\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(239 246 255 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#F0F7FF\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(240 247 255 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#F1F5F9\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(241 245 249 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#F8FAFC\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(248 250 252 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#FAFBFC\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(250 251 252 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#FEF2F2\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(254 242 242 / var(--tw-bg-opacity, 1));\n}\n\n.bg-black\\/45 {\n  background-color: rgb(0 0 0 / 0.45);\n}\n\n.bg-transparent {\n  background-color: transparent;\n}\n\n.bg-white {\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));\n}\n\n.bg-white\\/\\[0\\.08\\] {\n  background-color: rgb(255 255 255 / 0.08);\n}\n\n.p-5 {\n  padding: 1.25rem;\n}\n\n.px-2 {\n  padding-left: 0.5rem;\n  padding-right: 0.5rem;\n}\n\n.px-2\\.5 {\n  padding-left: 0.625rem;\n  padding-right: 0.625rem;\n}\n\n.px-3 {\n  padding-left: 0.75rem;\n  padding-right: 0.75rem;\n}\n\n.px-3\\.5 {\n  padding-left: 0.875rem;\n  padding-right: 0.875rem;\n}\n\n.px-4 {\n  padding-left: 1rem;\n  padding-right: 1rem;\n}\n\n.px-5 {\n  padding-left: 1.25rem;\n  padding-right: 1.25rem;\n}\n\n.px-6 {\n  padding-left: 1.5rem;\n  padding-right: 1.5rem;\n}\n\n.px-7 {\n  padding-left: 1.75rem;\n  padding-right: 1.75rem;\n}\n\n.px-\\[18px\\] {\n  padding-left: 18px;\n  padding-right: 18px;\n}\n\n.py-0\\.5 {\n  padding-top: 0.125rem;\n  padding-bottom: 0.125rem;\n}\n\n.py-1\\.5 {\n  padding-top: 0.375rem;\n  padding-bottom: 0.375rem;\n}\n\n.py-2 {\n  padding-top: 0.5rem;\n  padding-bottom: 0.5rem;\n}\n\n.py-2\\.5 {\n  padding-top: 0.625rem;\n  padding-bottom: 0.625rem;\n}\n\n.py-3 {\n  padding-top: 0.75rem;\n  padding-bottom: 0.75rem;\n}\n\n.py-3\\.5 {\n  padding-top: 0.875rem;\n  padding-bottom: 0.875rem;\n}\n\n.py-4 {\n  padding-top: 1rem;\n  padding-bottom: 1rem;\n}\n\n.py-5 {\n  padding-top: 1.25rem;\n  padding-bottom: 1.25rem;\n}\n\n.py-\\[18px\\] {\n  padding-top: 18px;\n  padding-bottom: 18px;\n}\n\n.py-\\[3px\\] {\n  padding-top: 3px;\n  padding-bottom: 3px;\n}\n\n.py-\\[5px\\] {\n  padding-top: 5px;\n  padding-bottom: 5px;\n}\n\n.py-\\[7px\\] {\n  padding-top: 7px;\n  padding-bottom: 7px;\n}\n\n.py-\\[9px\\] {\n  padding-top: 9px;\n  padding-bottom: 9px;\n}\n\n.pb-1\\.5 {\n  padding-bottom: 0.375rem;\n}\n\n.pb-10 {\n  padding-bottom: 2.5rem;\n}\n\n.pb-2 {\n  padding-bottom: 0.5rem;\n}\n\n.pb-3 {\n  padding-bottom: 0.75rem;\n}\n\n.pb-4 {\n  padding-bottom: 1rem;\n}\n\n.pl-2 {\n  padding-left: 0.5rem;\n}\n\n.pr-3 {\n  padding-right: 0.75rem;\n}\n\n.pt-1 {\n  padding-top: 0.25rem;\n}\n\n.pt-14 {\n  padding-top: 3.5rem;\n}\n\n.pt-2 {\n  padding-top: 0.5rem;\n}\n\n.pt-3\\.5 {\n  padding-top: 0.875rem;\n}\n\n.pt-7 {\n  padding-top: 1.75rem;\n}\n\n.text-left {\n  text-align: left;\n}\n\n.text-right {\n  text-align: right;\n}\n\n.font-mono {\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace;\n}\n\n.text-\\[11px\\] {\n  font-size: 11px;\n}\n\n.text-\\[13px\\] {\n  font-size: 13px;\n}\n\n.text-\\[14px\\] {\n  font-size: 14px;\n}\n\n.text-\\[15px\\] {\n  font-size: 15px;\n}\n\n.text-\\[16px\\] {\n  font-size: 16px;\n}\n\n.text-\\[17px\\] {\n  font-size: 17px;\n}\n\n.text-\\[19px\\] {\n  font-size: 19px;\n}\n\n.text-\\[21px\\] {\n  font-size: 21px;\n}\n\n.text-\\[24px\\] {\n  font-size: 24px;\n}\n\n.text-\\[28px\\] {\n  font-size: 28px;\n}\n\n.text-2xl {\n  font-size: 22px;\n}\n\n.text-base {\n  font-size: 14px;\n}\n\n.text-lg {\n  font-size: 16px;\n}\n\n.text-sm {\n  font-size: 13px;\n}\n\n.text-xs {\n  font-size: 11px;\n}\n\n.text-xl {\n  font-size: 18px;\n}\n\n.text-3xl {\n  font-size: 26px;\n}\n\n.font-bold {\n  font-weight: 700;\n}\n\n.font-normal {\n  font-weight: 400;\n}\n\n.font-semibold {\n  font-weight: 600;\n}\n\n.uppercase {\n  text-transform: uppercase;\n}\n\n.capitalize {\n  text-transform: capitalize;\n}\n\n.leading-none {\n  line-height: 1;\n}\n\n.leading-snug {\n  line-height: 1.375;\n}\n\n.leading-tight {\n  line-height: 1.25;\n}\n\n.tracking-\\[-0\\.2px\\] {\n  letter-spacing: -0.2px;\n}\n\n.tracking-\\[-0\\.3px\\] {\n  letter-spacing: -0.3px;\n}\n\n.tracking-\\[0\\.5px\\] {\n  letter-spacing: 0.5px;\n}\n\n.tracking-\\[0\\.6px\\] {\n  letter-spacing: 0.6px;\n}\n\n.tracking-wide {\n  letter-spacing: 0.025em;\n}\n\n.tracking-wider {\n  letter-spacing: 0.05em;\n}\n\n.text-\\[\\#065F46\\] {\n  --tw-text-opacity: 1;\n  color: rgb(6 95 70 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#0B1F3A\\] {\n  --tw-text-opacity: 1;\n  color: rgb(11 31 58 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#1E293B\\] {\n  --tw-text-opacity: 1;\n  color: rgb(30 41 59 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#1E40AF\\] {\n  --tw-text-opacity: 1;\n  color: rgb(30 64 175 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#1E5291\\] {\n  --tw-text-opacity: 1;\n  color: rgb(30 82 145 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#2563EB\\] {\n  --tw-text-opacity: 1;\n  color: rgb(37 99 235 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#334155\\] {\n  --tw-text-opacity: 1;\n  color: rgb(51 65 85 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#3730A3\\] {\n  --tw-text-opacity: 1;\n  color: rgb(55 48 163 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#4338CA\\] {\n  --tw-text-opacity: 1;\n  color: rgb(67 56 202 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#475569\\] {\n  --tw-text-opacity: 1;\n  color: rgb(71 85 105 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#4F46E5\\] {\n  --tw-text-opacity: 1;\n  color: rgb(79 70 229 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#64748B\\] {\n  --tw-text-opacity: 1;\n  color: rgb(100 116 139 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#94A3B8\\] {\n  --tw-text-opacity: 1;\n  color: rgb(148 163 184 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#991B1B\\] {\n  --tw-text-opacity: 1;\n  color: rgb(153 27 27 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#CBD5E1\\] {\n  --tw-text-opacity: 1;\n  color: rgb(203 213 225 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#DC2626\\] {\n  --tw-text-opacity: 1;\n  color: rgb(220 38 38 / var(--tw-text-opacity, 1));\n}\n\n.text-white {\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255 / var(--tw-text-opacity, 1));\n}\n\n.text-white\\/40 {\n  color: rgb(255 255 255 / 0.4);\n}\n\n.text-white\\/50 {\n  color: rgb(255 255 255 / 0.5);\n}\n\n.text-white\\/\\[0\\.55\\] {\n  color: rgb(255 255 255 / 0.55);\n}\n\n.text-white\\/\\[0\\.75\\] {\n  color: rgb(255 255 255 / 0.75);\n}\n\n.text-white\\/\\[0\\.85\\] {\n  color: rgb(255 255 255 / 0.85);\n}\n\n.underline {\n  text-decoration-line: underline;\n}\n\n.line-through {\n  text-decoration-line: line-through;\n}\n\n.no-underline {\n  text-decoration-line: none;\n}\n\n.shadow-\\[0_10px_25px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.08\\)\\2c 0_4px_8px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.04\\)\\] {\n  --tw-shadow: 0 10px 25px rgba(0,0,0,0.08),0 4px 8px rgba(0,0,0,0.04);\n  --tw-shadow-colored: 0 10px 25px var(--tw-shadow-color), 0 4px 8px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.shadow-\\[0_16px_40px_rgba\\(15\\2c 23\\2c 42\\2c 0\\.16\\)\\2c 0_4px_10px_rgba\\(15\\2c 23\\2c 42\\2c 0\\.08\\)\\] {\n  --tw-shadow: 0 16px 40px rgba(15,23,42,0.16),0 4px 10px rgba(15,23,42,0.08);\n  --tw-shadow-colored: 0 16px 40px var(--tw-shadow-color), 0 4px 10px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.shadow-\\[0_1px_3px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.08\\)\\2c 0_1px_2px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.06\\)\\] {\n  --tw-shadow: 0 1px 3px rgba(0,0,0,0.08),0 1px 2px rgba(0,0,0,0.06);\n  --tw-shadow-colored: 0 1px 3px var(--tw-shadow-color), 0 1px 2px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.shadow-\\[0_2px_8px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.25\\)\\] {\n  --tw-shadow: 0 2px 8px rgba(0,0,0,0.25);\n  --tw-shadow-colored: 0 2px 8px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.outline-none {\n  outline: 2px solid transparent;\n  outline-offset: 2px;\n}\n\n.filter {\n  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);\n}\n\n.transition-all {\n  transition-property: all;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\n\n.transition-colors {\n  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\n\n.duration-150 {\n  transition-duration: 150ms;\n}\n\n.\\[grid-template-columns\\:repeat\\(auto-fit\\2c minmax\\(160px\\2c 1fr\\)\\)\\] {\n  grid-template-columns: repeat(auto-fit,minmax(160px,1fr));\n}\n\n.\\[max-width\\:calc\\(100\\%-15rem\\)\\] {\n  max-width: calc(100% - 15rem);\n}\n\n.before\\:h-\\[5px\\]::before {\n  content: var(--tw-content);\n  height: 5px;\n}\n\n.before\\:w-\\[5px\\]::before {\n  content: var(--tw-content);\n  width: 5px;\n}\n\n.before\\:rounded-full::before {\n  content: var(--tw-content);\n  border-radius: 9999px;\n}\n\n.before\\:bg-current::before {\n  content: var(--tw-content);\n  background-color: currentColor;\n}\n\n.before\\:content-\\[\\'\\'\\]::before {\n  --tw-content: '';\n  content: var(--tw-content);\n}\n\n.hover\\:border-\\[\\#2563EB\\]:hover {\n  --tw-border-opacity: 1;\n  border-color: rgb(37 99 235 / var(--tw-border-opacity, 1));\n}\n\n.hover\\:border-\\[\\#3B82F6\\]:hover {\n  --tw-border-opacity: 1;\n  border-color: rgb(59 130 246 / var(--tw-border-opacity, 1));\n}\n\n.hover\\:border-\\[\\#4F46E5\\]:hover {\n  --tw-border-opacity: 1;\n  border-color: rgb(79 70 229 / var(--tw-border-opacity, 1));\n}\n\n.hover\\:border-\\[\\#94A3B8\\]:hover {\n  --tw-border-opacity: 1;\n  border-color: rgb(148 163 184 / var(--tw-border-opacity, 1));\n}\n\n.hover\\:border-\\[\\#DC2626\\]:hover {\n  --tw-border-opacity: 1;\n  border-color: rgb(220 38 38 / var(--tw-border-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#1E5291\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(30 82 145 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#2563EB\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(37 99 235 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#4338CA\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(67 56 202 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#4F46E5\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(79 70 229 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#DC2626\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(220 38 38 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#E2E8F0\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(226 232 240 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#EEF2FF\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(238 242 255 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#F0F7FF\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(240 247 255 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#F8FAFC\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(248 250 252 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#FEF2F2\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(254 242 242 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-white\\/\\[0\\.08\\]:hover {\n  background-color: rgb(255 255 255 / 0.08);\n}\n\n.hover\\:bg-white\\/\\[0\\.16\\]:hover {\n  background-color: rgb(255 255 255 / 0.16);\n}\n\n.hover\\:bg-white\\/\\[0\\.18\\]:hover {\n  background-color: rgb(255 255 255 / 0.18);\n}\n\n.hover\\:text-\\[\\#2563EB\\]:hover {\n  --tw-text-opacity: 1;\n  color: rgb(37 99 235 / var(--tw-text-opacity, 1));\n}\n\n.hover\\:text-white:hover {\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255 / var(--tw-text-opacity, 1));\n}\n\n.hover\\:shadow-\\[0_4px_6px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.07\\)\\2c 0_2px_4px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.06\\)\\]:hover {\n  --tw-shadow: 0 4px 6px rgba(0,0,0,0.07),0 2px 4px rgba(0,0,0,0.06);\n  --tw-shadow-colored: 0 4px 6px var(--tw-shadow-color), 0 2px 4px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.focus\\:border-\\[\\#3B82F6\\]:focus {\n  --tw-border-opacity: 1;\n  border-color: rgb(59 130 246 / var(--tw-border-opacity, 1));\n}\n\n.focus\\:border-\\[\\#6366F1\\]:focus {\n  --tw-border-opacity: 1;\n  border-color: rgb(99 102 241 / var(--tw-border-opacity, 1));\n}\n\n.focus\\:shadow-\\[0_0_0_3px_rgba\\(37\\2c 99\\2c 235\\2c 0\\.08\\)\\]:focus {\n  --tw-shadow: 0 0 0 3px rgba(37,99,235,0.08);\n  --tw-shadow-colored: 0 0 0 3px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.focus\\:shadow-\\[0_0_0_3px_rgba\\(79\\2c 70\\2c 229\\2c 0\\.10\\)\\]:focus {\n  --tw-shadow: 0 0 0 3px rgba(79,70,229,0.10);\n  --tw-shadow-colored: 0 0 0 3px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.disabled\\:opacity-60:disabled {\n  opacity: 0.6;\n}", "",{"version":3,"sources":["webpack://./src/output.css"],"names":[],"mappings":"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","sourcesContent":["*, ::before, ::after {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n  --tw-contain-size:  ;\n  --tw-contain-layout:  ;\n  --tw-contain-paint:  ;\n  --tw-contain-style:  ;\n}\n\n::backdrop {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n  --tw-contain-size:  ;\n  --tw-contain-layout:  ;\n  --tw-contain-paint:  ;\n  --tw-contain-style:  ;\n}\n\n/*\n! tailwindcss v3.4.19 | MIT License | https://tailwindcss.com\n*/\n\n/*\n1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)\n2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)\n*/\n\n*,\n::before,\n::after {\n  box-sizing: border-box;\n  /* 1 */\n  border-width: 0;\n  /* 2 */\n  border-style: solid;\n  /* 2 */\n  border-color: #e5e7eb;\n  /* 2 */\n}\n\n::before,\n::after {\n  --tw-content: '';\n}\n\n/*\n1. Use a consistent sensible line-height in all browsers.\n2. Prevent adjustments of font size after orientation changes in iOS.\n3. Use a more readable tab size.\n4. Use the user's configured `sans` font-family by default.\n5. Use the user's configured `sans` font-feature-settings by default.\n6. Use the user's configured `sans` font-variation-settings by default.\n7. Disable tap highlights on iOS\n*/\n\nhtml,\n:host {\n  line-height: 1.5;\n  /* 1 */\n  -webkit-text-size-adjust: 100%;\n  /* 2 */\n  -moz-tab-size: 4;\n  /* 3 */\n  -o-tab-size: 4;\n     tab-size: 4;\n  /* 3 */\n  font-family: ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\";\n  /* 4 */\n  font-feature-settings: normal;\n  /* 5 */\n  font-variation-settings: normal;\n  /* 6 */\n  -webkit-tap-highlight-color: transparent;\n  /* 7 */\n}\n\n/*\n1. Remove the margin in all browsers.\n2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.\n*/\n\nbody {\n  margin: 0;\n  /* 1 */\n  line-height: inherit;\n  /* 2 */\n}\n\n/*\n1. Add the correct height in Firefox.\n2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)\n3. Ensure horizontal rules are visible by default.\n*/\n\nhr {\n  height: 0;\n  /* 1 */\n  color: inherit;\n  /* 2 */\n  border-top-width: 1px;\n  /* 3 */\n}\n\n/*\nAdd the correct text decoration in Chrome, Edge, and Safari.\n*/\n\nabbr:where([title]) {\n  -webkit-text-decoration: underline dotted;\n          text-decoration: underline dotted;\n}\n\n/*\nRemove the default font size and weight for headings.\n*/\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  font-size: inherit;\n  font-weight: inherit;\n}\n\n/*\nReset links to optimize for opt-in styling instead of opt-out.\n*/\n\na {\n  color: inherit;\n  text-decoration: inherit;\n}\n\n/*\nAdd the correct font weight in Edge and Safari.\n*/\n\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/*\n1. Use the user's configured `mono` font-family by default.\n2. Use the user's configured `mono` font-feature-settings by default.\n3. Use the user's configured `mono` font-variation-settings by default.\n4. Correct the odd `em` font sizing in all browsers.\n*/\n\ncode,\nkbd,\nsamp,\npre {\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace;\n  /* 1 */\n  font-feature-settings: normal;\n  /* 2 */\n  font-variation-settings: normal;\n  /* 3 */\n  font-size: 1em;\n  /* 4 */\n}\n\n/*\nAdd the correct font size in all browsers.\n*/\n\nsmall {\n  font-size: 80%;\n}\n\n/*\nPrevent `sub` and `sup` elements from affecting the line height in all browsers.\n*/\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/*\n1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)\n2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)\n3. Remove gaps between table borders by default.\n*/\n\ntable {\n  text-indent: 0;\n  /* 1 */\n  border-color: inherit;\n  /* 2 */\n  border-collapse: collapse;\n  /* 3 */\n}\n\n/*\n1. Change the font styles in all browsers.\n2. Remove the margin in Firefox and Safari.\n3. Remove default padding in all browsers.\n*/\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit;\n  /* 1 */\n  font-feature-settings: inherit;\n  /* 1 */\n  font-variation-settings: inherit;\n  /* 1 */\n  font-size: 100%;\n  /* 1 */\n  font-weight: inherit;\n  /* 1 */\n  line-height: inherit;\n  /* 1 */\n  letter-spacing: inherit;\n  /* 1 */\n  color: inherit;\n  /* 1 */\n  margin: 0;\n  /* 2 */\n  padding: 0;\n  /* 3 */\n}\n\n/*\nRemove the inheritance of text transform in Edge and Firefox.\n*/\n\nbutton,\nselect {\n  text-transform: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Remove default button styles.\n*/\n\nbutton,\ninput:where([type='button']),\ninput:where([type='reset']),\ninput:where([type='submit']) {\n  -webkit-appearance: button;\n  /* 1 */\n  background-color: transparent;\n  /* 2 */\n  background-image: none;\n  /* 2 */\n}\n\n/*\nUse the modern Firefox focus style for all focusable elements.\n*/\n\n:-moz-focusring {\n  outline: auto;\n}\n\n/*\nRemove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)\n*/\n\n:-moz-ui-invalid {\n  box-shadow: none;\n}\n\n/*\nAdd the correct vertical alignment in Chrome and Firefox.\n*/\n\nprogress {\n  vertical-align: baseline;\n}\n\n/*\nCorrect the cursor style of increment and decrement buttons in Safari.\n*/\n\n::-webkit-inner-spin-button,\n::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/*\n1. Correct the odd appearance in Chrome and Safari.\n2. Correct the outline style in Safari.\n*/\n\n[type='search'] {\n  -webkit-appearance: textfield;\n  /* 1 */\n  outline-offset: -2px;\n  /* 2 */\n}\n\n/*\nRemove the inner padding in Chrome and Safari on macOS.\n*/\n\n::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Change font properties to `inherit` in Safari.\n*/\n\n::-webkit-file-upload-button {\n  -webkit-appearance: button;\n  /* 1 */\n  font: inherit;\n  /* 2 */\n}\n\n/*\nAdd the correct display in Chrome and Safari.\n*/\n\nsummary {\n  display: list-item;\n}\n\n/*\nRemoves the default spacing and border for appropriate elements.\n*/\n\nblockquote,\ndl,\ndd,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\nhr,\nfigure,\np,\npre {\n  margin: 0;\n}\n\nfieldset {\n  margin: 0;\n  padding: 0;\n}\n\nlegend {\n  padding: 0;\n}\n\nol,\nul,\nmenu {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n\n/*\nReset default styling for dialogs.\n*/\n\ndialog {\n  padding: 0;\n}\n\n/*\nPrevent resizing textareas horizontally by default.\n*/\n\ntextarea {\n  resize: vertical;\n}\n\n/*\n1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)\n2. Set the default placeholder color to the user's configured gray 400 color.\n*/\n\ninput::-moz-placeholder, textarea::-moz-placeholder {\n  opacity: 1;\n  /* 1 */\n  color: #9ca3af;\n  /* 2 */\n}\n\ninput::placeholder,\ntextarea::placeholder {\n  opacity: 1;\n  /* 1 */\n  color: #9ca3af;\n  /* 2 */\n}\n\n/*\nSet the default cursor for buttons.\n*/\n\nbutton,\n[role=\"button\"] {\n  cursor: pointer;\n}\n\n/*\nMake sure disabled buttons don't get the pointer cursor.\n*/\n\n:disabled {\n  cursor: default;\n}\n\n/*\n1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)\n2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)\n   This can trigger a poorly considered lint error in some tools but is included by design.\n*/\n\nimg,\nsvg,\nvideo,\ncanvas,\naudio,\niframe,\nembed,\nobject {\n  display: block;\n  /* 1 */\n  vertical-align: middle;\n  /* 2 */\n}\n\n/*\nConstrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)\n*/\n\nimg,\nvideo {\n  max-width: 100%;\n  height: auto;\n}\n\n/* Make elements with the HTML hidden attribute stay hidden by default */\n\n[hidden]:where(:not([hidden=\"until-found\"])) {\n  display: none;\n}\n\n.visible {\n  visibility: visible;\n}\n\n.static {\n  position: static;\n}\n\n.fixed {\n  position: fixed;\n}\n\n.absolute {\n  position: absolute;\n}\n\n.relative {\n  position: relative;\n}\n\n.inset-0 {\n  inset: 0px;\n}\n\n.bottom-0 {\n  bottom: 0px;\n}\n\n.left-0 {\n  left: 0px;\n}\n\n.right-0 {\n  right: 0px;\n}\n\n.top-0 {\n  top: 0px;\n}\n\n.top-14 {\n  top: 3.5rem;\n}\n\n.isolate {\n  isolation: isolate;\n}\n\n.z-\\[100\\] {\n  z-index: 100;\n}\n\n.z-\\[200\\] {\n  z-index: 200;\n}\n\n.z-\\[300\\] {\n  z-index: 300;\n}\n\n.z-\\[400\\] {\n  z-index: 400;\n}\n\n.my-2\\.5 {\n  margin-top: 0.625rem;\n  margin-bottom: 0.625rem;\n}\n\n.mb-1 {\n  margin-bottom: 0.25rem;\n}\n\n.mb-1\\.5 {\n  margin-bottom: 0.375rem;\n}\n\n.mb-2 {\n  margin-bottom: 0.5rem;\n}\n\n.mb-2\\.5 {\n  margin-bottom: 0.625rem;\n}\n\n.mb-3 {\n  margin-bottom: 0.75rem;\n}\n\n.mb-4 {\n  margin-bottom: 1rem;\n}\n\n.mb-5 {\n  margin-bottom: 1.25rem;\n}\n\n.mb-6 {\n  margin-bottom: 1.5rem;\n}\n\n.mb-\\[5px\\] {\n  margin-bottom: 5px;\n}\n\n.ml-2\\.5 {\n  margin-left: 0.625rem;\n}\n\n.ml-60 {\n  margin-left: 15rem;\n}\n\n.ml-auto {\n  margin-left: auto;\n}\n\n.mr-2 {\n  margin-right: 0.5rem;\n}\n\n.mr-3 {\n  margin-right: 0.75rem;\n}\n\n.mt-0\\.5 {\n  margin-top: 0.125rem;\n}\n\n.mt-1 {\n  margin-top: 0.25rem;\n}\n\n.mt-\\[3px\\] {\n  margin-top: 3px;\n}\n\n.block {\n  display: block;\n}\n\n.inline-block {\n  display: inline-block;\n}\n\n.flex {\n  display: flex;\n}\n\n.inline-flex {\n  display: inline-flex;\n}\n\n.table {\n  display: table;\n}\n\n.grid {\n  display: grid;\n}\n\n.hidden {\n  display: none;\n}\n\n.h-10 {\n  height: 2.5rem;\n}\n\n.h-11 {\n  height: 2.75rem;\n}\n\n.h-14 {\n  height: 3.5rem;\n}\n\n.h-2 {\n  height: 0.5rem;\n}\n\n.h-8 {\n  height: 2rem;\n}\n\n.h-9 {\n  height: 2.25rem;\n}\n\n.h-\\[18px\\] {\n  height: 18px;\n}\n\n.h-\\[3px\\] {\n  height: 3px;\n}\n\n.h-px {\n  height: 1px;\n}\n\n.h-screen {\n  height: 100vh;\n}\n\n.max-h-\\[90vh\\] {\n  max-height: 90vh;\n}\n\n.min-h-screen {\n  min-height: 100vh;\n}\n\n.w-10 {\n  width: 2.5rem;\n}\n\n.w-11 {\n  width: 2.75rem;\n}\n\n.w-2 {\n  width: 0.5rem;\n}\n\n.w-60 {\n  width: 15rem;\n}\n\n.w-64 {\n  width: 16rem;\n}\n\n.w-8 {\n  width: 2rem;\n}\n\n.w-9 {\n  width: 2.25rem;\n}\n\n.w-\\[150px\\] {\n  width: 150px;\n}\n\n.w-\\[160px\\] {\n  width: 160px;\n}\n\n.w-\\[180px\\] {\n  width: 180px;\n}\n\n.w-\\[18px\\] {\n  width: 18px;\n}\n\n.w-\\[240px\\] {\n  width: 240px;\n}\n\n.w-\\[300px\\] {\n  width: 300px;\n}\n\n.w-full {\n  width: 100%;\n}\n\n.min-w-0 {\n  min-width: 0px;\n}\n\n.max-w-\\[1200px\\] {\n  max-width: 1200px;\n}\n\n.max-w-\\[1440px\\] {\n  max-width: 1440px;\n}\n\n.max-w-\\[480px\\] {\n  max-width: 480px;\n}\n\n.max-w-\\[560px\\] {\n  max-width: 560px;\n}\n\n.flex-1 {\n  flex: 1 1 0%;\n}\n\n.shrink-0 {\n  flex-shrink: 0;\n}\n\n.border-collapse {\n  border-collapse: collapse;\n}\n\n.cursor-pointer {\n  cursor: pointer;\n}\n\n.grid-cols-2 {\n  grid-template-columns: repeat(2, minmax(0, 1fr));\n}\n\n.flex-col {\n  flex-direction: column;\n}\n\n.flex-wrap {\n  flex-wrap: wrap;\n}\n\n.items-center {\n  align-items: center;\n}\n\n.justify-end {\n  justify-content: flex-end;\n}\n\n.justify-center {\n  justify-content: center;\n}\n\n.justify-between {\n  justify-content: space-between;\n}\n\n.gap-1 {\n  gap: 0.25rem;\n}\n\n.gap-1\\.5 {\n  gap: 0.375rem;\n}\n\n.gap-2 {\n  gap: 0.5rem;\n}\n\n.gap-2\\.5 {\n  gap: 0.625rem;\n}\n\n.gap-3 {\n  gap: 0.75rem;\n}\n\n.gap-3\\.5 {\n  gap: 0.875rem;\n}\n\n.gap-4 {\n  gap: 1rem;\n}\n\n.overflow-hidden {\n  overflow: hidden;\n}\n\n.overflow-y-auto {\n  overflow-y: auto;\n}\n\n.whitespace-nowrap {\n  white-space: nowrap;\n}\n\n.rounded-2xl {\n  border-radius: 1rem;\n}\n\n.rounded-\\[10px\\] {\n  border-radius: 10px;\n}\n\n.rounded-full {\n  border-radius: 9999px;\n}\n\n.rounded-lg {\n  border-radius: 0.5rem;\n}\n\n.rounded-md {\n  border-radius: 0.375rem;\n}\n\n.rounded-xl {\n  border-radius: 0.75rem;\n}\n\n.border {\n  border-width: 1px;\n}\n\n.border-\\[1\\.5px\\] {\n  border-width: 1.5px;\n}\n\n.border-b {\n  border-bottom-width: 1px;\n}\n\n.border-l-\\[3px\\] {\n  border-left-width: 3px;\n}\n\n.border-r {\n  border-right-width: 1px;\n}\n\n.border-t {\n  border-top-width: 1px;\n}\n\n.border-none {\n  border-style: none;\n}\n\n.border-\\[\\#BFDBFE\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(191 219 254 / var(--tw-border-opacity, 1));\n}\n\n.border-\\[\\#C7D2FE\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(199 210 254 / var(--tw-border-opacity, 1));\n}\n\n.border-\\[\\#CBD5E1\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(203 213 225 / var(--tw-border-opacity, 1));\n}\n\n.border-\\[\\#E2E8F0\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(226 232 240 / var(--tw-border-opacity, 1));\n}\n\n.border-\\[\\#EEF2F6\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(238 242 246 / var(--tw-border-opacity, 1));\n}\n\n.border-\\[\\#F1F5F9\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(241 245 249 / var(--tw-border-opacity, 1));\n}\n\n.border-\\[\\#F8FAFC\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(248 250 252 / var(--tw-border-opacity, 1));\n}\n\n.border-\\[\\#FECACA\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(254 202 202 / var(--tw-border-opacity, 1));\n}\n\n.border-white\\/\\[0\\.12\\] {\n  border-color: rgb(255 255 255 / 0.12);\n}\n\n.border-white\\/\\[0\\.14\\] {\n  border-color: rgb(255 255 255 / 0.14);\n}\n\n.border-l-\\[\\#2563EB\\] {\n  --tw-border-opacity: 1;\n  border-left-color: rgb(37 99 235 / var(--tw-border-opacity, 1));\n}\n\n.border-l-transparent {\n  border-left-color: transparent;\n}\n\n.bg-\\[\\#0B1F3A\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(11 31 58 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#1E1B4B\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(30 27 75 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#2563EB\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(37 99 235 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#4F46E5\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(79 70 229 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#6366F1\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(99 102 241 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#7C3AED\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(124 58 237 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#E2E8F0\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(226 232 240 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#ECFDF5\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(236 253 245 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#EEF2FF\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(238 242 255 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#EFF6FF\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(239 246 255 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#F0F7FF\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(240 247 255 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#F1F5F9\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(241 245 249 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#F8FAFC\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(248 250 252 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#FAFBFC\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(250 251 252 / var(--tw-bg-opacity, 1));\n}\n\n.bg-\\[\\#FEF2F2\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(254 242 242 / var(--tw-bg-opacity, 1));\n}\n\n.bg-black\\/45 {\n  background-color: rgb(0 0 0 / 0.45);\n}\n\n.bg-transparent {\n  background-color: transparent;\n}\n\n.bg-white {\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));\n}\n\n.bg-white\\/\\[0\\.08\\] {\n  background-color: rgb(255 255 255 / 0.08);\n}\n\n.p-5 {\n  padding: 1.25rem;\n}\n\n.px-2 {\n  padding-left: 0.5rem;\n  padding-right: 0.5rem;\n}\n\n.px-2\\.5 {\n  padding-left: 0.625rem;\n  padding-right: 0.625rem;\n}\n\n.px-3 {\n  padding-left: 0.75rem;\n  padding-right: 0.75rem;\n}\n\n.px-3\\.5 {\n  padding-left: 0.875rem;\n  padding-right: 0.875rem;\n}\n\n.px-4 {\n  padding-left: 1rem;\n  padding-right: 1rem;\n}\n\n.px-5 {\n  padding-left: 1.25rem;\n  padding-right: 1.25rem;\n}\n\n.px-6 {\n  padding-left: 1.5rem;\n  padding-right: 1.5rem;\n}\n\n.px-7 {\n  padding-left: 1.75rem;\n  padding-right: 1.75rem;\n}\n\n.px-\\[18px\\] {\n  padding-left: 18px;\n  padding-right: 18px;\n}\n\n.py-0\\.5 {\n  padding-top: 0.125rem;\n  padding-bottom: 0.125rem;\n}\n\n.py-1\\.5 {\n  padding-top: 0.375rem;\n  padding-bottom: 0.375rem;\n}\n\n.py-2 {\n  padding-top: 0.5rem;\n  padding-bottom: 0.5rem;\n}\n\n.py-2\\.5 {\n  padding-top: 0.625rem;\n  padding-bottom: 0.625rem;\n}\n\n.py-3 {\n  padding-top: 0.75rem;\n  padding-bottom: 0.75rem;\n}\n\n.py-3\\.5 {\n  padding-top: 0.875rem;\n  padding-bottom: 0.875rem;\n}\n\n.py-4 {\n  padding-top: 1rem;\n  padding-bottom: 1rem;\n}\n\n.py-5 {\n  padding-top: 1.25rem;\n  padding-bottom: 1.25rem;\n}\n\n.py-\\[18px\\] {\n  padding-top: 18px;\n  padding-bottom: 18px;\n}\n\n.py-\\[3px\\] {\n  padding-top: 3px;\n  padding-bottom: 3px;\n}\n\n.py-\\[5px\\] {\n  padding-top: 5px;\n  padding-bottom: 5px;\n}\n\n.py-\\[7px\\] {\n  padding-top: 7px;\n  padding-bottom: 7px;\n}\n\n.py-\\[9px\\] {\n  padding-top: 9px;\n  padding-bottom: 9px;\n}\n\n.pb-1\\.5 {\n  padding-bottom: 0.375rem;\n}\n\n.pb-10 {\n  padding-bottom: 2.5rem;\n}\n\n.pb-2 {\n  padding-bottom: 0.5rem;\n}\n\n.pb-3 {\n  padding-bottom: 0.75rem;\n}\n\n.pb-4 {\n  padding-bottom: 1rem;\n}\n\n.pl-2 {\n  padding-left: 0.5rem;\n}\n\n.pr-3 {\n  padding-right: 0.75rem;\n}\n\n.pt-1 {\n  padding-top: 0.25rem;\n}\n\n.pt-14 {\n  padding-top: 3.5rem;\n}\n\n.pt-2 {\n  padding-top: 0.5rem;\n}\n\n.pt-3\\.5 {\n  padding-top: 0.875rem;\n}\n\n.pt-7 {\n  padding-top: 1.75rem;\n}\n\n.text-left {\n  text-align: left;\n}\n\n.text-right {\n  text-align: right;\n}\n\n.font-mono {\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace;\n}\n\n.text-\\[11px\\] {\n  font-size: 11px;\n}\n\n.text-\\[13px\\] {\n  font-size: 13px;\n}\n\n.text-\\[14px\\] {\n  font-size: 14px;\n}\n\n.text-\\[15px\\] {\n  font-size: 15px;\n}\n\n.text-\\[16px\\] {\n  font-size: 16px;\n}\n\n.text-\\[17px\\] {\n  font-size: 17px;\n}\n\n.text-\\[19px\\] {\n  font-size: 19px;\n}\n\n.text-\\[21px\\] {\n  font-size: 21px;\n}\n\n.text-\\[24px\\] {\n  font-size: 24px;\n}\n\n.text-\\[28px\\] {\n  font-size: 28px;\n}\n\n.text-2xl {\n  font-size: 22px;\n}\n\n.text-base {\n  font-size: 14px;\n}\n\n.text-lg {\n  font-size: 16px;\n}\n\n.text-sm {\n  font-size: 13px;\n}\n\n.text-xs {\n  font-size: 11px;\n}\n\n.text-xl {\n  font-size: 18px;\n}\n\n.text-3xl {\n  font-size: 26px;\n}\n\n.font-bold {\n  font-weight: 700;\n}\n\n.font-normal {\n  font-weight: 400;\n}\n\n.font-semibold {\n  font-weight: 600;\n}\n\n.uppercase {\n  text-transform: uppercase;\n}\n\n.capitalize {\n  text-transform: capitalize;\n}\n\n.leading-none {\n  line-height: 1;\n}\n\n.leading-snug {\n  line-height: 1.375;\n}\n\n.leading-tight {\n  line-height: 1.25;\n}\n\n.tracking-\\[-0\\.2px\\] {\n  letter-spacing: -0.2px;\n}\n\n.tracking-\\[-0\\.3px\\] {\n  letter-spacing: -0.3px;\n}\n\n.tracking-\\[0\\.5px\\] {\n  letter-spacing: 0.5px;\n}\n\n.tracking-\\[0\\.6px\\] {\n  letter-spacing: 0.6px;\n}\n\n.tracking-wide {\n  letter-spacing: 0.025em;\n}\n\n.tracking-wider {\n  letter-spacing: 0.05em;\n}\n\n.text-\\[\\#065F46\\] {\n  --tw-text-opacity: 1;\n  color: rgb(6 95 70 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#0B1F3A\\] {\n  --tw-text-opacity: 1;\n  color: rgb(11 31 58 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#1E293B\\] {\n  --tw-text-opacity: 1;\n  color: rgb(30 41 59 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#1E40AF\\] {\n  --tw-text-opacity: 1;\n  color: rgb(30 64 175 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#1E5291\\] {\n  --tw-text-opacity: 1;\n  color: rgb(30 82 145 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#2563EB\\] {\n  --tw-text-opacity: 1;\n  color: rgb(37 99 235 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#334155\\] {\n  --tw-text-opacity: 1;\n  color: rgb(51 65 85 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#3730A3\\] {\n  --tw-text-opacity: 1;\n  color: rgb(55 48 163 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#4338CA\\] {\n  --tw-text-opacity: 1;\n  color: rgb(67 56 202 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#475569\\] {\n  --tw-text-opacity: 1;\n  color: rgb(71 85 105 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#4F46E5\\] {\n  --tw-text-opacity: 1;\n  color: rgb(79 70 229 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#64748B\\] {\n  --tw-text-opacity: 1;\n  color: rgb(100 116 139 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#94A3B8\\] {\n  --tw-text-opacity: 1;\n  color: rgb(148 163 184 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#991B1B\\] {\n  --tw-text-opacity: 1;\n  color: rgb(153 27 27 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#CBD5E1\\] {\n  --tw-text-opacity: 1;\n  color: rgb(203 213 225 / var(--tw-text-opacity, 1));\n}\n\n.text-\\[\\#DC2626\\] {\n  --tw-text-opacity: 1;\n  color: rgb(220 38 38 / var(--tw-text-opacity, 1));\n}\n\n.text-white {\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255 / var(--tw-text-opacity, 1));\n}\n\n.text-white\\/40 {\n  color: rgb(255 255 255 / 0.4);\n}\n\n.text-white\\/50 {\n  color: rgb(255 255 255 / 0.5);\n}\n\n.text-white\\/\\[0\\.55\\] {\n  color: rgb(255 255 255 / 0.55);\n}\n\n.text-white\\/\\[0\\.75\\] {\n  color: rgb(255 255 255 / 0.75);\n}\n\n.text-white\\/\\[0\\.85\\] {\n  color: rgb(255 255 255 / 0.85);\n}\n\n.underline {\n  text-decoration-line: underline;\n}\n\n.line-through {\n  text-decoration-line: line-through;\n}\n\n.no-underline {\n  text-decoration-line: none;\n}\n\n.shadow-\\[0_10px_25px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.08\\)\\2c 0_4px_8px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.04\\)\\] {\n  --tw-shadow: 0 10px 25px rgba(0,0,0,0.08),0 4px 8px rgba(0,0,0,0.04);\n  --tw-shadow-colored: 0 10px 25px var(--tw-shadow-color), 0 4px 8px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.shadow-\\[0_16px_40px_rgba\\(15\\2c 23\\2c 42\\2c 0\\.16\\)\\2c 0_4px_10px_rgba\\(15\\2c 23\\2c 42\\2c 0\\.08\\)\\] {\n  --tw-shadow: 0 16px 40px rgba(15,23,42,0.16),0 4px 10px rgba(15,23,42,0.08);\n  --tw-shadow-colored: 0 16px 40px var(--tw-shadow-color), 0 4px 10px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.shadow-\\[0_1px_3px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.08\\)\\2c 0_1px_2px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.06\\)\\] {\n  --tw-shadow: 0 1px 3px rgba(0,0,0,0.08),0 1px 2px rgba(0,0,0,0.06);\n  --tw-shadow-colored: 0 1px 3px var(--tw-shadow-color), 0 1px 2px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.shadow-\\[0_2px_8px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.25\\)\\] {\n  --tw-shadow: 0 2px 8px rgba(0,0,0,0.25);\n  --tw-shadow-colored: 0 2px 8px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.outline-none {\n  outline: 2px solid transparent;\n  outline-offset: 2px;\n}\n\n.filter {\n  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);\n}\n\n.transition-all {\n  transition-property: all;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\n\n.transition-colors {\n  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\n\n.duration-150 {\n  transition-duration: 150ms;\n}\n\n.\\[grid-template-columns\\:repeat\\(auto-fit\\2c minmax\\(160px\\2c 1fr\\)\\)\\] {\n  grid-template-columns: repeat(auto-fit,minmax(160px,1fr));\n}\n\n.\\[max-width\\:calc\\(100\\%-15rem\\)\\] {\n  max-width: calc(100% - 15rem);\n}\n\n.before\\:h-\\[5px\\]::before {\n  content: var(--tw-content);\n  height: 5px;\n}\n\n.before\\:w-\\[5px\\]::before {\n  content: var(--tw-content);\n  width: 5px;\n}\n\n.before\\:rounded-full::before {\n  content: var(--tw-content);\n  border-radius: 9999px;\n}\n\n.before\\:bg-current::before {\n  content: var(--tw-content);\n  background-color: currentColor;\n}\n\n.before\\:content-\\[\\'\\'\\]::before {\n  --tw-content: '';\n  content: var(--tw-content);\n}\n\n.hover\\:border-\\[\\#2563EB\\]:hover {\n  --tw-border-opacity: 1;\n  border-color: rgb(37 99 235 / var(--tw-border-opacity, 1));\n}\n\n.hover\\:border-\\[\\#3B82F6\\]:hover {\n  --tw-border-opacity: 1;\n  border-color: rgb(59 130 246 / var(--tw-border-opacity, 1));\n}\n\n.hover\\:border-\\[\\#4F46E5\\]:hover {\n  --tw-border-opacity: 1;\n  border-color: rgb(79 70 229 / var(--tw-border-opacity, 1));\n}\n\n.hover\\:border-\\[\\#94A3B8\\]:hover {\n  --tw-border-opacity: 1;\n  border-color: rgb(148 163 184 / var(--tw-border-opacity, 1));\n}\n\n.hover\\:border-\\[\\#DC2626\\]:hover {\n  --tw-border-opacity: 1;\n  border-color: rgb(220 38 38 / var(--tw-border-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#1E5291\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(30 82 145 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#2563EB\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(37 99 235 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#4338CA\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(67 56 202 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#4F46E5\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(79 70 229 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#DC2626\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(220 38 38 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#E2E8F0\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(226 232 240 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#EEF2FF\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(238 242 255 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#F0F7FF\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(240 247 255 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#F8FAFC\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(248 250 252 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#FEF2F2\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(254 242 242 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-white\\/\\[0\\.08\\]:hover {\n  background-color: rgb(255 255 255 / 0.08);\n}\n\n.hover\\:bg-white\\/\\[0\\.16\\]:hover {\n  background-color: rgb(255 255 255 / 0.16);\n}\n\n.hover\\:bg-white\\/\\[0\\.18\\]:hover {\n  background-color: rgb(255 255 255 / 0.18);\n}\n\n.hover\\:text-\\[\\#2563EB\\]:hover {\n  --tw-text-opacity: 1;\n  color: rgb(37 99 235 / var(--tw-text-opacity, 1));\n}\n\n.hover\\:text-white:hover {\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255 / var(--tw-text-opacity, 1));\n}\n\n.hover\\:shadow-\\[0_4px_6px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.07\\)\\2c 0_2px_4px_rgba\\(0\\2c 0\\2c 0\\2c 0\\.06\\)\\]:hover {\n  --tw-shadow: 0 4px 6px rgba(0,0,0,0.07),0 2px 4px rgba(0,0,0,0.06);\n  --tw-shadow-colored: 0 4px 6px var(--tw-shadow-color), 0 2px 4px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.focus\\:border-\\[\\#3B82F6\\]:focus {\n  --tw-border-opacity: 1;\n  border-color: rgb(59 130 246 / var(--tw-border-opacity, 1));\n}\n\n.focus\\:border-\\[\\#6366F1\\]:focus {\n  --tw-border-opacity: 1;\n  border-color: rgb(99 102 241 / var(--tw-border-opacity, 1));\n}\n\n.focus\\:shadow-\\[0_0_0_3px_rgba\\(37\\2c 99\\2c 235\\2c 0\\.08\\)\\]:focus {\n  --tw-shadow: 0 0 0 3px rgba(37,99,235,0.08);\n  --tw-shadow-colored: 0 0 0 3px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.focus\\:shadow-\\[0_0_0_3px_rgba\\(79\\2c 70\\2c 229\\2c 0\\.10\\)\\]:focus {\n  --tw-shadow: 0 0 0 3px rgba(79,70,229,0.10);\n  --tw-shadow-colored: 0 0 0 3px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.disabled\\:opacity-60:disabled {\n  opacity: 0.6;\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -19071,4 +23673,4 @@ cs_web_components_base__WEBPACK_IMPORTED_MODULE_1__.Registry.registerReducer((0,
 /******/ })()
 ;
 });
-//# sourceMappingURL=kalyani-iot-smart_maintenance_system.dev.d737efff7646d12d379a.js.map
+//# sourceMappingURL=kalyani-iot-smart_maintenance_system.dev.8bfa8f2222d5ba9048e7.js.map

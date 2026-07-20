@@ -10,7 +10,7 @@ const CATEGORY_ICON = {
 };
 
 const badgeBase =
-  "inline-flex items-center gap-1 py-[3px] px-2.5 rounded-full text-[13px] font-semibold whitespace-nowrap before:content-[''] before:w-[5px] before:h-[5px] before:rounded-full before:bg-current";
+  "inline-flex items-center gap-1 py-[3px] px-2.5 rounded-full text-sm font-semibold whitespace-nowrap before:content-[''] before:w-[5px] before:h-[5px] before:rounded-full before:bg-current";
 
 const EquipmentCard = ({ equipment, onEdit, onDelete }) => {
   const {
@@ -31,10 +31,10 @@ const EquipmentCard = ({ equipment, onEdit, onDelete }) => {
         {CATEGORY_ICON[category] || "⚙️"}
       </div>
       <div className="flex-1">
-        <div className="text-sm font-bold text-[#0B1F3A]">
+        <div className="text-base font-bold text-[#0B1F3A]">
           {equipment_name} — {equipment_code}
         </div>
-        <div className="text-xs text-[#64748B] mt-0.5">
+        <div className="text-sm text-[#64748B] mt-0.5">
           Plant {plant_code} · {location || "—"} · Last PM: {last_pm_date || "—"}
         </div>
       </div>
@@ -47,8 +47,8 @@ const EquipmentCard = ({ equipment, onEdit, onDelete }) => {
         </span>
       </div>
       <div className="flex gap-4 mr-3 text-right">
-        <div className="text-[13px] text-[#64748B]">
-          <strong className="block text-sm text-[#0B1F3A] capitalize" style={{ fontFamily: 'var(--font-mono)' }}>
+        <div className="text-sm text-[#64748B]">
+          <strong className="block text-base text-[#0B1F3A] capitalize" style={{ fontFamily: 'var(--font-mono)' }}>
             {pm_frequency || "—"}
           </strong>
           Frequency
@@ -56,13 +56,13 @@ const EquipmentCard = ({ equipment, onEdit, onDelete }) => {
       </div>
       <div className="flex gap-1.5 shrink-0">
         <button
-          className="inline-flex items-center gap-1 py-[5px] px-2.5 rounded-lg text-xs font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-transparent text-[#2563EB] hover:bg-[#F0F7FF]"
+          className="inline-flex items-center gap-1 py-[5px] px-2.5 rounded-lg text-sm font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-transparent text-[#2563EB] hover:bg-[#F0F7FF]"
           onClick={(e) => { e.stopPropagation(); onEdit && onEdit(equipment); }}
         >
           ✏️ Edit
         </button>
         <button
-          className="inline-flex items-center gap-1 py-[5px] px-2.5 rounded-lg text-xs font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-transparent text-[#DC2626] hover:bg-[#FEF2F2]"
+          className="inline-flex items-center gap-1 py-[5px] px-2.5 rounded-lg text-sm font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-transparent text-[#DC2626] hover:bg-[#FEF2F2]"
           onClick={(e) => { e.stopPropagation(); onDelete && onDelete(equipment); }}
         >
           🗑️ Delete

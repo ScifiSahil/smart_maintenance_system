@@ -13,6 +13,8 @@ import equipment from './reducers/equipmentReducer';
 import plants from './reducers/plantsReducer';   // 👈 naya import
 import lines from './reducers/linesReducer';       // 👈 Line Name filter ke liye
 import machines from './reducers/machinesReducer'; // 👈 Machine Name filter ke liye
+import checklist from './reducers/checklistReducer';   // 👈 ye import line add karo
+
 
 
 const rootReducer = combineReducers({
@@ -20,6 +22,7 @@ const rootReducer = combineReducers({
   plants,
   lines,
   machines,
+  checklist,
 });
 
 // Chhota thunk middleware, khud likha hai — redux-thunk package install

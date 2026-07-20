@@ -5,15 +5,19 @@ import { loadEquipment, setEquipmentFilters, removeEquipment } from '../actions/
 import EquipmentStatsCards from './EquipmentStatsCards';
 import EquipmentCard from './EquipmentCard';
 import AddEquipmentModal from './AddEquipmentModal';
+import ChecklistBuilder from './ChecklistBuilder';
+import SOPLibrary from './SOPLibrary';
 import { loadPlants } from '../actions/plantActions';
 import { loadLines } from '../actions/lineActions';
 import { loadMachines } from '../actions/machineActions';
 import ConfigurationModal from './ConfigurationModal';
 import ConfigMasterPicker from './ConfigMasterPicker';
+import SpareStandardization from './SpareStandardization';
+
 
 
 const SIDEBAR_LINK_BASE =
-  "sidebar-link flex items-center gap-2.5 py-2.5 px-5 text-[14px] font-semibold no-underline transition-all duration-150 border-l-[3px]";
+  "sidebar-link flex items-center gap-2.5 py-2.5 px-5 text-base font-semibold no-underline transition-all duration-150 border-l-[3px]";
 const SIDEBAR_ACTIVE = "bg-[#F0F7FF] text-[#2563EB] border-l-[#2563EB] font-semibold hover:bg-[#F8FAFC]";
 const SIDEBAR_INACTIVE = "border-l-transparent text-[#475569] hover:bg-[#F8FAFC] hover:text-[#2563EB]";
 
@@ -55,12 +59,12 @@ function AdminPageInner({ onNavigate }) {
   useEffect(() => {
     dispatch(loadEquipment());
     dispatch(loadPlants());
-    dispatch(loadLines());       // Line Name filter — smartpm_line_master se
-    dispatch(loadMachines());    // Machine Name filter — smartpm_machine_master se
+    dispatch(loadLines());       // Line Name filter — from smartpm_line_master
+    dispatch(loadMachines());    // Machine Name filter — from smartpm_machine_master
   }, [dispatch]);
 
-  // Filter bar aur equipment list dono client-side filter hote hain
-  // (backend abhi query-param filter support nahi karta — GET sab kuch laata hai)
+  // Both the filter bar and the equipment list are filtered client-side
+  // (the backend doesn't support query-param filtering yet — GET returns everything)
   const filteredItems = items.filter((eq) => {
     if (filters.plant_code !== 'all' && String(eq.plant_code) !== String(filters.plant_code)) return false;
     if (filters.status === 'overdue' && eq.pm_status !== 'overdue') return false;
@@ -80,9 +84,9 @@ function AdminPageInner({ onNavigate }) {
     return true;
   });
 
-  // Line Name dropdown — smartpm_line_master se, selected Plant ke hisaab se scope hota hai.
-  // Dedup name se karte hain (dropdown mein ek hi naam do baar na dikhe) — CRUD table
-  // (Configuration modal) mein raw rows hi dikhti hain, wahan dedup nahi hota.
+  // Line Name dropdown — from smartpm_line_master, scoped to the selected Plant.
+  // Deduped by name (so the dropdown doesn't show the same name twice) — the CRUD
+  // table (Configuration modal) shows raw rows without dedup.
   const lineOptions = [
     ...new Map(
       lineItems
@@ -91,7 +95,7 @@ function AdminPageInner({ onNavigate }) {
     ).values(),
   ];
 
-  // Machine Name dropdown — smartpm_machine_master se, selected Plant + Line ke hisaab se scope hota hai
+  // Machine Name dropdown — from smartpm_machine_master, scoped to selected Plant + Line
   const machineOptions = [
     ...new Map(
       machineItems
@@ -104,9 +108,9 @@ function AdminPageInner({ onNavigate }) {
     ).values(),
   ];
 
-  // Assembly / Sub-Assembly ke liye koi master table nahi hai — abhi load ho chuke
-  // equipment records se hi unique, non-empty values nikal ke dropdown banaya jaata hai.
-  // Assembly Machine ke hisaab se scope hota hai, Sub-Assembly Assembly ke hisaab se.
+  // Assembly / Sub-Assembly have no master table — unique, non-empty values are
+  // derived directly from the equipment records already loaded. Assembly is
+  // scoped by Machine, Sub-Assembly is scoped by Assembly.
   const assemblyOptions = [
     ...new Set(
       items
@@ -131,7 +135,7 @@ function AdminPageInner({ onNavigate }) {
 
   const handleFilterChange = (field) => (e) => {
     const value = e.target.value;
-    // Plant badalne par Line + Machine + Assembly + Sub-Assembly sab reset ho jaate hain
+    // Changing Plant resets Line + Machine + Assembly + Sub-Assembly
     if (field === 'plant_code') {
       dispatch(
         setEquipmentFilters({
@@ -144,19 +148,19 @@ function AdminPageInner({ onNavigate }) {
       );
       return;
     }
-    // Line badalne par Machine + Assembly + Sub-Assembly reset ho jaate hain (machine line-scoped hai)
+    // Changing Line resets Machine + Assembly + Sub-Assembly (machine is line-scoped)
     if (field === 'line_name') {
       dispatch(
         setEquipmentFilters({ line_name: value, machine_name: 'all', assembly: 'all', sub_assembly: 'all' })
       );
       return;
     }
-    // Machine badalne par Assembly + Sub-Assembly reset ho jaate hain (assembly machine-scoped hai)
+    // Changing Machine resets Assembly + Sub-Assembly (assembly is machine-scoped)
     if (field === 'machine_name') {
       dispatch(setEquipmentFilters({ machine_name: value, assembly: 'all', sub_assembly: 'all' }));
       return;
     }
-    // Assembly badalne par Sub-Assembly reset ho jaata hai (sub-assembly assembly-scoped hai)
+    // Changing Assembly resets Sub-Assembly (sub-assembly is assembly-scoped)
     if (field === 'assembly') {
       dispatch(setEquipmentFilters({ assembly: value, sub_assembly: 'all' }));
       return;
@@ -164,9 +168,9 @@ function AdminPageInner({ onNavigate }) {
     dispatch(setEquipmentFilters({ [field]: value }));
   };
 
-  // Confirm karke soft-delete karta hai (backend is_active=0 karega)
+  // Confirms and soft-deletes (backend sets is_active=0)
   const handleDelete = (eq) => {
-    const ok = window.confirm(`"${eq.equipment_name}" (${eq.equipment_code}) delete karna hai?`);
+    const ok = window.confirm(`Delete "${eq.equipment_name}" (${eq.equipment_code})?`);
     if (ok) dispatch(removeEquipment(eq.cdb_object_id));
   };
 
@@ -174,11 +178,11 @@ function AdminPageInner({ onNavigate }) {
     <div>
       <nav className="bg-[#0B1F3A] h-14 flex items-center px-5 gap-3 shadow-[0_2px_8px_rgba(0,0,0,0.25)] fixed top-0 left-0 right-0 z-[100]">
         <a className="flex items-center gap-2.5 no-underline" href="#" onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('home'); }}>
-          <div className="w-8 h-8 bg-[#2563EB] rounded-md flex items-center justify-center text-base">⚙️</div>
-          <div><div className="text-white text-[16px] font-bold tracking-[-0.2px]">SmartPM</div><div className="text-white/40 text-[11px] font-normal tracking-[0.6px] uppercase">Admin Panel</div></div>
+          <div className="w-8 h-8 bg-[#2563EB] rounded-md flex items-center justify-center text-lg">⚙️</div>
+          <div><div className="text-white text-lg font-bold tracking-[-0.2px]">SmartPM</div><div className="text-white/40 text-xs font-normal tracking-[0.6px] uppercase">Admin Panel</div></div>
         </a>
         <div className="flex-1" />
-        <div className="flex items-center gap-2 bg-white/[0.08] border border-white/[0.12] rounded-full py-[5px] pl-2 pr-3"><div className="w-2 h-2 rounded-full bg-[#7C3AED]" /><span className="text-white text-xs font-semibold">Administrator</span></div>
+        <div className="flex items-center gap-2 bg-white/[0.08] border border-white/[0.12] rounded-full py-[5px] pl-2 pr-3"><div className="w-2 h-2 rounded-full bg-[#7C3AED]" /><span className="text-white text-sm font-semibold">Administrator</span></div>
         <button
           ref={gearBtnRef}
           onClick={() => {
@@ -187,39 +191,41 @@ function AdminPageInner({ onNavigate }) {
             setPickerOpen(true);
           }}
           title="System Configuration"
-          className="w-8 h-8 flex items-center justify-center rounded-md text-white/[0.75] text-base bg-white/[0.08] border border-white/[0.12] cursor-pointer transition-all duration-150 hover:bg-white/[0.16] hover:text-white"
+          className="w-8 h-8 flex items-center justify-center rounded-md text-white/[0.75] text-lg bg-white/[0.08] border border-white/[0.12] cursor-pointer transition-all duration-150 hover:bg-white/[0.16] hover:text-white"
           style={{ marginLeft: 4 }}
         >
           ⚙️
         </button>
-        <a href="#" onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('home'); }} className="text-white/[0.55] text-xs no-underline py-[5px] px-2.5 rounded-md transition-all duration-150 hover:bg-white/[0.08] hover:text-white" style={{ marginLeft: 12 }}>← Home</a>
-        <div className="text-white/50 text-[13px] ml-2.5" style={{ fontFamily: 'var(--font-mono)' }}>{clock}</div>
+        <a href="#" onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('home'); }} className="text-white/[0.55] text-sm no-underline py-[5px] px-2.5 rounded-md transition-all duration-150 hover:bg-white/[0.08] hover:text-white" style={{ marginLeft: 12 }}>← Home</a>
+        <div className="text-white/50 text-sm ml-2.5" style={{ fontFamily: 'var(--font-mono)' }}>{clock}</div>
       </nav>
 
       <div className="flex pt-14 min-h-screen">
         {/* SIDEBAR */}
         <aside className="w-60 bg-white border-r border-[#E2E8F0] fixed top-14 left-0 bottom-0 overflow-y-auto py-5">
-          <div className="text-[11px] font-bold tracking-wider uppercase text-[#94A3B8] pt-3.5 px-5 pb-1.5">Configuration</div>
-          <a href="#" className={sidebarLinkClass('equipment', activeTab)} onClick={(e) => { e.preventDefault(); setActiveTab('equipment'); }}><span className="w-[18px] h-[18px] flex items-center justify-center text-sm shrink-0">🏭</span>Equipment Register</a>
-          <a href="#" className={sidebarLinkClass('checklist', activeTab)} onClick={(e) => { e.preventDefault(); setActiveTab('checklist'); }}><span className="w-[18px] h-[18px] flex items-center justify-center text-sm shrink-0">📝</span>PM Checklists</a>
-          <a href="#" className={sidebarLinkClass('sop', activeTab)} onClick={(e) => { e.preventDefault(); setActiveTab('sop'); }}><span className="w-[18px] h-[18px] flex items-center justify-center text-sm shrink-0">📖</span>SOP Library</a>
-          <a href="#" className={sidebarLinkClass('iiot', activeTab)} onClick={(e) => { e.preventDefault(); setActiveTab('iiot'); }}><span className="w-[18px] h-[18px] flex items-center justify-center text-sm shrink-0">📡</span>IIoT Sensor Config</a>
+          <div className="text-xs font-bold tracking-wider uppercase text-[#94A3B8] pt-3.5 px-5 pb-1.5">Configuration</div>
+          <a href="#" className={sidebarLinkClass('equipment', activeTab)} onClick={(e) => { e.preventDefault(); setActiveTab('equipment'); }}><span className="w-[18px] h-[18px] flex items-center justify-center text-base shrink-0">🏭</span>Equipment Register</a>
+          <a href="#" className={sidebarLinkClass('checklist', activeTab)} onClick={(e) => { e.preventDefault(); setActiveTab('checklist'); }}><span className="w-[18px] h-[18px] flex items-center justify-center text-base shrink-0">📝</span>PM Checklists</a>
+          <a href="#" className={sidebarLinkClass('sop', activeTab)} onClick={(e) => { e.preventDefault(); setActiveTab('sop'); }}><span className="w-[18px] h-[18px] flex items-center justify-center text-base shrink-0">📖</span>SOP Library</a>
+          <a href="#" className={sidebarLinkClass('standardization', activeTab)} onClick={(e) => { e.preventDefault(); setActiveTab('standardization'); }}><span className="w-[18px] h-[18px] flex items-center justify-center text-base shrink-0">🔩</span>Spare Standardization</a>
+
+          <a href="#" className={sidebarLinkClass('iiot', activeTab)} onClick={(e) => { e.preventDefault(); setActiveTab('iiot'); }}><span className="w-[18px] h-[18px] flex items-center justify-center text-base shrink-0">📡</span>IIoT Sensor Config</a>
           <div className="h-px bg-[#E2E8F0] my-2.5" />
-          <div className="text-[11px] font-bold tracking-wider uppercase text-[#94A3B8] pt-3.5 px-5 pb-1.5">Users &amp; Access</div>
-          <a href="#" className={sidebarLinkClass('users', activeTab)} onClick={(e) => { e.preventDefault(); setActiveTab('users'); }}><span className="w-[18px] h-[18px] flex items-center justify-center text-sm shrink-0">👥</span>User Management</a>
-          <a href="#" className={sidebarLinkClass('roles', activeTab)} onClick={(e) => { e.preventDefault(); setActiveTab('roles'); }}><span className="w-[18px] h-[18px] flex items-center justify-center text-sm shrink-0">🔑</span>Roles &amp; Permissions</a>
+          <div className="text-xs font-bold tracking-wider uppercase text-[#94A3B8] pt-3.5 px-5 pb-1.5">Users &amp; Access</div>
+          <a href="#" className={sidebarLinkClass('users', activeTab)} onClick={(e) => { e.preventDefault(); setActiveTab('users'); }}><span className="w-[18px] h-[18px] flex items-center justify-center text-base shrink-0">👥</span>User Management</a>
+          <a href="#" className={sidebarLinkClass('roles', activeTab)} onClick={(e) => { e.preventDefault(); setActiveTab('roles'); }}><span className="w-[18px] h-[18px] flex items-center justify-center text-base shrink-0">🔑</span>Roles &amp; Permissions</a>
           <div className="h-px bg-[#E2E8F0] my-2.5" />
-          <div className="text-[11px] font-bold tracking-wider uppercase text-[#94A3B8] pt-3.5 px-5 pb-1.5">Navigation</div>
-          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('checker'); }} className={`${SIDEBAR_LINK_BASE} ${SIDEBAR_INACTIVE}`}><span className="w-[18px] h-[18px] flex items-center justify-center text-sm shrink-0">🔍</span>Checker View</a>
-          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('planner'); }} className={`${SIDEBAR_LINK_BASE} ${SIDEBAR_INACTIVE}`}><span className="w-[18px] h-[18px] flex items-center justify-center text-sm shrink-0">📋</span>Planner View</a>
-          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('executor'); }} className={`${SIDEBAR_LINK_BASE} ${SIDEBAR_INACTIVE}`}><span className="w-[18px] h-[18px] flex items-center justify-center text-sm shrink-0">🔧</span>Executor View</a>
-          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('dashboard'); }} className={`${SIDEBAR_LINK_BASE} ${SIDEBAR_INACTIVE}`}><span className="w-[18px] h-[18px] flex items-center justify-center text-sm shrink-0">📊</span>Mentor Dashboard</a>
+          <div className="text-xs font-bold tracking-wider uppercase text-[#94A3B8] pt-3.5 px-5 pb-1.5">Navigation</div>
+          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('checker'); }} className={`${SIDEBAR_LINK_BASE} ${SIDEBAR_INACTIVE}`}><span className="w-[18px] h-[18px] flex items-center justify-center text-base shrink-0">🔍</span>Checker View</a>
+          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('planner'); }} className={`${SIDEBAR_LINK_BASE} ${SIDEBAR_INACTIVE}`}><span className="w-[18px] h-[18px] flex items-center justify-center text-base shrink-0">📋</span>Planner View</a>
+          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('executor'); }} className={`${SIDEBAR_LINK_BASE} ${SIDEBAR_INACTIVE}`}><span className="w-[18px] h-[18px] flex items-center justify-center text-base shrink-0">🔧</span>Executor View</a>
+          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('dashboard'); }} className={`${SIDEBAR_LINK_BASE} ${SIDEBAR_INACTIVE}`}><span className="w-[18px] h-[18px] flex items-center justify-center text-base shrink-0">📊</span>Mentor Dashboard</a>
           <div className="h-px bg-[#E2E8F0] my-2.5" />
-          <div className="text-[11px] font-bold tracking-wider uppercase text-[#94A3B8] pt-3.5 px-5 pb-1.5">Quick Actions</div>
+          <div className="text-xs font-bold tracking-wider uppercase text-[#94A3B8] pt-3.5 px-5 pb-1.5">Quick Actions</div>
           <div className="flex flex-col gap-1.5 px-3 pb-3 pt-1">
-            <button className="flex items-center gap-2 py-[7px] px-3 rounded-lg bg-[#F0F7FF] border border-[#BFDBFE] text-[#1E5291] text-xs font-semibold cursor-pointer transition-all duration-150 w-full hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB]" onClick={() => setAddEquipModalOpen(true)}>+ Add Equipment</button>
-            <button className="flex items-center gap-2 py-[7px] px-3 rounded-lg bg-[#F0F7FF] border border-[#BFDBFE] text-[#1E5291] text-xs font-semibold cursor-pointer transition-all duration-150 w-full hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB]" onClick={() => alert('Add new user form')}>+ Add User</button>
-            <button className="flex items-center gap-2 py-[7px] px-3 rounded-lg bg-[#F0F7FF] border border-[#BFDBFE] text-[#1E5291] text-xs font-semibold cursor-pointer transition-all duration-150 w-full hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB]" onClick={() => alert('System audit log')}>🔍 Audit Log</button>
+            <button className="flex items-center gap-2 py-[7px] px-3 rounded-lg bg-[#F0F7FF] border border-[#BFDBFE] text-[#1E5291] text-sm font-semibold cursor-pointer transition-all duration-150 w-full hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB]" onClick={() => setAddEquipModalOpen(true)}>+ Add Equipment</button>
+            <button className="flex items-center gap-2 py-[7px] px-3 rounded-lg bg-[#F0F7FF] border border-[#BFDBFE] text-[#1E5291] text-sm font-semibold cursor-pointer transition-all duration-150 w-full hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB]" onClick={() => alert('Add new user form')}>+ Add User</button>
+            <button className="flex items-center gap-2 py-[7px] px-3 rounded-lg bg-[#F0F7FF] border border-[#BFDBFE] text-[#1E5291] text-sm font-semibold cursor-pointer transition-all duration-150 w-full hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB]" onClick={() => alert('System audit log')}>🔍 Audit Log</button>
           </div>
         </aside>
 
@@ -230,21 +236,21 @@ function AdminPageInner({ onNavigate }) {
           {activeTab === 'equipment' && (
             <div>
               <div className="mb-6">
-                <div className="flex items-center gap-1.5 text-xs text-[#94A3B8] mb-2 flex-wrap"><a className="text-[#94A3B8] no-underline hover:text-[#2563EB]" href="#" onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('home'); }}>Home</a><span className="text-[11px] text-[#CBD5E1]">›</span>Admin<span className="text-[11px] text-[#CBD5E1]">›</span>Equipment Register</div>
+                <div className="flex items-center gap-1.5 text-sm text-[#94A3B8] mb-2 flex-wrap"><a className="text-[#94A3B8] no-underline hover:text-[#2563EB]" href="#" onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('home'); }}>Home</a><span className="text-xs text-[#CBD5E1]">›</span>Admin<span className="text-xs text-[#CBD5E1]">›</span>Equipment Register</div>
                 <div className="flex items-center justify-between flex-wrap gap-2">
-                  <div><div className="text-[24px] font-bold text-[#0B1F3A] tracking-[-0.3px]">Equipment Register</div><div className="text-[14px] text-[#64748B] mt-[3px]">All monitored assets with PM schedules</div></div>
+                  <div><div className="text-2xl font-bold text-[#0B1F3A] tracking-[-0.3px]">Equipment Register</div><div className="text-base text-[#64748B] mt-[3px]">All monitored assets with PM schedules</div></div>
                   <div className="flex gap-2">
-                    <button className="inline-flex items-center gap-1.5 py-[5px] px-3 rounded-lg text-xs font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-white text-[#334155] border border-[#CBD5E1] hover:bg-[#F8FAFC] hover:border-[#94A3B8]" onClick={() => alert('Export equipment list')}>⬇ Export</button>
-                    <button className="inline-flex items-center gap-1.5 py-2 px-4 rounded-lg text-[14px] font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-[#2563EB] text-white hover:bg-[#1E5291]" onClick={() => setAddEquipModalOpen(true)}>+ Add Equipment</button>
+                    <button className="inline-flex items-center gap-1.5 py-[5px] px-3 rounded-lg text-sm font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-white text-[#334155] border border-[#CBD5E1] hover:bg-[#F8FAFC] hover:border-[#94A3B8]" onClick={() => alert('Export equipment list')}>⬇ Export</button>
+                    <button className="inline-flex items-center gap-1.5 py-2 px-4 rounded-lg text-base font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-[#2563EB] text-white hover:bg-[#1E5291]" onClick={() => setAddEquipModalOpen(true)}>+ Add Equipment</button>
                   </div>
                 </div>
               </div>
 
               {/* Filter bar */}
               <div className="bg-white border border-[#E2E8F0] rounded-xl py-3 px-4 mb-4 flex items-center gap-3 flex-wrap">
-                <span className="text-[13px] font-bold text-[#64748B] uppercase tracking-[0.5px]">Filter:</span>
+                <span className="text-sm font-bold text-[#64748B] uppercase tracking-[0.5px]">Filter:</span>
                 <select
-  className="w-[160px] text-xs py-[5px] px-2 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]"
+  className="w-[160px] text-sm py-[5px] px-2 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]"
   value={filters.plant_code}
   onChange={handleFilterChange('plant_code')}
 >
@@ -256,20 +262,20 @@ function AdminPageInner({ onNavigate }) {
     </option>
   ))}
 </select>
-                <select className="w-[150px] text-xs py-[5px] px-2 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]" value={filters.status} onChange={handleFilterChange('status')}>
+                <select className="w-[150px] text-sm py-[5px] px-2 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]" value={filters.status} onChange={handleFilterChange('status')}>
                   <option value="all">All Status</option>
                   <option value="iiot_connected">IIoT Connected</option>
                   <option value="overdue">Overdue PM</option>
                   <option value="no_pm_plan">No PM Plan</option>
                 </select>
                 <select
-                  className="w-[150px] text-xs py-[5px] px-2 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]"
+                  className="w-[150px] text-sm py-[5px] px-2 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]"
                   value={filters.line_name}
                   onChange={handleFilterChange('line_name')}
                 >
                   <option value="all">All Lines</option>
                   {linesStatus === 'loading' && <option disabled>Loading lines…</option>}
-                  {linesStatus === 'failed' && <option disabled>Lines load nahi hue</option>}
+                  {linesStatus === 'failed' && <option disabled>Failed to load lines</option>}
                   {lineOptions.map((l) => (
                     <option key={`${l.plant_code}-${l.line_name}`} value={l.line_name}>
                       {l.line_name}
@@ -277,13 +283,13 @@ function AdminPageInner({ onNavigate }) {
                   ))}
                 </select>
                 <select
-                  className="w-[160px] text-xs py-[5px] px-2 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]"
+                  className="w-[160px] text-sm py-[5px] px-2 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]"
                   value={filters.machine_name}
                   onChange={handleFilterChange('machine_name')}
                 >
                   <option value="all">All Machines</option>
                   {machinesStatus === 'loading' && <option disabled>Loading machines…</option>}
-                  {machinesStatus === 'failed' && <option disabled>Machines load nahi hue</option>}
+                  {machinesStatus === 'failed' && <option disabled>Failed to load machines</option>}
                   {machineOptions.map((m) => (
                     <option key={`${m.plant_code}-${m.line_name}-${m.machine_name}`} value={m.machine_name}>
                       {m.machine_name}
@@ -291,7 +297,7 @@ function AdminPageInner({ onNavigate }) {
                   ))}
                 </select>
                 <select
-                  className="w-[150px] text-xs py-[5px] px-2 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]"
+                  className="w-[150px] text-sm py-[5px] px-2 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]"
                   value={filters.assembly}
                   onChange={handleFilterChange('assembly')}
                 >
@@ -301,7 +307,7 @@ function AdminPageInner({ onNavigate }) {
                   ))}
                 </select>
                 <select
-                  className="w-[160px] text-xs py-[5px] px-2 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]"
+                  className="w-[160px] text-sm py-[5px] px-2 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]"
                   value={filters.sub_assembly}
                   onChange={handleFilterChange('sub_assembly')}
                 >
@@ -310,20 +316,20 @@ function AdminPageInner({ onNavigate }) {
                     <option key={sa} value={sa}>{sa}</option>
                   ))}
                 </select>
-                <input className="w-[180px] text-xs py-[5px] px-2.5 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]" placeholder="🔍 Search equipment…" value={filters.search} onChange={handleFilterChange('search')} />
+                <input className="w-[180px] text-sm py-[5px] px-2.5 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#3B82F6]" placeholder="🔍 Search equipment…" value={filters.search} onChange={handleFilterChange('search')} />
               </div>
 
               <EquipmentStatsCards items={items} />
 
               <div className="bg-white border border-[#E2E8F0] rounded-xl p-5 mb-5 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.06)]">
                 <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
-                  <div><div className="text-sm font-bold text-[#0B1F3A]">Equipment List</div><div className="text-xs text-[#64748B] mt-0.5">Click to view checklist and sensor assignments</div></div>
+                  <div><div className="text-base font-bold text-[#0B1F3A]">Equipment List</div><div className="text-sm text-[#64748B] mt-0.5">Click to view checklist and sensor assignments</div></div>
                 </div>
 
-                {status === 'loading' && <p className="text-sm text-[#64748B] py-4">Loading equipment…</p>}
-                {status === 'failed' && <p className="text-sm text-[#DC2626] py-4">Load failed: {error}</p>}
+                {status === 'loading' && <p className="text-base text-[#64748B] py-4">Loading equipment…</p>}
+                {status === 'failed' && <p className="text-base text-[#DC2626] py-4">Load failed: {error}</p>}
                 {status === 'succeeded' && filteredItems.length === 0 && (
-                  <p className="text-sm text-[#64748B] py-4">No equipment found.</p>
+                  <p className="text-base text-[#64748B] py-4">No equipment found.</p>
                 )}
                 {filteredItems.map((eq) => (
                   <EquipmentCard
@@ -337,43 +343,37 @@ function AdminPageInner({ onNavigate }) {
             </div>
           )}
 
-          {/* CHECKLIST TAB — static placeholder, module baad mein banega */}
-          {activeTab === 'checklist' && (
-            <div>
-              <div className="mb-6"><div className="text-[24px] font-bold text-[#0B1F3A] tracking-[-0.3px]">PM Checklist Builder</div><div className="text-[14px] text-[#64748B] mt-[3px]">Define inspection points for each equipment</div></div>
-              <p className="text-sm text-[#64748B]">Ye module abhi banaya nahi gaya — Equipment ke baad next.</p>
-            </div>
-          )}
+          {/* CHECKLIST TAB — PM Checklist Builder (real data) */}
+          {activeTab === 'checklist' && <ChecklistBuilder />}
 
           {/* USERS TAB — static placeholder */}
           {activeTab === 'users' && (
             <div>
-              <div className="mb-6"><div className="text-[24px] font-bold text-[#0B1F3A] tracking-[-0.3px]">User Management</div><div className="text-[14px] text-[#64748B] mt-[3px]">Manage system users and role assignments</div></div>
-              <p className="text-sm text-[#64748B]">Ye module abhi banaya nahi gaya.</p>
+              <div className="mb-6"><div className="text-2xl font-bold text-[#0B1F3A] tracking-[-0.3px]">User Management</div><div className="text-base text-[#64748B] mt-[3px]">Manage system users and role assignments</div></div>
+              <p className="text-base text-[#64748B]">This module hasn't been built yet.</p>
             </div>
           )}
 
           {/* IIoT TAB — static placeholder */}
           {activeTab === 'iiot' && (
             <div>
-              <div className="mb-6"><div className="text-[24px] font-bold text-[#0B1F3A] tracking-[-0.3px]">IIoT Sensor Configuration</div><div className="text-[14px] text-[#64748B] mt-[3px]">Manage connected sensors and alert thresholds</div></div>
-              <p className="text-sm text-[#64748B]">Ye module abhi banaya nahi gaya.</p>
+              <div className="mb-6"><div className="text-2xl font-bold text-[#0B1F3A] tracking-[-0.3px]">IIoT Sensor Configuration</div><div className="text-base text-[#64748B] mt-[3px]">Manage connected sensors and alert thresholds</div></div>
+              <p className="text-base text-[#64748B]">This module hasn't been built yet.</p>
             </div>
           )}
 
-          {/* SOP TAB — static placeholder */}
-          {activeTab === 'sop' && (
-            <div>
-              <div className="mb-6"><div className="text-[24px] font-bold text-[#0B1F3A] tracking-[-0.3px]">SOP Library</div><div className="text-[14px] text-[#64748B] mt-[3px]">Standard Operating Procedures for inspection tasks</div></div>
-              <p className="text-sm text-[#64748B]">Ye module abhi banaya nahi gaya.</p>
-            </div>
-          )}
+          {/* SOP TAB — SOP Library (real data) */}
+          {activeTab === 'sop' && <SOPLibrary />}
+ 
+ {activeTab === 'standardization' && <SpareStandardization />}
+
+
 
           {/* ROLES TAB — static placeholder */}
           {activeTab === 'roles' && (
             <div>
-              <div className="mb-6"><div className="text-[24px] font-bold text-[#0B1F3A] tracking-[-0.3px]">Roles &amp; Permissions</div><div className="text-[14px] text-[#64748B] mt-[3px]">Define access levels for each user role</div></div>
-              <p className="text-sm text-[#64748B]">Ye module abhi banaya nahi gaya.</p>
+              <div className="mb-6"><div className="text-2xl font-bold text-[#0B1F3A] tracking-[-0.3px]">Roles &amp; Permissions</div><div className="text-base text-[#64748B] mt-[3px]">Define access levels for each user role</div></div>
+              <p className="text-base text-[#64748B]">This module hasn't been built yet.</p>
             </div>
           )}
           </div>
@@ -405,8 +405,8 @@ function AdminPageInner({ onNavigate }) {
   );
 }
 
-// Apna alag Redux <Provider> — CMDBuild ke root Provider se independent.
-// Sirf AdminPageInner aur uske children ko ye store dikhta hai.
+// A separate Redux <Provider>, independent of CMDBuild's root Provider.
+// Only AdminPageInner and its children see this store.
 export default function AdminPage(props) {
   return (
     <Provider store={store}>

@@ -15,6 +15,13 @@
   /* 100% offline system fonts — no internet / CDN dependency */
   --font-main:"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
   --font-mono:"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+  /* ── SINGLE SOURCE OF TRUTH — font size scale ──────────────────────
+     Same scale jo tailwind.config.js mein Admin/Configuration UI ke
+     liye define hai (text-xs/sm/base/lg/xl/2xl/3xl). Purane pages
+     (Home/Dashboard/Planner/Executor/Checker) jab bhi refactor ho,
+     inline px ki jagah yehi variables use karna. */
+  --fs-xs:11px;--fs-sm:13px;--fs-base:14px;--fs-lg:16px;
+  --fs-xl:18px;--fs-2xl:22px;--fs-3xl:26px;
   --radius:8px;--radius-lg:12px;
   --shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.06);
   --shadow-md:0 4px 6px rgba(0,0,0,.07),0 2px 4px rgba(0,0,0,.06);

@@ -32,10 +32,10 @@ const ConfigurationModal = ({ onClose, initialMaster = "plant" }) => {
       {/* HEADER — deep indigo, AdminPage ke navy header se jaan-boojh ke alag */}
       <nav className="bg-[#1E1B4B] h-14 flex items-center px-5 gap-3 shadow-[0_2px_8px_rgba(0,0,0,0.25)] fixed top-0 left-0 right-0 z-[100]">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 bg-[#6366F1] rounded-md flex items-center justify-center text-base">⚙️</div>
+          <div className="w-8 h-8 bg-[#6366F1] rounded-md flex items-center justify-center text-lg">⚙️</div>
           <div>
-            <div className="text-white text-[16px] font-bold tracking-[-0.2px]">System Configuration</div>
-            <div className="text-white/40 text-[11px] font-normal tracking-[0.6px] uppercase">
+            <div className="text-white text-lg font-bold tracking-[-0.2px]">System Configuration</div>
+            <div className="text-white/40 text-xs font-normal tracking-[0.6px] uppercase">
               Master Data Management
             </div>
           </div>
@@ -43,7 +43,7 @@ const ConfigurationModal = ({ onClose, initialMaster = "plant" }) => {
         <div className="flex-1" />
         <button
           onClick={onClose}
-          className="text-white/[0.85] text-xs font-semibold no-underline py-[7px] px-3.5 rounded-md transition-all duration-150 bg-white/[0.08] border border-white/[0.14] cursor-pointer hover:bg-white/[0.18] hover:text-white"
+          className="text-white/[0.85] text-sm font-semibold no-underline py-[7px] px-3.5 rounded-md transition-all duration-150 bg-white/[0.08] border border-white/[0.14] cursor-pointer hover:bg-white/[0.18] hover:text-white"
         >
           ✕ Close
         </button>
@@ -52,7 +52,7 @@ const ConfigurationModal = ({ onClose, initialMaster = "plant" }) => {
       <div className="flex pt-14 h-screen">
         {/* SIDEBAR — card-style entries (icon tile + title + subtitle), picker jaisa hi look */}
         <aside className="w-64 bg-white border-r border-[#E2E8F0] overflow-y-auto py-4 px-2.5 shrink-0">
-          <div className="text-[11px] font-bold tracking-wider uppercase text-[#94A3B8] pt-2 px-2.5 pb-2">
+          <div className="text-xs font-bold tracking-wider uppercase text-[#94A3B8] pt-2 px-2.5 pb-2">
             Master Data APIs
           </div>
           {SIDEBAR_ITEMS.map((item) => {
@@ -67,16 +67,16 @@ const ConfigurationModal = ({ onClose, initialMaster = "plant" }) => {
                 style={active ? { boxShadow: "inset 3px 0 0 #6366F1" } : undefined}
               >
                 <span
-                  className="w-9 h-9 rounded-lg flex items-center justify-center text-base shrink-0"
+                  className="w-9 h-9 rounded-lg flex items-center justify-center text-lg shrink-0"
                   style={{ background: item.bg }}
                 >
                   {item.icon}
                 </span>
                 <span className="flex-1 min-w-0">
-                  <div className={`text-[14px] font-semibold leading-tight ${active ? "text-[#3730A3]" : "text-[#1E293B]"}`}>
+                  <div className={`text-base font-semibold leading-tight ${active ? "text-[#3730A3]" : "text-[#1E293B]"}`}>
                     {item.label}
                   </div>
-                  <div className="text-[13px] text-[#94A3B8] mt-0.5 leading-snug">{item.desc}</div>
+                  <div className="text-sm text-[#94A3B8] mt-0.5 leading-snug">{item.desc}</div>
                 </span>
               </button>
             );

@@ -6,7 +6,7 @@
 import { useState, useEffect } from "react";
 
 const inputClass =
-  "w-full py-[9px] px-3 border-[1.5px] border-[#CBD5E1] rounded-lg text-[14px] text-[#334155] bg-white outline-none focus:border-[#6366F1] focus:shadow-[0_0_0_3px_rgba(79,70,229,0.10)]";
+  "w-full py-[9px] px-3 border-[1.5px] border-[#CBD5E1] rounded-lg text-base text-[#334155] bg-white outline-none focus:border-[#6366F1] focus:shadow-[0_0_0_3px_rgba(79,70,229,0.10)]";
 
 /**
  * Props:
@@ -114,11 +114,11 @@ const MasterCrudPanel = ({
     <div>
       <div className="mb-6 flex items-center justify-between flex-wrap gap-2">
         <div>
-          <div className="text-[24px] font-bold text-[#0B1F3A] tracking-[-0.3px]">{title}</div>
-          <div className="text-[14px] text-[#64748B] mt-[3px]">{description}</div>
+          <div className="text-2xl font-bold text-[#0B1F3A] tracking-[-0.3px]">{title}</div>
+          <div className="text-base text-[#64748B] mt-[3px]">{description}</div>
         </div>
         <button
-          className="inline-flex items-center gap-1.5 py-2 px-4 rounded-lg text-[14px] font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-[#4F46E5] text-white hover:bg-[#4338CA]"
+          className="inline-flex items-center gap-1.5 py-2 px-4 rounded-lg text-base font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-[#4F46E5] text-white hover:bg-[#4338CA]"
           onClick={openAdd}
         >
           + Add {title}
@@ -126,23 +126,23 @@ const MasterCrudPanel = ({
       </div>
 
       <div className="bg-white border border-[#E2E8F0] rounded-xl py-3 px-4 mb-4 flex items-center gap-3 flex-wrap">
-        <span className="text-[13px] font-bold text-[#64748B] uppercase tracking-[0.5px]">Search:</span>
+        <span className="text-sm font-bold text-[#64748B] uppercase tracking-[0.5px]">Search:</span>
         <input
-          className="w-[240px] text-xs py-[5px] px-2.5 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#6366F1]"
+          className="w-[240px] text-sm py-[5px] px-2.5 border-[1.5px] border-[#CBD5E1] rounded-lg text-[#334155] bg-white outline-none focus:border-[#6366F1]"
           placeholder={`🔍 Search ${title.toLowerCase()}…`}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <span className="text-xs text-[#94A3B8] ml-auto">
+        <span className="text-sm text-[#94A3B8] ml-auto">
           {filteredItems.length} record{filteredItems.length === 1 ? "" : "s"}
         </span>
       </div>
 
       <div className="bg-white border border-[#E2E8F0] rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.06)] overflow-hidden">
-        {status === "loading" && <p className="text-sm text-[#64748B] py-4 px-5">Loading…</p>}
-        {status === "failed" && <p className="text-sm text-[#DC2626] py-4 px-5">Load failed: {error}</p>}
+        {status === "loading" && <p className="text-base text-[#64748B] py-4 px-5">Loading…</p>}
+        {status === "failed" && <p className="text-base text-[#DC2626] py-4 px-5">Load failed: {error}</p>}
         {status === "succeeded" && filteredItems.length === 0 && (
-          <p className="text-sm text-[#64748B] py-4 px-5">Koi record nahi mila.</p>
+          <p className="text-base text-[#64748B] py-4 px-5">Koi record nahi mila.</p>
         )}
 
         {filteredItems.length > 0 && (
@@ -152,12 +152,12 @@ const MasterCrudPanel = ({
                 {columns.map((c) => (
                   <th
                     key={c.key}
-                    className="text-[13px] font-bold text-[#64748B] uppercase tracking-[0.5px] py-3 px-4"
+                    className="text-sm font-bold text-[#64748B] uppercase tracking-[0.5px] py-3 px-4"
                   >
                     {c.label}
                   </th>
                 ))}
-                <th className="text-[13px] font-bold text-[#64748B] uppercase tracking-[0.5px] py-3 px-4 text-right">
+                <th className="text-sm font-bold text-[#64748B] uppercase tracking-[0.5px] py-3 px-4 text-right">
                   Actions
                 </th>
               </tr>
@@ -171,25 +171,25 @@ const MasterCrudPanel = ({
                   {columns.map((c) =>
                     c.key === "plant_code" ? (
                       <td key={c.key} className="py-2.5 px-4">
-                        <span className="inline-flex items-center py-0.5 px-2.5 rounded-full bg-[#EEF2FF] text-[#4338CA] text-xs font-semibold">
+                        <span className="inline-flex items-center py-0.5 px-2.5 rounded-full bg-[#EEF2FF] text-[#4338CA] text-sm font-semibold">
                           {row[c.key]}
                         </span>
                       </td>
                     ) : (
-                      <td key={c.key} className="text-sm text-[#334155] py-2.5 px-4">
+                      <td key={c.key} className="text-base text-[#334155] py-2.5 px-4">
                         {row[c.key]}
                       </td>
                     ),
                   )}
                   <td className="text-right py-2.5 px-4 whitespace-nowrap">
                     <button
-                      className="inline-flex items-center gap-1 text-xs font-semibold text-[#4F46E5] mr-2 py-[3px] px-2.5 rounded-md bg-[#EEF2FF] border border-[#C7D2FE] cursor-pointer transition-all duration-150 hover:bg-[#4F46E5] hover:text-white hover:border-[#4F46E5]"
+                      className="inline-flex items-center gap-1 text-sm font-semibold text-[#4F46E5] mr-2 py-[3px] px-2.5 rounded-md bg-[#EEF2FF] border border-[#C7D2FE] cursor-pointer transition-all duration-150 hover:bg-[#4F46E5] hover:text-white hover:border-[#4F46E5]"
                       onClick={() => openEdit(row)}
                     >
                       ✏️ Edit
                     </button>
                     <button
-                      className="inline-flex items-center gap-1 text-xs font-semibold text-[#DC2626] py-[3px] px-2.5 rounded-md bg-[#FEF2F2] border border-[#FECACA] cursor-pointer transition-all duration-150 hover:bg-[#DC2626] hover:text-white hover:border-[#DC2626]"
+                      className="inline-flex items-center gap-1 text-sm font-semibold text-[#DC2626] py-[3px] px-2.5 rounded-md bg-[#FEF2F2] border border-[#FECACA] cursor-pointer transition-all duration-150 hover:bg-[#DC2626] hover:text-white hover:border-[#DC2626]"
                       onClick={() => handleDelete(row)}
                     >
                       🗑️ Delete
@@ -206,11 +206,11 @@ const MasterCrudPanel = ({
         <div className="fixed inset-0 bg-black/45 z-[400] flex items-center justify-center p-5">
           <div className="bg-white rounded-xl w-full max-w-[480px] max-h-[90vh] overflow-y-auto shadow-[0_10px_25px_rgba(0,0,0,0.08),0_4px_8px_rgba(0,0,0,0.04)]">
             <div className="py-5 px-6 pb-4 border-b border-[#E2E8F0] flex items-center justify-between">
-              <div className="text-base font-bold text-[#0B1F3A]">
+              <div className="text-lg font-bold text-[#0B1F3A]">
                 {editingRow ? `Edit ${title}` : `Add New ${title}`}
               </div>
               <button
-                className="w-8 h-8 rounded-md border-none bg-[#F1F5F9] cursor-pointer text-base flex items-center justify-center text-[#64748B] hover:bg-[#E2E8F0]"
+                className="w-8 h-8 rounded-md border-none bg-[#F1F5F9] cursor-pointer text-lg flex items-center justify-center text-[#64748B] hover:bg-[#E2E8F0]"
                 onClick={closeModal}
               >
                 ✕
@@ -219,11 +219,11 @@ const MasterCrudPanel = ({
 
             <div className="py-5 px-6">
               {formError && (
-                <div className="mb-3 text-xs text-[#991B1B] bg-[#FEF2F2] py-2 px-3 rounded-lg">{formError}</div>
+                <div className="mb-3 text-sm text-[#991B1B] bg-[#FEF2F2] py-2 px-3 rounded-lg">{formError}</div>
               )}
               {fields.map((f) => (
                 <div className="mb-4" key={f.key}>
-                  <label className="block text-xs font-semibold text-[#334155] mb-[5px]">{f.label}</label>
+                  <label className="block text-sm font-semibold text-[#334155] mb-[5px]">{f.label}</label>
                   <input
                     className={inputClass}
                     type={f.type === "number" ? "number" : "text"}
@@ -237,13 +237,13 @@ const MasterCrudPanel = ({
 
             <div className="py-4 px-6 border-t border-[#E2E8F0] flex justify-end gap-2.5">
               <button
-                className="inline-flex items-center gap-1.5 py-[5px] px-3 rounded-lg text-xs font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-white text-[#334155] border border-[#CBD5E1] hover:bg-[#F8FAFC] hover:border-[#94A3B8]"
+                className="inline-flex items-center gap-1.5 py-[5px] px-3 rounded-lg text-sm font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-white text-[#334155] border border-[#CBD5E1] hover:bg-[#F8FAFC] hover:border-[#94A3B8]"
                 onClick={closeModal}
               >
                 Cancel
               </button>
               <button
-                className="inline-flex items-center gap-1.5 py-2 px-4 rounded-lg text-[14px] font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-[#4F46E5] text-white hover:bg-[#4338CA] disabled:opacity-60"
+                className="inline-flex items-center gap-1.5 py-2 px-4 rounded-lg text-base font-semibold cursor-pointer border-none transition-all duration-150 whitespace-nowrap bg-[#4F46E5] text-white hover:bg-[#4338CA] disabled:opacity-60"
                 onClick={handleSave}
                 disabled={saving}
               >

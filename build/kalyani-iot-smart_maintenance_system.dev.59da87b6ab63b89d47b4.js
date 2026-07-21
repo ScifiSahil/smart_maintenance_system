@@ -1299,6 +1299,672 @@ var removePlant = function removePlant(cdbObjectId) {
 
 /***/ }),
 
+/***/ "./src/components/AbnormalitiesPanel.jsx":
+/*!***********************************************!*\
+  !*** ./src/components/AbnormalitiesPanel.jsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ AbnormalitiesPanel)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _services_checkerApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/checkerApi */ "./src/services/checkerApi.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+var F = "SourceSansPro,\"Helvetica Neue\",Helvetica,Arial,sans-serif";
+var PRIORITIES = [{
+  value: "Critical",
+  color: "#dc2626"
+}, {
+  value: "High",
+  color: "#ea580c"
+}, {
+  value: "Medium",
+  color: "#d97706"
+}, {
+  value: "Low",
+  color: "#64748b"
+}];
+var priorityColor = function priorityColor(p) {
+  var _PRIORITIES$find;
+  return ((_PRIORITIES$find = PRIORITIES.find(function (x) {
+    return x.value === p;
+  })) === null || _PRIORITIES$find === void 0 ? void 0 : _PRIORITIES$find.color) || "#64748b";
+};
+
+// ══════════════════════════════════════════════════════════════════════════
+// "Log Abnormality" modal — matches the demo form exactly.
+// NOTE: manual entries are UI-only (kept in React state) because no backend
+// table exists yet for priority / probable_cause / photos. Once such a table
+// is added, swap handleSubmit's setManualEntries(...) for a real API call —
+// nothing else in this component needs to change.
+// ══════════════════════════════════════════════════════════════════════════
+function LogAbnormalityModal(_ref) {
+  var _equipmentList$, _equipmentList$2;
+  var open = _ref.open,
+    onClose = _ref.onClose,
+    equipmentList = _ref.equipmentList,
+    checkedBy = _ref.checkedBy,
+    onSubmit = _ref.onSubmit,
+    saving = _ref.saving;
+  var blank = {
+    equipment_code: ((_equipmentList$ = equipmentList[0]) === null || _equipmentList$ === void 0 ? void 0 : _equipmentList$.equipment_code) || ((_equipmentList$2 = equipmentList[0]) === null || _equipmentList$2 === void 0 ? void 0 : _equipmentList$2.code) || "",
+    priority: "Critical",
+    observed_value: "",
+    probable_cause: "",
+    remarks: "",
+    photos: [null, null, null]
+  };
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(blank),
+    _useState2 = _slicedToArray(_useState, 2),
+    form = _useState2[0],
+    setForm = _useState2[1];
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (open) setForm(blank);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+  if (!open) return null;
+  var set = function set(key) {
+    return function (e) {
+      return setForm(function (f) {
+        return _objectSpread(_objectSpread({}, f), {}, _defineProperty({}, key, e.target.value));
+      });
+    };
+  };
+  var setPhoto = function setPhoto(idx) {
+    return function (e) {
+      var _e$target$files;
+      var file = ((_e$target$files = e.target.files) === null || _e$target$files === void 0 ? void 0 : _e$target$files[0]) || null;
+      setForm(function (f) {
+        var photos = _toConsumableArray(f.photos);
+        photos[idx] = file;
+        return _objectSpread(_objectSpread({}, f), {}, {
+          photos: photos
+        });
+      });
+    };
+  };
+  var submit = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            if (!(!form.observed_value.trim() && !form.remarks.trim())) {
+              _context.next = 3;
+              break;
+            }
+            alert("Please fill in Observed Value or Remarks before logging.");
+            return _context.abrupt("return");
+          case 3:
+            _context.next = 5;
+            return onSubmit(_objectSpread(_objectSpread({}, form), {}, {
+              logged_by: checkedBy,
+              logged_at: new Date().toISOString(),
+              photos: form.photos.filter(Boolean).map(function (f) {
+                return f.name;
+              })
+            }));
+          case 5:
+            onClose();
+          case 6:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee);
+    }));
+    return function submit() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: "fixed",
+      inset: 0,
+      background: "rgba(15,23,42,.55)",
+      zIndex: 1000,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: 20
+    },
+    onClick: onClose
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#fff",
+      borderRadius: 14,
+      width: "100%",
+      maxWidth: 620,
+      maxHeight: "88vh",
+      overflowY: "auto",
+      boxShadow: "0 20px 60px rgba(0,0,0,.25)",
+      fontFamily: F
+    },
+    onClick: function onClick(e) {
+      return e.stopPropagation();
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      padding: "18px 22px",
+      borderBottom: "1px solid #e2e8f0",
+      position: "sticky",
+      top: 0,
+      background: "#fff"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 17,
+      fontWeight: 800,
+      color: "#0f172a"
+    }
+  }, "\u26A0\uFE0F Log Abnormality"), /*#__PURE__*/React.createElement("button", {
+    onClick: onClose,
+    style: {
+      background: "#f1f5f9",
+      border: "none",
+      width: 30,
+      height: 30,
+      borderRadius: 8,
+      fontSize: 14,
+      color: "#64748b",
+      cursor: "pointer"
+    }
+  }, "\u2715")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: "18px 22px"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#fef3c7",
+      border: "1px solid #fde68a",
+      color: "#92400e",
+      fontSize: 13,
+      borderRadius: 8,
+      padding: "10px 14px",
+      marginBottom: 18
+    }
+  }, "Check Point: ", /*#__PURE__*/React.createElement("strong", null, "Quick Log (no checklist)")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr",
+      gap: 14,
+      marginBottom: 16
+    }
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+    style: {
+      display: "block",
+      fontSize: 13,
+      fontWeight: 700,
+      color: "#0f172a",
+      marginBottom: 6
+    }
+  }, "Equipment / Machine"), /*#__PURE__*/React.createElement("select", {
+    value: form.equipment_code,
+    onChange: set("equipment_code"),
+    style: inputStyle
+  }, equipmentList.map(function (eq) {
+    var code = eq.equipment_code || eq.code;
+    return /*#__PURE__*/React.createElement("option", {
+      key: code,
+      value: code
+    }, code, " \u2014 ", eq.equipment_name || eq.name || "");
+  }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+    style: {
+      display: "block",
+      fontSize: 13,
+      fontWeight: 700,
+      color: "#0f172a",
+      marginBottom: 6
+    }
+  }, "Priority"), /*#__PURE__*/React.createElement("select", {
+    value: form.priority,
+    onChange: set("priority"),
+    style: _objectSpread(_objectSpread({}, inputStyle), {}, {
+      fontWeight: 700
+    })
+  }, PRIORITIES.map(function (p) {
+    return /*#__PURE__*/React.createElement("option", {
+      key: p.value,
+      value: p.value
+    }, p.value);
+  })))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: 16
+    }
+  }, /*#__PURE__*/React.createElement("label", {
+    style: {
+      display: "block",
+      fontSize: 13,
+      fontWeight: 700,
+      color: "#0f172a",
+      marginBottom: 6
+    }
+  }, "Observed Value / Condition"), /*#__PURE__*/React.createElement("input", {
+    value: form.observed_value,
+    onChange: set("observed_value"),
+    placeholder: "e.g. 8.2 mm/s (limit 4.5 mm/s)",
+    style: inputStyle
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: 16
+    }
+  }, /*#__PURE__*/React.createElement("label", {
+    style: {
+      display: "block",
+      fontSize: 13,
+      fontWeight: 700,
+      color: "#0f172a",
+      marginBottom: 6
+    }
+  }, "Probable Cause"), /*#__PURE__*/React.createElement("input", {
+    value: form.probable_cause,
+    onChange: set("probable_cause"),
+    placeholder: "e.g. Bearing wear / misalignment",
+    style: inputStyle
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: 16
+    }
+  }, /*#__PURE__*/React.createElement("label", {
+    style: {
+      display: "block",
+      fontSize: 13,
+      fontWeight: 700,
+      color: "#0f172a",
+      marginBottom: 6
+    }
+  }, "Remarks / Description"), /*#__PURE__*/React.createElement("textarea", {
+    value: form.remarks,
+    onChange: set("remarks"),
+    placeholder: "Describe in detail what you observed, when, and conditions\u2026",
+    style: _objectSpread(_objectSpread({}, inputStyle), {}, {
+      minHeight: 90,
+      resize: "vertical",
+      fontFamily: F
+    })
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: 4
+    }
+  }, /*#__PURE__*/React.createElement("label", {
+    style: {
+      display: "block",
+      fontSize: 13,
+      fontWeight: 700,
+      color: "#0f172a",
+      marginBottom: 8
+    }
+  }, "Photo Evidence"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "grid",
+      gridTemplateColumns: "repeat(3,1fr)",
+      gap: 10
+    }
+  }, [0, 1, 2].map(function (idx) {
+    return /*#__PURE__*/React.createElement("label", {
+      key: idx,
+      style: {
+        border: "1.5px dashed #cbd5e1",
+        borderRadius: 10,
+        padding: "18px 8px",
+        textAlign: "center",
+        fontSize: 12,
+        fontWeight: 600,
+        color: form.photos[idx] ? "#0f172a" : "#64748b",
+        cursor: "pointer",
+        background: form.photos[idx] ? "#f0fdf4" : "#f8fafc"
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 16,
+        marginBottom: 4
+      }
+    }, "\uD83D\uDCF7"), form.photos[idx] ? form.photos[idx].name.slice(0, 14) : "photo".concat(idx + 1), /*#__PURE__*/React.createElement("input", {
+      type: "file",
+      accept: "image/*",
+      onChange: setPhoto(idx),
+      style: {
+        display: "none"
+      }
+    }));
+  })))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: "14px 22px",
+      borderTop: "1px solid #e2e8f0",
+      display: "flex",
+      justifyContent: "flex-end",
+      gap: 10,
+      position: "sticky",
+      bottom: 0,
+      background: "#fff"
+    }
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: onClose,
+    style: {
+      padding: "9px 18px",
+      borderRadius: 8,
+      border: "1.5px solid #cbd5e1",
+      background: "#fff",
+      color: "#334155",
+      fontWeight: 700,
+      fontSize: 13,
+      cursor: "pointer"
+    }
+  }, "Cancel"), /*#__PURE__*/React.createElement("button", {
+    onClick: submit,
+    disabled: saving,
+    style: {
+      padding: "9px 18px",
+      borderRadius: 8,
+      border: "none",
+      background: saving ? "#f87171" : "#dc2626",
+      color: "#fff",
+      fontWeight: 700,
+      fontSize: 13,
+      cursor: saving ? "not-allowed" : "pointer"
+    }
+  }, saving ? "Logging…" : "⚠️ Log Abnormality"))));
+}
+var inputStyle = {
+  width: "100%",
+  padding: "9px 12px",
+  fontSize: 13,
+  border: "1.5px solid #e2e8f0",
+  borderRadius: 8,
+  background: "#fff",
+  color: "#334155",
+  outline: "none",
+  fontFamily: F,
+  boxSizing: "border-box"
+};
+
+// ══════════════════════════════════════════════════════════════════════════
+// One row in the logged abnormalities list
+// ══════════════════════════════════════════════════════════════════════════
+function AbnormalityRow(_ref3) {
+  var row = _ref3.row;
+  var isAuto = row.source !== "manual";
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      border: "1.5px solid #fecaca",
+      background: "#fef2f2",
+      borderRadius: 10,
+      padding: "14px 16px",
+      marginBottom: 10
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "flex-start",
+      gap: 12,
+      flexWrap: "wrap"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1,
+      minWidth: 220
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      alignItems: "center",
+      gap: 8,
+      marginBottom: 4,
+      flexWrap: "wrap"
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13,
+      fontWeight: 800,
+      color: "#0f172a"
+    }
+  }, row.equipment_code, " \u2014 ", row.item_title || "Manually logged"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 10,
+      fontWeight: 700,
+      color: "#fff",
+      padding: "2px 8px",
+      borderRadius: 100,
+      background: isAuto ? "#2563eb" : priorityColor(row.priority)
+    }
+  }, isAuto ? "AUTO-FLAGGED" : (row.priority || "MANUAL").toUpperCase())), isAuto ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: "#64748b"
+    }
+  }, "Current: ", /*#__PURE__*/React.createElement("strong", {
+    style: {
+      color: "#dc2626"
+    }
+  }, row.current_value || "—"), row.limit_value && /*#__PURE__*/React.createElement(React.Fragment, null, " \xB7 Limit: ", row.limit_value), row.remarks && /*#__PURE__*/React.createElement(React.Fragment, null, " \xB7 ", row.remarks)) : /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: "#64748b"
+    }
+  }, row.observed_value && /*#__PURE__*/React.createElement(React.Fragment, null, "Observed: ", /*#__PURE__*/React.createElement("strong", null, row.observed_value), " \xB7 "), row.probable_cause && /*#__PURE__*/React.createElement(React.Fragment, null, "Cause: ", row.probable_cause, " \xB7 "), row.remarks), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      color: "#94a3b8",
+      marginTop: 4
+    }
+  }, isAuto ? row.inspection_date : new Date(row.logged_at).toLocaleString(), row.checked_by || row.logged_by ? " \xB7 Logged by ".concat(row.checked_by || row.logged_by) : ""))));
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// Main panel
+// ══════════════════════════════════════════════════════════════════════════
+function AbnormalitiesPanel(_ref4) {
+  var equipmentList = _ref4.equipmentList,
+    checkedBy = _ref4.checkedBy;
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState4 = _slicedToArray(_useState3, 2),
+    autoRows = _useState4[0],
+    setAutoRows = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState6 = _slicedToArray(_useState5, 2),
+    manualRows = _useState6[0],
+    setManualRows = _useState6[1]; // now persisted via smartpm_checker_abnormality_log
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    _useState8 = _slicedToArray(_useState7, 2),
+    loading = _useState8[0],
+    setLoading = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    _useState10 = _slicedToArray(_useState9, 2),
+    error = _useState10[0],
+    setError = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState12 = _slicedToArray(_useState11, 2),
+    modalOpen = _useState12[0],
+    setModalOpen = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState14 = _slicedToArray(_useState13, 2),
+    logging = _useState14[0],
+    setLogging = _useState14[1];
+  var loadAll = function loadAll() {
+    setLoading(true);
+    setError("");
+    Promise.all([(0,_services_checkerApi__WEBPACK_IMPORTED_MODULE_1__.fetchAbnormalResults)(), (0,_services_checkerApi__WEBPACK_IMPORTED_MODULE_1__.fetchManualAbnormalities)()]).then(function (_ref5) {
+      var _ref6 = _slicedToArray(_ref5, 2),
+        autoJ = _ref6[0],
+        manualJ = _ref6[1];
+      setAutoRows(autoJ.objects || []);
+      setManualRows((manualJ.objects || []).map(function (r) {
+        return _objectSpread(_objectSpread({}, r), {}, {
+          source: "manual"
+        });
+      }));
+    })["catch"](function (e) {
+      return setError((e === null || e === void 0 ? void 0 : e.message) || "Failed to load abnormalities");
+    })["finally"](function () {
+      return setLoading(false);
+    });
+  };
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    loadAll();
+  }, []);
+  var allRows = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    return [].concat(_toConsumableArray(manualRows), _toConsumableArray(autoRows.map(function (r) {
+      return _objectSpread(_objectSpread({}, r), {}, {
+        source: "auto"
+      });
+    })));
+  }, [manualRows, autoRows]);
+  var handleLog = /*#__PURE__*/function () {
+    var _ref7 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(entry) {
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            setLogging(true);
+            setError("");
+            _context2.prev = 2;
+            _context2.next = 5;
+            return (0,_services_checkerApi__WEBPACK_IMPORTED_MODULE_1__.logAbnormality)(entry);
+          case 5:
+            loadAll(); // refetch so the new row has its real cdb_object_id
+            _context2.next = 11;
+            break;
+          case 8:
+            _context2.prev = 8;
+            _context2.t0 = _context2["catch"](2);
+            setError((_context2.t0 === null || _context2.t0 === void 0 ? void 0 : _context2.t0.message) || "Failed to save abnormality");
+          case 11:
+            _context2.prev = 11;
+            setLogging(false);
+            return _context2.finish(11);
+          case 14:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2, null, [[2, 8, 11, 14]]);
+    }));
+    return function handleLog(_x2) {
+      return _ref7.apply(this, arguments);
+    };
+  }();
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#fff",
+      borderBottom: "1.5px solid #e2e8f0",
+      padding: "16px 20px"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: "#94a3b8",
+      marginBottom: 6
+    }
+  }, "Checker ", /*#__PURE__*/React.createElement("span", {
+    style: {
+      margin: "0 4px"
+    }
+  }, "\u203A"), " Logged Abnormalities"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "flex-start",
+      gap: 16,
+      flexWrap: "wrap"
+    }
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 22,
+      fontWeight: 800,
+      color: "#0f172a"
+    }
+  }, "Logged Abnormalities"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: "#64748b",
+      marginTop: 2
+    }
+  }, "Auto-forwarded from PM Inspection \xB7 plus manually logged issues")), /*#__PURE__*/React.createElement("button", {
+    onClick: function onClick() {
+      return setModalOpen(true);
+    },
+    style: {
+      padding: "10px 18px",
+      borderRadius: 8,
+      border: "none",
+      background: "#2563eb",
+      color: "#fff",
+      fontWeight: 800,
+      fontSize: 13,
+      cursor: "pointer"
+    }
+  }, "+ Log Abnormality"))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: "16px 20px"
+    }
+  }, error && /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#fef2f2",
+      border: "1px solid #fecaca",
+      color: "#dc2626",
+      fontSize: 12,
+      fontWeight: 600,
+      borderRadius: 8,
+      padding: "8px 14px",
+      marginBottom: 14
+    }
+  }, "\u26A0 ", error), loading ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: "center",
+      padding: "40px 0",
+      color: "#94a3b8"
+    }
+  }, "Loading abnormalities\u2026") : allRows.length === 0 ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#eff6ff",
+      border: "1px solid #bfdbfe",
+      color: "#1d4ed8",
+      fontSize: 13,
+      borderRadius: 8,
+      padding: "12px 16px"
+    }
+  }, "\u2139\uFE0F No abnormalities logged yet \u2014 nice and clean.") : allRows.map(function (row, i) {
+    return /*#__PURE__*/React.createElement(AbnormalityRow, {
+      key: row.cdb_object_id || "manual-".concat(i),
+      row: row
+    });
+  })), /*#__PURE__*/React.createElement(LogAbnormalityModal, {
+    open: modalOpen,
+    onClose: function onClose() {
+      return setModalOpen(false);
+    },
+    equipmentList: equipmentList,
+    checkedBy: checkedBy,
+    saving: logging,
+    onSubmit: handleLog
+  }));
+}
+
+/***/ }),
+
 /***/ "./src/components/AddCheckPointModal.jsx":
 /*!***********************************************!*\
   !*** ./src/components/AddCheckPointModal.jsx ***!
@@ -2840,11 +3506,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _services_checkerApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/checkerApi */ "./src/services/checkerApi.js");
-/* harmony import */ var _services_equipmentApi__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/equipmentApi */ "./src/services/equipmentApi.js");
-/* harmony import */ var _services_plantApi__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/plantApi */ "./src/services/plantApi.js");
-/* harmony import */ var _services_lineApi__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/lineApi */ "./src/services/lineApi.js");
-/* harmony import */ var _services_machineApi__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/machineApi */ "./src/services/machineApi.js");
+/* harmony import */ var _MyCalendarPanel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MyCalendarPanel */ "./src/components/MyCalendarPanel.jsx");
+/* harmony import */ var _services_checkerApi__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/checkerApi */ "./src/services/checkerApi.js");
+/* harmony import */ var _services_equipmentApi__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/equipmentApi */ "./src/services/equipmentApi.js");
+/* harmony import */ var _services_plantApi__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/plantApi */ "./src/services/plantApi.js");
+/* harmony import */ var _services_lineApi__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/lineApi */ "./src/services/lineApi.js");
+/* harmony import */ var _services_machineApi__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/machineApi */ "./src/services/machineApi.js");
+/* harmony import */ var _AbnormalitiesPanel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./AbnormalitiesPanel */ "./src/components/AbnormalitiesPanel.jsx");
+/* harmony import */ var _ConsolidatedListPanel__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ConsolidatedListPanel */ "./src/components/ConsolidatedListPanel.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -2864,6 +3533,9 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
 
 
 
@@ -2960,7 +3632,7 @@ function CheckpointRow(_ref4) {
             setErr("");
             _context.prev = 3;
             _context.next = 6;
-            return (0,_services_checkerApi__WEBPACK_IMPORTED_MODULE_1__.saveCheckpoint)({
+            return (0,_services_checkerApi__WEBPACK_IMPORTED_MODULE_2__.saveCheckpoint)({
               equipment_code: item.equipment_code,
               checklist_item_id: item.cdb_object_id,
               inspection_date: todayStr(),
@@ -3190,6 +3862,21 @@ function TopNav(_ref6) {
       fontFamily: F
     }
   }, checkedBy, " \xB7 Checker")), /*#__PURE__*/React.createElement("button", {
+    onClick: function onClick() {
+      return onNavigate && onNavigate("admin");
+    },
+    style: {
+      fontSize: 13,
+      fontWeight: 600,
+      color: "rgba(255,255,255,.75)",
+      background: "transparent",
+      border: "none",
+      padding: "5px 10px",
+      borderRadius: 6,
+      cursor: "pointer",
+      fontFamily: F
+    }
+  }, "\u2190 Admin Panel"), /*#__PURE__*/React.createElement("button", {
     onClick: function onClick() {
       return onNavigate && onNavigate("home");
     },
@@ -3558,7 +4245,7 @@ function CheckerPage(_ref12) {
   // ── Load master/filter data on mount — same services ChecklistBuilder uses ──
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setLoading(true);
-    Promise.all([(0,_services_equipmentApi__WEBPACK_IMPORTED_MODULE_2__.fetchEquipment)(), (0,_services_plantApi__WEBPACK_IMPORTED_MODULE_3__.fetchPlants)(), (0,_services_lineApi__WEBPACK_IMPORTED_MODULE_4__.fetchLines)(), (0,_services_machineApi__WEBPACK_IMPORTED_MODULE_5__.fetchMachines)()]).then(function (_ref13) {
+    Promise.all([(0,_services_equipmentApi__WEBPACK_IMPORTED_MODULE_3__.fetchEquipment)(), (0,_services_plantApi__WEBPACK_IMPORTED_MODULE_4__.fetchPlants)(), (0,_services_lineApi__WEBPACK_IMPORTED_MODULE_5__.fetchLines)(), (0,_services_machineApi__WEBPACK_IMPORTED_MODULE_6__.fetchMachines)()]).then(function (_ref13) {
       var _ref14 = _slicedToArray(_ref13, 4),
         eqJ = _ref14[0],
         plantJ = _ref14[1],
@@ -3580,7 +4267,7 @@ function CheckerPage(_ref12) {
     })["finally"](function () {
       return setLoading(false);
     });
-    (0,_services_checkerApi__WEBPACK_IMPORTED_MODULE_1__.fetchDashboardSummary)(checkedBy).then(function (s) {
+    (0,_services_checkerApi__WEBPACK_IMPORTED_MODULE_2__.fetchDashboardSummary)(checkedBy).then(function (s) {
       return setSummary(s);
     })["catch"](function () {});
   }, [checkedBy]);
@@ -3618,12 +4305,12 @@ function CheckerPage(_ref12) {
     if (!effectiveSelectedEquipment) return;
     setLoadingItems(true);
     setError("");
-    Promise.all([(0,_services_checkerApi__WEBPACK_IMPORTED_MODULE_1__.fetchChecklistItems)(effectiveSelectedEquipment), (0,_services_checkerApi__WEBPACK_IMPORTED_MODULE_1__.fetchInspectionResults)(effectiveSelectedEquipment, today)]).then(function (_ref15) {
+    Promise.all([(0,_services_checkerApi__WEBPACK_IMPORTED_MODULE_2__.fetchChecklistItems)(effectiveSelectedEquipment), (0,_services_checkerApi__WEBPACK_IMPORTED_MODULE_2__.fetchInspectionResults)(effectiveSelectedEquipment, today)]).then(function (_ref15) {
       var _ref16 = _slicedToArray(_ref15, 2),
         itemsJ = _ref16[0],
         resultsJ = _ref16[1];
       setChecklistItems(rowsOf(itemsJ));
-      setChecklistHeaderFound(Boolean(itemsJ.header));
+      setChecklistHeaderFound(rowsOf(itemsJ).length > 0);
       var results = rowsOf(resultsJ);
       var map = {};
       results.forEach(function (r) {
@@ -3685,7 +4372,7 @@ function CheckerPage(_ref12) {
             setError("");
             _context2.prev = 2;
             _context2.next = 5;
-            return (0,_services_checkerApi__WEBPACK_IMPORTED_MODULE_1__.submitInspection)(effectiveSelectedEquipment, today);
+            return (0,_services_checkerApi__WEBPACK_IMPORTED_MODULE_2__.submitInspection)(effectiveSelectedEquipment, today);
           case 5:
             loadEquipmentData();
             _context2.next = 11;
@@ -3713,6 +4400,15 @@ function CheckerPage(_ref12) {
   });
   var handleQuickAction = function handleQuickAction(action) {
     if (action === "log-abnormality") setActiveTab("abnormalities");else if (action === "pending-audits") setActiveTab("audit-queue");else if (action === "view-history") setActiveTab("history-status");
+  };
+
+  // Jump from Consolidated List straight to a specific equipment's checklist.
+  var openInspectionFor = function openInspectionFor(equipmentCode) {
+    setSelectedEquipment(equipmentCode);
+    setActiveTab("pm-inspection");
+  };
+  var openAbnormalitiesTab = function openAbnormalitiesTab() {
+    return setActiveTab("abnormalities");
   };
   var TAB_META = {
     "pm-inspection": {
@@ -3785,7 +4481,21 @@ function CheckerPage(_ref12) {
       color: "#94a3b8",
       marginBottom: 6
     }
-  }, "Checker ", /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("span", {
+    onClick: function onClick() {
+      return onNavigate && onNavigate("home");
+    },
+    style: {
+      cursor: "pointer",
+      fontWeight: 600
+    },
+    onMouseEnter: function onMouseEnter(e) {
+      return e.currentTarget.style.color = "#2563eb";
+    },
+    onMouseLeave: function onMouseLeave(e) {
+      return e.currentTarget.style.color = "#94a3b8";
+    }
+  }, "Checker"), /*#__PURE__*/React.createElement("span", {
     style: {
       margin: "0 4px"
     }
@@ -4098,21 +4808,26 @@ function CheckerPage(_ref12) {
       submitted: isSubmitted,
       onSaved: loadEquipmentData
     });
-  }))), activeTab === "abnormalities" && /*#__PURE__*/React.createElement(ComingSoon, {
-    title: "Abnormalities",
-    subtitle: "Flagged out-of-limit readings across your equipment"
+  }))), activeTab === "abnormalities" && /*#__PURE__*/React.createElement(_AbnormalitiesPanel__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    equipmentList: equipmentList,
+    checkedBy: checkedBy
   }), activeTab === "iiot-alerts" && /*#__PURE__*/React.createElement(ComingSoon, {
     title: "IIoT Alerts",
     subtitle: "Sensor-triggered notifications requiring attention"
-  }), activeTab === "consolidated" && /*#__PURE__*/React.createElement(ComingSoon, {
-    title: "Consolidated List",
-    subtitle: "All tasks across equipment, plants and frequencies"
+  }), activeTab === "consolidated" && /*#__PURE__*/React.createElement(_ConsolidatedListPanel__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    equipmentList: equipmentList,
+    checkedBy: checkedBy,
+    today: today,
+    onOpenInspection: openInspectionFor,
+    onOpenAbnormalities: openAbnormalitiesTab
   }), activeTab === "audit-queue" && /*#__PURE__*/React.createElement(ComingSoon, {
     title: "Audit Queue",
     subtitle: "Submitted inspections awaiting audit sign-off"
-  }), activeTab === "my-calendar" && /*#__PURE__*/React.createElement(ComingSoon, {
-    title: "My Calendar",
-    subtitle: "Scheduled inspection dates by equipment"
+  }), activeTab === "my-calendar" && /*#__PURE__*/React.createElement(_MyCalendarPanel__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    onOpenInspection: function onOpenInspection(code) {
+      setSelectedEquipment(code);
+      setActiveTab("pm-inspection");
+    }
   }), activeTab === "history-status" && /*#__PURE__*/React.createElement(ComingSoon, {
     title: "History & Status",
     subtitle: "Past submissions and their outcomes"
@@ -4843,6 +5558,366 @@ var ConfigurationModal = function ConfigurationModal(_ref) {
   })))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ConfigurationModal);
+
+/***/ }),
+
+/***/ "./src/components/ConsolidatedListPanel.jsx":
+/*!**************************************************!*\
+  !*** ./src/components/ConsolidatedListPanel.jsx ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ConsolidatedListPanel)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _services_checkerApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/checkerApi */ "./src/services/checkerApi.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+var F = "SourceSansPro,\"Helvetica Neue\",Helvetica,Arial,sans-serif";
+
+// ── Small section wrapper — icon + title + count badge ──────────────────────
+function Section(_ref) {
+  var icon = _ref.icon,
+    title = _ref.title,
+    count = _ref.count,
+    color = _ref.color,
+    children = _ref.children;
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#fff",
+      border: "1px solid #e2e8f0",
+      borderRadius: 12,
+      marginBottom: 16,
+      overflow: "hidden"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      alignItems: "center",
+      gap: 8,
+      padding: "12px 16px",
+      borderBottom: "1px solid #f1f5f9"
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 16
+    }
+  }, icon), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 14,
+      fontWeight: 800,
+      color: "#0f172a"
+    }
+  }, title), /*#__PURE__*/React.createElement("span", {
+    style: {
+      marginLeft: "auto",
+      fontSize: 11,
+      fontWeight: 700,
+      color: "#fff",
+      background: count > 0 ? color : "#94a3b8",
+      padding: "2px 9px",
+      borderRadius: 100
+    }
+  }, count)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: count > 0 ? "8px 16px 14px" : "14px 16px"
+    }
+  }, children));
+}
+function EmptyRow(_ref2) {
+  var text = _ref2.text;
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: "#94a3b8",
+      padding: "6px 0"
+    }
+  }, text);
+}
+
+// ── One "pending PM inspection" row ──────────────────────────────────────────
+function PendingPmRow(_ref3) {
+  var status = _ref3.status,
+    equipment = _ref3.equipment,
+    onOpen = _ref3.onOpen;
+  var pct = status.total > 0 ? Math.round(status.done / status.total * 100) : 0;
+  return /*#__PURE__*/React.createElement("div", {
+    onClick: function onClick() {
+      return onOpen(status.equipment_code);
+    },
+    style: {
+      display: "flex",
+      alignItems: "center",
+      gap: 12,
+      padding: "10px 12px",
+      borderRadius: 8,
+      border: "1.5px solid #fde68a",
+      background: "#fffbeb",
+      marginBottom: 8,
+      cursor: "pointer"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1,
+      minWidth: 0
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      fontWeight: 800,
+      color: "#0f172a"
+    }
+  }, status.equipment_code, " ", equipment ? "\u2014 ".concat(equipment.equipment_name || equipment.name || "") : ""), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      color: "#92400e",
+      marginTop: 2
+    }
+  }, status.done, "/", status.total, " check points done \xB7 ", status.pending, " pending")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 60,
+      height: 6,
+      background: "#fde68a",
+      borderRadius: 4,
+      overflow: "hidden",
+      flexShrink: 0
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: "".concat(pct, "%"),
+      height: "100%",
+      background: "#d97706"
+    }
+  })), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 11,
+      fontWeight: 700,
+      color: "#2563eb",
+      flexShrink: 0
+    }
+  }, "Open \u2192"));
+}
+
+// ── One "open abnormality" row ────────────────────────────────────────────────
+function AbnormalityRow(_ref4) {
+  var row = _ref4.row;
+  var isAuto = row.source !== "manual";
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      alignItems: "flex-start",
+      gap: 10,
+      padding: "8px 12px",
+      borderRadius: 8,
+      border: "1.5px solid #fecaca",
+      background: "#fef2f2",
+      marginBottom: 8
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1,
+      minWidth: 0
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      fontWeight: 800,
+      color: "#0f172a"
+    }
+  }, row.equipment_code, " \u2014 ", isAuto ? row.item_title || "Checklist flag" : "Manually logged"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      color: "#991b1b",
+      marginTop: 2
+    }
+  }, isAuto ? "Current: ".concat(row.current_value || "—").concat(row.limit_value ? " \xB7 Limit: ".concat(row.limit_value) : "") : row.observed_value || row.probable_cause || row.remarks || "—")), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 10,
+      fontWeight: 700,
+      color: "#fff",
+      background: isAuto ? "#2563eb" : "#dc2626",
+      padding: "2px 8px",
+      borderRadius: 100,
+      flexShrink: 0
+    }
+  }, isAuto ? "AUTO" : (row.priority || "MANUAL").toUpperCase()));
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// Main panel
+// ══════════════════════════════════════════════════════════════════════════
+function ConsolidatedListPanel(_ref5) {
+  var equipmentList = _ref5.equipmentList,
+    checkedBy = _ref5.checkedBy,
+    today = _ref5.today,
+    onOpenInspection = _ref5.onOpenInspection,
+    onOpenAbnormalities = _ref5.onOpenAbnormalities;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState2 = _slicedToArray(_useState, 2),
+    pmStatus = _useState2[0],
+    setPmStatus = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState4 = _slicedToArray(_useState3, 2),
+    abnormalRows = _useState4[0],
+    setAbnormalRows = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    _useState6 = _slicedToArray(_useState5, 2),
+    loading = _useState6[0],
+    setLoading = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    _useState8 = _slicedToArray(_useState7, 2),
+    error = _useState8[0],
+    setError = _useState8[1];
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    setLoading(true);
+    setError("");
+    Promise.all([(0,_services_checkerApi__WEBPACK_IMPORTED_MODULE_1__.fetchTodayPmStatus)(today), (0,_services_checkerApi__WEBPACK_IMPORTED_MODULE_1__.fetchAbnormalResults)(), (0,_services_checkerApi__WEBPACK_IMPORTED_MODULE_1__.fetchManualAbnormalities)()]).then(function (_ref6) {
+      var _ref7 = _slicedToArray(_ref6, 3),
+        pmJ = _ref7[0],
+        autoJ = _ref7[1],
+        manualJ = _ref7[2];
+      setPmStatus(pmJ || []);
+      var auto = (autoJ.objects || []).map(function (r) {
+        return _objectSpread(_objectSpread({}, r), {}, {
+          source: "auto"
+        });
+      });
+      var manual = (manualJ.objects || []).filter(function (r) {
+        return (r.log_status || "Open") !== "Resolved";
+      }).map(function (r) {
+        return _objectSpread(_objectSpread({}, r), {}, {
+          source: "manual"
+        });
+      });
+      setAbnormalRows([].concat(_toConsumableArray(manual), _toConsumableArray(auto)));
+    })["catch"](function (e) {
+      return setError((e === null || e === void 0 ? void 0 : e.message) || "Failed to load consolidated list");
+    })["finally"](function () {
+      return setLoading(false);
+    });
+  }, [today]);
+  var equipmentByCode = {};
+  equipmentList.forEach(function (eq) {
+    equipmentByCode[eq.equipment_code || eq.code] = eq;
+  });
+  var pendingPm = pmStatus.filter(function (s) {
+    return !s.submitted && s.pending > 0;
+  });
+  var totalOpen = pendingPm.length + abnormalRows.length;
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#fff",
+      borderBottom: "1.5px solid #e2e8f0",
+      padding: "16px 20px"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: "#94a3b8",
+      marginBottom: 6
+    }
+  }, "Checker ", /*#__PURE__*/React.createElement("span", {
+    style: {
+      margin: "0 4px"
+    }
+  }, "\u203A"), " Consolidated List"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 22,
+      fontWeight: 800,
+      color: "#0f172a"
+    }
+  }, "Consolidated List"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: "#64748b",
+      marginTop: 2
+    }
+  }, checkedBy, " \xB7 Everything that needs your attention today (", totalOpen, " open items)")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: "16px 20px"
+    }
+  }, error && /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#fef2f2",
+      border: "1px solid #fecaca",
+      color: "#dc2626",
+      fontSize: 12,
+      fontWeight: 600,
+      borderRadius: 8,
+      padding: "8px 14px",
+      marginBottom: 14
+    }
+  }, "\u26A0 ", error), loading ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: "center",
+      padding: "40px 0",
+      color: "#94a3b8"
+    }
+  }, "Loading consolidated list\u2026") : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Section, {
+    icon: "\uD83D\uDD0D",
+    title: "Pending PM Inspections",
+    count: pendingPm.length,
+    color: "#d97706"
+  }, pendingPm.length === 0 ? /*#__PURE__*/React.createElement(EmptyRow, {
+    text: "All built checklists are complete for today. \u2705"
+  }) : pendingPm.map(function (s) {
+    return /*#__PURE__*/React.createElement(PendingPmRow, {
+      key: s.equipment_code,
+      status: s,
+      equipment: equipmentByCode[s.equipment_code],
+      onOpen: onOpenInspection
+    });
+  })), /*#__PURE__*/React.createElement(Section, {
+    icon: "\u26A0\uFE0F",
+    title: "Open Abnormalities",
+    count: abnormalRows.length,
+    color: "#dc2626"
+  }, abnormalRows.length === 0 ? /*#__PURE__*/React.createElement(EmptyRow, {
+    text: "No abnormalities open right now."
+  }) : /*#__PURE__*/React.createElement(React.Fragment, null, abnormalRows.slice(0, 8).map(function (row, i) {
+    return /*#__PURE__*/React.createElement(AbnormalityRow, {
+      key: row.cdb_object_id || i,
+      row: row
+    });
+  }), abnormalRows.length > 8 && /*#__PURE__*/React.createElement("button", {
+    onClick: onOpenAbnormalities,
+    style: {
+      fontSize: 12,
+      fontWeight: 700,
+      color: "#2563eb",
+      background: "transparent",
+      border: "none",
+      cursor: "pointer",
+      padding: "4px 0"
+    }
+  }, "View all ", abnormalRows.length, " in Abnormalities \u2192"))), /*#__PURE__*/React.createElement(Section, {
+    icon: "\uD83D\uDCE1",
+    title: "IIoT Alerts",
+    count: 0,
+    color: "#2563eb"
+  }, /*#__PURE__*/React.createElement(EmptyRow, {
+    text: "No live IIoT sensor feed connected yet."
+  })))));
+}
 
 /***/ }),
 
@@ -14366,6 +15441,540 @@ var MasterCrudPanel = function MasterCrudPanel(_ref) {
 
 /***/ }),
 
+/***/ "./src/components/MyCalendarPanel.jsx":
+/*!********************************************!*\
+  !*** ./src/components/MyCalendarPanel.jsx ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ MyCalendarPanel)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _services_checkerApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/checkerApi */ "./src/services/checkerApi.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+// components/MyCalendarPanel.jsx
+// My Calendar — month view highlighting dates that have PM checklist tasks
+// due (computed from checklist frequency), with a day drill-down panel
+// listing the equipment + checklist items for the selected date.
+
+
+
+var F = "SourceSansPro,\"Helvetica Neue\",Helvetica,Arial,sans-serif";
+var AC = "#16a34a";
+var WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+var MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+var pad2 = function pad2(n) {
+  return String(n).padStart(2, "0");
+};
+var dateKey = function dateKey(y, m, d) {
+  return "".concat(y, "-").concat(pad2(m + 1), "-").concat(pad2(d));
+};
+var todayKey = function todayKey() {
+  var t = new Date();
+  return dateKey(t.getFullYear(), t.getMonth(), t.getDate());
+};
+
+// ── One equipment row inside the day drill-down ─────────────────────────────
+function DayTaskRow(_ref) {
+  var task = _ref.task,
+    dateStr = _ref.dateStr;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    expanded = _useState2[0],
+    setExpanded = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState4 = _slicedToArray(_useState3, 2),
+    items = _useState4[0],
+    setItems = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+    _useState6 = _slicedToArray(_useState5, 2),
+    resultsMap = _useState6[0],
+    setResultsMap = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState8 = _slicedToArray(_useState7, 2),
+    loading = _useState8[0],
+    setLoading = _useState8[1];
+  var toggle = function toggle() {
+    var next = !expanded;
+    setExpanded(next);
+    if (next && items.length === 0) {
+      setLoading(true);
+      Promise.all([(0,_services_checkerApi__WEBPACK_IMPORTED_MODULE_1__.fetchChecklistItems)(task.equipment_code), (0,_services_checkerApi__WEBPACK_IMPORTED_MODULE_1__.fetchInspectionResults)(task.equipment_code, dateStr)]).then(function (_ref2) {
+        var _ref4, _ref5, _itemsJ$objects;
+        var _ref3 = _slicedToArray(_ref2, 2),
+          itemsJ = _ref3[0],
+          resultsJ = _ref3[1];
+        var rows = (_ref4 = (_ref5 = (_itemsJ$objects = itemsJ === null || itemsJ === void 0 ? void 0 : itemsJ.objects) !== null && _itemsJ$objects !== void 0 ? _itemsJ$objects : itemsJ === null || itemsJ === void 0 ? void 0 : itemsJ.data) !== null && _ref5 !== void 0 ? _ref5 : itemsJ === null || itemsJ === void 0 ? void 0 : itemsJ.results) !== null && _ref4 !== void 0 ? _ref4 : [];
+        setItems(rows);
+        var map = {};
+        ((resultsJ === null || resultsJ === void 0 ? void 0 : resultsJ.objects) || []).forEach(function (r) {
+          map[r.checklist_item_id] = r;
+        });
+        setResultsMap(map);
+      })["finally"](function () {
+        return setLoading(false);
+      });
+    }
+  };
+  var statusColor = task.submitted ? AC : task.done > 0 ? "#d97706" : "#94a3b8";
+  var statusLabel = task.submitted ? "Submitted" : task.done > 0 ? "In progress" : "Not started";
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      border: "1.5px solid #e2e8f0",
+      borderRadius: 10,
+      marginBottom: 8,
+      background: "#fff"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    onClick: toggle,
+    style: {
+      padding: "10px 14px",
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      cursor: "pointer",
+      gap: 10,
+      flexWrap: "wrap"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      alignItems: "center",
+      gap: 10
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12,
+      color: "#94a3b8",
+      transform: expanded ? "rotate(90deg)" : "none",
+      transition: "transform .15s"
+    }
+  }, "\u25B8"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      fontWeight: 700,
+      color: "#0f172a"
+    }
+  }, task.equipment_code), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      color: "#64748b"
+    }
+  }, task.checklist_name, " \xB7 ", task.frequency))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      alignItems: "center",
+      gap: 8
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 11,
+      color: "#64748b"
+    }
+  }, task.done, "/", task.total), /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 8,
+      height: 8,
+      borderRadius: "50%",
+      background: statusColor
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 11,
+      fontWeight: 700,
+      color: statusColor
+    }
+  }, statusLabel))), expanded && /*#__PURE__*/React.createElement("div", {
+    style: {
+      borderTop: "1px solid #f1f5f9",
+      padding: "10px 14px",
+      background: "#f8fafc"
+    }
+  }, loading ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: "#94a3b8",
+      padding: "6px 0"
+    }
+  }, "Loading\u2026") : items.length === 0 ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: "#94a3b8",
+      padding: "6px 0"
+    }
+  }, "No active check points for this equipment.") : items.map(function (it) {
+    var r = resultsMap[it.cdb_object_id];
+    return /*#__PURE__*/React.createElement("div", {
+      key: it.cdb_object_id,
+      style: {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        padding: "6px 0",
+        borderBottom: "1px solid #e2e8f0"
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 12,
+        fontWeight: 600,
+        color: "#0f172a"
+      }
+    }, it.title), r ? /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 11,
+        fontWeight: 800,
+        padding: "2px 8px",
+        borderRadius: 6,
+        background: r.result === "Abnormal" ? "#fee2e2" : "#dcfce7",
+        color: r.result === "Abnormal" ? "#991b1b" : "#166534"
+      }
+    }, r.result) : /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 11,
+        color: "#94a3b8"
+      }
+    }, "Pending"));
+  })));
+}
+function MyCalendarPanel(_ref6) {
+  var onOpenInspection = _ref6.onOpenInspection;
+  var now = new Date();
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(now.getFullYear()),
+    _useState10 = _slicedToArray(_useState9, 2),
+    viewYear = _useState10[0],
+    setViewYear = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(now.getMonth()),
+    _useState12 = _slicedToArray(_useState11, 2),
+    viewMonth = _useState12[0],
+    setViewMonth = _useState12[1]; // 0-indexed
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+    _useState14 = _slicedToArray(_useState13, 2),
+    taskMap = _useState14[0],
+    setTaskMap = _useState14[1];
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    _useState16 = _slicedToArray(_useState15, 2),
+    loading = _useState16[0],
+    setLoading = _useState16[1];
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    _useState18 = _slicedToArray(_useState17, 2),
+    error = _useState18[0],
+    setError = _useState18[1];
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(todayKey()),
+    _useState20 = _slicedToArray(_useState19, 2),
+    selectedDate = _useState20[0],
+    setSelectedDate = _useState20[1];
+  var load = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    setLoading(true);
+    setError("");
+    (0,_services_checkerApi__WEBPACK_IMPORTED_MODULE_1__.fetchCalendarTasks)(viewYear, viewMonth).then(setTaskMap)["catch"](function (e) {
+      return setError((e === null || e === void 0 ? void 0 : e.message) || "Failed to load calendar");
+    })["finally"](function () {
+      return setLoading(false);
+    });
+  }, [viewYear, viewMonth]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    load();
+  }, [load]);
+  var goPrevMonth = function goPrevMonth() {
+    if (viewMonth === 0) {
+      setViewYear(function (y) {
+        return y - 1;
+      });
+      setViewMonth(11);
+    } else setViewMonth(function (m) {
+      return m - 1;
+    });
+  };
+  var goNextMonth = function goNextMonth() {
+    if (viewMonth === 11) {
+      setViewYear(function (y) {
+        return y + 1;
+      });
+      setViewMonth(0);
+    } else setViewMonth(function (m) {
+      return m + 1;
+    });
+  };
+  var goToday = function goToday() {
+    setViewYear(now.getFullYear());
+    setViewMonth(now.getMonth());
+    setSelectedDate(todayKey());
+  };
+
+  // Build the 6x7 grid, Monday-first
+  var grid = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    var firstOfMonth = new Date(viewYear, viewMonth, 1);
+    var firstWeekday = (firstOfMonth.getDay() + 6) % 7; // 0=Mon..6=Sun
+    var daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+    var cells = [];
+    for (var i = 0; i < firstWeekday; i++) cells.push(null);
+    for (var d = 1; d <= daysInMonth; d++) cells.push(d);
+    while (cells.length % 7 !== 0) cells.push(null);
+    return cells;
+  }, [viewYear, viewMonth]);
+  var tk = todayKey();
+  var selectedTasks = taskMap[selectedDate] || [];
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: "16px 20px"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: 16
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 22,
+      fontWeight: 800,
+      color: "#0f172a"
+    }
+  }, "My Calendar"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: "#64748b",
+      marginTop: 2
+    }
+  }, "Scheduled inspection dates by equipment")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 16,
+      flexWrap: "wrap"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: "1 1 380px",
+      minWidth: 320,
+      background: "#fff",
+      border: "1.5px solid #e2e8f0",
+      borderRadius: 12,
+      padding: 16
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      marginBottom: 14
+    }
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: goPrevMonth,
+    style: {
+      border: "none",
+      background: "transparent",
+      cursor: "pointer",
+      fontSize: 16,
+      color: "#64748b"
+    }
+  }, "\u2039"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 14,
+      fontWeight: 800,
+      color: "#0f172a"
+    }
+  }, MONTH_NAMES[viewMonth], " ", viewYear), /*#__PURE__*/React.createElement("button", {
+    onClick: goNextMonth,
+    style: {
+      border: "none",
+      background: "transparent",
+      cursor: "pointer",
+      fontSize: 16,
+      color: "#64748b"
+    }
+  }, "\u203A")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "grid",
+      gridTemplateColumns: "repeat(7,1fr)",
+      gap: 4,
+      marginBottom: 6
+    }
+  }, WEEKDAYS.map(function (w) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: w,
+      style: {
+        textAlign: "center",
+        fontSize: 10,
+        fontWeight: 700,
+        color: "#94a3b8",
+        textTransform: "uppercase"
+      }
+    }, w);
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "grid",
+      gridTemplateColumns: "repeat(7,1fr)",
+      gap: 4
+    }
+  }, grid.map(function (d, i) {
+    if (d === null) return /*#__PURE__*/React.createElement("div", {
+      key: i
+    });
+    var key = dateKey(viewYear, viewMonth, d);
+    var tasks = taskMap[key] || [];
+    var hasTasks = tasks.length > 0;
+    var allSubmitted = hasTasks && tasks.every(function (t) {
+      return t.submitted;
+    });
+    var isToday = key === tk;
+    var isSelected = key === selectedDate;
+    var bg = isSelected ? "#2563eb" : isToday ? "#eff6ff" : "#fff";
+    var fg = isSelected ? "#fff" : "#0f172a";
+    var dotColor = allSubmitted ? AC : hasTasks ? "#d97706" : "transparent";
+    return /*#__PURE__*/React.createElement("button", {
+      key: key,
+      onClick: function onClick() {
+        return setSelectedDate(key);
+      },
+      style: {
+        aspectRatio: "1",
+        borderRadius: 8,
+        border: isToday && !isSelected ? "1.5px solid #93c5fd" : "1.5px solid transparent",
+        background: bg,
+        color: fg,
+        cursor: "pointer",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 2,
+        fontFamily: F,
+        position: "relative"
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 12,
+        fontWeight: isToday || isSelected ? 800 : 600
+      }
+    }, d), hasTasks && /*#__PURE__*/React.createElement("span", {
+      style: {
+        display: "flex",
+        alignItems: "center",
+        gap: 2
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        width: 5,
+        height: 5,
+        borderRadius: "50%",
+        background: isSelected ? "#fff" : dotColor
+      }
+    }), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 8,
+        fontWeight: 700,
+        color: isSelected ? "#fff" : "#64748b"
+      }
+    }, tasks.length)));
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 14,
+      marginTop: 14,
+      fontSize: 11,
+      color: "#64748b",
+      flexWrap: "wrap"
+    }
+  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: "inline-block",
+      width: 7,
+      height: 7,
+      borderRadius: "50%",
+      background: AC,
+      marginRight: 4
+    }
+  }), "All submitted"), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: "inline-block",
+      width: 7,
+      height: 7,
+      borderRadius: "50%",
+      background: "#d97706",
+      marginRight: 4
+    }
+  }), "Pending tasks"), /*#__PURE__*/React.createElement("button", {
+    onClick: goToday,
+    style: {
+      marginLeft: "auto",
+      fontSize: 11,
+      fontWeight: 700,
+      color: "#2563eb",
+      background: "transparent",
+      border: "none",
+      cursor: "pointer"
+    }
+  }, "Today"))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: "1 1 320px",
+      minWidth: 280
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      fontWeight: 800,
+      color: "#0f172a",
+      marginBottom: 10
+    }
+  }, "Tasks for ", selectedDate), error && /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#fef2f2",
+      border: "1px solid #fecaca",
+      borderRadius: 8,
+      padding: "8px 14px",
+      fontSize: 12,
+      color: "#dc2626",
+      fontWeight: 600,
+      marginBottom: 12
+    }
+  }, "\u26A0 ", error), loading ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: "#94a3b8",
+      padding: "20px 0",
+      textAlign: "center"
+    }
+  }, "Loading\u2026") : selectedTasks.length === 0 ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: "#94a3b8",
+      padding: "20px 0",
+      textAlign: "center"
+    }
+  }, "No checklist tasks due on this date.") : /*#__PURE__*/React.createElement(React.Fragment, null, selectedTasks.map(function (t) {
+    return /*#__PURE__*/React.createElement(DayTaskRow, {
+      key: t.equipment_code,
+      task: t,
+      dateStr: selectedDate
+    });
+  }), selectedDate === tk && onOpenInspection && /*#__PURE__*/React.createElement("button", {
+    onClick: function onClick() {
+      var _selectedTasks$;
+      return onOpenInspection((_selectedTasks$ = selectedTasks[0]) === null || _selectedTasks$ === void 0 ? void 0 : _selectedTasks$.equipment_code);
+    },
+    style: {
+      marginTop: 6,
+      width: "100%",
+      padding: "10px 0",
+      borderRadius: 8,
+      border: "none",
+      background: AC,
+      color: "#fff",
+      fontWeight: 800,
+      fontSize: 12,
+      cursor: "pointer"
+    }
+  }, "Go to Today's Inspection \u2192")))));
+}
+
+/***/ }),
+
 /***/ "./src/components/PlannerPage.jsx":
 /*!****************************************!*\
   !*** ./src/components/PlannerPage.jsx ***!
@@ -14378,13 +15987,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _services_plannerApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/plannerApi */ "./src/services/plannerApi.js");
+/* harmony import */ var _services_equipmentApi__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/equipmentApi */ "./src/services/equipmentApi.js");
+/* harmony import */ var _services_plantApi__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/plantApi */ "./src/services/plantApi.js");
+/* harmony import */ var _services_lineApi__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/lineApi */ "./src/services/lineApi.js");
+/* harmony import */ var _services_machineApi__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/machineApi */ "./src/services/machineApi.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+
+
+
+
+
+var rowsOf = function rowsOf(j) {
+  var _ref, _ref2, _j$objects;
+  return (_ref = (_ref2 = (_j$objects = j === null || j === void 0 ? void 0 : j.objects) !== null && _j$objects !== void 0 ? _j$objects : j === null || j === void 0 ? void 0 : j.data) !== null && _ref2 !== void 0 ? _ref2 : j === null || j === void 0 ? void 0 : j.results) !== null && _ref !== void 0 ? _ref : [];
+};
 
 /* ---------------------------------------------------------------
    Module-scope helpers (verbatim logic from the original page's
@@ -14533,91 +16169,234 @@ function flowTrack(item) {
   });
   return html + '</div>';
 }
+
+// ── Shared data loader for both Consolidated List and Incoming Abnormalities ─
+// Both tabs show the same underlying source (manual + checklist abnormalities
+// merged with any existing work order); Incoming is just scoped to pending
+// ones with a different card layout. Loading through one function keeps
+// consolItems (used by openPlDetail/openPlanModal from either tab) in sync.
+function loadPlannerItems() {
+  return _loadPlannerItems.apply(this, arguments);
+}
+function _loadPlannerItems() {
+  _loadPlannerItems = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    var rawItems, items, equipMap;
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          rawItems = [];
+          _context.prev = 1;
+          _context.next = 4;
+          return (0,_services_plannerApi__WEBPACK_IMPORTED_MODULE_1__.fetchConsolidatedList)();
+        case 4:
+          rawItems = _context.sent;
+          _context.next = 10;
+          break;
+        case 7:
+          _context.prev = 7;
+          _context.t0 = _context["catch"](1);
+          showToast((_context.t0 === null || _context.t0 === void 0 ? void 0 : _context.t0.message) || 'Failed to load abnormalities', 'error');
+        case 10:
+          items = rawItems.map(function (it) {
+            var _it$wo, _it$wo2, _it$wo3;
+            return _objectSpread(_objectSpread({}, it), {}, {
+              status: it.wo ? it.wo.status : 'pending_planner',
+              woRef: (_it$wo = it.wo) === null || _it$wo === void 0 ? void 0 : _it$wo.wo_ref,
+              assignedTo: (_it$wo2 = it.wo) === null || _it$wo2 === void 0 ? void 0 : _it$wo2.assigned_to,
+              scheduledDate: (_it$wo3 = it.wo) === null || _it$wo3 === void 0 ? void 0 : _it$wo3.scheduled_date
+            });
+          }).sort(function (a, b) {
+            return (PRIORITY_ORDER[a.priority] || 3) - (PRIORITY_ORDER[b.priority] || 3);
+          }); // Common Plant/Line/Machine filter — same scoping logic as CheckerPage.
+          if (plFilterPlant !== 'all' || plFilterLine !== 'all' || plFilterMachine !== 'all') {
+            equipMap = {};
+            plEquipmentList.forEach(function (eq) {
+              equipMap[eq.equipment_code || eq.code] = eq;
+            });
+            items = items.filter(function (it) {
+              var eq = equipMap[it.machine];
+              if (!eq) return true; // unresolved equipment — don't hide unexpectedly
+              if (plFilterPlant !== 'all' && String(eq.plant_code) !== String(plFilterPlant)) return false;
+              if (plFilterLine !== 'all' && String(eq.line || '') !== String(plFilterLine)) return false;
+              if (plFilterMachine !== 'all' && String(eq.machine || '') !== String(plFilterMachine)) return false;
+              return true;
+            });
+          }
+          consolItems = items;
+          return _context.abrupt("return", items);
+        case 14:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee, null, [[1, 7]]);
+  }));
+  return _loadPlannerItems.apply(this, arguments);
+}
 function renderIncomingCard(item) {
   var isNew = item.status === 'pending_planner';
   return "<div class=\"wf-card ".concat(item.priority, " ").concat(isNew ? 'new-incoming' : '', "\" id=\"plcard-").concat(item.id, "\">\n    <div style=\"display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:8px\">\n      <div>\n        <div style=\"font-size:13px;font-weight:700;color:var(--blue-900)\">\u26A0\uFE0F ").concat(item.checkPoint, "</div>\n        <div style=\"font-size:11px;color:var(--slate-500);margin-top:2px\">").concat(item.loggedDate, " ").concat(item.loggedTime, " \xB7 Logged by: ").concat(item.loggedBy, " \xB7 Machine: <strong>").concat(item.machine, "</strong></div>\n      </div>\n      <div style=\"display:flex;gap:6px;flex-wrap:wrap\">").concat(priBadge(item.priority)).concat(statusPill(item.status), "</div>\n    </div>\n    <div style=\"display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;font-size:12px;margin-bottom:8px\">\n      <div style=\"background:var(--slate-50);border-radius:6px;padding:8px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:2px\">Observed</div>").concat(item.observed || '—', "</div>\n      <div style=\"background:var(--slate-50);border-radius:6px;padding:8px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:2px\">Probable Cause</div>").concat(item.cause || '—', "</div>\n      <div style=\"background:var(--slate-50);border-radius:6px;padding:8px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:2px\">Remarks</div>").concat(item.remarks || '—', "</div>\n    </div>\n    ").concat(flowTrack(item), "\n    <div style=\"display:flex;gap:8px;margin-top:10px;flex-wrap:wrap\">\n      ").concat(item.status === 'pending_planner' ? "<button class=\"btn btn-primary btn-sm\" onclick=\"openPlanModal('".concat(item.id, "')\">\uD83D\uDCCB Plan WO & Assign</button>") : '', "\n      <button class=\"btn btn-secondary btn-sm\" onclick=\"openPlDetail('").concat(item.id, "')\">\uD83D\uDCC4 View Full Detail</button>\n      ").concat(item.woRef ? "<span style=\"font-size:11px;color:var(--slate-600);font-weight:600;padding:5px 8px;background:var(--blue-50);border-radius:6px\">WO: <strong style=\"font-family:var(--font-mono)\">".concat(item.woRef, "</strong></span>") : '', "\n    </div>\n  </div>");
 }
 function renderIncoming() {
-  var items = WF.getAll().sort(function (a, b) {
-    return (PRIORITY_ORDER[a.priority] || 3) - (PRIORITY_ORDER[b.priority] || 3);
-  });
-  var pending = items.filter(function (i) {
-    return i.status === 'pending_planner';
-  });
-  var raised = items.filter(function (i) {
-    return i.status !== 'pending_planner' && i.status !== 'closed';
-  });
-  var list = document.getElementById('pl-incoming-list');
-  var empty = document.getElementById('pl-incoming-empty');
-  document.getElementById('pl-stat-crit').textContent = items.filter(function (i) {
-    return i.priority === 'critical' && i.status === 'pending_planner';
-  }).length;
-  document.getElementById('pl-stat-high').textContent = items.filter(function (i) {
-    return i.priority === 'high' && i.status === 'pending_planner';
-  }).length;
-  document.getElementById('pl-stat-pending').textContent = pending.length;
-  document.getElementById('pl-stat-raised').textContent = items.filter(function (i) {
-    return i.woRef;
-  }).length;
-  var badge = document.getElementById('pl-incoming-badge');
-  if (badge) badge.textContent = pending.length;
-  if (!items.length) {
-    if (empty) empty.style.display = 'flex';
-    list.innerHTML = '';
-    return;
-  }
-  if (empty) empty.style.display = 'none';
-  var html = '';
-  if (pending.length) {
-    html += "<div style=\"font-size:11px;font-weight:700;text-transform:uppercase;color:var(--slate-400);letter-spacing:.5px;margin-bottom:8px\">\u26A0\uFE0F Awaiting Planning (".concat(pending.length, ")</div>");
-    html += pending.map(function (i) {
-      return renderIncomingCard(i);
-    }).join('');
-  }
-  if (raised.length) {
-    html += "<div style=\"font-size:11px;font-weight:700;text-transform:uppercase;color:var(--slate-400);letter-spacing:.5px;margin:16px 0 8px\">\uD83D\uDCCB In Progress (".concat(raised.length, ")</div>");
-    html += raised.map(function (i) {
-      return renderIncomingCard(i);
-    }).join('');
-  }
-  list.innerHTML = html;
-  document.getElementById('pl-incoming-sub').textContent = "".concat(items.length, " total \xB7 ").concat(pending.length, " awaiting WO \xB7 Last sync: ").concat(new Date().toLocaleTimeString('en-IN', {
-    hour: '2-digit',
-    minute: '2-digit'
+  return _renderIncoming.apply(this, arguments);
+}
+function _renderIncoming() {
+  _renderIncoming = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+    var items, pending, raised, list, empty, badge, html;
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.next = 2;
+          return loadPlannerItems();
+        case 2:
+          items = _context2.sent;
+          pending = items.filter(function (i) {
+            return i.status === 'pending_planner';
+          });
+          raised = items.filter(function (i) {
+            return i.status !== 'pending_planner' && i.status !== 'closed';
+          });
+          list = document.getElementById('pl-incoming-list');
+          empty = document.getElementById('pl-incoming-empty');
+          document.getElementById('pl-stat-crit').textContent = items.filter(function (i) {
+            return i.priority === 'critical' && i.status === 'pending_planner';
+          }).length;
+          document.getElementById('pl-stat-high').textContent = items.filter(function (i) {
+            return i.priority === 'high' && i.status === 'pending_planner';
+          }).length;
+          document.getElementById('pl-stat-pending').textContent = pending.length;
+          document.getElementById('pl-stat-raised').textContent = items.filter(function (i) {
+            return i.woRef;
+          }).length;
+          badge = document.getElementById('pl-incoming-badge');
+          if (badge) badge.textContent = pending.length;
+          if (items.length) {
+            _context2.next = 17;
+            break;
+          }
+          if (empty) empty.style.display = 'flex';
+          list.innerHTML = '';
+          return _context2.abrupt("return");
+        case 17:
+          if (empty) empty.style.display = 'none';
+          html = '';
+          if (pending.length) {
+            html += "<div style=\"font-size:11px;font-weight:700;text-transform:uppercase;color:var(--slate-400);letter-spacing:.5px;margin-bottom:8px\">\u26A0\uFE0F Awaiting Planning (".concat(pending.length, ")</div>");
+            html += pending.map(function (i) {
+              return renderIncomingCard(i);
+            }).join('');
+          }
+          if (raised.length) {
+            html += "<div style=\"font-size:11px;font-weight:700;text-transform:uppercase;color:var(--slate-400);letter-spacing:.5px;margin:16px 0 8px\">\uD83D\uDCCB In Progress (".concat(raised.length, ")</div>");
+            html += raised.map(function (i) {
+              return renderIncomingCard(i);
+            }).join('');
+          }
+          list.innerHTML = html;
+          document.getElementById('pl-incoming-sub').textContent = "".concat(items.length, " total \xB7 ").concat(pending.length, " awaiting WO \xB7 Last sync: ").concat(new Date().toLocaleTimeString('en-IN', {
+            hour: '2-digit',
+            minute: '2-digit'
+          }));
+        case 23:
+        case "end":
+          return _context2.stop();
+      }
+    }, _callee2);
   }));
+  return _renderIncoming.apply(this, arguments);
 }
 function renderWOTab() {
-  var _document$getElementB, _document$getElementB2, _document$getElementB3;
-  var mach = ((_document$getElementB = document.getElementById('wo-mach')) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB.value) || 'all';
-  var prio = ((_document$getElementB2 = document.getElementById('wo-prio')) === null || _document$getElementB2 === void 0 ? void 0 : _document$getElementB2.value) || 'all';
-  var stat = ((_document$getElementB3 = document.getElementById('wo-stat')) === null || _document$getElementB3 === void 0 ? void 0 : _document$getElementB3.value) || 'all';
-  var items = WF.getAll().filter(function (i) {
-    return i.woRef;
-  });
-  if (mach !== 'all') items = items.filter(function (i) {
-    return i.machine === mach;
-  });
-  if (prio !== 'all') items = items.filter(function (i) {
-    return i.priority === prio;
-  });
-  if (stat !== 'all') items = items.filter(function (i) {
-    return i.status === stat;
-  });
-  items.sort(function (a, b) {
-    return (PRIORITY_ORDER[a.priority] || 3) - (PRIORITY_ORDER[b.priority] || 3);
-  });
-  var list = document.getElementById('pl-wo-list');
-  var badge = document.getElementById('pl-wo-badge');
-  if (badge) badge.textContent = WF.getAll().filter(function (i) {
-    return i.woRef;
-  }).length;
-  if (!items.length) {
-    list.innerHTML = '<div class="alert alert-info">No WOs match the current filters.</div>';
-    return;
-  }
-  list.innerHTML = items.map(function (item) {
-    return "\n    <div class=\"wf-card ".concat(item.priority, "\">\n      <div style=\"display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:8px\">\n        <div>\n          <div style=\"font-size:13px;font-weight:700;color:var(--blue-900)\">").concat(item.woRef, " \u2014 ").concat(item.checkPoint, "</div>\n          <div style=\"font-size:11px;color:var(--slate-500);margin-top:2px\">").concat(item.machine, " \xB7 Assigned: <strong>").concat(item.assignedTo || '—', "</strong> \xB7 Scheduled: <strong>").concat(item.scheduledDate || '—', "</strong></div>\n        </div>\n        <div style=\"display:flex;gap:6px;flex-wrap:wrap\">").concat(priBadge(item.priority)).concat(statusPill(item.status), "</div>\n      </div>\n      ").concat(flowTrack(item), "\n      <div style=\"display:flex;gap:8px;margin-top:8px\">\n        <button class=\"btn btn-ghost btn-sm\" onclick=\"openPlDetail('").concat(item.id, "')\">\uD83D\uDCC4 Detail</button>\n        ").concat(item.status === 'rework' ? "<button class=\"btn btn-primary btn-sm\" onclick=\"openPlanModal('".concat(item.id, "')\">\uD83D\uDD01 Re-Plan</button>") : '', "\n      </div>\n    </div>\n  ");
-  }).join('');
+  return _renderWOTab.apply(this, arguments);
+}
+function _renderWOTab() {
+  _renderWOTab = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+    var _document$getElementB, _document$getElementB2;
+    var prio, stat, rawWOs, items, equipMap, list, badge;
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
+        case 0:
+          prio = ((_document$getElementB = document.getElementById('wo-prio')) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB.value) || 'all';
+          stat = ((_document$getElementB2 = document.getElementById('wo-stat')) === null || _document$getElementB2 === void 0 ? void 0 : _document$getElementB2.value) || 'all';
+          rawWOs = [];
+          _context3.prev = 3;
+          _context3.next = 6;
+          return (0,_services_plannerApi__WEBPACK_IMPORTED_MODULE_1__.fetchWorkOrders)();
+        case 6:
+          rawWOs = _context3.sent;
+          _context3.next = 12;
+          break;
+        case 9:
+          _context3.prev = 9;
+          _context3.t0 = _context3["catch"](3);
+          showToast((_context3.t0 === null || _context3.t0 === void 0 ? void 0 : _context3.t0.message) || 'Failed to load work orders', 'error');
+        case 12:
+          items = rawWOs.map(function (wo) {
+            return {
+              id: "wo:".concat(wo.cdb_object_id),
+              cdbId: wo.cdb_object_id,
+              sourceType: wo.source_type,
+              sourceId: wo.source_id,
+              woRef: wo.wo_ref,
+              checkPoint: wo.check_point,
+              machine: wo.equipment_code,
+              observed: wo.observed_value,
+              cause: wo.probable_cause,
+              remarks: wo.remarks,
+              loggedBy: wo.logged_by,
+              assignedTo: wo.assigned_to,
+              allExecutors: wo.all_executors,
+              scheduledDate: wo.scheduled_date,
+              sparesNeeded: wo.spares_needed,
+              plannerNotes: wo.planner_notes,
+              priority: (wo.priority || 'medium').toLowerCase(),
+              status: wo.status || 'pending_executor',
+              reworkCount: Number(wo.rework_count || 0)
+            };
+          }); // Common Plant/Line/Machine filter (from the top-nav dropdowns, wired to
+          // the real master APIs).
+          if (plFilterPlant !== 'all' || plFilterLine !== 'all' || plFilterMachine !== 'all') {
+            equipMap = {};
+            plEquipmentList.forEach(function (eq) {
+              equipMap[eq.equipment_code || eq.code] = eq;
+            });
+            items = items.filter(function (it) {
+              var eq = equipMap[it.machine];
+              if (!eq) return true;
+              if (plFilterPlant !== 'all' && String(eq.plant_code) !== String(plFilterPlant)) return false;
+              if (plFilterLine !== 'all' && String(eq.line || '') !== String(plFilterLine)) return false;
+              if (plFilterMachine !== 'all' && String(eq.machine || '') !== String(plFilterMachine)) return false;
+              return true;
+            });
+          }
+          if (prio !== 'all') items = items.filter(function (i) {
+            return i.priority === prio;
+          });
+          if (stat !== 'all') items = items.filter(function (i) {
+            return i.status === stat;
+          });
+          items.sort(function (a, b) {
+            return (PRIORITY_ORDER[a.priority] || 3) - (PRIORITY_ORDER[b.priority] || 3);
+          });
+          woItems = items;
+          list = document.getElementById('pl-wo-list');
+          badge = document.getElementById('pl-wo-badge');
+          if (badge) badge.textContent = rawWOs.length;
+          if (items.length) {
+            _context3.next = 24;
+            break;
+          }
+          list.innerHTML = '<div class="alert alert-info">No WOs match the current filters.</div>';
+          return _context3.abrupt("return");
+        case 24:
+          list.innerHTML = items.map(function (item) {
+            return "\n    <div class=\"wf-card ".concat(item.priority, "\">\n      <div style=\"display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:8px\">\n        <div>\n          <div style=\"font-size:13px;font-weight:700;color:var(--blue-900)\">").concat(item.woRef, " \u2014 ").concat(item.checkPoint, "</div>\n          <div style=\"font-size:11px;color:var(--slate-500);margin-top:2px\">").concat(item.machine, " \xB7 Assigned: <strong>").concat(item.assignedTo || '—', "</strong> \xB7 Scheduled: <strong>").concat(item.scheduledDate || '—', "</strong></div>\n        </div>\n        <div style=\"display:flex;gap:6px;flex-wrap:wrap\">").concat(priBadge(item.priority)).concat(statusPill(item.status), "</div>\n      </div>\n      ").concat(flowTrack(item), "\n      <div style=\"display:flex;gap:8px;margin-top:8px\">\n        <button class=\"btn btn-ghost btn-sm\" onclick=\"openPlDetail('").concat(item.id, "')\">\uD83D\uDCC4 Detail</button>\n        ").concat(item.status === 'rework' ? "<button class=\"btn btn-primary btn-sm\" onclick=\"openPlanModal('".concat(item.id, "')\">\uD83D\uDD01 Re-Plan</button>") : '', "\n      </div>\n    </div>\n  ");
+          }).join('');
+        case 25:
+        case "end":
+          return _context3.stop();
+      }
+    }, _callee3, null, [[3, 9]]);
+  }));
+  return _renderWOTab.apply(this, arguments);
 }
 function renderReworkTab() {
   var items = WF.getAll().filter(function (i) {
@@ -14641,7 +16420,7 @@ function filterWOTab() {
   renderWOTab();
 }
 function clearWOFilter() {
-  ['wo-mach', 'wo-prio', 'wo-stat'].forEach(function (id) {
+  ['wo-prio', 'wo-stat'].forEach(function (id) {
     var el = document.getElementById(id);
     if (el) el.value = 'all';
   });
@@ -14649,7 +16428,10 @@ function clearWOFilter() {
 }
 function openPlanModal(id) {
   activePlanId = id;
-  var item = WF.getAll().find(function (i) {
+  var item = consolItems.find(function (i) {
+    return i.id === id;
+  });
+  if (!item) item = woItems.find(function (i) {
     return i.id === id;
   });
   if (!item) return;
@@ -14668,36 +16450,96 @@ function openPlanModal(id) {
   document.getElementById('planModal').classList.add('open');
 }
 function submitPlan() {
-  var executor = document.getElementById('plan-executor').value;
-  var date = document.getElementById('plan-date').value;
-  var hours = document.getElementById('plan-hours').value;
-  var spares = document.getElementById('plan-spares').value;
-  var notes = document.getElementById('plan-notes').value;
-  var errEl = document.getElementById('plan-modal-error');
-  if (!date) {
-    errEl.textContent = 'Please select a scheduled date.';
-    errEl.style.display = 'flex';
-    return;
-  }
-  errEl.style.display = 'none';
-  var item = WF.planWO(activePlanId, {
-    executor: executor,
-    date: date,
-    hours: hours,
-    spares: spares,
-    notes: notes
-  });
-  document.getElementById('planModal').classList.remove('open');
-  refreshAll();
-  showToast("\uD83D\uDCCB WO ".concat(item.woRef, " raised & assigned to ").concat(executor, "!"), 'success');
+  return _submitPlan.apply(this, arguments);
+}
+function _submitPlan() {
+  _submitPlan = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+    var executor, date, hours, spares, notes, errEl, item, sop;
+    return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+      while (1) switch (_context4.prev = _context4.next) {
+        case 0:
+          executor = document.getElementById('plan-executor').value;
+          date = document.getElementById('plan-date').value;
+          hours = document.getElementById('plan-hours').value;
+          spares = document.getElementById('plan-spares').value;
+          notes = document.getElementById('plan-notes').value;
+          errEl = document.getElementById('plan-modal-error');
+          if (date) {
+            _context4.next = 10;
+            break;
+          }
+          errEl.textContent = 'Please select a scheduled date.';
+          errEl.style.display = 'flex';
+          return _context4.abrupt("return");
+        case 10:
+          errEl.style.display = 'none';
+          item = consolItems.find(function (i) {
+            return i.id === activePlanId;
+          });
+          if (!item) item = woItems.find(function (i) {
+            return i.id === activePlanId;
+          });
+          if (item) {
+            _context4.next = 17;
+            break;
+          }
+          errEl.textContent = 'Item not found — try refreshing the page.';
+          errEl.style.display = 'flex';
+          return _context4.abrupt("return");
+        case 17:
+          sop = getSOP(item);
+          _context4.prev = 18;
+          _context4.next = 21;
+          return (0,_services_plannerApi__WEBPACK_IMPORTED_MODULE_1__.generateWorkOrder)(item, {
+            executors: [{
+              name: executor,
+              role: 'Lead'
+            }],
+            scheduledDate: date,
+            scheduledTime: '09:00',
+            hours: hours || sop.hours,
+            spares: spares || sop.material,
+            notes: notes || "SOP: ".concat(sop.sop, " \xB7 ").concat(sop.method),
+            sopRef: sop.sop
+          });
+        case 21:
+          document.getElementById('planModal').classList.remove('open');
+          showToast("\uD83D\uDCCB Work Order raised & assigned to ".concat(executor, "!"), 'success');
+          _context4.next = 25;
+          return renderIncoming();
+        case 25:
+          _context4.next = 27;
+          return renderWOTab();
+        case 27:
+          updateBadges();
+          _context4.next = 34;
+          break;
+        case 30:
+          _context4.prev = 30;
+          _context4.t0 = _context4["catch"](18);
+          errEl.textContent = (_context4.t0 === null || _context4.t0 === void 0 ? void 0 : _context4.t0.message) || 'Failed to raise work order';
+          errEl.style.display = 'flex';
+        case 34:
+        case "end":
+          return _context4.stop();
+      }
+    }, _callee4, null, [[18, 30]]);
+  }));
+  return _submitPlan.apply(this, arguments);
 }
 function openPlDetail(id) {
-  var item = WF.getAll().find(function (i) {
+  var item = consolItems.find(function (i) {
+    return i.id === id;
+  });
+  if (!item) item = woItems.find(function (i) {
+    return i.id === id;
+  });
+  if (!item) item = WF.getAll().find(function (i) {
     return i.id === id;
   });
   if (!item) return;
   document.getElementById('pl-detail-title').textContent = '📄 ' + item.checkPoint;
-  document.getElementById('pl-detail-body').innerHTML = "\n    <div style=\"margin-bottom:14px\">".concat(flowTrack(item), "</div>\n    <div style=\"display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:12px;margin-bottom:14px\">\n      <div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Machine</div>").concat(item.machine, "</div>\n      <div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Priority</div>").concat(item.priority, "</div>\n      <div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Observed</div>").concat(item.observed || '—', "</div>\n      <div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Cause</div>").concat(item.cause || '—', "</div>\n      ").concat(item.woRef ? "<div style=\"background:var(--blue-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">WO Reference</div><strong style=\"font-family:var(--font-mono)\">".concat(item.woRef, "</strong></div>") : '', "\n      ").concat(item.assignedTo ? "<div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Assigned To</div>".concat(item.assignedTo, "</div>") : '', "\n      ").concat(item.scheduledDate ? "<div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Scheduled Date</div>".concat(item.scheduledDate, "</div>") : '', "\n      ").concat(item.sparesNeeded ? "<div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Spares Needed</div>".concat(item.sparesNeeded, "</div>") : '', "\n    </div>\n    <div style=\"font-size:11px;font-weight:700;color:var(--slate-500);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px\">Workflow Timeline</div>\n    <div>").concat(item.history.map(function (h) {
+  document.getElementById('pl-detail-body').innerHTML = "\n    <div style=\"margin-bottom:14px\">".concat(flowTrack(item), "</div>\n    <div style=\"display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:12px;margin-bottom:14px\">\n      <div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Machine</div>").concat(item.machine, "</div>\n      <div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Priority</div>").concat(item.priority, "</div>\n      <div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Observed</div>").concat(item.observed || '—', "</div>\n      <div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Cause</div>").concat(item.cause || '—', "</div>\n      ").concat(item.woRef ? "<div style=\"background:var(--blue-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">WO Reference</div><strong style=\"font-family:var(--font-mono)\">".concat(item.woRef, "</strong></div>") : '', "\n      ").concat(item.assignedTo ? "<div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Assigned To</div>".concat(item.assignedTo, "</div>") : '', "\n      ").concat(item.scheduledDate ? "<div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Scheduled Date</div>".concat(item.scheduledDate, "</div>") : '', "\n      ").concat(item.sparesNeeded ? "<div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Spares Needed</div>".concat(item.sparesNeeded, "</div>") : '', "\n    </div>\n    <div style=\"font-size:11px;font-weight:700;color:var(--slate-500);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px\">Workflow Timeline</div>\n    <div>").concat((item.history || []).map(function (h) {
     return "<div style=\"display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--slate-100)\">\n      <div style=\"width:24px;height:24px;border-radius:50%;background:var(--blue-50);border:1.5px solid var(--blue-200);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0\">".concat(h.icon || '📌', "</div>\n      <div style=\"flex:1\"><div style=\"font-size:12px;font-weight:700;color:var(--blue-900)\">").concat(h.stage, "</div><div style=\"font-size:11px;color:var(--slate-400)\">").concat(h.by, " \xB7 ").concat(new Date(h.at).toLocaleString('en-IN', {
       day: '2-digit',
       month: 'short',
@@ -14929,9 +16771,9 @@ function renderExCal() {
       Amol: 'Mech L1',
       Nilesh: 'Mech L1'
     };
-    var role = ((_Object$entries$find = Object.entries(roles).find(function (_ref) {
-      var _ref2 = _slicedToArray(_ref, 1),
-        k = _ref2[0];
+    var role = ((_Object$entries$find = Object.entries(roles).find(function (_ref3) {
+      var _ref4 = _slicedToArray(_ref3, 1),
+        k = _ref4[0];
       return ex.startsWith(k);
     })) === null || _Object$entries$find === void 0 ? void 0 : _Object$entries$find[1]) || 'Mech';
     var woHtml = wos.length ? wos.map(function (w) {
@@ -15047,6 +16889,27 @@ function getSOP(item) {
   return SOP_MAP["default"];
 }
 var consolExecRows = {};
+
+// Real data now lives here — populated by renderConsolTab() from plannerApi
+// instead of WF/localStorage. Kept as a plain module-level array (not React
+// state) so it stays consistent with the rest of this file's imperative
+// DOM-driven rendering style.
+var consolItems = [];
+
+// Cache for the Work Orders tab (real smartpm_planner_work_order rows),
+// separate from consolItems since a WO's id format differs from an
+// abnormality's id — openPlDetail/openPlanModal check both caches.
+var woItems = [];
+
+// Common Plant/Line/Machine filter (same pattern as CheckerPage) — mirrored
+// here as module-level vars so the imperative renderConsolTab() function can
+// read the latest filter selection without being a React closure. The
+// component below keeps the "source of truth" in useState and syncs these
+// on every change.
+var plEquipmentList = [];
+var plFilterPlant = 'all';
+var plFilterLine = 'all';
+var plFilterMachine = 'all';
 function getConsolExecRows(id) {
   if (!consolExecRows[id]) {
     consolExecRows[id] = [{
@@ -15078,46 +16941,69 @@ function renderConsolCard(item) {
       return "<option ".concat(r.role === rl ? 'selected' : '', ">").concat(rl, "</option>");
     }).join(''), "\n      </select>\n      ").concat(idx > 0 ? "<button style=\"background:none;border:none;color:var(--red);cursor:pointer;font-size:18px;line-height:1;padding:0 4px\" onclick=\"removeExecRow('".concat(item.id, "',").concat(idx, ")\">\xD7</button>") : '<span style="width:24px"></span>', "\n    </div>\n  ");
   }).join('');
-  var isAlreadyWO = item.status !== 'pending_planner';
-  return "<div class=\"consol-card\" style=\"position:relative\" id=\"consol-card-".concat(item.id, "\">\n    <div style=\"position:absolute;left:0;top:0;bottom:0;width:5px;background:").concat(priColor(item.priority), ";border-radius:var(--radius-lg) 0 0 var(--radius-lg)\"></div>\n    <div class=\"consol-card-header\" style=\"padding-left:22px\">\n      <div style=\"display:flex;align-items:center;gap:10px;flex-wrap:wrap\">\n        <span style=\"width:10px;height:10px;border-radius:50%;background:").concat(priColor(item.priority), ";flex-shrink:0\"></span>\n        <span class=\"badge ").concat(item.priority === 'critical' ? 'badge-critical' : item.priority === 'high' ? 'badge-high' : 'badge-medium', "\">").concat(item.priority.charAt(0).toUpperCase() + item.priority.slice(1), "</span>\n        <span style=\"font-size:15px;font-weight:700;color:var(--blue-900)\">").concat(item.machine, " \u2014 ").concat(item.checkPoint, "</span>\n      </div>\n      <div style=\"display:flex;align-items:center;gap:12px;flex-wrap:wrap\">\n        ").concat(isAlreadyWO ? "<span class=\"wf-pill pending-executor\">WO: ".concat(item.woRef, "</span>") : '', "\n        <span style=\"font-size:11px;color:var(--slate-500)\">\u2022 Manual + IIoT</span>\n        <a class=\"sop-link\" href=\"#\" onclick=\"alert('Opening ").concat(sop.sop, "')\">\uD83D\uDCD6 ").concat(sop.sop, "</a>\n      </div>\n    </div>\n\n    <!-- 4M Grid -->\n    <div class=\"consol-4m\">\n      <div class=\"consol-4m-cell\">\n        <div class=\"consol-4m-label\">\uD83D\uDC64 MAN</div>\n        <div class=\"consol-4m-value\">").concat(sop.man, "</div>\n      </div>\n      <div class=\"consol-4m-cell\">\n        <div class=\"consol-4m-label\">\u2699\uFE0F MACHINE</div>\n        <div class=\"consol-4m-value\">").concat(item.machine, " \u2014 ").concat(sop.machine_note, "</div>\n      </div>\n      <div class=\"consol-4m-cell\">\n        <div class=\"consol-4m-label\">\uD83D\uDD29 MATERIAL</div>\n        <div class=\"consol-4m-value\">").concat(sop.material, " \xB7 ").concat(matStatusHtml(sop.matStatus), "</div>\n      </div>\n      <div class=\"consol-4m-cell\">\n        <div class=\"consol-4m-label\">\uD83D\uDCD6 METHOD</div>\n        <div class=\"consol-4m-value\">").concat(sop.method, "</div>\n      </div>\n    </div>\n\n    <!-- Assign Executors -->\n    ").concat(!isAlreadyWO ? "\n    <div style=\"padding:14px 18px 6px 22px\">\n      <div style=\"font-size:13px;font-weight:700;color:var(--blue-900);margin-bottom:10px\">Assign Executors</div>\n      <div id=\"exec-rows-".concat(item.id, "\">").concat(execRowsHtml, "</div>\n      <button class=\"btn btn-ghost btn-sm\" style=\"margin-top:6px;color:var(--blue-500)\" onclick=\"addExecRow('").concat(item.id, "')\">+ Add Executor</button>\n    </div>\n    <div style=\"padding:12px 18px 16px 22px;display:flex;align-items:center;gap:10px;flex-wrap:wrap\">\n      <button class=\"btn btn-primary\" onclick=\"generateWO('").concat(item.id, "')\">\u26A1 Generate WO &amp; Assign</button>\n      <button class=\"btn btn-secondary btn-sm\" onclick=\"openPlDetail('").concat(item.id, "')\">\uD83D\uDCC4 View Detail</button>\n      <span style=\"font-size:11px;color:var(--slate-400)\">Est. ").concat(sop.hours, "</span>\n    </div>\n    ") : "\n    <div style=\"padding:12px 18px 14px 22px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-top:1px solid var(--slate-100)\">\n      <span class=\"badge badge-progress\">WO Generated \u2014 ".concat(item.assignedTo || '—', "</span>\n      <span style=\"font-size:11px;color:var(--slate-500)\">Scheduled: ").concat(item.scheduledDate || '—', "</span>\n      <button class=\"btn btn-ghost btn-sm\" onclick=\"openPlDetail('").concat(item.id, "')\">\uD83D\uDCC4 Detail</button>\n    </div>\n    "), "\n  </div>");
+  var isAlreadyWO = Boolean(item.wo);
+  return "<div class=\"consol-card\" style=\"position:relative\" id=\"consol-card-".concat(item.id, "\">\n    <div style=\"position:absolute;left:0;top:0;bottom:0;width:5px;background:").concat(priColor(item.priority), ";border-radius:var(--radius-lg) 0 0 var(--radius-lg)\"></div>\n    <div class=\"consol-card-header\" style=\"padding-left:22px\">\n      <div style=\"display:flex;align-items:center;gap:10px;flex-wrap:wrap\">\n        <span style=\"width:10px;height:10px;border-radius:50%;background:").concat(priColor(item.priority), ";flex-shrink:0\"></span>\n        <span class=\"badge ").concat(item.priority === 'critical' ? 'badge-critical' : item.priority === 'high' ? 'badge-high' : 'badge-medium', "\">").concat(item.priority.charAt(0).toUpperCase() + item.priority.slice(1), "</span>\n        <span style=\"font-size:15px;font-weight:700;color:var(--blue-900)\">").concat(item.machine, " \u2014 ").concat(item.checkPoint, "</span>\n      </div>\n      <div style=\"display:flex;align-items:center;gap:12px;flex-wrap:wrap\">\n        ").concat(isAlreadyWO ? "<span class=\"wf-pill pending-executor\">WO: ".concat(item.woRef, "</span>") : '', "\n        <span style=\"font-size:11px;color:var(--slate-500)\">\u2022 ").concat(item.sourceType === 'manual' ? 'Manual Log' : 'Checklist', "</span>\n        <a class=\"sop-link\" href=\"#\" onclick=\"alert('Opening ").concat(sop.sop, "')\">\uD83D\uDCD6 ").concat(sop.sop, "</a>\n      </div>\n    </div>\n\n    <!-- 4M Grid -->\n    <div class=\"consol-4m\">\n      <div class=\"consol-4m-cell\">\n        <div class=\"consol-4m-label\">\uD83D\uDC64 MAN</div>\n        <div class=\"consol-4m-value\">").concat(sop.man, "</div>\n      </div>\n      <div class=\"consol-4m-cell\">\n        <div class=\"consol-4m-label\">\u2699\uFE0F MACHINE</div>\n        <div class=\"consol-4m-value\">").concat(item.machine, " \u2014 ").concat(sop.machine_note, "</div>\n      </div>\n      <div class=\"consol-4m-cell\">\n        <div class=\"consol-4m-label\">\uD83D\uDD29 MATERIAL</div>\n        <div class=\"consol-4m-value\">").concat(sop.material, " \xB7 ").concat(matStatusHtml(sop.matStatus), "</div>\n      </div>\n      <div class=\"consol-4m-cell\">\n        <div class=\"consol-4m-label\">\uD83D\uDCD6 METHOD</div>\n        <div class=\"consol-4m-value\">").concat(sop.method, "</div>\n      </div>\n    </div>\n\n    <!-- Assign Executors -->\n    ").concat(!isAlreadyWO ? "\n    <div style=\"padding:14px 18px 6px 22px\">\n      <div style=\"font-size:13px;font-weight:700;color:var(--blue-900);margin-bottom:10px\">Assign Executors</div>\n      <div id=\"exec-rows-".concat(item.id, "\">").concat(execRowsHtml, "</div>\n      <button class=\"btn btn-ghost btn-sm\" style=\"margin-top:6px;color:var(--blue-500)\" onclick=\"addExecRow('").concat(item.id, "')\">+ Add Executor</button>\n    </div>\n    <div style=\"padding:12px 18px 16px 22px;display:flex;align-items:center;gap:10px;flex-wrap:wrap\">\n      <button class=\"btn btn-primary\" onclick=\"generateWO('").concat(item.id, "')\">\u26A1 Generate WO &amp; Assign</button>\n      <button class=\"btn btn-secondary btn-sm\" onclick=\"openPlDetail('").concat(item.id, "')\">\uD83D\uDCC4 View Detail</button>\n      <span style=\"font-size:11px;color:var(--slate-400)\">Est. ").concat(sop.hours, "</span>\n    </div>\n    ") : "\n    <div style=\"padding:12px 18px 14px 22px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-top:1px solid var(--slate-100)\">\n      <span class=\"badge badge-progress\">WO Generated \u2014 ".concat(item.assignedTo || '—', "</span>\n      <span style=\"font-size:11px;color:var(--slate-500)\">Scheduled: ").concat(item.scheduledDate || '—', "</span>\n      <button class=\"btn btn-ghost btn-sm\" onclick=\"openPlDetail('").concat(item.id, "')\">\uD83D\uDCC4 Detail</button>\n    </div>\n    "), "\n  </div>");
 }
+
+// ── Consolidated List — now backed by real DB data via plannerApi ───────────
+// Fetches manual abnormality logs + checklist "Abnormal" results (merged),
+// joins in any existing work order for each, and re-renders the tab.
 function renderConsolTab() {
-  var items = WF.getAll().sort(function (a, b) {
-    return (PRIORITY_ORDER[a.priority] || 3) - (PRIORITY_ORDER[b.priority] || 3);
-  });
-  var list = document.getElementById('consol-list');
-  var empty = document.getElementById('consol-empty');
-  var now = new Date();
-  document.getElementById('consol-sub').textContent = 'Vishwas Landage · ' + now.toLocaleDateString('en-IN', {
-    day: '2-digit',
-    month: 'short',
-    year: 'numeric'
-  }) + ' · Manual + IIoT Merged';
-  document.getElementById('cs-crit').textContent = items.filter(function (i) {
-    return i.priority === 'critical';
-  }).length;
-  document.getElementById('cs-high').textContent = items.filter(function (i) {
-    return i.priority === 'high';
-  }).length;
-  document.getElementById('cs-med').textContent = items.filter(function (i) {
-    return i.priority === 'medium';
-  }).length;
-  document.getElementById('cs-wo').textContent = items.filter(function (i) {
-    return i.woRef;
-  }).length;
-  var cb = document.getElementById('pl-consol-badge');
-  if (cb) cb.textContent = items.filter(function (i) {
-    return i.status === 'pending_planner';
-  }).length;
-  if (!items.length) {
-    if (empty) empty.style.display = 'flex';
-    list.innerHTML = '';
-    return;
-  }
-  if (empty) empty.style.display = 'none';
-  list.innerHTML = items.map(function (i) {
-    return renderConsolCard(i);
-  }).join('');
+  return _renderConsolTab.apply(this, arguments);
+}
+function _renderConsolTab() {
+  _renderConsolTab = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+    var list, empty, items, now, cb;
+    return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+      while (1) switch (_context5.prev = _context5.next) {
+        case 0:
+          list = document.getElementById('consol-list');
+          empty = document.getElementById('consol-empty');
+          _context5.next = 4;
+          return loadPlannerItems();
+        case 4:
+          items = _context5.sent;
+          now = new Date();
+          document.getElementById('consol-sub').textContent = 'Planner · ' + now.toLocaleDateString('en-IN', {
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric'
+          }) + ' · Manual + Checklist Merged';
+          document.getElementById('cs-crit').textContent = items.filter(function (i) {
+            return i.priority === 'critical';
+          }).length;
+          document.getElementById('cs-high').textContent = items.filter(function (i) {
+            return i.priority === 'high';
+          }).length;
+          document.getElementById('cs-med').textContent = items.filter(function (i) {
+            return i.priority === 'medium';
+          }).length;
+          document.getElementById('cs-wo').textContent = items.filter(function (i) {
+            return i.woRef;
+          }).length;
+          cb = document.getElementById('pl-consol-badge');
+          if (cb) cb.textContent = items.filter(function (i) {
+            return i.status === 'pending_planner';
+          }).length;
+          if (items.length) {
+            _context5.next = 17;
+            break;
+          }
+          if (empty) empty.style.display = 'flex';
+          if (list) list.innerHTML = '';
+          return _context5.abrupt("return");
+        case 17:
+          if (empty) empty.style.display = 'none';
+          if (list) list.innerHTML = items.map(function (i) {
+            return renderConsolCard(i);
+          }).join('');
+        case 19:
+        case "end":
+          return _context5.stop();
+      }
+    }, _callee5);
+  }));
+  return _renderConsolTab.apply(this, arguments);
 }
 function updExecRow(id, idx, field, val) {
   if (!consolExecRows[id]) consolExecRows[id] = [{
@@ -15140,45 +17026,88 @@ function removeExecRow(id, idx) {
   if (consolExecRows[id]) consolExecRows[id].splice(idx, 1);
   renderConsolTab();
 }
-function generateWO(id) {
-  var rows = consolExecRows[id] || [{
-    executor: 'Manoj Shinde',
-    datetime: '',
-    role: 'Lead'
-  }];
-  var lead = rows.find(function (r) {
-    return r.role === 'Lead';
-  }) || rows[0];
-  if (!lead) {
-    showToast('Please assign at least one executor.', 'error');
-    return;
-  }
-  var execName = lead.executor.split(' (')[0];
-  var dtVal = lead.datetime;
-  // Extract date part from datetime-local value
-  var datePart = dtVal ? dtVal.split('T')[0] : new Date().toISOString().split('T')[0];
-  var timePart = dtVal ? dtVal.split('T')[1] || '09:00' : '09:00';
-  var sop = getSOP(WF.getAll().find(function (i) {
-    return i.id === id;
-  }) || {});
-  var allExecs = rows.map(function (r) {
-    return "".concat(r.executor.split(' (')[0], " (").concat(r.role, ")");
-  }).join(', ');
-  var item = WF.planWO(id, {
-    executor: execName,
-    allExecutors: allExecs,
-    date: datePart,
-    scheduledTime: timePart,
-    hours: sop.hours,
-    spares: sop.material,
-    notes: "SOP: ".concat(sop.sop, " \xB7 ").concat(sop.method, " \xB7 Team: ").concat(allExecs),
-    sopRef: sop.sop,
-    plant: 'Plant A',
-    location: 'Utility Block'
-  });
-  renderConsolTab();
-  updateBadges();
-  showToast("\u26A1 WO ".concat(item.woRef, " generated & assigned to ").concat(allExecs, "!"), 'success');
+
+// ── Generate WO & Assign — now writes a real smartpm_planner_work_order row ──
+function generateWO(_x2) {
+  return _generateWO.apply(this, arguments);
+}
+function _generateWO() {
+  _generateWO = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6(id) {
+    var item, rows, lead, dtVal, datePart, timePart, sop, executors, allExecsLabel;
+    return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+      while (1) switch (_context6.prev = _context6.next) {
+        case 0:
+          item = consolItems.find(function (i) {
+            return i.id === id;
+          });
+          if (item) {
+            _context6.next = 4;
+            break;
+          }
+          showToast('Item not found — try refreshing.', 'error');
+          return _context6.abrupt("return");
+        case 4:
+          rows = consolExecRows[id] || [{
+            executor: 'Manoj Shinde',
+            datetime: '',
+            role: 'Lead'
+          }];
+          lead = rows.find(function (r) {
+            return r.role === 'Lead';
+          }) || rows[0];
+          if (lead) {
+            _context6.next = 9;
+            break;
+          }
+          showToast('Please assign at least one executor.', 'error');
+          return _context6.abrupt("return");
+        case 9:
+          dtVal = lead.datetime;
+          datePart = dtVal ? dtVal.split('T')[0] : new Date().toISOString().split('T')[0];
+          timePart = dtVal ? dtVal.split('T')[1] || '09:00' : '09:00';
+          sop = getSOP(item);
+          executors = rows.map(function (r) {
+            return {
+              name: r.executor.split(' (')[0],
+              role: r.role
+            };
+          });
+          allExecsLabel = executors.map(function (e) {
+            return "".concat(e.name, " (").concat(e.role, ")");
+          }).join(', ');
+          _context6.prev = 15;
+          _context6.next = 18;
+          return (0,_services_plannerApi__WEBPACK_IMPORTED_MODULE_1__.generateWorkOrder)(item, {
+            executors: executors,
+            scheduledDate: datePart,
+            scheduledTime: timePart,
+            hours: sop.hours,
+            spares: sop.material,
+            notes: "SOP: ".concat(sop.sop, " \xB7 ").concat(sop.method, " \xB7 Team: ").concat(allExecsLabel),
+            sopRef: sop.sop
+          });
+        case 18:
+          showToast("\u26A1 Work Order generated & assigned to ".concat(allExecsLabel, "!"), 'success');
+          _context6.next = 21;
+          return renderConsolTab();
+        case 21:
+          _context6.next = 23;
+          return renderWOTab();
+        case 23:
+          updateBadges();
+          _context6.next = 29;
+          break;
+        case 26:
+          _context6.prev = 26;
+          _context6.t0 = _context6["catch"](15);
+          showToast((_context6.t0 === null || _context6.t0 === void 0 ? void 0 : _context6.t0.message) || 'Failed to generate work order', 'error');
+        case 29:
+        case "end":
+          return _context6.stop();
+      }
+    }, _callee6, null, [[15, 26]]);
+  }));
+  return _generateWO.apply(this, arguments);
 }
 function showToast(msg, type) {
   var t = document.getElementById('wf-toast');
@@ -15199,22 +17128,99 @@ function showToast(msg, type) {
   }, 3000);
 }
 function updateBadges() {
-  var items = WF.getAll();
+  var wfItems = WF.getAll();
   var ib = document.getElementById('pl-incoming-badge');
-  if (ib) ib.textContent = items.filter(function (i) {
+  if (ib) ib.textContent = consolItems.filter(function (i) {
     return i.status === 'pending_planner';
   }).length;
   var wb = document.getElementById('pl-wo-badge');
-  if (wb) wb.textContent = items.filter(function (i) {
+  if (wb) wb.textContent = wfItems.filter(function (i) {
     return i.woRef;
   }).length;
   var rb = document.getElementById('pl-rework-badge');
-  if (rb) rb.textContent = items.filter(function (i) {
+  if (rb) rb.textContent = wfItems.filter(function (i) {
     return i.status === 'rework';
   }).length;
 }
-function PlannerPage(_ref3) {
-  var onNavigate = _ref3.onNavigate;
+function PlannerPage(_ref5) {
+  var onNavigate = _ref5.onNavigate;
+  // ── Common Plant/Line/Machine filter — same pattern as CheckerPage ──────
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState2 = _slicedToArray(_useState, 2),
+    equipmentList = _useState2[0],
+    setEquipmentList = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState4 = _slicedToArray(_useState3, 2),
+    plantList = _useState4[0],
+    setPlantList = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState6 = _slicedToArray(_useState5, 2),
+    lineList = _useState6[0],
+    setLineList = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState8 = _slicedToArray(_useState7, 2),
+    machineList = _useState8[0],
+    setMachineList = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('all'),
+    _useState10 = _slicedToArray(_useState9, 2),
+    filterPlant = _useState10[0],
+    setFilterPlant = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('all'),
+    _useState12 = _slicedToArray(_useState11, 2),
+    filterLine = _useState12[0],
+    setFilterLine = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('all'),
+    _useState14 = _slicedToArray(_useState13, 2),
+    filterMachine = _useState14[0],
+    setFilterMachine = _useState14[1];
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    Promise.all([(0,_services_equipmentApi__WEBPACK_IMPORTED_MODULE_2__.fetchEquipment)(), (0,_services_plantApi__WEBPACK_IMPORTED_MODULE_3__.fetchPlants)(), (0,_services_lineApi__WEBPACK_IMPORTED_MODULE_4__.fetchLines)(), (0,_services_machineApi__WEBPACK_IMPORTED_MODULE_5__.fetchMachines)()]).then(function (_ref6) {
+      var _ref7 = _slicedToArray(_ref6, 4),
+        eqJ = _ref7[0],
+        plantJ = _ref7[1],
+        lineJ = _ref7[2],
+        machineJ = _ref7[3];
+      setEquipmentList(rowsOf(eqJ));
+      setPlantList(rowsOf(plantJ));
+      setLineList(rowsOf(lineJ));
+      setMachineList(rowsOf(machineJ));
+    })["catch"](function () {});
+  }, []);
+
+  // Line dropdown — scoped to filterPlant, deduped by name (same as Checker)
+  var lineOptions = _toConsumableArray(new Map(lineList.filter(function (l) {
+    return filterPlant === 'all' || String(l.plant_code) === String(filterPlant);
+  }).map(function (l) {
+    return [l.line_name, l];
+  })).values());
+
+  // Machine dropdown — scoped to filterPlant + filterLine (same as Checker)
+  var machineOptions = _toConsumableArray(new Map(machineList.filter(function (m) {
+    return (filterPlant === 'all' || String(m.plant_code) === String(filterPlant)) && (filterLine === 'all' || String(m.line_name) === String(filterLine));
+  }).map(function (m) {
+    return [m.machine_name, m];
+  })).values());
+  var handlePlantFilterChange = function handlePlantFilterChange(e) {
+    setFilterPlant(e.target.value);
+    setFilterLine('all');
+    setFilterMachine('all');
+  };
+  var handleLineFilterChange = function handleLineFilterChange(e) {
+    setFilterLine(e.target.value);
+    setFilterMachine('all');
+  };
+
+  // Sync the module-level mirrors whenever the filter or equipment list
+  // changes, then re-render the (imperative) Consolidated List with the new
+  // scope applied.
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    plEquipmentList = equipmentList;
+    plFilterPlant = filterPlant;
+    plFilterLine = filterLine;
+    plFilterMachine = filterMachine;
+    renderConsolTab();
+    renderWOTab();
+  }, [equipmentList, filterPlant, filterLine, filterMachine]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     function t() {
       var n = new Date();
@@ -15283,19 +17289,56 @@ function PlannerPage(_ref3) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
     className: "form-select",
     style: {
-      width: 100,
+      width: 110,
       fontSize: 12,
       padding: '5px 8px'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "All Plants"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Plant A"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Plant B")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
+    },
+    value: filterPlant,
+    onChange: handlePlantFilterChange
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+    value: "all"
+  }, "All Plants"), plantList.map(function (p) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+      key: p.plant_code,
+      value: p.plant_code
+    }, p.plant_name, " (", p.plant_code, ")");
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
     className: "form-select",
     style: {
-      width: 90,
+      width: 100,
       fontSize: 12,
       padding: '5px 8px',
       marginLeft: 6
+    },
+    value: filterLine,
+    onChange: handleLineFilterChange
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+    value: "all"
+  }, "All Lines"), lineOptions.map(function (l) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+      key: "".concat(l.plant_code, "-").concat(l.line_name),
+      value: l.line_name
+    }, l.line_name);
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
+    className: "form-select",
+    style: {
+      width: 110,
+      fontSize: 12,
+      padding: '5px 8px',
+      marginLeft: 6
+    },
+    value: filterMachine,
+    onChange: function onChange(e) {
+      return setFilterMachine(e.target.value);
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "All Lines"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Line 1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Line 2")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+    value: "all"
+  }, "All Machines"), machineOptions.map(function (m) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+      key: "".concat(m.plant_code, "-").concat(m.line_name, "-").concat(m.machine_name),
+      value: m.machine_name
+    }, m.machine_name);
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "nav-role-badge",
     style: {
       marginLeft: 8
@@ -15502,7 +17545,7 @@ function PlannerPage(_ref3) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     className: "btn btn-secondary btn-sm",
     onClick: function onClick(e) {
-      refreshAll();
+      renderConsolTab();
     }
   }, "\u27F3 Refresh"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     style: {
@@ -15576,7 +17619,10 @@ function PlannerPage(_ref3) {
   }, "\u2139\uFE0F No abnormalities from Checker yet."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     id: "consol-list"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    id: "tab-incoming"
+    id: "tab-incoming",
+    style: {
+      display: 'none'
+    }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "page-header"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -15713,41 +17759,54 @@ function PlannerPage(_ref3) {
     }
   }, "\u27F3 Refresh")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wo-filter-bar"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, "Plant"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, "FILTER:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
     className: "form-select",
     style: {
-      width: 95,
+      width: 150,
       fontSize: 12
     },
+    value: filterPlant,
+    onChange: handlePlantFilterChange
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+    value: "all"
+  }, "All Plants"), plantList.map(function (p) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+      key: p.plant_code,
+      value: p.plant_code
+    }, p.plant_name, " (", p.plant_code, ")");
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
+    className: "form-select",
+    style: {
+      width: 140,
+      fontSize: 12
+    },
+    value: filterLine,
+    onChange: handleLineFilterChange
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+    value: "all"
+  }, "All Lines"), lineOptions.map(function (l) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+      key: "".concat(l.plant_code, "-").concat(l.line_name),
+      value: l.line_name
+    }, l.line_name);
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
+    className: "form-select",
+    style: {
+      width: 150,
+      fontSize: 12
+    },
+    value: filterMachine,
     onChange: function onChange(e) {
-      filterWOTab();
+      return setFilterMachine(e.target.value);
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
     value: "all"
-  }, "All"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Plant A"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Plant B")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, "Line"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
-    className: "form-select",
-    style: {
-      width: 90,
-      fontSize: 12
-    },
-    onChange: function onChange(e) {
-      filterWOTab();
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
-    value: "all"
-  }, "All"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Line 1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Line 2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Line 3")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, "Machine"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
-    className: "form-select",
-    id: "wo-mach",
-    style: {
-      width: 130,
-      fontSize: 12
-    },
-    onChange: function onChange(e) {
-      filterWOTab();
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
-    value: "all"
-  }, "All"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "CP-101"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "HX-204"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "COM-302"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "MDU-115"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Forging-Press"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Robotic-Arm")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, "Priority"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
+  }, "All Machines"), machineOptions.map(function (m) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+      key: "".concat(m.plant_code, "-").concat(m.line_name, "-").concat(m.machine_name),
+      value: m.machine_name
+    }, m.machine_name);
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, "Priority"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
     className: "form-select",
     id: "wo-prio",
     style: {
@@ -20688,10 +22747,15 @@ var AuthService = /*#__PURE__*/function () {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "fetchAbnormalResults": () => (/* binding */ fetchAbnormalResults),
+/* harmony export */   "fetchCalendarTasks": () => (/* binding */ fetchCalendarTasks),
 /* harmony export */   "fetchChecklistItems": () => (/* binding */ fetchChecklistItems),
 /* harmony export */   "fetchDashboardSummary": () => (/* binding */ fetchDashboardSummary),
 /* harmony export */   "fetchEquipmentList": () => (/* binding */ fetchEquipmentList),
 /* harmony export */   "fetchInspectionResults": () => (/* binding */ fetchInspectionResults),
+/* harmony export */   "fetchManualAbnormalities": () => (/* binding */ fetchManualAbnormalities),
+/* harmony export */   "fetchTodayPmStatus": () => (/* binding */ fetchTodayPmStatus),
+/* harmony export */   "logAbnormality": () => (/* binding */ logAbnormality),
 /* harmony export */   "saveCheckpoint": () => (/* binding */ saveCheckpoint),
 /* harmony export */   "submitInspection": () => (/* binding */ submitInspection)
 /* harmony export */ });
@@ -20704,6 +22768,12 @@ function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key i
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 // js/src/services/checkerApi.js
@@ -20711,17 +22781,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 // Reuses apiConfig (BASE/AUTH) + csrfService.
 //
 // Tables used (all already exist):
-//   smartpm_admin_equipment_master     → equipment list
-//   smartpm_admin_checklist_header      → one row per equipment + frequency
-//   smartpm_admin_checklist_item        → check points, linked via checklist_header_id
-//   smartpm_checker_insp_result         → inspection results (save/submit here)
-//
-// NOTE on checklist item lookup:
-//   Check point rows are NOT guaranteed to have equipment_code populated
-//   (the Builder's AddCheckPointModal only sets checklist_header_id).
-//   So we resolve equipment_code -> header -> checklist_header_id -> items,
-//   the same relation ChecklistBuilder.jsx uses. This is the fix for
-//   "No checklist items found for this equipment".
+//   smartpm_admin_equipment_master   → equipment list
+//   smartpm_admin_checklist_item      → checklist items (now has equipment_code)
+//   smartpm_checker_insp_result       → inspection results (save/submit here)
 //
 // NOTE on column mapping:
 //   The result table stores the OK/Abnormal value in column `smresult`,
@@ -20737,18 +22799,100 @@ var EQUIPMENT_API = "".concat(_apiConfig__WEBPACK_IMPORTED_MODULE_0__.BASE, "/ap
 var HEADER_API = "".concat(_apiConfig__WEBPACK_IMPORTED_MODULE_0__.BASE, "/api/v1/collection/smartpm_admin_checklist_header");
 var CHECKLIST_ITEM_API = "".concat(_apiConfig__WEBPACK_IMPORTED_MODULE_0__.BASE, "/api/v1/collection/smartpm_admin_checklist_item");
 var RESULT_API = "".concat(_apiConfig__WEBPACK_IMPORTED_MODULE_0__.BASE, "/api/v1/collection/smartpm_checker_insp_result");
+var ABNORMALITY_LOG_API = "".concat(_apiConfig__WEBPACK_IMPORTED_MODULE_0__.BASE, "/api/v1/collection/smartpm_checker_abnormality_log");
 
-// ── low-level helpers ────────────────────────────────────────────────────────
+// ── Defensive CSRF token getter ──────────────────────────────────────────────
+// csrfService.js's export shape can vary depending on how it was written
+// (a plain function, an object with a method, or an object with a token
+// property already fetched). This wrapper tries every common shape instead
+// of assuming `csrfService()` is directly callable — which was throwing:
+//   "(0, _csrfService__WEBPACK_IMPORTED_MODULE_1__.default) is not a function"
+function getCsrfToken() {
+  return _getCsrfToken.apply(this, arguments);
+} // ── low-level helpers ────────────────────────────────────────────────────────
+function _getCsrfToken() {
+  _getCsrfToken = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee10() {
+    var svc;
+    return _regeneratorRuntime().wrap(function _callee10$(_context11) {
+      while (1) switch (_context11.prev = _context11.next) {
+        case 0:
+          svc = _csrfService__WEBPACK_IMPORTED_MODULE_1__["default"]; // Case 1: default export IS a function -> csrfService()
+          if (!(typeof svc === "function")) {
+            _context11.next = 5;
+            break;
+          }
+          _context11.next = 4;
+          return svc();
+        case 4:
+          return _context11.abrupt("return", _context11.sent);
+        case 5:
+          if (!(svc && typeof svc.getToken === "function")) {
+            _context11.next = 9;
+            break;
+          }
+          _context11.next = 8;
+          return svc.getToken();
+        case 8:
+          return _context11.abrupt("return", _context11.sent);
+        case 9:
+          if (!(svc && typeof svc.fetchToken === "function")) {
+            _context11.next = 13;
+            break;
+          }
+          _context11.next = 12;
+          return svc.fetchToken();
+        case 12:
+          return _context11.abrupt("return", _context11.sent);
+        case 13:
+          if (!(svc && typeof svc["default"] === "function")) {
+            _context11.next = 17;
+            break;
+          }
+          _context11.next = 16;
+          return svc["default"]();
+        case 16:
+          return _context11.abrupt("return", _context11.sent);
+        case 17:
+          if (!(typeof svc === "string")) {
+            _context11.next = 19;
+            break;
+          }
+          return _context11.abrupt("return", svc);
+        case 19:
+          if (!(svc && typeof svc.token === "string")) {
+            _context11.next = 21;
+            break;
+          }
+          return _context11.abrupt("return", svc.token);
+        case 21:
+          if (!(svc && typeof svc.csrfToken === "string")) {
+            _context11.next = 23;
+            break;
+          }
+          return _context11.abrupt("return", svc.csrfToken);
+        case 23:
+          // Nothing matched — fail loudly with a clear message instead of a cryptic
+          // webpack module error, so this is easy to spot if csrfService.js changes.
+          console.error("checkerApi: unrecognized csrfService export shape:", svc);
+          throw new Error("Unable to resolve CSRF token — check csrfService.js export format");
+        case 25:
+        case "end":
+          return _context11.stop();
+      }
+    }, _callee10);
+  }));
+  return _getCsrfToken.apply(this, arguments);
+}
 function doGet(_x) {
   return _doGet.apply(this, arguments);
 }
 function _doGet() {
-  _doGet = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6(url) {
+  _doGet = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee11(url) {
     var res;
-    return _regeneratorRuntime().wrap(function _callee6$(_context6) {
-      while (1) switch (_context6.prev = _context6.next) {
+    return _regeneratorRuntime().wrap(function _callee11$(_context12) {
+      while (1) switch (_context12.prev = _context12.next) {
         case 0:
-          _context6.next = 2;
+          _context12.next = 2;
           return fetch(url, {
             headers: {
               Accept: "application/json",
@@ -20757,19 +22901,19 @@ function _doGet() {
             credentials: "include"
           });
         case 2:
-          res = _context6.sent;
+          res = _context12.sent;
           if (res.ok) {
-            _context6.next = 5;
+            _context12.next = 5;
             break;
           }
           throw new Error("HTTP ".concat(res.status));
         case 5:
-          return _context6.abrupt("return", res.json());
+          return _context12.abrupt("return", res.json());
         case 6:
         case "end":
-          return _context6.stop();
+          return _context12.stop();
       }
-    }, _callee6);
+    }, _callee11);
   }));
   return _doGet.apply(this, arguments);
 }
@@ -20777,16 +22921,16 @@ function doPost(_x2, _x3) {
   return _doPost.apply(this, arguments);
 }
 function _doPost() {
-  _doPost = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7(url, body) {
+  _doPost = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee12(url, body) {
     var csrfToken, res, json;
-    return _regeneratorRuntime().wrap(function _callee7$(_context7) {
-      while (1) switch (_context7.prev = _context7.next) {
+    return _regeneratorRuntime().wrap(function _callee12$(_context13) {
+      while (1) switch (_context13.prev = _context13.next) {
         case 0:
-          _context7.next = 2;
-          return _csrfService__WEBPACK_IMPORTED_MODULE_1__["default"].getCsrfToken();
+          _context13.next = 2;
+          return getCsrfToken();
         case 2:
-          csrfToken = _context7.sent;
-          _context7.next = 5;
+          csrfToken = _context13.sent;
+          _context13.next = 5;
           return fetch(url, {
             method: "POST",
             headers: {
@@ -20799,23 +22943,23 @@ function _doPost() {
             body: JSON.stringify(body)
           });
         case 5:
-          res = _context7.sent;
-          _context7.next = 8;
+          res = _context13.sent;
+          _context13.next = 8;
           return res.json();
         case 8:
-          json = _context7.sent;
+          json = _context13.sent;
           if (!(!res.ok || json !== null && json !== void 0 && json.error)) {
-            _context7.next = 11;
+            _context13.next = 11;
             break;
           }
           throw new Error((json === null || json === void 0 ? void 0 : json.error) || "HTTP ".concat(res.status));
         case 11:
-          return _context7.abrupt("return", json);
+          return _context13.abrupt("return", json);
         case 12:
         case "end":
-          return _context7.stop();
+          return _context13.stop();
       }
-    }, _callee7);
+    }, _callee12);
   }));
   return _doPost.apply(this, arguments);
 }
@@ -20823,16 +22967,16 @@ function doPatch(_x4, _x5) {
   return _doPatch.apply(this, arguments);
 } // Collection responses can come back under different keys — normalise them.
 function _doPatch() {
-  _doPatch = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8(url, body) {
+  _doPatch = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee13(url, body) {
     var csrfToken, res, json;
-    return _regeneratorRuntime().wrap(function _callee8$(_context8) {
-      while (1) switch (_context8.prev = _context8.next) {
+    return _regeneratorRuntime().wrap(function _callee13$(_context14) {
+      while (1) switch (_context14.prev = _context14.next) {
         case 0:
-          _context8.next = 2;
-          return _csrfService__WEBPACK_IMPORTED_MODULE_1__["default"].getCsrfToken();
+          _context14.next = 2;
+          return getCsrfToken();
         case 2:
-          csrfToken = _context8.sent;
-          _context8.next = 5;
+          csrfToken = _context14.sent;
+          _context14.next = 5;
           return fetch(url, {
             method: "PATCH",
             headers: {
@@ -20845,23 +22989,23 @@ function _doPatch() {
             body: JSON.stringify(body)
           });
         case 5:
-          res = _context8.sent;
-          _context8.next = 8;
+          res = _context14.sent;
+          _context14.next = 8;
           return res.json();
         case 8:
-          json = _context8.sent;
+          json = _context14.sent;
           if (!(!res.ok || json !== null && json !== void 0 && json.error)) {
-            _context8.next = 11;
+            _context14.next = 11;
             break;
           }
           throw new Error((json === null || json === void 0 ? void 0 : json.error) || "HTTP ".concat(res.status));
         case 11:
-          return _context8.abrupt("return", json);
+          return _context14.abrupt("return", json);
         case 12:
         case "end":
-          return _context8.stop();
+          return _context14.stop();
       }
-    }, _callee8);
+    }, _callee13);
   }));
   return _doPatch.apply(this, arguments);
 }
@@ -20880,44 +23024,31 @@ var fetchEquipmentList = function fetchEquipmentList() {
   return doGet(filterUrl(EQUIPMENT_API, "is_active eq '1'"));
 };
 
-// ── Checklist items for a given equipment ──
-// smartpm_admin_checklist_item has its OWN equipment_code column, so we query
-// it directly — no need to go through checklist_id (which is typed Integer
-// on the item table, while the header's id is a UUID string, so joining on
-// that would likely throw a type-mismatch error anyway).
-// We separately check the header table just to tell "no checklist built yet"
-// apart from "checklist built but no active check points".
-// Returns: { objects: [...activeItems sorted by seq_no], header: headerRowOrNull }
+// ── Checklist items for a given equipment + header existence check ──────────
+// Fetches BOTH the checklist header (to know if a checklist was ever built
+// for this equipment) and the items (the actual check points), filtered by
+// equipment_code on both tables. CheckerPage.jsx reads `.header` (boolean)
+// and `.objects` (the item rows) from this response.
 var fetchChecklistItems = /*#__PURE__*/function () {
   var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(equipmentCode) {
-    var headers, header, items, activeSorted;
+    var _yield$Promise$all, _yield$Promise$all2, headerJson, itemsJson, headerRows, itemRows;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          _context.t0 = extractRows;
-          _context.next = 3;
-          return doGet(filterUrl(HEADER_API, "equipment_code eq '".concat(equipmentCode, "'")));
-        case 3:
-          _context.t1 = _context.sent;
-          headers = (0, _context.t0)(_context.t1);
-          header = headers[0] || null;
-          _context.t2 = extractRows;
-          _context.next = 9;
-          return doGet(filterUrl(CHECKLIST_ITEM_API, "equipment_code eq '".concat(equipmentCode, "'")));
-        case 9:
-          _context.t3 = _context.sent;
-          items = (0, _context.t2)(_context.t3);
-          activeSorted = items.filter(function (it) {
-            var _it$is_active;
-            return String((_it$is_active = it.is_active) !== null && _it$is_active !== void 0 ? _it$is_active : "1") === "1";
-          }).sort(function (a, b) {
-            return Number(a.seq_no || 0) - Number(b.seq_no || 0);
-          });
+          _context.next = 2;
+          return Promise.all([doGet(filterUrl(HEADER_API, "equipment_code eq '".concat(equipmentCode, "'"))), doGet(filterUrl(CHECKLIST_ITEM_API, "equipment_code eq '".concat(equipmentCode, "'")))]);
+        case 2:
+          _yield$Promise$all = _context.sent;
+          _yield$Promise$all2 = _slicedToArray(_yield$Promise$all, 2);
+          headerJson = _yield$Promise$all2[0];
+          itemsJson = _yield$Promise$all2[1];
+          headerRows = extractRows(headerJson);
+          itemRows = extractRows(itemsJson);
           return _context.abrupt("return", {
-            objects: activeSorted,
-            header: header
+            objects: itemRows,
+            header: headerRows.length > 0
           });
-        case 13:
+        case 9:
         case "end":
           return _context.stop();
       }
@@ -21060,6 +23191,313 @@ var fetchDashboardSummary = /*#__PURE__*/function () {
   }));
   return function fetchDashboardSummary() {
     return _ref7.apply(this, arguments);
+  };
+}();
+
+// ── Abnormalities module — every "Abnormal" result across ALL equipment ──
+// Single query on `smresult eq 'Abnormal'` (no equipment loop needed), then
+// joined client-side against the checklist item list to attach a readable
+// title + limit value. This is real data — no new tables required.
+var fetchAbnormalResults = /*#__PURE__*/function () {
+  var _ref8 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
+    var _yield$Promise$all3, _yield$Promise$all4, resultsJson, itemsJson, itemMap, rows;
+    return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+      while (1) switch (_context6.prev = _context6.next) {
+        case 0:
+          _context6.next = 2;
+          return Promise.all([doGet(filterUrl(RESULT_API, "smresult eq 'Abnormal'")), doGet(CHECKLIST_ITEM_API) // fetched once, unfiltered, to map id -> title/limit
+          ]);
+        case 2:
+          _yield$Promise$all3 = _context6.sent;
+          _yield$Promise$all4 = _slicedToArray(_yield$Promise$all3, 2);
+          resultsJson = _yield$Promise$all4[0];
+          itemsJson = _yield$Promise$all4[1];
+          itemMap = {};
+          extractRows(itemsJson).forEach(function (it) {
+            itemMap[it.cdb_object_id] = it;
+          });
+          rows = extractRows(resultsJson).map(function (r) {
+            var _itemMap$r$checklist_, _itemMap$r$checklist_2;
+            return _objectSpread(_objectSpread({}, r), {}, {
+              result: r.smresult,
+              item_title: ((_itemMap$r$checklist_ = itemMap[r.checklist_item_id]) === null || _itemMap$r$checklist_ === void 0 ? void 0 : _itemMap$r$checklist_.title) || "Unknown check point",
+              limit_value: ((_itemMap$r$checklist_2 = itemMap[r.checklist_item_id]) === null || _itemMap$r$checklist_2 === void 0 ? void 0 : _itemMap$r$checklist_2.limit_value) || ""
+            });
+          }).sort(function (a, b) {
+            return new Date(b.created_at || 0) - new Date(a.created_at || 0);
+          });
+          return _context6.abrupt("return", {
+            objects: rows
+          });
+        case 10:
+        case "end":
+          return _context6.stop();
+      }
+    }, _callee6);
+  }));
+  return function fetchAbnormalResults() {
+    return _ref8.apply(this, arguments);
+  };
+}();
+
+// ── Manually logged abnormalities (Log Abnormality form) ──
+// Table: smartpm_checker_abnormality_log
+// Columns: equipment_code, priority, observed_value, probable_cause, remarks,
+//          photo1, photo2, photo3, logged_by, logged_at, log_status, created_at
+var fetchManualAbnormalities = /*#__PURE__*/function () {
+  var _ref9 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
+    var rows;
+    return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+      while (1) switch (_context7.prev = _context7.next) {
+        case 0:
+          _context7.t0 = extractRows;
+          _context7.next = 3;
+          return doGet(ABNORMALITY_LOG_API);
+        case 3:
+          _context7.t1 = _context7.sent;
+          rows = (0, _context7.t0)(_context7.t1).sort(function (a, b) {
+            return new Date(b.logged_at || b.created_at || 0) - new Date(a.logged_at || a.created_at || 0);
+          });
+          return _context7.abrupt("return", {
+            objects: rows
+          });
+        case 6:
+        case "end":
+          return _context7.stop();
+      }
+    }, _callee7);
+  }));
+  return function fetchManualAbnormalities() {
+    return _ref9.apply(this, arguments);
+  };
+}();
+
+// payload: { equipment_code, priority, observed_value, probable_cause, remarks,
+//            photos: [name1, name2, name3], logged_by }
+var logAbnormality = function logAbnormality(payload) {
+  var _ref10 = payload.photos || [],
+    _ref11 = _slicedToArray(_ref10, 3),
+    _ref11$ = _ref11[0],
+    photo1 = _ref11$ === void 0 ? "" : _ref11$,
+    _ref11$2 = _ref11[1],
+    photo2 = _ref11$2 === void 0 ? "" : _ref11$2,
+    _ref11$3 = _ref11[2],
+    photo3 = _ref11$3 === void 0 ? "" : _ref11$3;
+  return doPost(ABNORMALITY_LOG_API, {
+    equipment_code: payload.equipment_code,
+    priority: payload.priority,
+    observed_value: payload.observed_value || "",
+    probable_cause: payload.probable_cause || "",
+    remarks: payload.remarks || "",
+    photo1: photo1,
+    photo2: photo2,
+    photo3: photo3,
+    logged_by: payload.logged_by || "",
+    logged_at: payload.logged_at || new Date().toISOString(),
+    log_status: "Open"
+  });
+};
+
+// ── Consolidated List — today's PM status across ALL equipment ──
+// Single-shot queries only (no N+1 loop over equipment): headers + items are
+// fetched unfiltered once, today's results are fetched with a date-only
+// filter (no equipment_code), then everything is grouped client-side.
+// Returns: [{ equipment_code, total, done, pending, submitted }, …]
+// — only for equipment that actually has a checklist header built.
+var fetchTodayPmStatus = /*#__PURE__*/function () {
+  var _ref12 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8(inspectionDate) {
+    var _yield$Promise$all5, _yield$Promise$all6, headersJson, itemsJson, resultsJson, headerEquipCodes, totalByEquip, doneByEquip, submittedByEquip;
+    return _regeneratorRuntime().wrap(function _callee8$(_context8) {
+      while (1) switch (_context8.prev = _context8.next) {
+        case 0:
+          _context8.next = 2;
+          return Promise.all([doGet(HEADER_API), doGet(CHECKLIST_ITEM_API), doGet(filterUrl(RESULT_API, "inspection_date eq '".concat(inspectionDate, "'")))]);
+        case 2:
+          _yield$Promise$all5 = _context8.sent;
+          _yield$Promise$all6 = _slicedToArray(_yield$Promise$all5, 3);
+          headersJson = _yield$Promise$all6[0];
+          itemsJson = _yield$Promise$all6[1];
+          resultsJson = _yield$Promise$all6[2];
+          headerEquipCodes = new Set(extractRows(headersJson).map(function (h) {
+            return h.equipment_code;
+          }));
+          totalByEquip = {};
+          extractRows(itemsJson).filter(function (it) {
+            var _it$is_active;
+            return String((_it$is_active = it.is_active) !== null && _it$is_active !== void 0 ? _it$is_active : "1") === "1";
+          }).forEach(function (it) {
+            totalByEquip[it.equipment_code] = (totalByEquip[it.equipment_code] || 0) + 1;
+          });
+          doneByEquip = {};
+          submittedByEquip = {};
+          extractRows(resultsJson).forEach(function (r) {
+            if (!doneByEquip[r.equipment_code]) doneByEquip[r.equipment_code] = new Set();
+            doneByEquip[r.equipment_code].add(r.checklist_item_id);
+            if (r.submitted_at) submittedByEquip[r.equipment_code] = true;
+          });
+          return _context8.abrupt("return", Object.keys(totalByEquip).filter(function (code) {
+            return headerEquipCodes.has(code);
+          }).map(function (code) {
+            var _doneByEquip$code;
+            var total = totalByEquip[code] || 0;
+            var done = ((_doneByEquip$code = doneByEquip[code]) === null || _doneByEquip$code === void 0 ? void 0 : _doneByEquip$code.size) || 0;
+            return {
+              equipment_code: code,
+              total: total,
+              done: done,
+              pending: Math.max(total - done, 0),
+              submitted: Boolean(submittedByEquip[code])
+            };
+          }));
+        case 14:
+        case "end":
+          return _context8.stop();
+      }
+    }, _callee8);
+  }));
+  return function fetchTodayPmStatus(_x12) {
+    return _ref12.apply(this, arguments);
+  };
+}();
+
+// ── Frequency → "is this equipment's checklist due on this date?" ──────────
+// ASSUMPTION (no start-date column exists on the header table to anchor
+// weekly/monthly cycles to, so a fixed convention is used):
+//   Daily     → every day
+//   Weekly    → every Monday
+//   Monthly   → the 1st of every month
+//   Quarterly → the 1st of Jan / Apr / Jul / Oct
+// Change this function if the real business rule differs.
+function isDueOn(header, dateObj) {
+  var freq = (header.frequency || "Daily").toLowerCase();
+  var day = dateObj.getDay(); // 0 = Sunday, 1 = Monday
+  var dom = dateObj.getDate();
+  var month = dateObj.getMonth(); // 0-indexed
+  if (freq === "daily") return true;
+  if (freq === "weekly") return day === 1;
+  if (freq === "monthly") return dom === 1;
+  if (freq === "quarterly") return dom === 1 && [0, 3, 6, 9].includes(month);
+  return false;
+}
+
+// ── Calendar data for one month ─────────────────────────────────────────────
+// Returns a map: { "2026-07-21": [ { equipment_code, checklist_name, total, done, submitted }, … ] }
+// Only dates that actually have a due checklist are included as keys.
+var fetchCalendarTasks = /*#__PURE__*/function () {
+  var _ref13 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee9(year, month /* 0-indexed */) {
+    var _yield$Promise$all7, _yield$Promise$all8, headersJson, itemsJson, resultsJson, headers, items, results, totalByEquip, equipCodes, freqByEquip, nameByEquip, daysInMonth, dateMap, _loop, d, _ret;
+    return _regeneratorRuntime().wrap(function _callee9$(_context10) {
+      while (1) switch (_context10.prev = _context10.next) {
+        case 0:
+          _context10.next = 2;
+          return Promise.all([doGet(HEADER_API), doGet(CHECKLIST_ITEM_API), doGet(RESULT_API)]);
+        case 2:
+          _yield$Promise$all7 = _context10.sent;
+          _yield$Promise$all8 = _slicedToArray(_yield$Promise$all7, 3);
+          headersJson = _yield$Promise$all8[0];
+          itemsJson = _yield$Promise$all8[1];
+          resultsJson = _yield$Promise$all8[2];
+          headers = extractRows(headersJson);
+          items = extractRows(itemsJson).filter(function (it) {
+            var _it$is_active2;
+            return String((_it$is_active2 = it.is_active) !== null && _it$is_active2 !== void 0 ? _it$is_active2 : "1") === "1";
+          });
+          results = extractRows(resultsJson); // Ground truth for "which equipment has an active checklist" is the ITEM
+          // table's equipment_code — not the header table's. The header's
+          // equipment_code can drift (e.g. admin re-links a checklist to a
+          // different equipment) while the items underneath keep their own
+          // equipment_code, exactly like PM Inspection already reads items
+          // directly without depending on the header link.
+          totalByEquip = {};
+          items.forEach(function (it) {
+            totalByEquip[it.equipment_code] = (totalByEquip[it.equipment_code] || 0) + 1;
+          });
+          equipCodes = Object.keys(totalByEquip); // Frequency + display name still come from the header table when a
+          // matching one exists for that equipment_code; default to "Daily" if
+          // no header is linked to this equipment at all.
+          freqByEquip = {};
+          nameByEquip = {};
+          headers.forEach(function (h) {
+            if (!h.equipment_code) return;
+            freqByEquip[h.equipment_code] = h.frequency || "Daily";
+            nameByEquip[h.equipment_code] = h.checklist_name || h.equipment_code;
+          });
+          daysInMonth = new Date(year, month + 1, 0).getDate();
+          dateMap = {};
+          _loop = /*#__PURE__*/_regeneratorRuntime().mark(function _loop() {
+            var dateObj, dateStr, dueCodes;
+            return _regeneratorRuntime().wrap(function _loop$(_context9) {
+              while (1) switch (_context9.prev = _context9.next) {
+                case 0:
+                  dateObj = new Date(year, month, d);
+                  dateStr = "".concat(year, "-").concat(String(month + 1).padStart(2, "0"), "-").concat(String(d).padStart(2, "0"));
+                  dueCodes = equipCodes.filter(function (code) {
+                    return isDueOn({
+                      frequency: freqByEquip[code] || "Daily"
+                    }, dateObj);
+                  });
+                  if (!(dueCodes.length === 0)) {
+                    _context9.next = 5;
+                    break;
+                  }
+                  return _context9.abrupt("return", "continue");
+                case 5:
+                  dateMap[dateStr] = dueCodes.map(function (code) {
+                    var total = totalByEquip[code] || 0;
+                    var dayResults = results.filter(function (r) {
+                      return r.equipment_code === code && r.inspection_date === dateStr;
+                    });
+                    var doneSet = new Set(dayResults.filter(function (r) {
+                      return r.checklist_item_id;
+                    }).map(function (r) {
+                      return r.checklist_item_id;
+                    }));
+                    var submitted = dayResults.some(function (r) {
+                      return r.submitted_at;
+                    });
+                    return {
+                      equipment_code: code,
+                      checklist_name: nameByEquip[code] || code,
+                      frequency: freqByEquip[code] || "Daily",
+                      total: total,
+                      done: doneSet.size,
+                      submitted: submitted
+                    };
+                  });
+                case 6:
+                case "end":
+                  return _context9.stop();
+              }
+            }, _loop);
+          });
+          d = 1;
+        case 20:
+          if (!(d <= daysInMonth)) {
+            _context10.next = 28;
+            break;
+          }
+          return _context10.delegateYield(_loop(), "t0", 22);
+        case 22:
+          _ret = _context10.t0;
+          if (!(_ret === "continue")) {
+            _context10.next = 25;
+            break;
+          }
+          return _context10.abrupt("continue", 25);
+        case 25:
+          d++;
+          _context10.next = 20;
+          break;
+        case 28:
+          return _context10.abrupt("return", dateMap);
+        case 29:
+        case "end":
+          return _context10.stop();
+      }
+    }, _callee9);
+  }));
+  return function fetchCalendarTasks(_x13, _x14) {
+    return _ref13.apply(this, arguments);
   };
 }();
 
@@ -21389,6 +23827,407 @@ function updateMachine(cdbObjectId, data) {
 function deleteMachine(cdbObjectId) {
   return _apiAuth__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("".concat(MACHINE_MASTER_URL, "/").concat(cdbObjectId));
 }
+
+/***/ }),
+
+/***/ "./src/services/plannerApi.js":
+/*!************************************!*\
+  !*** ./src/services/plannerApi.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "fetchConsolidatedList": () => (/* binding */ fetchConsolidatedList),
+/* harmony export */   "fetchWorkOrders": () => (/* binding */ fetchWorkOrders),
+/* harmony export */   "generateWorkOrder": () => (/* binding */ generateWorkOrder),
+/* harmony export */   "updateWorkOrderStatus": () => (/* binding */ updateWorkOrderStatus)
+/* harmony export */ });
+/* harmony import */ var _apiConfig__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./apiConfig */ "./src/services/apiConfig.js");
+/* harmony import */ var _csrfService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./csrfService */ "./src/services/csrfService.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+// js/src/services/plannerApi.js
+// Planner Portal API — real REST collections, no localStorage.
+//
+// Sources merged into the Consolidated List:
+//   smartpm_checker_abnormality_log   → manually logged abnormalities (Checker's "Log Abnormality" form)
+//   smartpm_checker_insp_result       → checklist rows where smresult = 'Abnormal'
+//   smartpm_admin_checklist_item      → joined in just to get a readable title for checklist-sourced items
+//
+// Work orders live in their own table so the abnormality source rows are
+// never mutated — a work order just carries a source_type/source_id pointer
+// back to whichever row triggered it.
+//   smartpm_planner_work_order        → created here via generateWorkOrder()
+
+
+
+var BASIC_AUTH = _apiConfig__WEBPACK_IMPORTED_MODULE_0__.AUTH;
+var ABNORMALITY_LOG_API = "".concat(_apiConfig__WEBPACK_IMPORTED_MODULE_0__.BASE, "/api/v1/collection/smartpm_checker_abnormality_log");
+var RESULT_API = "".concat(_apiConfig__WEBPACK_IMPORTED_MODULE_0__.BASE, "/api/v1/collection/smartpm_checker_insp_result");
+var CHECKLIST_ITEM_API = "".concat(_apiConfig__WEBPACK_IMPORTED_MODULE_0__.BASE, "/api/v1/collection/smartpm_admin_checklist_item");
+var WORK_ORDER_API = "".concat(_apiConfig__WEBPACK_IMPORTED_MODULE_0__.BASE, "/api/v1/collection/smartpm_planner_work_order");
+function getCsrfToken() {
+  return _getCsrfToken.apply(this, arguments);
+}
+function _getCsrfToken() {
+  _getCsrfToken = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+    return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+      while (1) switch (_context4.prev = _context4.next) {
+        case 0:
+          _context4.next = 2;
+          return _csrfService__WEBPACK_IMPORTED_MODULE_1__["default"].getCsrfToken();
+        case 2:
+          return _context4.abrupt("return", _context4.sent);
+        case 3:
+        case "end":
+          return _context4.stop();
+      }
+    }, _callee4);
+  }));
+  return _getCsrfToken.apply(this, arguments);
+}
+function doGet(_x) {
+  return _doGet.apply(this, arguments);
+}
+function _doGet() {
+  _doGet = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(url) {
+    var res;
+    return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+      while (1) switch (_context5.prev = _context5.next) {
+        case 0:
+          _context5.next = 2;
+          return fetch(url, {
+            headers: {
+              Accept: "application/json",
+              Authorization: BASIC_AUTH
+            },
+            credentials: "include"
+          });
+        case 2:
+          res = _context5.sent;
+          if (res.ok) {
+            _context5.next = 5;
+            break;
+          }
+          throw new Error("HTTP ".concat(res.status));
+        case 5:
+          return _context5.abrupt("return", res.json());
+        case 6:
+        case "end":
+          return _context5.stop();
+      }
+    }, _callee5);
+  }));
+  return _doGet.apply(this, arguments);
+}
+function doPost(_x2, _x3) {
+  return _doPost.apply(this, arguments);
+}
+function _doPost() {
+  _doPost = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6(url, body) {
+    var csrfToken, res, json;
+    return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+      while (1) switch (_context6.prev = _context6.next) {
+        case 0:
+          _context6.next = 2;
+          return getCsrfToken();
+        case 2:
+          csrfToken = _context6.sent;
+          _context6.next = 5;
+          return fetch(url, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: BASIC_AUTH,
+              "X-CSRFToken": csrfToken
+            },
+            credentials: "include",
+            body: JSON.stringify(body)
+          });
+        case 5:
+          res = _context6.sent;
+          _context6.next = 8;
+          return res.json();
+        case 8:
+          json = _context6.sent;
+          if (!(!res.ok || json !== null && json !== void 0 && json.error)) {
+            _context6.next = 11;
+            break;
+          }
+          throw new Error((json === null || json === void 0 ? void 0 : json.error) || "HTTP ".concat(res.status));
+        case 11:
+          return _context6.abrupt("return", json);
+        case 12:
+        case "end":
+          return _context6.stop();
+      }
+    }, _callee6);
+  }));
+  return _doPost.apply(this, arguments);
+}
+function doPatch(_x4, _x5) {
+  return _doPatch.apply(this, arguments);
+}
+function _doPatch() {
+  _doPatch = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7(url, body) {
+    var csrfToken, res, json;
+    return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+      while (1) switch (_context7.prev = _context7.next) {
+        case 0:
+          _context7.next = 2;
+          return getCsrfToken();
+        case 2:
+          csrfToken = _context7.sent;
+          _context7.next = 5;
+          return fetch(url, {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: BASIC_AUTH,
+              "X-CSRFToken": csrfToken
+            },
+            credentials: "include",
+            body: JSON.stringify(body)
+          });
+        case 5:
+          res = _context7.sent;
+          _context7.next = 8;
+          return res.json();
+        case 8:
+          json = _context7.sent;
+          if (!(!res.ok || json !== null && json !== void 0 && json.error)) {
+            _context7.next = 11;
+            break;
+          }
+          throw new Error((json === null || json === void 0 ? void 0 : json.error) || "HTTP ".concat(res.status));
+        case 11:
+          return _context7.abrupt("return", json);
+        case 12:
+        case "end":
+          return _context7.stop();
+      }
+    }, _callee7);
+  }));
+  return _doPatch.apply(this, arguments);
+}
+var extractRows = function extractRows(j) {
+  var _ref, _ref2, _j$objects;
+  return (_ref = (_ref2 = (_j$objects = j === null || j === void 0 ? void 0 : j.objects) !== null && _j$objects !== void 0 ? _j$objects : j === null || j === void 0 ? void 0 : j.data) !== null && _ref2 !== void 0 ? _ref2 : j === null || j === void 0 ? void 0 : j.results) !== null && _ref !== void 0 ? _ref : [];
+};
+var filterUrl = function filterUrl(base, clause) {
+  return "".concat(base, "?$filter=").concat(encodeURIComponent(clause));
+};
+function normalizePriority(p) {
+  var v = (p || "medium").toLowerCase();
+  return ["critical", "high", "medium", "low"].includes(v) ? v : "medium";
+}
+
+// Splits an ISO-ish date/datetime string into { date, time } for display.
+function fmtDatePart(raw) {
+  if (!raw) return {
+    date: "",
+    time: ""
+  };
+  try {
+    var d = new Date(raw);
+    if (isNaN(d.getTime())) return {
+      date: raw,
+      time: ""
+    };
+    return {
+      date: d.toISOString().slice(0, 10),
+      time: d.toTimeString().slice(0, 5)
+    };
+  } catch (_unused) {
+    return {
+      date: raw,
+      time: ""
+    };
+  }
+}
+
+// ── Consolidated List — merges both abnormality sources with any existing WO ─
+// Each returned item carries `wo` (the matching work_order row, or null) so
+// the caller can decide whether it's "awaiting WO" or already in progress.
+var fetchConsolidatedList = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    var _yield$Promise$all, _yield$Promise$all2, manualJson, resultJson, itemsJson, woJson, itemMap, woBySource, manualItems, checklistItems;
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          _context.next = 2;
+          return Promise.all([doGet(ABNORMALITY_LOG_API), doGet(filterUrl(RESULT_API, "smresult eq 'Abnormal'")), doGet(CHECKLIST_ITEM_API), doGet(WORK_ORDER_API)]);
+        case 2:
+          _yield$Promise$all = _context.sent;
+          _yield$Promise$all2 = _slicedToArray(_yield$Promise$all, 4);
+          manualJson = _yield$Promise$all2[0];
+          resultJson = _yield$Promise$all2[1];
+          itemsJson = _yield$Promise$all2[2];
+          woJson = _yield$Promise$all2[3];
+          itemMap = {};
+          extractRows(itemsJson).forEach(function (it) {
+            itemMap[it.cdb_object_id] = it;
+          });
+          woBySource = {};
+          extractRows(woJson).forEach(function (wo) {
+            woBySource["".concat(wo.source_type, ":").concat(wo.source_id)] = wo;
+          });
+          manualItems = extractRows(manualJson).map(function (r) {
+            var key = "manual:".concat(r.cdb_object_id);
+            var _fmtDatePart = fmtDatePart(r.logged_at),
+              date = _fmtDatePart.date,
+              time = _fmtDatePart.time;
+            return {
+              id: key,
+              sourceType: "manual",
+              sourceId: r.cdb_object_id,
+              checkPoint: "Manual Abnormality Log",
+              machine: r.equipment_code,
+              observed: r.observed_value,
+              cause: r.probable_cause,
+              remarks: r.remarks,
+              priority: normalizePriority(r.priority),
+              loggedBy: r.logged_by,
+              loggedDate: date,
+              loggedTime: time,
+              wo: woBySource[key] || null
+            };
+          });
+          checklistItems = extractRows(resultJson).map(function (r) {
+            var key = "checklist:".concat(r.cdb_object_id);
+            var item = itemMap[r.checklist_item_id] || {};
+            var _fmtDatePart2 = fmtDatePart(r.inspection_date),
+              date = _fmtDatePart2.date,
+              time = _fmtDatePart2.time;
+            return {
+              id: key,
+              sourceType: "checklist",
+              sourceId: r.cdb_object_id,
+              checkPoint: item.title || "Checklist Check Point",
+              machine: r.equipment_code,
+              observed: r.current_value,
+              cause: "",
+              remarks: r.remarks,
+              priority: "medium",
+              loggedBy: "",
+              loggedDate: date,
+              loggedTime: time,
+              wo: woBySource[key] || null
+            };
+          });
+          return _context.abrupt("return", [].concat(_toConsumableArray(manualItems), _toConsumableArray(checklistItems)));
+        case 15:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee);
+  }));
+  return function fetchConsolidatedList() {
+    return _ref3.apply(this, arguments);
+  };
+}();
+
+// ── All raised work orders (used by Work Orders / Rework tabs later) ────────
+var fetchWorkOrders = /*#__PURE__*/function () {
+  var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+    var rows;
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.t0 = extractRows;
+          _context2.next = 3;
+          return doGet(WORK_ORDER_API);
+        case 3:
+          _context2.t1 = _context2.sent;
+          rows = (0, _context2.t0)(_context2.t1);
+          return _context2.abrupt("return", rows.sort(function (a, b) {
+            return new Date(b.planned_at || 0) - new Date(a.planned_at || 0);
+          }));
+        case 6:
+        case "end":
+          return _context2.stop();
+      }
+    }, _callee2);
+  }));
+  return function fetchWorkOrders() {
+    return _ref4.apply(this, arguments);
+  };
+}();
+
+// ── Generate a Work Order + assign executor(s) for one abnormality item ─────
+// item: a normalized item from fetchConsolidatedList (has sourceType/sourceId/…)
+// plan: { executors: [{name, role}], scheduledDate, scheduledTime, hours, spares, notes, sopRef }
+var generateWorkOrder = /*#__PURE__*/function () {
+  var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(item, plan) {
+    var existingWOs, woNum, lead, allExecutors, body;
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
+        case 0:
+          _context3.next = 2;
+          return fetchWorkOrders();
+        case 2:
+          existingWOs = _context3.sent;
+          woNum = "WO-".concat(new Date().getFullYear(), "-").concat(String(2040 + existingWOs.length).padStart(4, "0"));
+          lead = plan.executors.find(function (e) {
+            return e.role === "Lead";
+          }) || plan.executors[0];
+          allExecutors = plan.executors.map(function (e) {
+            return "".concat(e.name, " (").concat(e.role, ")");
+          }).join(", ");
+          body = {
+            source_type: item.sourceType,
+            source_id: item.sourceId,
+            equipment_code: item.machine,
+            check_point: item.checkPoint,
+            observed_value: item.observed || "",
+            probable_cause: item.cause || "",
+            remarks: item.remarks || "",
+            priority: item.priority,
+            logged_by: item.loggedBy || "",
+            wo_ref: woNum,
+            assigned_to: (lead === null || lead === void 0 ? void 0 : lead.name) || "",
+            all_executors: allExecutors,
+            scheduled_date: plan.scheduledDate,
+            scheduled_time: plan.scheduledTime || "09:00",
+            estimated_hours: plan.hours || "",
+            spares_needed: plan.spares || "",
+            planner_notes: plan.notes || "",
+            sop_ref: plan.sopRef || "",
+            status: "pending_executor",
+            planned_at: new Date().toISOString(),
+            rework_count: "0"
+          };
+          return _context3.abrupt("return", doPost(WORK_ORDER_API, body));
+        case 8:
+        case "end":
+          return _context3.stop();
+      }
+    }, _callee3);
+  }));
+  return function generateWorkOrder(_x6, _x7) {
+    return _ref5.apply(this, arguments);
+  };
+}();
+
+// ── Update a work order's status (used by Rework/Audit flows later) ─────────
+var updateWorkOrderStatus = function updateWorkOrderStatus(woId, patch) {
+  return doPatch("".concat(WORK_ORDER_API, "/").concat(woId), patch);
+};
 
 /***/ }),
 
@@ -23673,4 +26512,4 @@ cs_web_components_base__WEBPACK_IMPORTED_MODULE_1__.Registry.registerReducer((0,
 /******/ })()
 ;
 });
-//# sourceMappingURL=kalyani-iot-smart_maintenance_system.dev.8bfa8f2222d5ba9048e7.js.map
+//# sourceMappingURL=kalyani-iot-smart_maintenance_system.dev.59da87b6ab63b89d47b4.js.map

@@ -1,4 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { fetchConsolidatedList, generateWorkOrder, fetchWorkOrders } from '../services/plannerApi';
+import { fetchEquipment } from '../services/equipmentApi';
+import { fetchPlants } from '../services/plantApi';
+import { fetchLines } from '../services/lineApi';
+import { fetchMachines } from '../services/machineApi';
+
+const rowsOf = (j) => j?.objects ?? j?.data ?? j?.results ?? [];
 
 /* ---------------------------------------------------------------
    Module-scope helpers (verbatim logic from the original page's
@@ -55,6 +62,47 @@ function flowTrack(item){
   return html+'</div>';
 }
 
+// ── Shared data loader for both Consolidated List and Incoming Abnormalities ─
+// Both tabs show the same underlying source (manual + checklist abnormalities
+// merged with any existing work order); Incoming is just scoped to pending
+// ones with a different card layout. Loading through one function keeps
+// consolItems (used by openPlDetail/openPlanModal from either tab) in sync.
+async function loadPlannerItems() {
+  let rawItems = [];
+  try {
+    rawItems = await fetchConsolidatedList();
+  } catch (e) {
+    showToast(e?.message || 'Failed to load abnormalities', 'error');
+  }
+
+  let items = rawItems
+    .map((it) => ({
+      ...it,
+      status: it.wo ? it.wo.status : 'pending_planner',
+      woRef: it.wo?.wo_ref,
+      assignedTo: it.wo?.assigned_to,
+      scheduledDate: it.wo?.scheduled_date,
+    }))
+    .sort((a, b) => (PRIORITY_ORDER[a.priority] || 3) - (PRIORITY_ORDER[b.priority] || 3));
+
+  // Common Plant/Line/Machine filter — same scoping logic as CheckerPage.
+  if (plFilterPlant !== 'all' || plFilterLine !== 'all' || plFilterMachine !== 'all') {
+    const equipMap = {};
+    plEquipmentList.forEach((eq) => { equipMap[eq.equipment_code || eq.code] = eq; });
+    items = items.filter((it) => {
+      const eq = equipMap[it.machine];
+      if (!eq) return true; // unresolved equipment — don't hide unexpectedly
+      if (plFilterPlant !== 'all' && String(eq.plant_code) !== String(plFilterPlant)) return false;
+      if (plFilterLine !== 'all' && String(eq.line || '') !== String(plFilterLine)) return false;
+      if (plFilterMachine !== 'all' && String(eq.machine || '') !== String(plFilterMachine)) return false;
+      return true;
+    });
+  }
+
+  consolItems = items;
+  return items;
+}
+
 function renderIncomingCard(item){
   const isNew=item.status==='pending_planner';
   return `<div class="wf-card ${item.priority} ${isNew?'new-incoming':''}" id="plcard-${item.id}">
@@ -79,8 +127,8 @@ function renderIncomingCard(item){
   </div>`;
 }
 
-function renderIncoming(){
-  const items=WF.getAll().sort((a,b)=>(PRIORITY_ORDER[a.priority]||3)-(PRIORITY_ORDER[b.priority]||3));
+async function renderIncoming(){
+  const items = await loadPlannerItems();
   const pending=items.filter(i=>i.status==='pending_planner');
   const raised=items.filter(i=>i.status!=='pending_planner'&&i.status!=='closed');
   const list=document.getElementById('pl-incoming-list');
@@ -100,18 +148,63 @@ function renderIncoming(){
   document.getElementById('pl-incoming-sub').textContent=`${items.length} total · ${pending.length} awaiting WO · Last sync: ${new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})}`;
 }
 
-function renderWOTab(){
-  const mach=document.getElementById('wo-mach')?.value||'all';
+async function renderWOTab(){
   const prio=document.getElementById('wo-prio')?.value||'all';
   const stat=document.getElementById('wo-stat')?.value||'all';
-  let items=WF.getAll().filter(i=>i.woRef);
-  if(mach!=='all')items=items.filter(i=>i.machine===mach);
+
+  let rawWOs = [];
+  try {
+    rawWOs = await fetchWorkOrders();
+  } catch (e) {
+    showToast(e?.message || 'Failed to load work orders', 'error');
+  }
+
+  let items = rawWOs.map((wo) => ({
+    id: `wo:${wo.cdb_object_id}`,
+    cdbId: wo.cdb_object_id,
+    sourceType: wo.source_type,
+    sourceId: wo.source_id,
+    woRef: wo.wo_ref,
+    checkPoint: wo.check_point,
+    machine: wo.equipment_code,
+    observed: wo.observed_value,
+    cause: wo.probable_cause,
+    remarks: wo.remarks,
+    loggedBy: wo.logged_by,
+    assignedTo: wo.assigned_to,
+    allExecutors: wo.all_executors,
+    scheduledDate: wo.scheduled_date,
+    sparesNeeded: wo.spares_needed,
+    plannerNotes: wo.planner_notes,
+    priority: (wo.priority || 'medium').toLowerCase(),
+    status: wo.status || 'pending_executor',
+    reworkCount: Number(wo.rework_count || 0),
+  }));
+
+  // Common Plant/Line/Machine filter (from the top-nav dropdowns, wired to
+  // the real master APIs).
+  if (plFilterPlant !== 'all' || plFilterLine !== 'all' || plFilterMachine !== 'all') {
+    const equipMap = {};
+    plEquipmentList.forEach((eq) => { equipMap[eq.equipment_code || eq.code] = eq; });
+    items = items.filter((it) => {
+      const eq = equipMap[it.machine];
+      if (!eq) return true;
+      if (plFilterPlant !== 'all' && String(eq.plant_code) !== String(plFilterPlant)) return false;
+      if (plFilterLine !== 'all' && String(eq.line || '') !== String(plFilterLine)) return false;
+      if (plFilterMachine !== 'all' && String(eq.machine || '') !== String(plFilterMachine)) return false;
+      return true;
+    });
+  }
+
   if(prio!=='all')items=items.filter(i=>i.priority===prio);
   if(stat!=='all')items=items.filter(i=>i.status===stat);
   items.sort((a,b)=>(PRIORITY_ORDER[a.priority]||3)-(PRIORITY_ORDER[b.priority]||3));
+
+  woItems = items;
+
   const list=document.getElementById('pl-wo-list');
   const badge=document.getElementById('pl-wo-badge');
-  if(badge)badge.textContent=WF.getAll().filter(i=>i.woRef).length;
+  if(badge)badge.textContent=rawWOs.length;
   if(!items.length){list.innerHTML='<div class="alert alert-info">No WOs match the current filters.</div>';return;}
   list.innerHTML=items.map(item=>`
     <div class="wf-card ${item.priority}">
@@ -158,13 +251,14 @@ function renderReworkTab(){
 function filterWOTab(){renderWOTab();}
 
 function clearWOFilter(){
-  ['wo-mach','wo-prio','wo-stat'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='all';});
+  ['wo-prio','wo-stat'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='all';});
   renderWOTab();
 }
 
 function openPlanModal(id){
   activePlanId=id;
-  const item=WF.getAll().find(i=>i.id===id);
+  let item = consolItems.find(i=>i.id===id);
+  if(!item) item = woItems.find(i=>i.id===id);
   if(!item)return;
   document.getElementById('plan-modal-title').textContent=item.status==='rework'?'🔁 Plan Rework WO':'📋 Plan Work Order — '+item.machine;
   document.getElementById('plan-abn-summary').innerHTML=`
@@ -187,7 +281,7 @@ function openPlanModal(id){
   document.getElementById('planModal').classList.add('open');
 }
 
-function submitPlan(){
+async function submitPlan(){
   const executor=document.getElementById('plan-executor').value;
   const date=document.getElementById('plan-date').value;
   const hours=document.getElementById('plan-hours').value;
@@ -196,14 +290,37 @@ function submitPlan(){
   const errEl=document.getElementById('plan-modal-error');
   if(!date){errEl.textContent='Please select a scheduled date.';errEl.style.display='flex';return;}
   errEl.style.display='none';
-  const item=WF.planWO(activePlanId,{executor,date,hours,spares,notes});
-  document.getElementById('planModal').classList.remove('open');
-  refreshAll();
-  showToast(`📋 WO ${item.woRef} raised & assigned to ${executor}!`,'success');
+
+  let item = consolItems.find(i=>i.id===activePlanId);
+  if(!item) item = woItems.find(i=>i.id===activePlanId);
+  if(!item){ errEl.textContent='Item not found — try refreshing the page.'; errEl.style.display='flex'; return; }
+
+  const sop = getSOP(item);
+  try {
+    await generateWorkOrder(item, {
+      executors: [{ name: executor, role: 'Lead' }],
+      scheduledDate: date,
+      scheduledTime: '09:00',
+      hours: hours || sop.hours,
+      spares: spares || sop.material,
+      notes: notes || `SOP: ${sop.sop} · ${sop.method}`,
+      sopRef: sop.sop,
+    });
+    document.getElementById('planModal').classList.remove('open');
+    showToast(`📋 Work Order raised & assigned to ${executor}!`,'success');
+    await renderIncoming();
+    await renderWOTab();
+    updateBadges();
+  } catch (e) {
+    errEl.textContent = e?.message || 'Failed to raise work order';
+    errEl.style.display='flex';
+  }
 }
 
 function openPlDetail(id){
-  const item=WF.getAll().find(i=>i.id===id);
+  let item = consolItems.find(i=>i.id===id);
+  if(!item) item = woItems.find(i=>i.id===id);
+  if(!item) item = WF.getAll().find(i=>i.id===id);
   if(!item)return;
   document.getElementById('pl-detail-title').textContent='📄 '+item.checkPoint;
   document.getElementById('pl-detail-body').innerHTML=`
@@ -219,7 +336,7 @@ function openPlDetail(id){
       ${item.sparesNeeded?`<div style="background:var(--slate-50);border-radius:6px;padding:10px"><div style="font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px">Spares Needed</div>${item.sparesNeeded}</div>`:''}
     </div>
     <div style="font-size:11px;font-weight:700;color:var(--slate-500);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Workflow Timeline</div>
-    <div>${item.history.map(h=>`<div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--slate-100)">
+    <div>${(item.history||[]).map(h=>`<div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--slate-100)">
       <div style="width:24px;height:24px;border-radius:50%;background:var(--blue-50);border:1.5px solid var(--blue-200);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0">${h.icon||'📌'}</div>
       <div style="flex:1"><div style="font-size:12px;font-weight:700;color:var(--blue-900)">${h.stage}</div><div style="font-size:11px;color:var(--slate-400)">${h.by} · ${new Date(h.at).toLocaleString('en-IN',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'})}</div>${h.note?`<div style="font-size:11px;color:var(--slate-600);margin-top:2px">${h.note}</div>`:''}</div>
     </div>`).join('')}</div>
@@ -375,6 +492,27 @@ function getSOP(item) {
 
 let consolExecRows = {};
 
+// Real data now lives here — populated by renderConsolTab() from plannerApi
+// instead of WF/localStorage. Kept as a plain module-level array (not React
+// state) so it stays consistent with the rest of this file's imperative
+// DOM-driven rendering style.
+let consolItems = [];
+
+// Cache for the Work Orders tab (real smartpm_planner_work_order rows),
+// separate from consolItems since a WO's id format differs from an
+// abnormality's id — openPlDetail/openPlanModal check both caches.
+let woItems = [];
+
+// Common Plant/Line/Machine filter (same pattern as CheckerPage) — mirrored
+// here as module-level vars so the imperative renderConsolTab() function can
+// read the latest filter selection without being a React closure. The
+// component below keeps the "source of truth" in useState and syncs these
+// on every change.
+let plEquipmentList = [];
+let plFilterPlant = 'all';
+let plFilterLine = 'all';
+let plFilterMachine = 'all';
+
 function getConsolExecRows(id) {
   if(!consolExecRows[id]) {
     consolExecRows[id] = [{executor:'Manoj Shinde', datetime:'', role:'Lead'}];
@@ -413,7 +551,7 @@ function renderConsolCard(item) {
     </div>
   `).join('');
 
-  const isAlreadyWO = item.status !== 'pending_planner';
+  const isAlreadyWO = Boolean(item.wo);
 
   return `<div class="consol-card" style="position:relative" id="consol-card-${item.id}">
     <div style="position:absolute;left:0;top:0;bottom:0;width:5px;background:${priColor(item.priority)};border-radius:var(--radius-lg) 0 0 var(--radius-lg)"></div>
@@ -425,7 +563,7 @@ function renderConsolCard(item) {
       </div>
       <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
         ${isAlreadyWO ? `<span class="wf-pill pending-executor">WO: ${item.woRef}</span>` : ''}
-        <span style="font-size:11px;color:var(--slate-500)">• Manual + IIoT</span>
+        <span style="font-size:11px;color:var(--slate-500)">• ${item.sourceType === 'manual' ? 'Manual Log' : 'Checklist'}</span>
         <a class="sop-link" href="#" onclick="alert('Opening ${sop.sop}')">📖 ${sop.sop}</a>
       </div>
     </div>
@@ -472,21 +610,26 @@ function renderConsolCard(item) {
   </div>`;
 }
 
-function renderConsolTab() {
-  const items = WF.getAll().sort((a,b)=>(PRIORITY_ORDER[a.priority]||3)-(PRIORITY_ORDER[b.priority]||3));
+// ── Consolidated List — now backed by real DB data via plannerApi ───────────
+// Fetches manual abnormality logs + checklist "Abnormal" results (merged),
+// joins in any existing work order for each, and re-renders the tab.
+async function renderConsolTab() {
   const list = document.getElementById('consol-list');
   const empty = document.getElementById('consol-empty');
+
+  const items = await loadPlannerItems();
+
   const now = new Date();
-  document.getElementById('consol-sub').textContent = 'Vishwas Landage · ' + now.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}) + ' · Manual + IIoT Merged';
+  document.getElementById('consol-sub').textContent = 'Planner · ' + now.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}) + ' · Manual + Checklist Merged';
   document.getElementById('cs-crit').textContent = items.filter(i=>i.priority==='critical').length;
   document.getElementById('cs-high').textContent = items.filter(i=>i.priority==='high').length;
   document.getElementById('cs-med').textContent = items.filter(i=>i.priority==='medium').length;
   document.getElementById('cs-wo').textContent = items.filter(i=>i.woRef).length;
   const cb = document.getElementById('pl-consol-badge');
   if(cb) cb.textContent = items.filter(i=>i.status==='pending_planner').length;
-  if(!items.length) { if(empty)empty.style.display='flex'; list.innerHTML=''; return; }
+  if(!items.length) { if(empty)empty.style.display='flex'; if(list) list.innerHTML=''; return; }
   if(empty) empty.style.display='none';
-  list.innerHTML = items.map(i=>renderConsolCard(i)).join('');
+  if(list) list.innerHTML = items.map(i=>renderConsolCard(i)).join('');
 }
 
 function updExecRow(id, idx, field, val) {
@@ -505,33 +648,39 @@ function removeExecRow(id, idx) {
   renderConsolTab();
 }
 
-function generateWO(id) {
+// ── Generate WO & Assign — now writes a real smartpm_planner_work_order row ──
+async function generateWO(id) {
+  const item = consolItems.find(i => i.id === id);
+  if (!item) { showToast('Item not found — try refreshing.', 'error'); return; }
+
   const rows = consolExecRows[id] || [{executor:'Manoj Shinde', datetime:'', role:'Lead'}];
   const lead = rows.find(r=>r.role==='Lead') || rows[0];
-  if(!lead) { showToast('Please assign at least one executor.','error'); return; }
-  const execName = lead.executor.split(' (')[0];
-  const dtVal = lead.datetime;
-  // Extract date part from datetime-local value
-  const datePart = dtVal ? dtVal.split('T')[0] : new Date().toISOString().split('T')[0];
-  const timePart = dtVal ? dtVal.split('T')[1]||'09:00' : '09:00';
-  const sop = getSOP(WF.getAll().find(i=>i.id===id)||{});
-  const allExecs = rows.map(r=>`${r.executor.split(' (')[0]} (${r.role})`).join(', ');
+  if (!lead) { showToast('Please assign at least one executor.','error'); return; }
 
-  const item = WF.planWO(id, {
-    executor: execName,
-    allExecutors: allExecs,
-    date: datePart,
-    scheduledTime: timePart,
-    hours: sop.hours,
-    spares: sop.material,
-    notes: `SOP: ${sop.sop} · ${sop.method} · Team: ${allExecs}`,
-    sopRef: sop.sop,
-    plant: 'Plant A',
-    location: 'Utility Block'
-  });
-  renderConsolTab();
-  updateBadges();
-  showToast(`⚡ WO ${item.woRef} generated & assigned to ${allExecs}!`, 'success');
+  const dtVal = lead.datetime;
+  const datePart = dtVal ? dtVal.split('T')[0] : new Date().toISOString().split('T')[0];
+  const timePart = dtVal ? (dtVal.split('T')[1]||'09:00') : '09:00';
+  const sop = getSOP(item);
+  const executors = rows.map(r => ({ name: r.executor.split(' (')[0], role: r.role }));
+  const allExecsLabel = executors.map(e => `${e.name} (${e.role})`).join(', ');
+
+  try {
+    await generateWorkOrder(item, {
+      executors,
+      scheduledDate: datePart,
+      scheduledTime: timePart,
+      hours: sop.hours,
+      spares: sop.material,
+      notes: `SOP: ${sop.sop} · ${sop.method} · Team: ${allExecsLabel}`,
+      sopRef: sop.sop,
+    });
+    showToast(`⚡ Work Order generated & assigned to ${allExecsLabel}!`, 'success');
+    await renderConsolTab();
+    await renderWOTab();
+    updateBadges();
+  } catch (e) {
+    showToast(e?.message || 'Failed to generate work order', 'error');
+  }
 }
 
 function showToast(msg,type){
@@ -545,13 +694,77 @@ function showToast(msg,type){
 }
 
 function updateBadges(){
-  const items=WF.getAll();
-  const ib=document.getElementById('pl-incoming-badge');if(ib)ib.textContent=items.filter(i=>i.status==='pending_planner').length;
-  const wb=document.getElementById('pl-wo-badge');if(wb)wb.textContent=items.filter(i=>i.woRef).length;
-  const rb=document.getElementById('pl-rework-badge');if(rb)rb.textContent=items.filter(i=>i.status==='rework').length;
+  const wfItems=WF.getAll();
+  const ib=document.getElementById('pl-incoming-badge');if(ib)ib.textContent=consolItems.filter(i=>i.status==='pending_planner').length;
+  const wb=document.getElementById('pl-wo-badge');if(wb)wb.textContent=wfItems.filter(i=>i.woRef).length;
+  const rb=document.getElementById('pl-rework-badge');if(rb)rb.textContent=wfItems.filter(i=>i.status==='rework').length;
 }
 
 export default function PlannerPage({ onNavigate }) {
+  // ── Common Plant/Line/Machine filter — same pattern as CheckerPage ──────
+  const [equipmentList, setEquipmentList] = useState([]);
+  const [plantList, setPlantList] = useState([]);
+  const [lineList, setLineList] = useState([]);
+  const [machineList, setMachineList] = useState([]);
+  const [filterPlant, setFilterPlant] = useState('all');
+  const [filterLine, setFilterLine] = useState('all');
+  const [filterMachine, setFilterMachine] = useState('all');
+
+  useEffect(() => {
+    Promise.all([fetchEquipment(), fetchPlants(), fetchLines(), fetchMachines()])
+      .then(([eqJ, plantJ, lineJ, machineJ]) => {
+        setEquipmentList(rowsOf(eqJ));
+        setPlantList(rowsOf(plantJ));
+        setLineList(rowsOf(lineJ));
+        setMachineList(rowsOf(machineJ));
+      })
+      .catch(() => {});
+  }, []);
+
+  // Line dropdown — scoped to filterPlant, deduped by name (same as Checker)
+  const lineOptions = [
+    ...new Map(
+      lineList
+        .filter((l) => filterPlant === 'all' || String(l.plant_code) === String(filterPlant))
+        .map((l) => [l.line_name, l]),
+    ).values(),
+  ];
+
+  // Machine dropdown — scoped to filterPlant + filterLine (same as Checker)
+  const machineOptions = [
+    ...new Map(
+      machineList
+        .filter(
+          (m) =>
+            (filterPlant === 'all' || String(m.plant_code) === String(filterPlant)) &&
+            (filterLine === 'all' || String(m.line_name) === String(filterLine)),
+        )
+        .map((m) => [m.machine_name, m]),
+    ).values(),
+  ];
+
+  const handlePlantFilterChange = (e) => {
+    setFilterPlant(e.target.value);
+    setFilterLine('all');
+    setFilterMachine('all');
+  };
+  const handleLineFilterChange = (e) => {
+    setFilterLine(e.target.value);
+    setFilterMachine('all');
+  };
+
+  // Sync the module-level mirrors whenever the filter or equipment list
+  // changes, then re-render the (imperative) Consolidated List with the new
+  // scope applied.
+  useEffect(() => {
+    plEquipmentList = equipmentList;
+    plFilterPlant = filterPlant;
+    plFilterLine = filterLine;
+    plFilterMachine = filterMachine;
+    renderConsolTab();
+    renderWOTab();
+  }, [equipmentList, filterPlant, filterLine, filterMachine]);
+
   useEffect(() => {
     function t(){var n=new Date();document.getElementById('pl-clock').textContent=n.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})+' '+n.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});}t();const _iv = setInterval(t, 1000);
         return () => clearInterval(_iv);
@@ -634,8 +847,24 @@ export default function PlannerPage({ onNavigate }) {
         <nav className="top-nav">
           <a className="nav-logo" href="#" onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('home'); }}><div className="nav-logo-icon">📋</div><div><div className="nav-logo-text">SmartPM</div><div className="nav-logo-sub">Planner Portal</div></div></a>
           <div className="nav-spacer" />
-          <select className="form-select" style={{width: 100, fontSize: 12, padding: '5px 8px'}}><option>All Plants</option><option>Plant A</option><option>Plant B</option></select>
-          <select className="form-select" style={{width: 90, fontSize: 12, padding: '5px 8px', marginLeft: 6}}><option>All Lines</option><option>Line 1</option><option>Line 2</option></select>
+          <select className="form-select" style={{width: 110, fontSize: 12, padding: '5px 8px'}} value={filterPlant} onChange={handlePlantFilterChange}>
+            <option value="all">All Plants</option>
+            {plantList.map((p) => (
+              <option key={p.plant_code} value={p.plant_code}>{p.plant_name} ({p.plant_code})</option>
+            ))}
+          </select>
+          <select className="form-select" style={{width: 100, fontSize: 12, padding: '5px 8px', marginLeft: 6}} value={filterLine} onChange={handleLineFilterChange}>
+            <option value="all">All Lines</option>
+            {lineOptions.map((l) => (
+              <option key={`${l.plant_code}-${l.line_name}`} value={l.line_name}>{l.line_name}</option>
+            ))}
+          </select>
+          <select className="form-select" style={{width: 110, fontSize: 12, padding: '5px 8px', marginLeft: 6}} value={filterMachine} onChange={(e) => setFilterMachine(e.target.value)}>
+            <option value="all">All Machines</option>
+            {machineOptions.map((m) => (
+              <option key={`${m.plant_code}-${m.line_name}-${m.machine_name}`} value={m.machine_name}>{m.machine_name}</option>
+            ))}
+          </select>
           <div className="nav-role-badge" style={{marginLeft: 8}}><div className="nav-role-dot" style={{background: '#2563EB'}} /><span className="nav-role-name">Vishwas Landage · Planner</span></div>
           <a href="#" onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('home'); }} className="nav-home-btn" style={{marginLeft: 8}}>← Home</a>
           <div id="pl-clock" style={{color: 'rgba(255,255,255,.5)', fontSize: 11, fontFamily: 'var(--font-mono)', marginLeft: 10}} />
@@ -679,7 +908,7 @@ export default function PlannerPage({ onNavigate }) {
                     <div className="page-subtitle" id="consol-sub">Vishwas Landage · Manual + IIoT Merged</div>
                   </div>
                   <div style={{display: 'flex', gap: 8}}>
-                    <button className="btn btn-secondary btn-sm" onClick={(e) => { refreshAll() }}>⟳ Refresh</button>
+                    <button className="btn btn-secondary btn-sm" onClick={(e) => { renderConsolTab() }}>⟳ Refresh</button>
                     <div style={{display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, color: 'var(--green)', fontWeight: 600}}><span style={{width: 8, height: 8, background: 'var(--green)', borderRadius: '50%', animation: 'pulse 2s infinite', display: 'inline-block'}} />Live</div>
                   </div>
                 </div>
@@ -694,7 +923,7 @@ export default function PlannerPage({ onNavigate }) {
               <div id="consol-list" />
             </div>
             {/* ══ INCOMING TAB ══ */}
-            <div id="tab-incoming">
+            <div id="tab-incoming" style={{display: 'none'}}>
               <div className="page-header">
                 <div className="breadcrumb"><span>Planner</span><span className="breadcrumb-sep">›</span>Incoming Abnormalities</div>
                 <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 8}}>
@@ -724,9 +953,25 @@ export default function PlannerPage({ onNavigate }) {
                 </div>
               </div>
               <div className="wo-filter-bar">
-                <label>Plant</label><select className="form-select" style={{width: 95, fontSize: 12}} onChange={(e) => { filterWOTab() }}><option value="all">All</option><option>Plant A</option><option>Plant B</option></select>
-                <label>Line</label><select className="form-select" style={{width: 90, fontSize: 12}} onChange={(e) => { filterWOTab() }}><option value="all">All</option><option>Line 1</option><option>Line 2</option><option>Line 3</option></select>
-                <label>Machine</label><select className="form-select" id="wo-mach" style={{width: 130, fontSize: 12}} onChange={(e) => { filterWOTab() }}><option value="all">All</option><option>CP-101</option><option>HX-204</option><option>COM-302</option><option>MDU-115</option><option>Forging-Press</option><option>Robotic-Arm</option></select>
+                <label>FILTER:</label>
+                <select className="form-select" style={{width: 150, fontSize: 12}} value={filterPlant} onChange={handlePlantFilterChange}>
+                  <option value="all">All Plants</option>
+                  {plantList.map((p) => (
+                    <option key={p.plant_code} value={p.plant_code}>{p.plant_name} ({p.plant_code})</option>
+                  ))}
+                </select>
+                <select className="form-select" style={{width: 140, fontSize: 12}} value={filterLine} onChange={handleLineFilterChange}>
+                  <option value="all">All Lines</option>
+                  {lineOptions.map((l) => (
+                    <option key={`${l.plant_code}-${l.line_name}`} value={l.line_name}>{l.line_name}</option>
+                  ))}
+                </select>
+                <select className="form-select" style={{width: 150, fontSize: 12}} value={filterMachine} onChange={(e) => setFilterMachine(e.target.value)}>
+                  <option value="all">All Machines</option>
+                  {machineOptions.map((m) => (
+                    <option key={`${m.plant_code}-${m.line_name}-${m.machine_name}`} value={m.machine_name}>{m.machine_name}</option>
+                  ))}
+                </select>
                 <label>Priority</label><select className="form-select" id="wo-prio" style={{width: 100, fontSize: 12}} onChange={(e) => { filterWOTab() }}><option value="all">All</option><option value="critical">🔴 Critical</option><option value="high">🟠 High</option><option value="medium">🟡 Medium</option></select>
                 <label>Status</label><select className="form-select" id="wo-stat" style={{width: 150, fontSize: 12}} onChange={(e) => { filterWOTab() }}><option value="all">All</option><option value="pending_executor">Pending Executor</option><option value="pending_audit">Pending Audit</option><option value="rework">Rework</option><option value="closed">Closed</option></select>
                 <button className="btn btn-secondary btn-sm" onClick={(e) => { clearWOFilter() }}>↺ Reset</button>

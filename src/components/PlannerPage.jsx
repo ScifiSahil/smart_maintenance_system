@@ -4,6 +4,7 @@ import { fetchEquipment } from '../services/equipmentApi';
 import { fetchPlants } from '../services/plantApi';
 import { fetchLines } from '../services/lineApi';
 import { fetchMachines } from '../services/machineApi';
+import { fetchTechnicians } from '../services/technicianApi';
 
 const rowsOf = (j) => j?.objects ?? j?.data ?? j?.results ?? [];
 
@@ -81,7 +82,13 @@ async function loadPlannerItems() {
       status: it.wo ? it.wo.status : 'pending_planner',
       woRef: it.wo?.wo_ref,
       assignedTo: it.wo?.assigned_to,
+      allExecutors: it.wo?.all_executors,
       scheduledDate: it.wo?.scheduled_date,
+      scheduledTime: it.wo?.scheduled_time,
+      sparesNeeded: it.wo?.spares_needed,
+      plannerNotes: it.wo?.planner_notes,
+      estimatedHours: it.wo?.estimated_hours,
+      reworkCount: Number(it.wo?.rework_count || 0),
     }))
     .sort((a, b) => (PRIORITY_ORDER[a.priority] || 3) - (PRIORITY_ORDER[b.priority] || 3));
 
@@ -278,7 +285,7 @@ function openPlanModal(id){
   document.getElementById('plan-spares').value='';
   document.getElementById('plan-notes').value='';
   document.getElementById('plan-modal-error').style.display='none';
-  document.getElementById('planModal').classList.add('open');
+  document.getElementById('planModal').classList.remove('hidden'); document.getElementById('planModal').classList.add('flex');
 }
 
 async function submitPlan(){
@@ -306,7 +313,7 @@ async function submitPlan(){
       notes: notes || `SOP: ${sop.sop} · ${sop.method}`,
       sopRef: sop.sop,
     });
-    document.getElementById('planModal').classList.remove('open');
+    document.getElementById('planModal').classList.remove('flex'); document.getElementById('planModal').classList.add('hidden');
     showToast(`📋 Work Order raised & assigned to ${executor}!`,'success');
     await renderIncoming();
     await renderWOTab();
@@ -315,6 +322,35 @@ async function submitPlan(){
     errEl.textContent = e?.message || 'Failed to raise work order';
     errEl.style.display='flex';
   }
+}
+
+// ── Real timeline for the Detail modal — built from actual timestamps we
+// have (when it was reported, when the WO was raised + to whom), instead of
+// the old demo `history` array which only ever existed in localStorage.
+function buildTimeline(item) {
+  const rows = [];
+  if (item.loggedDate) {
+    rows.push({
+      icon: item.sourceType === 'manual' ? '⚠️' : '🔍',
+      stage: item.sourceType === 'manual' ? 'Abnormality Logged' : 'Flagged by Checklist',
+      by: item.loggedBy || (item.sourceType === 'checklist' ? 'Checker Inspection' : '—'),
+      at: `${item.loggedDate}${item.loggedTime ? ' ' + item.loggedTime : ''}`,
+      note: item.observed ? `Observed: ${item.observed}` : (item.remarks || ''),
+    });
+  }
+  if (item.woRef) {
+    rows.push({
+      icon: '📋',
+      stage: item.reworkCount > 0 ? `Rework WO Raised (#${item.reworkCount})` : 'Work Order Raised',
+      by: 'Planner',
+      at: `${item.scheduledDate || ''}${item.scheduledTime ? ' ' + item.scheduledTime : ''}`,
+      note: `${item.woRef} → ${item.allExecutors || item.assignedTo || '—'}`,
+    });
+  }
+  if (item.status === 'pending_audit') rows.push({ icon: '🔍', stage: 'Awaiting Audit', by: '—', at: '', note: '' });
+  else if (item.status === 'closed') rows.push({ icon: '✅', stage: 'Closed', by: '—', at: '', note: '' });
+  else if (item.status === 'rework') rows.push({ icon: '🔁', stage: 'Sent back for Rework', by: 'Auditor', at: '', note: 'Audit failed — see planner notes' });
+  return rows;
 }
 
 function openPlDetail(id){
@@ -331,17 +367,19 @@ function openPlDetail(id){
       <div style="background:var(--slate-50);border-radius:6px;padding:10px"><div style="font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px">Observed</div>${item.observed||'—'}</div>
       <div style="background:var(--slate-50);border-radius:6px;padding:10px"><div style="font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px">Cause</div>${item.cause||'—'}</div>
       ${item.woRef?`<div style="background:var(--blue-50);border-radius:6px;padding:10px"><div style="font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px">WO Reference</div><strong style="font-family:var(--font-mono)">${item.woRef}</strong></div>`:''}
-      ${item.assignedTo?`<div style="background:var(--slate-50);border-radius:6px;padding:10px"><div style="font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px">Assigned To</div>${item.assignedTo}</div>`:''}
-      ${item.scheduledDate?`<div style="background:var(--slate-50);border-radius:6px;padding:10px"><div style="font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px">Scheduled Date</div>${item.scheduledDate}</div>`:''}
+      ${item.allExecutors||item.assignedTo?`<div style="background:var(--blue-50);border-radius:6px;padding:10px;grid-column:span 2"><div style="font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px">Team / Executors</div>${item.allExecutors||item.assignedTo}</div>`:''}
+      ${item.scheduledDate?`<div style="background:var(--slate-50);border-radius:6px;padding:10px"><div style="font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px">Scheduled</div>${item.scheduledDate}${item.scheduledTime?' '+item.scheduledTime:''}</div>`:''}
+      ${item.estimatedHours?`<div style="background:var(--slate-50);border-radius:6px;padding:10px"><div style="font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px">Estimated Hours</div>${item.estimatedHours}</div>`:''}
       ${item.sparesNeeded?`<div style="background:var(--slate-50);border-radius:6px;padding:10px"><div style="font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px">Spares Needed</div>${item.sparesNeeded}</div>`:''}
+      ${item.plannerNotes?`<div style="background:var(--slate-50);border-radius:6px;padding:10px;grid-column:span 2"><div style="font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px">Planner Notes</div>${item.plannerNotes}</div>`:''}
     </div>
     <div style="font-size:11px;font-weight:700;color:var(--slate-500);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Workflow Timeline</div>
-    <div>${(item.history||[]).map(h=>`<div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--slate-100)">
+    <div>${buildTimeline(item).map(h=>`<div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--slate-100)">
       <div style="width:24px;height:24px;border-radius:50%;background:var(--blue-50);border:1.5px solid var(--blue-200);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0">${h.icon||'📌'}</div>
-      <div style="flex:1"><div style="font-size:12px;font-weight:700;color:var(--blue-900)">${h.stage}</div><div style="font-size:11px;color:var(--slate-400)">${h.by} · ${new Date(h.at).toLocaleString('en-IN',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'})}</div>${h.note?`<div style="font-size:11px;color:var(--slate-600);margin-top:2px">${h.note}</div>`:''}</div>
-    </div>`).join('')}</div>
+      <div style="flex:1"><div style="font-size:12px;font-weight:700;color:var(--blue-900)">${h.stage}</div><div style="font-size:11px;color:var(--slate-400)">${h.by}${h.at?' · '+h.at:''}</div>${h.note?`<div style="font-size:11px;color:var(--slate-600);margin-top:2px">${h.note}</div>`:''}</div>
+    </div>`).join('') || '<div style="color:var(--slate-400);font-size:12px">No timeline data available.</div>'}</div>
   `;
-  document.getElementById('plDetailModal').classList.add('open');
+  document.getElementById('plDetailModal').classList.remove('hidden'); document.getElementById('plDetailModal').classList.add('flex');
 }
 
 function showTab(name,el){
@@ -368,32 +406,59 @@ const PL_DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 
 let plCkYear,plCkMonth,plCkEvents={};
 
-function plSeedCkEvents(year,month){
-  plCkEvents={};
-  const k=d=>`${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-  const dim=new Date(year,month+1,0).getDate();
-  for(let d=1;d<=dim;d++){
-    const dow=new Date(year,month,d).getDay();
-    if(dow===0||dow===6)continue;
-    if(d%2===0){if(!plCkEvents[k(d)])plCkEvents[k(d)]=[];plCkEvents[k(d)].push({type:'insp',label:'CP-101 Daily PM',time:'08:00',icon:'⚙️'});}
-    if(dow===1&&d<=22){if(!plCkEvents[k(d)])plCkEvents[k(d)]=[];plCkEvents[k(d)].push({type:'insp',label:'HX-204 Weekly PM',time:'14:00',icon:'🔥'});}
-    if(d<=5){if(!plCkEvents[k(d)])plCkEvents[k(d)]=[];plCkEvents[k(d)].push({type:'overdue',label:'COM-302 PM — OVERDUE',time:'—',icon:'💨'});}
+// ── Real calendar data — built from actual DB rows, no synthetic demo data
+// and no localStorage. Two kinds of events per day:
+//   'logged'    — an abnormality (manual or checklist) on the day it was reported
+//   'scheduled' — a Work Order on the day it's scheduled to be executed
+async function plSeedCkEvents(year, month) {
+  plCkEvents = {};
+  const k = (d) => `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+
+  let items = [];
+  let wos = [];
+  try {
+    [items, wos] = await Promise.all([fetchConsolidatedList(), fetchWorkOrders()]);
+  } catch (e) {
+    showToast(e?.message || 'Failed to load calendar data', 'error');
+    return;
   }
-  WF.getAll().forEach(item=>{
-    if(item.loggedAt){
-      const dt=new Date(item.loggedAt);
-      if(dt.getFullYear()===year&&dt.getMonth()===month){
-        const kk=k(dt.getDate());
-        if(!plCkEvents[kk])plCkEvents[kk]=[];
-        plCkEvents[kk].push({type:'wo',label:'ABN: '+item.checkPoint+(item.woRef?' · '+item.woRef:''),time:item.loggedTime,icon:'⚠️',status:item.status,id:item.id});
-      }
-    }
+
+  items.forEach((item) => {
+    if (!item.loggedDate) return;
+    const [y, m, d] = item.loggedDate.split('-').map(Number);
+    if (y !== year || (m - 1) !== month) return;
+    const kk = k(d);
+    if (!plCkEvents[kk]) plCkEvents[kk] = [];
+    plCkEvents[kk].push({
+      type: 'logged',
+      label: '⚠️ ' + item.checkPoint + ' — ' + item.machine + (item.wo ? ' · ' + item.wo.wo_ref : ''),
+      time: item.loggedTime || '—',
+      icon: '⚠️',
+      status: item.wo ? item.wo.status : 'pending_planner',
+      id: item.id,
+    });
+  });
+
+  wos.forEach((wo) => {
+    if (!wo.scheduled_date) return;
+    const [y, m, d] = wo.scheduled_date.split('-').map(Number);
+    if (y !== year || (m - 1) !== month) return;
+    const kk = k(d);
+    if (!plCkEvents[kk]) plCkEvents[kk] = [];
+    plCkEvents[kk].push({
+      type: 'scheduled',
+      label: '🔧 ' + wo.wo_ref + ' — ' + wo.check_point + ' (' + wo.equipment_code + ') · ' + (wo.assigned_to || '—'),
+      time: wo.scheduled_time || '—',
+      icon: '🔧',
+      status: wo.status,
+      id: 'wo:' + wo.cdb_object_id,
+    });
   });
 }
 
-function plBuildCkCal(year,month){
+async function plBuildCkCal(year,month){
   plCkYear=year;plCkMonth=month;
-  plSeedCkEvents(year,month);
+  await plSeedCkEvents(year,month);
   const n=new Date(),ty=n.getFullYear(),tm=n.getMonth(),td=n.getDate();
   document.getElementById('pl-ck-label').textContent=PL_MONTHS[month]+' '+year;
   document.getElementById('pl-ck-sub').textContent='Sandeep Tapkir · '+PL_MONTHS[month]+' '+year;
@@ -409,12 +474,12 @@ function plBuildCkCal(year,month){
     const dk=`${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
     const evs=plCkEvents[dk]||[];
     const isToday=year===ty&&month===tm&&d===td;
-    const hasOver=evs.some(e=>e.type==='overdue'),hasWO=evs.some(e=>e.type==='wo'),hasInsp=evs.some(e=>e.type==='insp');
-    let cls='cal-day';if(isToday)cls+=' today';if(hasOver)cls+=' has-overdue';else if(hasWO)cls+=' has-wo';else if(hasInsp)cls+=' has-task';
+    const hasLogged=evs.some(e=>e.type==='logged'),hasScheduled=evs.some(e=>e.type==='scheduled');
+    let cls='cal-day';if(isToday)cls+=' today';if(hasLogged)cls+=' has-overdue';else if(hasScheduled)cls+=' has-task';
     const cell=document.createElement('div');cell.className=cls;cell.innerHTML=`<span>${d}</span>`;
     if(evs.length>0){
       const dot=document.createElement('span');dot.style.cssText='position:absolute;bottom:3px;left:50%;transform:translateX(-50%);display:flex;gap:2px';
-      evs.slice(0,3).forEach(ev=>{const dd=document.createElement('span');dd.style.cssText=`width:4px;height:4px;border-radius:50%;background:${ev.type==='overdue'?'var(--red)':ev.type==='wo'?'var(--amber)':isToday?'white':'var(--green)'}`;dot.appendChild(dd);});
+      evs.slice(0,3).forEach(ev=>{const dd=document.createElement('span');dd.style.cssText=`width:4px;height:4px;border-radius:50%;background:${ev.type==='logged'?'var(--red)':isToday?'white':'var(--green)'}`;dot.appendChild(dd);});
       cell.appendChild(dot);cell.style.cursor='pointer';
       cell.addEventListener('click',()=>plShowCkDay(d,month,year,dk,evs,isToday));
     }
@@ -430,8 +495,8 @@ function plShowCkDay(day,month,year,dk,evs,isToday){
   let html='<div style="display:flex;flex-direction:column;gap:8px">';
   if(!evs.length)html+='<div style="color:var(--slate-400);font-size:13px">No tasks this day.</div>';
   else evs.forEach(ev=>{
-    const b=ev.type==='overdue'?'badge-abnormal':ev.type==='wo'?'badge-pending':'badge-ok';
-    const bl=ev.type==='overdue'?'Overdue':ev.type==='wo'?'WO Logged':'Inspection';
+    const b=ev.type==='logged'?'badge-abnormal':'badge-pending';
+    const bl=ev.type==='logged'?'Abnormality':'Scheduled Work';
     html+=`<div style="display:flex;align-items:center;gap:10px;background:white;border-radius:var(--radius);padding:10px 12px;border:1px solid var(--slate-200)">
       <span style="font-size:18px">${ev.icon||'📋'}</span>
       <div style="flex:1"><div style="font-size:13px;font-weight:600">${ev.label}</div><div style="font-size:11px;color:var(--slate-500)">${ev.time}</div></div>
@@ -446,19 +511,64 @@ function plCkNav(dir){plCkMonth+=dir;if(plCkMonth>11){plCkMonth=0;plCkYear++;}if
 
 function plCkToday(){const n=new Date();plBuildCkCal(n.getFullYear(),n.getMonth());}
 
-function renderExCal(){
+async function renderExCal(){
   const now=new Date();
   document.getElementById('pl-ex-date').textContent=now.toLocaleDateString('en-IN',{day:'2-digit',month:'long',year:'numeric'});
-  const items=WF.getAll().filter(i=>i.assignedTo);
+  const execFilter=document.getElementById('ex-cal-executor')?.value||'all';
+
+  let rawWOs = [];
+  try {
+    rawWOs = await fetchWorkOrders();
+  } catch (e) {
+    showToast(e?.message || 'Failed to load executor schedule', 'error');
+  }
+
+  let items = rawWOs
+    .filter((wo) => wo.status && wo.status !== 'closed') // active WOs only
+    .map((wo) => ({
+      woRef: wo.wo_ref,
+      checkPoint: wo.check_point,
+      machine: wo.equipment_code,
+      assignedTo: wo.assigned_to,
+      priority: (wo.priority || 'medium').toLowerCase(),
+      status: wo.status,
+      scheduledDate: wo.scheduled_date,
+    }));
+
+  // Common Plant/Line/Machine filter (top-bar) — same pattern as everywhere else.
+  if (plFilterPlant !== 'all' || plFilterLine !== 'all' || plFilterMachine !== 'all') {
+    const equipMap = {};
+    plEquipmentList.forEach((eq) => { equipMap[eq.equipment_code || eq.code] = eq; });
+    items = items.filter((it) => {
+      const eq = equipMap[it.machine];
+      if (!eq) return true;
+      if (plFilterPlant !== 'all' && String(eq.plant_code) !== String(plFilterPlant)) return false;
+      if (plFilterLine !== 'all' && String(eq.line || '') !== String(plFilterLine)) return false;
+      if (plFilterMachine !== 'all' && String(eq.machine || '') !== String(plFilterMachine)) return false;
+      return true;
+    });
+  }
+
   const exMap={};
-  items.forEach(item=>{const ex=item.assignedTo;if(!exMap[ex])exMap[ex]=[];exMap[ex].push(item);});
-  const all=['Manoj Shinde','Pradeep Jadhav','Rakesh Patil','Suresh Kulkarni','Dinesh Wagh','Amol Deshmukh','Nilesh More'];
+  items.forEach(item=>{
+    const ex=item.assignedTo;
+    if(!ex) return;
+    if(!exMap[ex])exMap[ex]=[];
+    exMap[ex].push(item);
+  });
+
+  // Executor roster — from smartpm_technician_master (see plTechnicians sync
+  // effect in the component below), NOT hardcoded. Role is read straight off
+  // the technician row instead of guessed from the name.
+  const all = (execFilter === 'all')
+    ? plTechnicians.map((t) => t.name)
+    : [execFilter];
+
   let html='<div class="table-wrap"><table><thead><tr><th>Executor</th><th>Role</th><th>Assigned WOs</th><th>Status</th></tr></thead><tbody>';
   all.forEach(ex=>{
     const wos=exMap[ex]||[];
-    const roles={Manoj:'Mech L3',Pradeep:'Mech L2',Rakesh:'Mech L2',Suresh:'Elect L2',Dinesh:'Mech L2',Amol:'Mech L1',Nilesh:'Mech L1'};
-    const role=Object.entries(roles).find(([k])=>ex.startsWith(k))?.[1]||'Mech';
-    const woHtml=wos.length?wos.map(w=>`<span class="badge badge-${w.priority==='critical'?'critical':w.priority==='high'?'high':'medium'}" style="margin:2px">${w.woRef||'—'} ${w.machine}</span>`).join(' '):'<span style="color:var(--slate-400);font-size:12px">Free</span>';
+    const role = plTechnicians.find((t) => t.name === ex)?.technician_role || '—';
+    const woHtml=wos.length?wos.map(w=>`<span class="badge badge-${w.priority==='critical'?'critical':w.priority==='high'?'high':'medium'}" style="margin:2px" title="Scheduled: ${w.scheduledDate||'—'}">${w.woRef||'—'} ${w.machine}</span>`).join(' '):'<span style="color:var(--slate-400);font-size:12px">Free</span>';
     html+=`<tr><td><strong>${ex}</strong></td><td><span style="font-size:11px;color:var(--slate-400)">${role}</span></td><td>${woHtml}</td><td>${wos.length?`<span class="badge badge-progress">${wos.length} Active</span>`:'<span class="badge badge-closed">Available</span>'}</td></tr>`;
   });
   html+='</tbody></table></div>';
@@ -513,9 +623,16 @@ let plFilterPlant = 'all';
 let plFilterLine = 'all';
 let plFilterMachine = 'all';
 
+// Technician roster — from smartpm_technician_master, synced from the
+// component's `technicians` state (see the sync effect below). Replaces the
+// old hardcoded name/role list used across Assign Executors, the Plan WO
+// modal, and the Executor Calendar.
+let plTechnicians = [];
+
 function getConsolExecRows(id) {
   if(!consolExecRows[id]) {
-    consolExecRows[id] = [{executor:'Manoj Shinde', datetime:'', role:'Lead'}];
+    const lead = plTechnicians[0];
+    consolExecRows[id] = [{executor: lead ? lead.name : '', datetime:'', role:'Lead'}];
   }
   return consolExecRows[id];
 }
@@ -537,11 +654,17 @@ function renderConsolCard(item) {
   const today = new Date();
   const defDate = today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0')+'-'+String(today.getDate()+1).padStart(2,'0')+'T09:00';
 
+  // Technician dropdown options — built fresh from plTechnicians on every
+  // render, so newly added/removed technicians show up immediately.
+  const techOptionsHtml = (selectedName) => plTechnicians.map((t) =>
+    `<option value="${t.name}" ${t.name===selectedName?'selected':''}>${t.name} (${t.technician_role})</option>`
+  ).join('');
+
   const execRowsHtml = rows.map((r,idx) => `
     <div class="exec-assign-row" id="execrow-${item.id}-${idx}">
       <div class="exec-num">${idx+1}</div>
       <select class="form-select" style="flex:2;min-width:180px;font-size:12px" onchange="updExecRow('${item.id}',${idx},'executor',this.value)">
-        ${['Manoj Shinde (Mech L3)','Pradeep Jadhav (Mech L2)','Rakesh Patil (Mech L2)','Suresh Kulkarni (Elect L2)','Dinesh Wagh (Mech L2)','Amol Deshmukh (Mech L1)','Nilesh More (Mech L1)'].map(e=>`<option ${r.executor===e.split(' (')[0]?'selected':''}>${e}</option>`).join('')}
+        ${plTechnicians.length ? techOptionsHtml(r.executor) : '<option value="">No technicians found</option>'}
       </select>
       <input type="datetime-local" class="form-input" style="width:180px;font-size:12px" value="${r.datetime||defDate}" onchange="updExecRow('${item.id}',${idx},'datetime',this.value)"/>
       <select class="form-select" style="width:110px;font-size:12px" onchange="updExecRow('${item.id}',${idx},'role',this.value)">
@@ -633,13 +756,18 @@ async function renderConsolTab() {
 }
 
 function updExecRow(id, idx, field, val) {
-  if(!consolExecRows[id]) consolExecRows[id]=[{executor:'Manoj Shinde',datetime:'',role:'Lead'}];
+  if(!consolExecRows[id]) {
+    const lead = plTechnicians[0];
+    consolExecRows[id]=[{executor: lead ? lead.name : '', datetime:'', role:'Lead'}];
+  }
   consolExecRows[id][idx][field] = val;
 }
 
 function addExecRow(id) {
   if(!consolExecRows[id]) consolExecRows[id]=[];
-  consolExecRows[id].push({executor:'Pradeep Jadhav',datetime:'',role:'Support'});
+  // New row starts blank so the planner explicitly picks who's supporting —
+  // no more hardcoded "Pradeep Jadhav" default.
+  consolExecRows[id].push({executor:'', datetime:'', role:'Support'});
   renderConsolTab();
 }
 
@@ -653,15 +781,15 @@ async function generateWO(id) {
   const item = consolItems.find(i => i.id === id);
   if (!item) { showToast('Item not found — try refreshing.', 'error'); return; }
 
-  const rows = consolExecRows[id] || [{executor:'Manoj Shinde', datetime:'', role:'Lead'}];
+  const rows = consolExecRows[id] || [];
   const lead = rows.find(r=>r.role==='Lead') || rows[0];
-  if (!lead) { showToast('Please assign at least one executor.','error'); return; }
+  if (!lead || !lead.executor) { showToast('Please assign at least one executor.','error'); return; }
 
   const dtVal = lead.datetime;
   const datePart = dtVal ? dtVal.split('T')[0] : new Date().toISOString().split('T')[0];
   const timePart = dtVal ? (dtVal.split('T')[1]||'09:00') : '09:00';
   const sop = getSOP(item);
-  const executors = rows.map(r => ({ name: r.executor.split(' (')[0], role: r.role }));
+  const executors = rows.filter(r => r.executor).map(r => ({ name: r.executor, role: r.role }));
   const allExecsLabel = executors.map(e => `${e.name} (${e.role})`).join(', ');
 
   try {
@@ -700,6 +828,31 @@ function updateBadges(){
   const rb=document.getElementById('pl-rework-badge');if(rb)rb.textContent=wfItems.filter(i=>i.status==='rework').length;
 }
 
+// ── Expose imperative handlers used inside innerHTML-rendered markup ────────
+// renderConsolCard/renderIncomingCard/renderWOTab/renderReworkTab/plShowCkDay
+// all build raw HTML strings with onclick="functionName(...)" attributes
+// (e.g. "+ Add Executor", "Generate WO & Assign", "Plan WO & Assign").
+// Browsers resolve those attribute strings against `window`, NOT this
+// module's scope — so without this block, clicking them throws
+// "functionName is not defined" and silently does nothing.
+if (typeof window !== 'undefined') {
+  Object.assign(window, {
+    openPlanModal,
+    openPlDetail,
+    updExecRow,
+    addExecRow,
+    removeExecRow,
+    generateWO,
+    submitPlan,
+    showTab,
+    refreshAll,
+    filterWOTab,
+    clearWOFilter,
+    plCkNav,
+    plCkToday,
+  });
+}
+
 export default function PlannerPage({ onNavigate }) {
   // ── Common Plant/Line/Machine filter — same pattern as CheckerPage ──────
   const [equipmentList, setEquipmentList] = useState([]);
@@ -710,6 +863,10 @@ export default function PlannerPage({ onNavigate }) {
   const [filterLine, setFilterLine] = useState('all');
   const [filterMachine, setFilterMachine] = useState('all');
 
+  // Technician roster — real data from smartpm_technician_master, replacing
+  // the old hardcoded name/role lists.
+  const [technicians, setTechnicians] = useState([]);
+
   useEffect(() => {
     Promise.all([fetchEquipment(), fetchPlants(), fetchLines(), fetchMachines()])
       .then(([eqJ, plantJ, lineJ, machineJ]) => {
@@ -719,6 +876,10 @@ export default function PlannerPage({ onNavigate }) {
         setMachineList(rowsOf(machineJ));
       })
       .catch(() => {});
+
+    fetchTechnicians()
+      .then(setTechnicians)
+      .catch(() => setTechnicians([]));
   }, []);
 
   // Line dropdown — scoped to filterPlant, deduped by name (same as Checker)
@@ -753,17 +914,19 @@ export default function PlannerPage({ onNavigate }) {
     setFilterMachine('all');
   };
 
-  // Sync the module-level mirrors whenever the filter or equipment list
-  // changes, then re-render the (imperative) Consolidated List with the new
-  // scope applied.
+  // Sync the module-level mirrors whenever the filter, equipment list, or
+  // technician roster changes, then re-render the (imperative) tabs with the
+  // new data applied.
   useEffect(() => {
     plEquipmentList = equipmentList;
     plFilterPlant = filterPlant;
     plFilterLine = filterLine;
     plFilterMachine = filterMachine;
+    plTechnicians = technicians;
     renderConsolTab();
     renderWOTab();
-  }, [equipmentList, filterPlant, filterLine, filterMachine]);
+    renderExCal();
+  }, [equipmentList, filterPlant, filterLine, filterMachine, technicians]);
 
   useEffect(() => {
     function t(){var n=new Date();document.getElementById('pl-clock').textContent=n.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})+' '+n.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});}t();const _iv = setInterval(t, 1000);
@@ -1003,9 +1166,8 @@ export default function PlannerPage({ onNavigate }) {
               <div className="card">
                 <div className="card-header"><div className="card-title" id="pl-ck-label">—</div>
                   <div style={{display: 'flex', gap: 8, fontSize: 11, color: 'var(--slate-500)', alignItems: 'center'}}>
-                    <span style={{display: 'flex', alignItems: 'center', gap: 3}}><span style={{width: 8, height: 8, background: 'var(--green)', borderRadius: '50%', display: 'inline-block'}} />Inspection</span>
-                    <span style={{display: 'flex', alignItems: 'center', gap: 3}}><span style={{width: 8, height: 8, background: 'var(--amber)', borderRadius: '50%', display: 'inline-block'}} />ABN Logged</span>
-                    <span style={{display: 'flex', alignItems: 'center', gap: 3}}><span style={{width: 8, height: 8, background: 'var(--red)', borderRadius: '50%', display: 'inline-block'}} />Overdue</span>
+                    <span style={{display: 'flex', alignItems: 'center', gap: 3}}><span style={{width: 8, height: 8, background: 'var(--green)', borderRadius: '50%', display: 'inline-block'}} />Scheduled Work Order</span>
+                    <span style={{display: 'flex', alignItems: 'center', gap: 3}}><span style={{width: 8, height: 8, background: 'var(--red)', borderRadius: '50%', display: 'inline-block'}} />Abnormality Logged</span>
                   </div>
                 </div>
                 <div className="cal-grid" id="pl-ck-grid" />
@@ -1021,10 +1183,34 @@ export default function PlannerPage({ onNavigate }) {
                 <div className="breadcrumb"><span>Planner</span><span className="breadcrumb-sep">›</span>Executor Calendar</div>
                 <div><div className="page-title">Executor Work Calendar</div><div className="page-subtitle">All executors — assigned WOs by date</div></div>
               </div>
+              <div className="wo-filter-bar">
+                <label>FILTER:</label>
+                <select className="form-select" style={{width: 150, fontSize: 12}} value={filterPlant} onChange={handlePlantFilterChange}>
+                  <option value="all">All Plants</option>
+                  {plantList.map((p) => (
+                    <option key={p.plant_code} value={p.plant_code}>{p.plant_name} ({p.plant_code})</option>
+                  ))}
+                </select>
+                <select className="form-select" style={{width: 140, fontSize: 12}} value={filterLine} onChange={handleLineFilterChange}>
+                  <option value="all">All Lines</option>
+                  {lineOptions.map((l) => (
+                    <option key={`${l.plant_code}-${l.line_name}`} value={l.line_name}>{l.line_name}</option>
+                  ))}
+                </select>
+                <select className="form-select" style={{width: 150, fontSize: 12}} value={filterMachine} onChange={(e) => setFilterMachine(e.target.value)}>
+                  <option value="all">All Machines</option>
+                  {machineOptions.map((m) => (
+                    <option key={`${m.plant_code}-${m.line_name}-${m.machine_name}`} value={m.machine_name}>{m.machine_name}</option>
+                  ))}
+                </select>
+              </div>
               <div className="card">
                 <div className="card-header"><div className="card-title">Executor Schedule — <span id="pl-ex-date" /></div>
-                  <select className="form-select" style={{width: 180, fontSize: 12}}>
-                    <option>All Executors</option><option>Manoj Shinde</option><option>Pradeep Jadhav</option><option>Rakesh Patil</option><option>Suresh Kulkarni</option><option>Dinesh Wagh</option>
+                  <select className="form-select" id="ex-cal-executor" style={{width: 180, fontSize: 12}} onChange={(e) => { renderExCal() }}>
+                    <option value="all">All Executors</option>
+                    {technicians.map((t) => (
+                      <option key={t.cdb_object_id} value={t.name}>{t.name} ({t.technician_role})</option>
+                    ))}
                   </select>
                 </div>
                 <div id="pl-ex-schedule" />
@@ -1064,21 +1250,17 @@ export default function PlannerPage({ onNavigate }) {
           </main>
         </div>
         {/* ══ PLAN WO MODAL ══ */}
-        <div className="modal-overlay" id="planModal">
-          <div className="modal" style={{maxWidth: 580}}>
-            <div className="modal-header"><div className="modal-title" id="plan-modal-title">📋 Plan Work Order</div><button className="modal-close" onClick={(e) => { document.getElementById('planModal').classList.remove('open') }}>✕</button></div>
+        <div className="modal-overlay fixed inset-0 z-[1000] bg-[rgba(15,23,42,0.55)] items-center justify-center p-5 hidden" id="planModal">
+          <div className="modal max-w-[580px] bg-white rounded-2xl w-full max-h-[88vh] overflow-y-auto shadow-2xl">
+            <div className="modal-header"><div className="modal-title" id="plan-modal-title">📋 Plan Work Order</div><button className="modal-close" onClick={(e) => { document.getElementById('planModal').classList.remove('flex'); document.getElementById('planModal').classList.add('hidden') }}>✕</button></div>
             <div className="modal-body">
               <div id="plan-abn-summary" style={{background: 'var(--slate-50)', borderRadius: 'var(--radius)', padding: 12, marginBottom: 14, fontSize: 12, border: '1px solid var(--slate-200)'}} />
               <div className="form-row">
                 <div className="form-group"><label className="form-label">Assign Executor</label>
                   <select className="form-select" id="plan-executor">
-                    <option value="Manoj Shinde">Manoj Shinde (Mech L3)</option>
-                    <option value="Pradeep Jadhav">Pradeep Jadhav (Mech L2)</option>
-                    <option value="Rakesh Patil">Rakesh Patil (Mech L2)</option>
-                    <option value="Suresh Kulkarni">Suresh Kulkarni (Elect L2)</option>
-                    <option value="Dinesh Wagh">Dinesh Wagh (Mech L2)</option>
-                    <option value="Amol Deshmukh">Amol Deshmukh (Mech L1)</option>
-                    <option value="Nilesh More">Nilesh More (Mech L1)</option>
+                    {technicians.map((t) => (
+                      <option key={t.cdb_object_id} value={t.name}>{t.name} ({t.technician_role})</option>
+                    ))}
                   </select>
                 </div>
                 <div className="form-group"><label className="form-label">Scheduled Date</label>
@@ -1093,17 +1275,17 @@ export default function PlannerPage({ onNavigate }) {
               <div id="plan-modal-error" className="alert alert-error" style={{display: 'none'}} />
             </div>
             <div className="modal-footer">
-              <button className="btn btn-secondary" onClick={(e) => { document.getElementById('planModal').classList.remove('open') }}>Cancel</button>
+              <button className="btn btn-secondary" onClick={(e) => { document.getElementById('planModal').classList.remove('flex'); document.getElementById('planModal').classList.add('hidden') }}>Cancel</button>
               <button className="btn btn-primary" onClick={(e) => { submitPlan() }}>🚀 Raise WO &amp; Assign Executor</button>
             </div>
           </div>
         </div>
         {/* ══ DETAIL MODAL ══ */}
-        <div className="modal-overlay" id="plDetailModal">
-          <div className="modal" style={{maxWidth: 600}}>
-            <div className="modal-header"><div className="modal-title" id="pl-detail-title">Detail</div><button className="modal-close" onClick={(e) => { document.getElementById('plDetailModal').classList.remove('open') }}>✕</button></div>
+        <div className="modal-overlay fixed inset-0 z-[1000] bg-[rgba(15,23,42,0.55)] items-center justify-center p-5 hidden" id="plDetailModal">
+          <div className="modal max-w-[600px] bg-white rounded-2xl w-full max-h-[88vh] overflow-y-auto shadow-2xl">
+            <div className="modal-header"><div className="modal-title" id="pl-detail-title">Detail</div><button className="modal-close" onClick={(e) => { document.getElementById('plDetailModal').classList.remove('flex'); document.getElementById('plDetailModal').classList.add('hidden') }}>✕</button></div>
             <div className="modal-body" id="pl-detail-body" />
-            <div className="modal-footer"><button className="btn btn-secondary" onClick={(e) => { document.getElementById('plDetailModal').classList.remove('open') }}>Close</button></div>
+            <div className="modal-footer"><button className="btn btn-secondary" onClick={(e) => { document.getElementById('plDetailModal').classList.remove('flex'); document.getElementById('plDetailModal').classList.add('hidden') }}>Close</button></div>
           </div>
         </div>
       </div>

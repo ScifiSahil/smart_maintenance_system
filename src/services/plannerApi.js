@@ -73,6 +73,11 @@ async function doPatch(url, body) {
 const extractRows = (j) => j?.objects ?? j?.data ?? j?.results ?? [];
 const filterUrl = (base, clause) => `${base}?$filter=${encodeURIComponent(clause)}`;
 
+// Date-only string (YYYY-MM-DD) — CDB `Date` columns reject anything with a
+// time portion (e.g. a full ISO datetime), so every Date-typed field we write
+// (planned_at, logged_at, etc.) must go through this, never .toISOString().
+const dateOnly = (d = new Date()) => d.toISOString().slice(0, 10);
+
 function normalizePriority(p) {
   const v = (p || "medium").toLowerCase();
   return ["critical", "high", "medium", "low"].includes(v) ? v : "medium";
@@ -188,7 +193,10 @@ export const generateWorkOrder = async (item, plan) => {
     planner_notes: plan.notes || "",
     sop_ref: plan.sopRef || "",
     status: "pending_executor",
-    planned_at: new Date().toISOString(),
+    // Date-only — planned_at is a CDB `Date` column, it rejects a value with
+    // a time portion (that's what caused the "invalid because it contains a
+    // time portion" 403 error).
+    planned_at: dateOnly(),
     rework_count: "0",
   };
 

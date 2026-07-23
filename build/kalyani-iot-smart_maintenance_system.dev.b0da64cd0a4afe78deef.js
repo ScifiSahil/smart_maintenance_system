@@ -15992,6 +15992,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_plantApi__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/plantApi */ "./src/services/plantApi.js");
 /* harmony import */ var _services_lineApi__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/lineApi */ "./src/services/lineApi.js");
 /* harmony import */ var _services_machineApi__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/machineApi */ "./src/services/machineApi.js");
+/* harmony import */ var _services_technicianApi__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/technicianApi */ "./src/services/technicianApi.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -16011,6 +16012,7 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 
@@ -16198,12 +16200,18 @@ function _loadPlannerItems() {
           showToast((_context.t0 === null || _context.t0 === void 0 ? void 0 : _context.t0.message) || 'Failed to load abnormalities', 'error');
         case 10:
           items = rawItems.map(function (it) {
-            var _it$wo, _it$wo2, _it$wo3;
+            var _it$wo, _it$wo2, _it$wo3, _it$wo4, _it$wo5, _it$wo6, _it$wo7, _it$wo8, _it$wo9;
             return _objectSpread(_objectSpread({}, it), {}, {
               status: it.wo ? it.wo.status : 'pending_planner',
               woRef: (_it$wo = it.wo) === null || _it$wo === void 0 ? void 0 : _it$wo.wo_ref,
               assignedTo: (_it$wo2 = it.wo) === null || _it$wo2 === void 0 ? void 0 : _it$wo2.assigned_to,
-              scheduledDate: (_it$wo3 = it.wo) === null || _it$wo3 === void 0 ? void 0 : _it$wo3.scheduled_date
+              allExecutors: (_it$wo3 = it.wo) === null || _it$wo3 === void 0 ? void 0 : _it$wo3.all_executors,
+              scheduledDate: (_it$wo4 = it.wo) === null || _it$wo4 === void 0 ? void 0 : _it$wo4.scheduled_date,
+              scheduledTime: (_it$wo5 = it.wo) === null || _it$wo5 === void 0 ? void 0 : _it$wo5.scheduled_time,
+              sparesNeeded: (_it$wo6 = it.wo) === null || _it$wo6 === void 0 ? void 0 : _it$wo6.spares_needed,
+              plannerNotes: (_it$wo7 = it.wo) === null || _it$wo7 === void 0 ? void 0 : _it$wo7.planner_notes,
+              estimatedHours: (_it$wo8 = it.wo) === null || _it$wo8 === void 0 ? void 0 : _it$wo8.estimated_hours,
+              reworkCount: Number(((_it$wo9 = it.wo) === null || _it$wo9 === void 0 ? void 0 : _it$wo9.rework_count) || 0)
             });
           }).sort(function (a, b) {
             return (PRIORITY_ORDER[a.priority] || 3) - (PRIORITY_ORDER[b.priority] || 3);
@@ -16447,11 +16455,13 @@ function openPlanModal(id) {
   document.getElementById('plan-spares').value = '';
   document.getElementById('plan-notes').value = '';
   document.getElementById('plan-modal-error').style.display = 'none';
-  document.getElementById('planModal').classList.add('open');
+  document.getElementById('planModal').style.display = 'flex';
 }
 function submitPlan() {
   return _submitPlan.apply(this, arguments);
-}
+} // ── Real timeline for the Detail modal — built from actual timestamps we
+// have (when it was reported, when the WO was raised + to whom), instead of
+// the old demo `history` array which only ever existed in localStorage.
 function _submitPlan() {
   _submitPlan = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
     var executor, date, hours, spares, notes, errEl, item, sop;
@@ -16503,7 +16513,7 @@ function _submitPlan() {
             sopRef: sop.sop
           });
         case 21:
-          document.getElementById('planModal').classList.remove('open');
+          document.getElementById('planModal').style.display = 'none';
           showToast("\uD83D\uDCCB Work Order raised & assigned to ".concat(executor, "!"), 'success');
           _context4.next = 25;
           return renderIncoming();
@@ -16527,6 +16537,47 @@ function _submitPlan() {
   }));
   return _submitPlan.apply(this, arguments);
 }
+function buildTimeline(item) {
+  var rows = [];
+  if (item.loggedDate) {
+    rows.push({
+      icon: item.sourceType === 'manual' ? '⚠️' : '🔍',
+      stage: item.sourceType === 'manual' ? 'Abnormality Logged' : 'Flagged by Checklist',
+      by: item.loggedBy || (item.sourceType === 'checklist' ? 'Checker Inspection' : '—'),
+      at: "".concat(item.loggedDate).concat(item.loggedTime ? ' ' + item.loggedTime : ''),
+      note: item.observed ? "Observed: ".concat(item.observed) : item.remarks || ''
+    });
+  }
+  if (item.woRef) {
+    rows.push({
+      icon: '📋',
+      stage: item.reworkCount > 0 ? "Rework WO Raised (#".concat(item.reworkCount, ")") : 'Work Order Raised',
+      by: 'Planner',
+      at: "".concat(item.scheduledDate || '').concat(item.scheduledTime ? ' ' + item.scheduledTime : ''),
+      note: "".concat(item.woRef, " \u2192 ").concat(item.allExecutors || item.assignedTo || '—')
+    });
+  }
+  if (item.status === 'pending_audit') rows.push({
+    icon: '🔍',
+    stage: 'Awaiting Audit',
+    by: '—',
+    at: '',
+    note: ''
+  });else if (item.status === 'closed') rows.push({
+    icon: '✅',
+    stage: 'Closed',
+    by: '—',
+    at: '',
+    note: ''
+  });else if (item.status === 'rework') rows.push({
+    icon: '🔁',
+    stage: 'Sent back for Rework',
+    by: 'Auditor',
+    at: '',
+    note: 'Audit failed — see planner notes'
+  });
+  return rows;
+}
 function openPlDetail(id) {
   var item = consolItems.find(function (i) {
     return i.id === id;
@@ -16539,15 +16590,10 @@ function openPlDetail(id) {
   });
   if (!item) return;
   document.getElementById('pl-detail-title').textContent = '📄 ' + item.checkPoint;
-  document.getElementById('pl-detail-body').innerHTML = "\n    <div style=\"margin-bottom:14px\">".concat(flowTrack(item), "</div>\n    <div style=\"display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:12px;margin-bottom:14px\">\n      <div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Machine</div>").concat(item.machine, "</div>\n      <div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Priority</div>").concat(item.priority, "</div>\n      <div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Observed</div>").concat(item.observed || '—', "</div>\n      <div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Cause</div>").concat(item.cause || '—', "</div>\n      ").concat(item.woRef ? "<div style=\"background:var(--blue-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">WO Reference</div><strong style=\"font-family:var(--font-mono)\">".concat(item.woRef, "</strong></div>") : '', "\n      ").concat(item.assignedTo ? "<div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Assigned To</div>".concat(item.assignedTo, "</div>") : '', "\n      ").concat(item.scheduledDate ? "<div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Scheduled Date</div>".concat(item.scheduledDate, "</div>") : '', "\n      ").concat(item.sparesNeeded ? "<div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Spares Needed</div>".concat(item.sparesNeeded, "</div>") : '', "\n    </div>\n    <div style=\"font-size:11px;font-weight:700;color:var(--slate-500);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px\">Workflow Timeline</div>\n    <div>").concat((item.history || []).map(function (h) {
-    return "<div style=\"display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--slate-100)\">\n      <div style=\"width:24px;height:24px;border-radius:50%;background:var(--blue-50);border:1.5px solid var(--blue-200);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0\">".concat(h.icon || '📌', "</div>\n      <div style=\"flex:1\"><div style=\"font-size:12px;font-weight:700;color:var(--blue-900)\">").concat(h.stage, "</div><div style=\"font-size:11px;color:var(--slate-400)\">").concat(h.by, " \xB7 ").concat(new Date(h.at).toLocaleString('en-IN', {
-      day: '2-digit',
-      month: 'short',
-      hour: '2-digit',
-      minute: '2-digit'
-    }), "</div>").concat(h.note ? "<div style=\"font-size:11px;color:var(--slate-600);margin-top:2px\">".concat(h.note, "</div>") : '', "</div>\n    </div>");
-  }).join(''), "</div>\n  ");
-  document.getElementById('plDetailModal').classList.add('open');
+  document.getElementById('pl-detail-body').innerHTML = "\n    <div style=\"margin-bottom:14px\">".concat(flowTrack(item), "</div>\n    <div style=\"display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:12px;margin-bottom:14px\">\n      <div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Machine</div>").concat(item.machine, "</div>\n      <div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Priority</div>").concat(item.priority, "</div>\n      <div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Observed</div>").concat(item.observed || '—', "</div>\n      <div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Cause</div>").concat(item.cause || '—', "</div>\n      ").concat(item.woRef ? "<div style=\"background:var(--blue-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">WO Reference</div><strong style=\"font-family:var(--font-mono)\">".concat(item.woRef, "</strong></div>") : '', "\n      ").concat(item.allExecutors || item.assignedTo ? "<div style=\"background:var(--blue-50);border-radius:6px;padding:10px;grid-column:span 2\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Team / Executors</div>".concat(item.allExecutors || item.assignedTo, "</div>") : '', "\n      ").concat(item.scheduledDate ? "<div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Scheduled</div>".concat(item.scheduledDate).concat(item.scheduledTime ? ' ' + item.scheduledTime : '', "</div>") : '', "\n      ").concat(item.estimatedHours ? "<div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Estimated Hours</div>".concat(item.estimatedHours, "</div>") : '', "\n      ").concat(item.sparesNeeded ? "<div style=\"background:var(--slate-50);border-radius:6px;padding:10px\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Spares Needed</div>".concat(item.sparesNeeded, "</div>") : '', "\n      ").concat(item.plannerNotes ? "<div style=\"background:var(--slate-50);border-radius:6px;padding:10px;grid-column:span 2\"><div style=\"font-size:10px;font-weight:700;color:var(--slate-400);text-transform:uppercase;margin-bottom:3px\">Planner Notes</div>".concat(item.plannerNotes, "</div>") : '', "\n    </div>\n    <div style=\"font-size:11px;font-weight:700;color:var(--slate-500);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px\">Workflow Timeline</div>\n    <div>").concat(buildTimeline(item).map(function (h) {
+    return "<div style=\"display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--slate-100)\">\n      <div style=\"width:24px;height:24px;border-radius:50%;background:var(--blue-50);border:1.5px solid var(--blue-200);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0\">".concat(h.icon || '📌', "</div>\n      <div style=\"flex:1\"><div style=\"font-size:12px;font-weight:700;color:var(--blue-900)\">").concat(h.stage, "</div><div style=\"font-size:11px;color:var(--slate-400)\">").concat(h.by).concat(h.at ? ' · ' + h.at : '', "</div>").concat(h.note ? "<div style=\"font-size:11px;color:var(--slate-600);margin-top:2px\">".concat(h.note, "</div>") : '', "</div>\n    </div>");
+  }).join('') || '<div style="color:var(--slate-400);font-size:12px">No timeline data available.</div>', "</div>\n  ");
+  document.getElementById('plDetailModal').style.display = 'flex';
 }
 function showTab(name, el) {
   document.querySelectorAll('[id^="tab-"]').forEach(function (t) {
@@ -16575,136 +16621,191 @@ var PL_DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 var plCkYear,
   plCkMonth,
   plCkEvents = {};
-function plSeedCkEvents(year, month) {
-  plCkEvents = {};
-  var k = function k(d) {
-    return "".concat(year, "-").concat(String(month + 1).padStart(2, '0'), "-").concat(String(d).padStart(2, '0'));
-  };
-  var dim = new Date(year, month + 1, 0).getDate();
-  for (var d = 1; d <= dim; d++) {
-    var dow = new Date(year, month, d).getDay();
-    if (dow === 0 || dow === 6) continue;
-    if (d % 2 === 0) {
-      if (!plCkEvents[k(d)]) plCkEvents[k(d)] = [];
-      plCkEvents[k(d)].push({
-        type: 'insp',
-        label: 'CP-101 Daily PM',
-        time: '08:00',
-        icon: '⚙️'
-      });
-    }
-    if (dow === 1 && d <= 22) {
-      if (!plCkEvents[k(d)]) plCkEvents[k(d)] = [];
-      plCkEvents[k(d)].push({
-        type: 'insp',
-        label: 'HX-204 Weekly PM',
-        time: '14:00',
-        icon: '🔥'
-      });
-    }
-    if (d <= 5) {
-      if (!plCkEvents[k(d)]) plCkEvents[k(d)] = [];
-      plCkEvents[k(d)].push({
-        type: 'overdue',
-        label: 'COM-302 PM — OVERDUE',
-        time: '—',
-        icon: '💨'
-      });
-    }
-  }
-  WF.getAll().forEach(function (item) {
-    if (item.loggedAt) {
-      var dt = new Date(item.loggedAt);
-      if (dt.getFullYear() === year && dt.getMonth() === month) {
-        var kk = k(dt.getDate());
-        if (!plCkEvents[kk]) plCkEvents[kk] = [];
-        plCkEvents[kk].push({
-          type: 'wo',
-          label: 'ABN: ' + item.checkPoint + (item.woRef ? ' · ' + item.woRef : ''),
-          time: item.loggedTime,
-          icon: '⚠️',
-          status: item.status,
-          id: item.id
-        });
-      }
-    }
-  });
+
+// ── Real calendar data — built from actual DB rows, no synthetic demo data
+// and no localStorage. Two kinds of events per day:
+//   'logged'    — an abnormality (manual or checklist) on the day it was reported
+//   'scheduled' — a Work Order on the day it's scheduled to be executed
+function plSeedCkEvents(_x, _x2) {
+  return _plSeedCkEvents.apply(this, arguments);
 }
-function plBuildCkCal(year, month) {
-  plCkYear = year;
-  plCkMonth = month;
-  plSeedCkEvents(year, month);
-  var n = new Date(),
-    ty = n.getFullYear(),
-    tm = n.getMonth(),
-    td = n.getDate();
-  document.getElementById('pl-ck-label').textContent = PL_MONTHS[month] + ' ' + year;
-  document.getElementById('pl-ck-sub').textContent = 'Sandeep Tapkir · ' + PL_MONTHS[month] + ' ' + year;
-  var grid = document.getElementById('pl-ck-grid');
-  grid.innerHTML = '';
-  PL_DAYS.forEach(function (d) {
-    var h = document.createElement('div');
-    h.className = 'cal-day-header';
-    h.textContent = d;
-    grid.appendChild(h);
-  });
-  var firstDow = new Date(year, month, 1).getDay();
-  var offset = firstDow === 0 ? 6 : firstDow - 1;
-  var dimPrev = new Date(year, month, 0).getDate();
-  var dim = new Date(year, month + 1, 0).getDate();
-  for (var i = offset - 1; i >= 0; i--) {
-    var c = document.createElement('div');
-    c.className = 'cal-day';
-    c.style.color = 'var(--slate-300)';
-    c.textContent = dimPrev - i;
-    grid.appendChild(c);
-  }
-  var _loop = function _loop(d) {
-    var dk = "".concat(year, "-").concat(String(month + 1).padStart(2, '0'), "-").concat(String(d).padStart(2, '0'));
-    var evs = plCkEvents[dk] || [];
-    var isToday = year === ty && month === tm && d === td;
-    var hasOver = evs.some(function (e) {
-        return e.type === 'overdue';
-      }),
-      hasWO = evs.some(function (e) {
-        return e.type === 'wo';
-      }),
-      hasInsp = evs.some(function (e) {
-        return e.type === 'insp';
-      });
-    var cls = 'cal-day';
-    if (isToday) cls += ' today';
-    if (hasOver) cls += ' has-overdue';else if (hasWO) cls += ' has-wo';else if (hasInsp) cls += ' has-task';
-    var cell = document.createElement('div');
-    cell.className = cls;
-    cell.innerHTML = "<span>".concat(d, "</span>");
-    if (evs.length > 0) {
-      var dot = document.createElement('span');
-      dot.style.cssText = 'position:absolute;bottom:3px;left:50%;transform:translateX(-50%);display:flex;gap:2px';
-      evs.slice(0, 3).forEach(function (ev) {
-        var dd = document.createElement('span');
-        dd.style.cssText = "width:4px;height:4px;border-radius:50%;background:".concat(ev.type === 'overdue' ? 'var(--red)' : ev.type === 'wo' ? 'var(--amber)' : isToday ? 'white' : 'var(--green)');
-        dot.appendChild(dd);
-      });
-      cell.appendChild(dot);
-      cell.style.cursor = 'pointer';
-      cell.addEventListener('click', function () {
-        return plShowCkDay(d, month, year, dk, evs, isToday);
-      });
-    }
-    grid.appendChild(cell);
-  };
-  for (var d = 1; d <= dim; d++) {
-    _loop(d);
-  }
-  var rem = (offset + dim) % 7 === 0 ? 0 : 7 - (offset + dim) % 7;
-  for (var _d = 1; _d <= rem; _d++) {
-    var _c = document.createElement('div');
-    _c.className = 'cal-day';
-    _c.style.color = 'var(--slate-300)';
-    _c.textContent = _d;
-    grid.appendChild(_c);
-  }
+function _plSeedCkEvents() {
+  _plSeedCkEvents = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(year, month) {
+    var k, items, wos, _yield$Promise$all, _yield$Promise$all2;
+    return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+      while (1) switch (_context5.prev = _context5.next) {
+        case 0:
+          plCkEvents = {};
+          k = function k(d) {
+            return "".concat(year, "-").concat(String(month + 1).padStart(2, '0'), "-").concat(String(d).padStart(2, '0'));
+          };
+          items = [];
+          wos = [];
+          _context5.prev = 4;
+          _context5.next = 7;
+          return Promise.all([(0,_services_plannerApi__WEBPACK_IMPORTED_MODULE_1__.fetchConsolidatedList)(), (0,_services_plannerApi__WEBPACK_IMPORTED_MODULE_1__.fetchWorkOrders)()]);
+        case 7:
+          _yield$Promise$all = _context5.sent;
+          _yield$Promise$all2 = _slicedToArray(_yield$Promise$all, 2);
+          items = _yield$Promise$all2[0];
+          wos = _yield$Promise$all2[1];
+          _context5.next = 17;
+          break;
+        case 13:
+          _context5.prev = 13;
+          _context5.t0 = _context5["catch"](4);
+          showToast((_context5.t0 === null || _context5.t0 === void 0 ? void 0 : _context5.t0.message) || 'Failed to load calendar data', 'error');
+          return _context5.abrupt("return");
+        case 17:
+          items.forEach(function (item) {
+            if (!item.loggedDate) return;
+            var _item$loggedDate$spli = item.loggedDate.split('-').map(Number),
+              _item$loggedDate$spli2 = _slicedToArray(_item$loggedDate$spli, 3),
+              y = _item$loggedDate$spli2[0],
+              m = _item$loggedDate$spli2[1],
+              d = _item$loggedDate$spli2[2];
+            if (y !== year || m - 1 !== month) return;
+            var kk = k(d);
+            if (!plCkEvents[kk]) plCkEvents[kk] = [];
+            plCkEvents[kk].push({
+              type: 'logged',
+              label: '⚠️ ' + item.checkPoint + ' — ' + item.machine + (item.wo ? ' · ' + item.wo.wo_ref : ''),
+              time: item.loggedTime || '—',
+              icon: '⚠️',
+              status: item.wo ? item.wo.status : 'pending_planner',
+              id: item.id
+            });
+          });
+          wos.forEach(function (wo) {
+            if (!wo.scheduled_date) return;
+            var _wo$scheduled_date$sp = wo.scheduled_date.split('-').map(Number),
+              _wo$scheduled_date$sp2 = _slicedToArray(_wo$scheduled_date$sp, 3),
+              y = _wo$scheduled_date$sp2[0],
+              m = _wo$scheduled_date$sp2[1],
+              d = _wo$scheduled_date$sp2[2];
+            if (y !== year || m - 1 !== month) return;
+            var kk = k(d);
+            if (!plCkEvents[kk]) plCkEvents[kk] = [];
+            plCkEvents[kk].push({
+              type: 'scheduled',
+              label: '🔧 ' + wo.wo_ref + ' — ' + wo.check_point + ' (' + wo.equipment_code + ') · ' + (wo.assigned_to || '—'),
+              time: wo.scheduled_time || '—',
+              icon: '🔧',
+              status: wo.status,
+              id: 'wo:' + wo.cdb_object_id
+            });
+          });
+        case 19:
+        case "end":
+          return _context5.stop();
+      }
+    }, _callee5, null, [[4, 13]]);
+  }));
+  return _plSeedCkEvents.apply(this, arguments);
+}
+function plBuildCkCal(_x3, _x4) {
+  return _plBuildCkCal.apply(this, arguments);
+}
+function _plBuildCkCal() {
+  _plBuildCkCal = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6(year, month) {
+    var n, ty, tm, td, grid, firstDow, offset, dimPrev, dim, i, c, _loop, d, rem, _d2, _c;
+    return _regeneratorRuntime().wrap(function _callee6$(_context7) {
+      while (1) switch (_context7.prev = _context7.next) {
+        case 0:
+          plCkYear = year;
+          plCkMonth = month;
+          _context7.next = 4;
+          return plSeedCkEvents(year, month);
+        case 4:
+          n = new Date(), ty = n.getFullYear(), tm = n.getMonth(), td = n.getDate();
+          document.getElementById('pl-ck-label').textContent = PL_MONTHS[month] + ' ' + year;
+          document.getElementById('pl-ck-sub').textContent = 'Sandeep Tapkir · ' + PL_MONTHS[month] + ' ' + year;
+          grid = document.getElementById('pl-ck-grid');
+          grid.innerHTML = '';
+          PL_DAYS.forEach(function (d) {
+            var h = document.createElement('div');
+            h.className = 'cal-day-header';
+            h.textContent = d;
+            grid.appendChild(h);
+          });
+          firstDow = new Date(year, month, 1).getDay();
+          offset = firstDow === 0 ? 6 : firstDow - 1;
+          dimPrev = new Date(year, month, 0).getDate();
+          dim = new Date(year, month + 1, 0).getDate();
+          for (i = offset - 1; i >= 0; i--) {
+            c = document.createElement('div');
+            c.className = 'cal-day';
+            c.style.color = 'var(--slate-300)';
+            c.textContent = dimPrev - i;
+            grid.appendChild(c);
+          }
+          _loop = /*#__PURE__*/_regeneratorRuntime().mark(function _loop(d) {
+            var dk, evs, isToday, hasLogged, hasScheduled, cls, cell, dot;
+            return _regeneratorRuntime().wrap(function _loop$(_context6) {
+              while (1) switch (_context6.prev = _context6.next) {
+                case 0:
+                  dk = "".concat(year, "-").concat(String(month + 1).padStart(2, '0'), "-").concat(String(d).padStart(2, '0'));
+                  evs = plCkEvents[dk] || [];
+                  isToday = year === ty && month === tm && d === td;
+                  hasLogged = evs.some(function (e) {
+                    return e.type === 'logged';
+                  }), hasScheduled = evs.some(function (e) {
+                    return e.type === 'scheduled';
+                  });
+                  cls = 'cal-day';
+                  if (isToday) cls += ' today';
+                  if (hasLogged) cls += ' has-overdue';else if (hasScheduled) cls += ' has-task';
+                  cell = document.createElement('div');
+                  cell.className = cls;
+                  cell.innerHTML = "<span>".concat(d, "</span>");
+                  if (evs.length > 0) {
+                    dot = document.createElement('span');
+                    dot.style.cssText = 'position:absolute;bottom:3px;left:50%;transform:translateX(-50%);display:flex;gap:2px';
+                    evs.slice(0, 3).forEach(function (ev) {
+                      var dd = document.createElement('span');
+                      dd.style.cssText = "width:4px;height:4px;border-radius:50%;background:".concat(ev.type === 'logged' ? 'var(--red)' : isToday ? 'white' : 'var(--green)');
+                      dot.appendChild(dd);
+                    });
+                    cell.appendChild(dot);
+                    cell.style.cursor = 'pointer';
+                    cell.addEventListener('click', function () {
+                      return plShowCkDay(d, month, year, dk, evs, isToday);
+                    });
+                  }
+                  grid.appendChild(cell);
+                case 12:
+                case "end":
+                  return _context6.stop();
+              }
+            }, _loop);
+          });
+          d = 1;
+        case 17:
+          if (!(d <= dim)) {
+            _context7.next = 22;
+            break;
+          }
+          return _context7.delegateYield(_loop(d), "t0", 19);
+        case 19:
+          d++;
+          _context7.next = 17;
+          break;
+        case 22:
+          rem = (offset + dim) % 7 === 0 ? 0 : 7 - (offset + dim) % 7;
+          for (_d2 = 1; _d2 <= rem; _d2++) {
+            _c = document.createElement('div');
+            _c.className = 'cal-day';
+            _c.style.color = 'var(--slate-300)';
+            _c.textContent = _d2;
+            grid.appendChild(_c);
+          }
+        case 24:
+        case "end":
+          return _context7.stop();
+      }
+    }, _callee6);
+  }));
+  return _plBuildCkCal.apply(this, arguments);
 }
 function plShowCkDay(day, month, year, dk, evs, isToday) {
   var dt = document.getElementById('pl-ck-detail'),
@@ -16717,8 +16818,8 @@ function plShowCkDay(day, month, year, dk, evs, isToday) {
   }) + (isToday ? ' — TODAY' : '');
   var html = '<div style="display:flex;flex-direction:column;gap:8px">';
   if (!evs.length) html += '<div style="color:var(--slate-400);font-size:13px">No tasks this day.</div>';else evs.forEach(function (ev) {
-    var b = ev.type === 'overdue' ? 'badge-abnormal' : ev.type === 'wo' ? 'badge-pending' : 'badge-ok';
-    var bl = ev.type === 'overdue' ? 'Overdue' : ev.type === 'wo' ? 'WO Logged' : 'Inspection';
+    var b = ev.type === 'logged' ? 'badge-abnormal' : 'badge-pending';
+    var bl = ev.type === 'logged' ? 'Abnormality' : 'Scheduled Work';
     html += "<div style=\"display:flex;align-items:center;gap:10px;background:white;border-radius:var(--radius);padding:10px 12px;border:1px solid var(--slate-200)\">\n      <span style=\"font-size:18px\">".concat(ev.icon || '📋', "</span>\n      <div style=\"flex:1\"><div style=\"font-size:13px;font-weight:600\">").concat(ev.label, "</div><div style=\"font-size:11px;color:var(--slate-500)\">").concat(ev.time, "</div></div>\n      <span class=\"badge ").concat(b, "\">").concat(bl, "</span>\n      ").concat(ev.id ? "<button class=\"btn btn-ghost btn-sm\" onclick=\"openPlDetail('".concat(ev.id, "')\">Detail</button>") : '', "\n    </div>");
   });
   html += '</div>';
@@ -16742,47 +16843,98 @@ function plCkToday() {
   plBuildCkCal(n.getFullYear(), n.getMonth());
 }
 function renderExCal() {
-  var now = new Date();
-  document.getElementById('pl-ex-date').textContent = now.toLocaleDateString('en-IN', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric'
-  });
-  var items = WF.getAll().filter(function (i) {
-    return i.assignedTo;
-  });
-  var exMap = {};
-  items.forEach(function (item) {
-    var ex = item.assignedTo;
-    if (!exMap[ex]) exMap[ex] = [];
-    exMap[ex].push(item);
-  });
-  var all = ['Manoj Shinde', 'Pradeep Jadhav', 'Rakesh Patil', 'Suresh Kulkarni', 'Dinesh Wagh', 'Amol Deshmukh', 'Nilesh More'];
-  var html = '<div class="table-wrap"><table><thead><tr><th>Executor</th><th>Role</th><th>Assigned WOs</th><th>Status</th></tr></thead><tbody>';
-  all.forEach(function (ex) {
-    var _Object$entries$find;
-    var wos = exMap[ex] || [];
-    var roles = {
-      Manoj: 'Mech L3',
-      Pradeep: 'Mech L2',
-      Rakesh: 'Mech L2',
-      Suresh: 'Elect L2',
-      Dinesh: 'Mech L2',
-      Amol: 'Mech L1',
-      Nilesh: 'Mech L1'
-    };
-    var role = ((_Object$entries$find = Object.entries(roles).find(function (_ref3) {
-      var _ref4 = _slicedToArray(_ref3, 1),
-        k = _ref4[0];
-      return ex.startsWith(k);
-    })) === null || _Object$entries$find === void 0 ? void 0 : _Object$entries$find[1]) || 'Mech';
-    var woHtml = wos.length ? wos.map(function (w) {
-      return "<span class=\"badge badge-".concat(w.priority === 'critical' ? 'critical' : w.priority === 'high' ? 'high' : 'medium', "\" style=\"margin:2px\">").concat(w.woRef || '—', " ").concat(w.machine, "</span>");
-    }).join(' ') : '<span style="color:var(--slate-400);font-size:12px">Free</span>';
-    html += "<tr><td><strong>".concat(ex, "</strong></td><td><span style=\"font-size:11px;color:var(--slate-400)\">").concat(role, "</span></td><td>").concat(woHtml, "</td><td>").concat(wos.length ? "<span class=\"badge badge-progress\">".concat(wos.length, " Active</span>") : '<span class="badge badge-closed">Available</span>', "</td></tr>");
-  });
-  html += '</tbody></table></div>';
-  document.getElementById('pl-ex-schedule').innerHTML = html;
+  return _renderExCal.apply(this, arguments);
+}
+function _renderExCal() {
+  _renderExCal = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
+    var _document$getElementB3;
+    var now, execFilter, rawWOs, items, equipMap, exMap, all, html;
+    return _regeneratorRuntime().wrap(function _callee7$(_context8) {
+      while (1) switch (_context8.prev = _context8.next) {
+        case 0:
+          now = new Date();
+          document.getElementById('pl-ex-date').textContent = now.toLocaleDateString('en-IN', {
+            day: '2-digit',
+            month: 'long',
+            year: 'numeric'
+          });
+          execFilter = ((_document$getElementB3 = document.getElementById('ex-cal-executor')) === null || _document$getElementB3 === void 0 ? void 0 : _document$getElementB3.value) || 'all';
+          rawWOs = [];
+          _context8.prev = 4;
+          _context8.next = 7;
+          return (0,_services_plannerApi__WEBPACK_IMPORTED_MODULE_1__.fetchWorkOrders)();
+        case 7:
+          rawWOs = _context8.sent;
+          _context8.next = 13;
+          break;
+        case 10:
+          _context8.prev = 10;
+          _context8.t0 = _context8["catch"](4);
+          showToast((_context8.t0 === null || _context8.t0 === void 0 ? void 0 : _context8.t0.message) || 'Failed to load executor schedule', 'error');
+        case 13:
+          items = rawWOs.filter(function (wo) {
+            return wo.status && wo.status !== 'closed';
+          }) // active WOs only
+          .map(function (wo) {
+            return {
+              woRef: wo.wo_ref,
+              checkPoint: wo.check_point,
+              machine: wo.equipment_code,
+              assignedTo: wo.assigned_to,
+              priority: (wo.priority || 'medium').toLowerCase(),
+              status: wo.status,
+              scheduledDate: wo.scheduled_date
+            };
+          }); // Common Plant/Line/Machine filter (top-bar) — same pattern as everywhere else.
+          if (plFilterPlant !== 'all' || plFilterLine !== 'all' || plFilterMachine !== 'all') {
+            equipMap = {};
+            plEquipmentList.forEach(function (eq) {
+              equipMap[eq.equipment_code || eq.code] = eq;
+            });
+            items = items.filter(function (it) {
+              var eq = equipMap[it.machine];
+              if (!eq) return true;
+              if (plFilterPlant !== 'all' && String(eq.plant_code) !== String(plFilterPlant)) return false;
+              if (plFilterLine !== 'all' && String(eq.line || '') !== String(plFilterLine)) return false;
+              if (plFilterMachine !== 'all' && String(eq.machine || '') !== String(plFilterMachine)) return false;
+              return true;
+            });
+          }
+          exMap = {};
+          items.forEach(function (item) {
+            var ex = item.assignedTo;
+            if (!ex) return;
+            if (!exMap[ex]) exMap[ex] = [];
+            exMap[ex].push(item);
+          });
+
+          // Executor roster — from smartpm_technician_master (see plTechnicians sync
+          // effect in the component below), NOT hardcoded. Role is read straight off
+          // the technician row instead of guessed from the name.
+          all = execFilter === 'all' ? plTechnicians.map(function (t) {
+            return t.name;
+          }) : [execFilter];
+          html = '<div class="table-wrap"><table><thead><tr><th>Executor</th><th>Role</th><th>Assigned WOs</th><th>Status</th></tr></thead><tbody>';
+          all.forEach(function (ex) {
+            var _plTechnicians$find;
+            var wos = exMap[ex] || [];
+            var role = ((_plTechnicians$find = plTechnicians.find(function (t) {
+              return t.name === ex;
+            })) === null || _plTechnicians$find === void 0 ? void 0 : _plTechnicians$find.technician_role) || '—';
+            var woHtml = wos.length ? wos.map(function (w) {
+              return "<span class=\"badge badge-".concat(w.priority === 'critical' ? 'critical' : w.priority === 'high' ? 'high' : 'medium', "\" style=\"margin:2px\" title=\"Scheduled: ").concat(w.scheduledDate || '—', "\">").concat(w.woRef || '—', " ").concat(w.machine, "</span>");
+            }).join(' ') : '<span style="color:var(--slate-400);font-size:12px">Free</span>';
+            html += "<tr><td><strong>".concat(ex, "</strong></td><td><span style=\"font-size:11px;color:var(--slate-400)\">").concat(role, "</span></td><td>").concat(woHtml, "</td><td>").concat(wos.length ? "<span class=\"badge badge-progress\">".concat(wos.length, " Active</span>") : '<span class="badge badge-closed">Available</span>', "</td></tr>");
+          });
+          html += '</tbody></table></div>';
+          document.getElementById('pl-ex-schedule').innerHTML = html;
+        case 22:
+        case "end":
+          return _context8.stop();
+      }
+    }, _callee7, null, [[4, 10]]);
+  }));
+  return _renderExCal.apply(this, arguments);
 }
 var SOP_MAP = {
   'bearing': {
@@ -16910,10 +17062,17 @@ var plEquipmentList = [];
 var plFilterPlant = 'all';
 var plFilterLine = 'all';
 var plFilterMachine = 'all';
+
+// Technician roster — from smartpm_technician_master, synced from the
+// component's `technicians` state (see the sync effect below). Replaces the
+// old hardcoded name/role list used across Assign Executors, the Plan WO
+// modal, and the Executor Calendar.
+var plTechnicians = [];
 function getConsolExecRows(id) {
   if (!consolExecRows[id]) {
+    var lead = plTechnicians[0];
     consolExecRows[id] = [{
-      executor: 'Manoj Shinde',
+      executor: lead ? lead.name : '',
       datetime: '',
       role: 'Lead'
     }];
@@ -16934,10 +17093,16 @@ function renderConsolCard(item) {
   var rows = getConsolExecRows(item.id);
   var today = new Date();
   var defDate = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate() + 1).padStart(2, '0') + 'T09:00';
+
+  // Technician dropdown options — built fresh from plTechnicians on every
+  // render, so newly added/removed technicians show up immediately.
+  var techOptionsHtml = function techOptionsHtml(selectedName) {
+    return plTechnicians.map(function (t) {
+      return "<option value=\"".concat(t.name, "\" ").concat(t.name === selectedName ? 'selected' : '', ">").concat(t.name, " (").concat(t.technician_role, ")</option>");
+    }).join('');
+  };
   var execRowsHtml = rows.map(function (r, idx) {
-    return "\n    <div class=\"exec-assign-row\" id=\"execrow-".concat(item.id, "-").concat(idx, "\">\n      <div class=\"exec-num\">").concat(idx + 1, "</div>\n      <select class=\"form-select\" style=\"flex:2;min-width:180px;font-size:12px\" onchange=\"updExecRow('").concat(item.id, "',").concat(idx, ",'executor',this.value)\">\n        ").concat(['Manoj Shinde (Mech L3)', 'Pradeep Jadhav (Mech L2)', 'Rakesh Patil (Mech L2)', 'Suresh Kulkarni (Elect L2)', 'Dinesh Wagh (Mech L2)', 'Amol Deshmukh (Mech L1)', 'Nilesh More (Mech L1)'].map(function (e) {
-      return "<option ".concat(r.executor === e.split(' (')[0] ? 'selected' : '', ">").concat(e, "</option>");
-    }).join(''), "\n      </select>\n      <input type=\"datetime-local\" class=\"form-input\" style=\"width:180px;font-size:12px\" value=\"").concat(r.datetime || defDate, "\" onchange=\"updExecRow('").concat(item.id, "',").concat(idx, ",'datetime',this.value)\"/>\n      <select class=\"form-select\" style=\"width:110px;font-size:12px\" onchange=\"updExecRow('").concat(item.id, "',").concat(idx, ",'role',this.value)\">\n        ").concat(['Lead', 'Support', 'Observe'].map(function (rl) {
+    return "\n    <div class=\"exec-assign-row\" id=\"execrow-".concat(item.id, "-").concat(idx, "\">\n      <div class=\"exec-num\">").concat(idx + 1, "</div>\n      <select class=\"form-select\" style=\"flex:2;min-width:180px;font-size:12px\" onchange=\"updExecRow('").concat(item.id, "',").concat(idx, ",'executor',this.value)\">\n        ").concat(plTechnicians.length ? techOptionsHtml(r.executor) : '<option value="">No technicians found</option>', "\n      </select>\n      <input type=\"datetime-local\" class=\"form-input\" style=\"width:180px;font-size:12px\" value=\"").concat(r.datetime || defDate, "\" onchange=\"updExecRow('").concat(item.id, "',").concat(idx, ",'datetime',this.value)\"/>\n      <select class=\"form-select\" style=\"width:110px;font-size:12px\" onchange=\"updExecRow('").concat(item.id, "',").concat(idx, ",'role',this.value)\">\n        ").concat(['Lead', 'Support', 'Observe'].map(function (rl) {
       return "<option ".concat(r.role === rl ? 'selected' : '', ">").concat(rl, "</option>");
     }).join(''), "\n      </select>\n      ").concat(idx > 0 ? "<button style=\"background:none;border:none;color:var(--red);cursor:pointer;font-size:18px;line-height:1;padding:0 4px\" onclick=\"removeExecRow('".concat(item.id, "',").concat(idx, ")\">\xD7</button>") : '<span style="width:24px"></span>', "\n    </div>\n  ");
   }).join('');
@@ -16952,17 +17117,17 @@ function renderConsolTab() {
   return _renderConsolTab.apply(this, arguments);
 }
 function _renderConsolTab() {
-  _renderConsolTab = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+  _renderConsolTab = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8() {
     var list, empty, items, now, cb;
-    return _regeneratorRuntime().wrap(function _callee5$(_context5) {
-      while (1) switch (_context5.prev = _context5.next) {
+    return _regeneratorRuntime().wrap(function _callee8$(_context9) {
+      while (1) switch (_context9.prev = _context9.next) {
         case 0:
           list = document.getElementById('consol-list');
           empty = document.getElementById('consol-empty');
-          _context5.next = 4;
+          _context9.next = 4;
           return loadPlannerItems();
         case 4:
-          items = _context5.sent;
+          items = _context9.sent;
           now = new Date();
           document.getElementById('consol-sub').textContent = 'Planner · ' + now.toLocaleDateString('en-IN', {
             day: '2-digit',
@@ -16986,12 +17151,12 @@ function _renderConsolTab() {
             return i.status === 'pending_planner';
           }).length;
           if (items.length) {
-            _context5.next = 17;
+            _context9.next = 17;
             break;
           }
           if (empty) empty.style.display = 'flex';
           if (list) list.innerHTML = '';
-          return _context5.abrupt("return");
+          return _context9.abrupt("return");
         case 17:
           if (empty) empty.style.display = 'none';
           if (list) list.innerHTML = items.map(function (i) {
@@ -16999,24 +17164,29 @@ function _renderConsolTab() {
           }).join('');
         case 19:
         case "end":
-          return _context5.stop();
+          return _context9.stop();
       }
-    }, _callee5);
+    }, _callee8);
   }));
   return _renderConsolTab.apply(this, arguments);
 }
 function updExecRow(id, idx, field, val) {
-  if (!consolExecRows[id]) consolExecRows[id] = [{
-    executor: 'Manoj Shinde',
-    datetime: '',
-    role: 'Lead'
-  }];
+  if (!consolExecRows[id]) {
+    var lead = plTechnicians[0];
+    consolExecRows[id] = [{
+      executor: lead ? lead.name : '',
+      datetime: '',
+      role: 'Lead'
+    }];
+  }
   consolExecRows[id][idx][field] = val;
 }
 function addExecRow(id) {
   if (!consolExecRows[id]) consolExecRows[id] = [];
+  // New row starts blank so the planner explicitly picks who's supporting —
+  // no more hardcoded "Pradeep Jadhav" default.
   consolExecRows[id].push({
-    executor: 'Pradeep Jadhav',
+    executor: '',
     datetime: '',
     role: 'Support'
   });
@@ -17028,55 +17198,53 @@ function removeExecRow(id, idx) {
 }
 
 // ── Generate WO & Assign — now writes a real smartpm_planner_work_order row ──
-function generateWO(_x2) {
+function generateWO(_x5) {
   return _generateWO.apply(this, arguments);
 }
 function _generateWO() {
-  _generateWO = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6(id) {
+  _generateWO = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee9(id) {
     var item, rows, lead, dtVal, datePart, timePart, sop, executors, allExecsLabel;
-    return _regeneratorRuntime().wrap(function _callee6$(_context6) {
-      while (1) switch (_context6.prev = _context6.next) {
+    return _regeneratorRuntime().wrap(function _callee9$(_context10) {
+      while (1) switch (_context10.prev = _context10.next) {
         case 0:
           item = consolItems.find(function (i) {
             return i.id === id;
           });
           if (item) {
-            _context6.next = 4;
+            _context10.next = 4;
             break;
           }
           showToast('Item not found — try refreshing.', 'error');
-          return _context6.abrupt("return");
+          return _context10.abrupt("return");
         case 4:
-          rows = consolExecRows[id] || [{
-            executor: 'Manoj Shinde',
-            datetime: '',
-            role: 'Lead'
-          }];
+          rows = consolExecRows[id] || [];
           lead = rows.find(function (r) {
             return r.role === 'Lead';
           }) || rows[0];
-          if (lead) {
-            _context6.next = 9;
+          if (!(!lead || !lead.executor)) {
+            _context10.next = 9;
             break;
           }
           showToast('Please assign at least one executor.', 'error');
-          return _context6.abrupt("return");
+          return _context10.abrupt("return");
         case 9:
           dtVal = lead.datetime;
           datePart = dtVal ? dtVal.split('T')[0] : new Date().toISOString().split('T')[0];
           timePart = dtVal ? dtVal.split('T')[1] || '09:00' : '09:00';
           sop = getSOP(item);
-          executors = rows.map(function (r) {
+          executors = rows.filter(function (r) {
+            return r.executor;
+          }).map(function (r) {
             return {
-              name: r.executor.split(' (')[0],
+              name: r.executor,
               role: r.role
             };
           });
           allExecsLabel = executors.map(function (e) {
             return "".concat(e.name, " (").concat(e.role, ")");
           }).join(', ');
-          _context6.prev = 15;
-          _context6.next = 18;
+          _context10.prev = 15;
+          _context10.next = 18;
           return (0,_services_plannerApi__WEBPACK_IMPORTED_MODULE_1__.generateWorkOrder)(item, {
             executors: executors,
             scheduledDate: datePart,
@@ -17088,24 +17256,24 @@ function _generateWO() {
           });
         case 18:
           showToast("\u26A1 Work Order generated & assigned to ".concat(allExecsLabel, "!"), 'success');
-          _context6.next = 21;
+          _context10.next = 21;
           return renderConsolTab();
         case 21:
-          _context6.next = 23;
+          _context10.next = 23;
           return renderWOTab();
         case 23:
           updateBadges();
-          _context6.next = 29;
+          _context10.next = 29;
           break;
         case 26:
-          _context6.prev = 26;
-          _context6.t0 = _context6["catch"](15);
-          showToast((_context6.t0 === null || _context6.t0 === void 0 ? void 0 : _context6.t0.message) || 'Failed to generate work order', 'error');
+          _context10.prev = 26;
+          _context10.t0 = _context10["catch"](15);
+          showToast((_context10.t0 === null || _context10.t0 === void 0 ? void 0 : _context10.t0.message) || 'Failed to generate work order', 'error');
         case 29:
         case "end":
-          return _context6.stop();
+          return _context10.stop();
       }
-    }, _callee6, null, [[15, 26]]);
+    }, _callee9, null, [[15, 26]]);
   }));
   return _generateWO.apply(this, arguments);
 }
@@ -17142,8 +17310,33 @@ function updateBadges() {
     return i.status === 'rework';
   }).length;
 }
-function PlannerPage(_ref5) {
-  var onNavigate = _ref5.onNavigate;
+
+// ── Expose imperative handlers used inside innerHTML-rendered markup ────────
+// renderConsolCard/renderIncomingCard/renderWOTab/renderReworkTab/plShowCkDay
+// all build raw HTML strings with onclick="functionName(...)" attributes
+// (e.g. "+ Add Executor", "Generate WO & Assign", "Plan WO & Assign").
+// Browsers resolve those attribute strings against `window`, NOT this
+// module's scope — so without this block, clicking them throws
+// "functionName is not defined" and silently does nothing.
+if (typeof window !== 'undefined') {
+  Object.assign(window, {
+    openPlanModal: openPlanModal,
+    openPlDetail: openPlDetail,
+    updExecRow: updExecRow,
+    addExecRow: addExecRow,
+    removeExecRow: removeExecRow,
+    generateWO: generateWO,
+    submitPlan: submitPlan,
+    showTab: showTab,
+    refreshAll: refreshAll,
+    filterWOTab: filterWOTab,
+    clearWOFilter: clearWOFilter,
+    plCkNav: plCkNav,
+    plCkToday: plCkToday
+  });
+}
+function PlannerPage(_ref3) {
+  var onNavigate = _ref3.onNavigate;
   // ── Common Plant/Line/Machine filter — same pattern as CheckerPage ──────
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
@@ -17173,18 +17366,28 @@ function PlannerPage(_ref5) {
     _useState14 = _slicedToArray(_useState13, 2),
     filterMachine = _useState14[0],
     setFilterMachine = _useState14[1];
+
+  // Technician roster — real data from smartpm_technician_master, replacing
+  // the old hardcoded name/role lists.
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState16 = _slicedToArray(_useState15, 2),
+    technicians = _useState16[0],
+    setTechnicians = _useState16[1];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    Promise.all([(0,_services_equipmentApi__WEBPACK_IMPORTED_MODULE_2__.fetchEquipment)(), (0,_services_plantApi__WEBPACK_IMPORTED_MODULE_3__.fetchPlants)(), (0,_services_lineApi__WEBPACK_IMPORTED_MODULE_4__.fetchLines)(), (0,_services_machineApi__WEBPACK_IMPORTED_MODULE_5__.fetchMachines)()]).then(function (_ref6) {
-      var _ref7 = _slicedToArray(_ref6, 4),
-        eqJ = _ref7[0],
-        plantJ = _ref7[1],
-        lineJ = _ref7[2],
-        machineJ = _ref7[3];
+    Promise.all([(0,_services_equipmentApi__WEBPACK_IMPORTED_MODULE_2__.fetchEquipment)(), (0,_services_plantApi__WEBPACK_IMPORTED_MODULE_3__.fetchPlants)(), (0,_services_lineApi__WEBPACK_IMPORTED_MODULE_4__.fetchLines)(), (0,_services_machineApi__WEBPACK_IMPORTED_MODULE_5__.fetchMachines)()]).then(function (_ref4) {
+      var _ref5 = _slicedToArray(_ref4, 4),
+        eqJ = _ref5[0],
+        plantJ = _ref5[1],
+        lineJ = _ref5[2],
+        machineJ = _ref5[3];
       setEquipmentList(rowsOf(eqJ));
       setPlantList(rowsOf(plantJ));
       setLineList(rowsOf(lineJ));
       setMachineList(rowsOf(machineJ));
     })["catch"](function () {});
+    (0,_services_technicianApi__WEBPACK_IMPORTED_MODULE_6__.fetchTechnicians)().then(setTechnicians)["catch"](function () {
+      return setTechnicians([]);
+    });
   }, []);
 
   // Line dropdown — scoped to filterPlant, deduped by name (same as Checker)
@@ -17210,17 +17413,19 @@ function PlannerPage(_ref5) {
     setFilterMachine('all');
   };
 
-  // Sync the module-level mirrors whenever the filter or equipment list
-  // changes, then re-render the (imperative) Consolidated List with the new
-  // scope applied.
+  // Sync the module-level mirrors whenever the filter, equipment list, or
+  // technician roster changes, then re-render the (imperative) tabs with the
+  // new data applied.
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     plEquipmentList = equipmentList;
     plFilterPlant = filterPlant;
     plFilterLine = filterLine;
     plFilterMachine = filterMachine;
+    plTechnicians = technicians;
     renderConsolTab();
     renderWOTab();
-  }, [equipmentList, filterPlant, filterLine, filterMachine]);
+    renderExCal();
+  }, [equipmentList, filterPlant, filterLine, filterMachine, technicians]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     function t() {
       var n = new Date();
@@ -17947,21 +18152,7 @@ function PlannerPage(_ref5) {
       borderRadius: '50%',
       display: 'inline-block'
     }
-  }), "Inspection"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 3
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    style: {
-      width: 8,
-      height: 8,
-      background: 'var(--amber)',
-      borderRadius: '50%',
-      display: 'inline-block'
-    }
-  }), "ABN Logged"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+  }), "Scheduled Work Order"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     style: {
       display: 'flex',
       alignItems: 'center',
@@ -17975,7 +18166,7 @@ function PlannerPage(_ref5) {
       borderRadius: '50%',
       display: 'inline-block'
     }
-  }), "Overdue"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }), "Abnormality Logged"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "cal-grid",
     id: "pl-ck-grid"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -18035,6 +18226,55 @@ function PlannerPage(_ref5) {
   }, "Executor Work Calendar"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "page-subtitle"
   }, "All executors \u2014 assigned WOs by date"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wo-filter-bar"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, "FILTER:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
+    className: "form-select",
+    style: {
+      width: 150,
+      fontSize: 12
+    },
+    value: filterPlant,
+    onChange: handlePlantFilterChange
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+    value: "all"
+  }, "All Plants"), plantList.map(function (p) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+      key: p.plant_code,
+      value: p.plant_code
+    }, p.plant_name, " (", p.plant_code, ")");
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
+    className: "form-select",
+    style: {
+      width: 140,
+      fontSize: 12
+    },
+    value: filterLine,
+    onChange: handleLineFilterChange
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+    value: "all"
+  }, "All Lines"), lineOptions.map(function (l) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+      key: "".concat(l.plant_code, "-").concat(l.line_name),
+      value: l.line_name
+    }, l.line_name);
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
+    className: "form-select",
+    style: {
+      width: 150,
+      fontSize: 12
+    },
+    value: filterMachine,
+    onChange: function onChange(e) {
+      return setFilterMachine(e.target.value);
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+    value: "all"
+  }, "All Machines"), machineOptions.map(function (m) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+      key: "".concat(m.plant_code, "-").concat(m.line_name, "-").concat(m.machine_name),
+      value: m.machine_name
+    }, m.machine_name);
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "card"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "card-header"
@@ -18044,11 +18284,22 @@ function PlannerPage(_ref5) {
     id: "pl-ex-date"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
     className: "form-select",
+    id: "ex-cal-executor",
     style: {
       width: 180,
       fontSize: 12
+    },
+    onChange: function onChange(e) {
+      renderExCal();
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "All Executors"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Manoj Shinde"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Pradeep Jadhav"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Rakesh Patil"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Suresh Kulkarni"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Dinesh Wagh"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+    value: "all"
+  }, "All Executors"), technicians.map(function (t) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+      key: t.cdb_object_id,
+      value: t.name
+    }, t.name, " (", t.technician_role, ")");
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     id: "pl-ex-schedule"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     id: "tab-spares",
@@ -18283,11 +18534,27 @@ function PlannerPage(_ref5) {
     }
   }, "Rev 2 \xB7 No isolation"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "modal-overlay",
-    id: "planModal"
+    id: "planModal",
+    style: {
+      display: 'none',
+      position: 'fixed',
+      inset: 0,
+      background: 'rgba(15,23,42,.55)',
+      zIndex: 1000,
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 20
+    }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "modal",
     style: {
-      maxWidth: 580
+      maxWidth: 580,
+      background: '#fff',
+      borderRadius: 14,
+      width: '100%',
+      maxHeight: '88vh',
+      overflowY: 'auto',
+      boxShadow: '0 20px 60px rgba(0,0,0,.25)'
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "modal-header"
@@ -18297,7 +18564,7 @@ function PlannerPage(_ref5) {
   }, "\uD83D\uDCCB Plan Work Order"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     className: "modal-close",
     onClick: function onClick(e) {
-      document.getElementById('planModal').classList.remove('open');
+      document.getElementById('planModal').style.display = 'none';
     }
   }, "\u2715")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "modal-body"
@@ -18320,21 +18587,12 @@ function PlannerPage(_ref5) {
   }, "Assign Executor"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
     className: "form-select",
     id: "plan-executor"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
-    value: "Manoj Shinde"
-  }, "Manoj Shinde (Mech L3)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
-    value: "Pradeep Jadhav"
-  }, "Pradeep Jadhav (Mech L2)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
-    value: "Rakesh Patil"
-  }, "Rakesh Patil (Mech L2)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
-    value: "Suresh Kulkarni"
-  }, "Suresh Kulkarni (Elect L2)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
-    value: "Dinesh Wagh"
-  }, "Dinesh Wagh (Mech L2)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
-    value: "Amol Deshmukh"
-  }, "Amol Deshmukh (Mech L1)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
-    value: "Nilesh More"
-  }, "Nilesh More (Mech L1)"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, technicians.map(function (t) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+      key: t.cdb_object_id,
+      value: t.name
+    }, t.name, " (", t.technician_role, ")");
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "form-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
     className: "form-label"
@@ -18380,7 +18638,7 @@ function PlannerPage(_ref5) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     className: "btn btn-secondary",
     onClick: function onClick(e) {
-      document.getElementById('planModal').classList.remove('open');
+      document.getElementById('planModal').style.display = 'none';
     }
   }, "Cancel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     className: "btn btn-primary",
@@ -18389,11 +18647,27 @@ function PlannerPage(_ref5) {
     }
   }, "\uD83D\uDE80 Raise WO & Assign Executor")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "modal-overlay",
-    id: "plDetailModal"
+    id: "plDetailModal",
+    style: {
+      display: 'none',
+      position: 'fixed',
+      inset: 0,
+      background: 'rgba(15,23,42,.55)',
+      zIndex: 1000,
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 20
+    }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "modal",
     style: {
-      maxWidth: 600
+      maxWidth: 600,
+      background: '#fff',
+      borderRadius: 14,
+      width: '100%',
+      maxHeight: '88vh',
+      overflowY: 'auto',
+      boxShadow: '0 20px 60px rgba(0,0,0,.25)'
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "modal-header"
@@ -18403,7 +18677,7 @@ function PlannerPage(_ref5) {
   }, "Detail"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     className: "modal-close",
     onClick: function onClick(e) {
-      document.getElementById('plDetailModal').classList.remove('open');
+      document.getElementById('plDetailModal').style.display = 'none';
     }
   }, "\u2715")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "modal-body",
@@ -18413,7 +18687,7 @@ function PlannerPage(_ref5) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     className: "btn btn-secondary",
     onClick: function onClick(e) {
-      document.getElementById('plDetailModal').classList.remove('open');
+      document.getElementById('plDetailModal').style.display = 'none';
     }
   }, "Close"))))));
 }
@@ -24032,6 +24306,14 @@ var extractRows = function extractRows(j) {
 var filterUrl = function filterUrl(base, clause) {
   return "".concat(base, "?$filter=").concat(encodeURIComponent(clause));
 };
+
+// Date-only string (YYYY-MM-DD) — CDB `Date` columns reject anything with a
+// time portion (e.g. a full ISO datetime), so every Date-typed field we write
+// (planned_at, logged_at, etc.) must go through this, never .toISOString().
+var dateOnly = function dateOnly() {
+  var d = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new Date();
+  return d.toISOString().slice(0, 10);
+};
 function normalizePriority(p) {
   var v = (p || "medium").toLowerCase();
   return ["critical", "high", "medium", "low"].includes(v) ? v : "medium";
@@ -24209,7 +24491,10 @@ var generateWorkOrder = /*#__PURE__*/function () {
             planner_notes: plan.notes || "",
             sop_ref: plan.sopRef || "",
             status: "pending_executor",
-            planned_at: new Date().toISOString(),
+            // Date-only — planned_at is a CDB `Date` column, it rejects a value with
+            // a time portion (that's what caused the "invalid because it contains a
+            // time portion" 403 error).
+            planned_at: dateOnly(),
             rework_count: "0"
           };
           return _context3.abrupt("return", doPost(WORK_ORDER_API, body));
@@ -24269,6 +24554,104 @@ function updatePlant(cdbObjectId, data) {
 function deletePlant(cdbObjectId) {
   return _apiAuth__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("".concat(PLANT_MASTER_URL, "/").concat(cdbObjectId));
 }
+
+/***/ }),
+
+/***/ "./src/services/technicianApi.js":
+/*!***************************************!*\
+  !*** ./src/services/technicianApi.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "fetchTechnicians": () => (/* binding */ fetchTechnicians)
+/* harmony export */ });
+/* harmony import */ var _apiConfig__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./apiConfig */ "./src/services/apiConfig.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+// js/src/services/technicianApi.js
+// Technician master — used by PlannerPage to populate executor dropdowns
+// (Assign Executors row, Plan WO modal, Executor Calendar filter) instead of
+// the old hardcoded name list.
+//
+// Table: smartpm_technician_master
+// Columns: cdb_object_id, name, technician_role, plant_code, is_active, created_at
+
+
+var BASIC_AUTH = _apiConfig__WEBPACK_IMPORTED_MODULE_0__.AUTH;
+var TECHNICIAN_API = "".concat(_apiConfig__WEBPACK_IMPORTED_MODULE_0__.BASE, "/api/v1/collection/smartpm_technician_master");
+function doGet(_x) {
+  return _doGet.apply(this, arguments);
+}
+function _doGet() {
+  _doGet = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(url) {
+    var res;
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.next = 2;
+          return fetch(url, {
+            headers: {
+              Accept: "application/json",
+              Authorization: BASIC_AUTH
+            },
+            credentials: "include"
+          });
+        case 2:
+          res = _context2.sent;
+          if (res.ok) {
+            _context2.next = 5;
+            break;
+          }
+          throw new Error("HTTP ".concat(res.status));
+        case 5:
+          return _context2.abrupt("return", res.json());
+        case 6:
+        case "end":
+          return _context2.stop();
+      }
+    }, _callee2);
+  }));
+  return _doGet.apply(this, arguments);
+}
+var extractRows = function extractRows(j) {
+  var _ref, _ref2, _j$objects;
+  return (_ref = (_ref2 = (_j$objects = j === null || j === void 0 ? void 0 : j.objects) !== null && _j$objects !== void 0 ? _j$objects : j === null || j === void 0 ? void 0 : j.data) !== null && _ref2 !== void 0 ? _ref2 : j === null || j === void 0 ? void 0 : j.results) !== null && _ref !== void 0 ? _ref : [];
+};
+var filterUrl = function filterUrl(base, clause) {
+  return "".concat(base, "?$filter=").concat(encodeURIComponent(clause));
+};
+
+// Returns active technicians, sorted by name.
+// Each row: { cdb_object_id, name, technician_role, plant_code, is_active }
+var fetchTechnicians = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    var rows;
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          _context.t0 = extractRows;
+          _context.next = 3;
+          return doGet(filterUrl(TECHNICIAN_API, "is_active eq '1'"));
+        case 3:
+          _context.t1 = _context.sent;
+          rows = (0, _context.t0)(_context.t1);
+          return _context.abrupt("return", rows.sort(function (a, b) {
+            return (a.name || "").localeCompare(b.name || "");
+          }));
+        case 6:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee);
+  }));
+  return function fetchTechnicians() {
+    return _ref3.apply(this, arguments);
+  };
+}();
 
 /***/ }),
 
@@ -26512,4 +26895,4 @@ cs_web_components_base__WEBPACK_IMPORTED_MODULE_1__.Registry.registerReducer((0,
 /******/ })()
 ;
 });
-//# sourceMappingURL=kalyani-iot-smart_maintenance_system.dev.59da87b6ab63b89d47b4.js.map
+//# sourceMappingURL=kalyani-iot-smart_maintenance_system.dev.b0da64cd0a4afe78deef.js.map
